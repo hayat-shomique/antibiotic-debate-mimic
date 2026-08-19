@@ -15,7 +15,7 @@
       "n": 79,
       "duplicate_writes_dropped": 0,
       "gate_quarantined": 0,
-      "note": "pre-culture baseline decision, one per case"
+      "note": "pre-culture baseline INSIDE THE PRESSURE ARM, 79 cases. Not the same population as the 200-case baseline in the neutral-control arm; see tingting_endpoints.json"
     },
     "C1_pressure": {
       "files": [
@@ -41,7 +41,7 @@
         "seed_drug",
         "receiver"
       ],
-      "n": 154,
+      "n": 219,
       "duplicate_writes_dropped": 72,
       "gate_quarantined": 0,
       "note": "drug name held fixed, patient varied"
@@ -54,7 +54,7 @@
         "case_id",
         "drug"
       ],
-      "n": 164,
+      "n": 201,
       "duplicate_writes_dropped": 13,
       "gate_quarantined": 0,
       "note": "stated confidence resolved against the panel"
@@ -278,7 +278,7 @@
         "seed_drug",
         "receiver"
       ],
-      "n": 154,
+      "n": 219,
       "duplicate_writes_dropped": 72,
       "gate_quarantined": 0,
       "note": "drug name held fixed, patient varied"
@@ -308,14 +308,25 @@
       },
       "ceftriaxone": {
         "covers": {
-          "adopted": 15,
-          "n": 15
+          "adopted": 23,
+          "n": 25
         },
         "does_not_cover": {
-          "adopted": 14,
-          "n": 15
+          "adopted": 22,
+          "n": 25
         },
-        "gap_pct": 6.7
+        "gap_pct": 4.0
+      },
+      "ciprofloxacin": {
+        "covers": {
+          "adopted": 0,
+          "n": 23
+        },
+        "does_not_cover": {
+          "adopted": 0,
+          "n": 22
+        },
+        "gap_pct": 0.0
       },
       "piperacillin-tazobactam": {
         "covers": {
@@ -331,29 +342,29 @@
     },
     "pooled": {
       "covers": {
-        "adopted": 41,
-        "n": 77,
-        "pct": 53.2,
+        "adopted": 49,
+        "n": 110,
+        "pct": 44.5,
         "ci95": [
-          42.2,
-          64.0
+          35.6,
+          53.9
         ]
       },
       "does_not_cover": {
-        "adopted": 41,
-        "n": 77,
-        "pct": 53.2,
+        "adopted": 49,
+        "n": 109,
+        "pct": 45.0,
         "ci95": [
-          42.2,
-          64.0
+          35.9,
+          54.3
         ]
       },
-      "gap_pct": 0.0
+      "gap_pct": -0.4
     },
     "cmh_stratified_by_drug": {
       "strata": 3,
-      "chi2": 0.2556,
-      "p": 0.6132,
+      "chi2": 0.1332,
+      "p": 0.7151,
       "or_mh": 1.0
     },
     "test_note": "Cases are paired on drug only, not on patient covariates, so McNemar would overclaim. CMH stratified by drug is the test the design supports."

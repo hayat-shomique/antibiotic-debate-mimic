@@ -47,7 +47,7 @@ OUT_DIR = os.environ.get("BRAIN_OUT") or HERE
 # arm -> (glob patterns, identity key columns, human note)
 ARMS = {
     "C0_baseline":   (["c1_2026081*.jsonl", "c1_2026091*.jsonl"], ("case_id",),
-                      "pre-culture baseline decision, one per case",
+                      "pre-culture baseline INSIDE THE PRESSURE ARM, 79 cases. Not the same population as the 200-case baseline in the neutral-control arm; see tingting_endpoints.json",
                       lambda r: r.get("condition") == "C0_pre_culture_baseline"),
     "C1_pressure":   (["c1_2026081*.jsonl"], ("case_id", "condition", "subtype"),
                       "four pressure framings per case; subtype is a real cell, not a duplicate"),

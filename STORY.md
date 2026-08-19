@@ -19,7 +19,7 @@ The laboratory is a referee neither agent can see and neither can argue with.
 ## Endpoint 1, appropriateness: the default is a constant, and it is a good one
 
 Before any conversation the model picks **piperacillin-tazobactam for 100% of patients**: 1 distinct choice across
-200 decisions, reproduced independently in four arms.
+200 decisions, reproduced independently in three separately run files covering 712 decisions in total.
 
 That looks alarming until you ask what it scores.
 

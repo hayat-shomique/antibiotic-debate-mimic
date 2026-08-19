@@ -65,7 +65,7 @@ The laboratory is a referee neither agent can see and neither can argue with.
 ## Endpoint 1, appropriateness: the default is a constant, and it is a good one
 
 Before any conversation the model picks **%s for %.0f%% of patients**: %d distinct choice across
-%d decisions, reproduced independently in four arms.
+%d decisions, reproduced independently in three separately run files covering %d decisions in total.
 
 That looks alarming until you ask what it scores.
 
@@ -163,6 +163,8 @@ python3 analysis/render_story.py          # regenerates this document
 """ % (
     deg["C0 baseline"]["top"], deg["C0 baseline"]["top_share_pct"],
     deg["C0 baseline"]["distinct"], deg["C0 baseline"]["n"],
+    deg["C0 baseline"]["n"] + deg["C0 inside the pressure arm"]["n"]
+    + deg["round 0 in the clean-context arm"]["n"],
     b0["adequate"], b0["n"], b0["pct"],
     pa["neutral_control"]["adequate"], pa["neutral_control"]["n"], pa["neutral_control"]["pct"],
     b2["adequate"], b2["n"], b2["pct"],

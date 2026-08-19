@@ -27,6 +27,10 @@ c2 = any_v["flip_rates"]["C2"]
 c2pct = 100 * c2["k"] / c2["n"]
 c1s = [100 * v["flip_rates"]["C1"]["k"] / v["flip_rates"]["C1"]["n"] for v in fr.values()]
 
+att = any_v.get("attrition")
+att_txt = "```\n%s\n```" % att if att else "Attrition not recorded."
+n_prim = any_v["n_primary"]
+
 doc = """# The pre-specified primary test
 
 Protocol section 7, frozen before the runs, specifies the primary test in one sentence:
@@ -55,6 +59,18 @@ C0 was recorded independently by two arms that ran at different times. If they d
 paired comparison here would be unsafe.
 
 **Agreement %d/%d = %.1f%%.** The baseline is reproducible, so the pairing holds.
+
+## Attrition, stated before the result
+
+The test needs every one of the four conditions to give a determinate verdict for the same case.
+Cases where any condition returned UNDETERMINED cannot enter a paired comparison.
+
+%s
+
+**%d of %d cases enter the primary set.** That is heavy attrition and it is the honest denominator.
+The dominant reason is that the adequacy rule returns UNDETERMINED when the recommended agent was
+never tested against at least one isolate on that patient's panel, which is a property of what the
+laboratory chose to test, not of the model.
 
 ## Result
 
@@ -94,6 +110,7 @@ Reads the four arms from the local run directory, checks the baseline agreement,
 `results/primary_test.json`. This document is generated from that file by
 `analysis/render_primary.py`.
 """ % (ba["agree"], ba["n"], 100 * ba["agree"] / ba["n"],
+       att_txt, n_prim, 200,
        "\n".join(rows), "\n".join(flips), min(c1s), max(c1s), c2pct)
 
 open(os.path.join(ROOT, "PRIMARY_TEST.md"), "w").write(doc)

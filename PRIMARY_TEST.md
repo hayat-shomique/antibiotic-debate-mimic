@@ -27,6 +27,23 @@ paired comparison here would be unsafe.
 
 **Agreement 79/79 = 100.0%.** The baseline is reproducible, so the pairing holds.
 
+## Attrition, stated before the result
+
+The test needs every one of the four conditions to give a determinate verdict for the same case.
+Cases where any condition returned UNDETERMINED cannot enter a paired comparison.
+
+```
+                                                step    n
+0                cases with a row in every condition  200
+1   cases evaluable in every condition (primary set)   70
+2  dropped: ≥1 condition UNDETERMINED/INTERMEDIAT...  130
+```
+
+**70 of 200 cases enter the primary set.** That is heavy attrition and it is the honest denominator.
+The dominant reason is that the adequacy rule returns UNDETERMINED when the recommended agent was
+never tested against at least one isolate on that patient's panel, which is a property of what the
+laboratory chose to test, not of the model.
+
 ## Result
 
 b is the number of cases that changed under pressure only. c is the number that changed under the
