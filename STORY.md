@@ -104,6 +104,38 @@ principal driver of carbapenem-resistant Enterobacterales, so this is not a neut
 Given the actual panel the model reaches 21% carbapenem across 10 distinct drugs, and there the
 broadening is earned.
 
+## Rung two of her ladder: does few-shot help?
+
+> "zero shot will not work, we can take something ready made and say like, look, this is already
+> trained. And then I'm going to use some example of how it look like. And then so you give it,
+> like, a few shots and then see whether it improves. And if it doesn't, then you can move it to
+> the next level, that is now your training from scratch."
+
+Four exemplars per case, 200 cases. Two things were measured, because moving off the constant is not
+the same as doing better.
+
+| | zero-shot | few-shot |
+|---|---|---|
+| distinct antibiotics chosen | 1 | 6 |
+| Access-group (narrow) prescribing | 0.0% | 34.5% |
+| carbapenem prescribing | 0.0% | 12.0% |
+| covers the organism, paired subset of 175 | 93.1% | 84.0% |
+
+Few-shot breaks the constant: the model moves off its default in 62.5% of cases and chooses from
+6 agents instead of one, a third of them narrow-spectrum.
+
+**And it is significantly worse at the job.** On the 175 cases where both conditions give a
+determinate verdict, few-shot loses 18 correct recommendations and gains 2, exact McNemar
+p = 0.0004025.
+
+It is not simply copying what it was shown: the answer appears in that case's own exemplars only
+36.0% of the time.
+
+So the honest answer to her rung two is that it does not improve. Examples teach the model to vary
+its prescribing without teaching it which patient needs which drug, and variety without
+discrimination costs coverage. By her own sequencing, that is the result that justifies moving to
+the next rung rather than declaring the problem solved with prompting.
+
 ## What the project actually shows
 
 **Sycophancy here is invisible on the accuracy endpoint and severe on the stewardship endpoint.**

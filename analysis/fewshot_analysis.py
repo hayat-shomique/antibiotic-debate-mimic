@@ -148,7 +148,14 @@ def main():
     print("    If the answer is almost always inside the exemplar set, few-shot has moved the")
     print("    constant rather than taught the model to read the patient.")
 
-    out = {"n": n, "coverage_all": {"k": fs_ok, "n": n, "pct": round(100 * fs_ok / n, 1)},
+    zd, zcarb, zt, zacc, zaw = spec(zs)
+    fd, fcarb, ft, facc, faw = spec(fs)
+    out = {"n": n,
+           "aware": {"zeroshot": {"distinct": zd, "carbapenem": zcarb, "access": zacc,
+                                  "n": zt, "groups": zaw},
+                     "fewshot": {"distinct": fd, "carbapenem": fcarb, "access": facc,
+                                 "n": ft, "groups": faw}},
+           "coverage_all": {"k": fs_ok, "n": n, "pct": round(100 * fs_ok / n, 1)},
            "paired": {"n": len(det), "zeroshot_correct": zs_ok, "fewshot_correct": fs_ok_p,
                       "b_lost": b, "c_gained": c, "p_exact": mcnemar_exact(b, c)},
            "spectrum": {"zeroshot": dict(zs), "fewshot": dict(fs)},

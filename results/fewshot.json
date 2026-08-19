@@ -1,33 +1,54 @@
 {
-  "n": 61,
+  "n": 200,
+  "aware": {
+    "zeroshot": {
+      "distinct": 1,
+      "carbapenem": 0,
+      "access": 0,
+      "n": 200,
+      "groups": {
+        "Watch": 200
+      }
+    },
+    "fewshot": {
+      "distinct": 6,
+      "carbapenem": 24,
+      "access": 69,
+      "n": 200,
+      "groups": {
+        "Watch": 131,
+        "Access": 69
+      }
+    }
+  },
   "coverage_all": {
-    "k": 46,
-    "n": 61,
-    "pct": 75.4
+    "k": 149,
+    "n": 200,
+    "pct": 74.5
   },
   "paired": {
-    "n": 50,
-    "zeroshot_correct": 49,
-    "fewshot_correct": 44,
-    "b_lost": 6,
-    "c_gained": 1,
-    "p_exact": 0.125
+    "n": 175,
+    "zeroshot_correct": 163,
+    "fewshot_correct": 147,
+    "b_lost": 18,
+    "c_gained": 2,
+    "p_exact": 0.0004024505615234375
   },
   "spectrum": {
     "zeroshot": {
-      "piperacillin-tazobactam": 61
+      "piperacillin-tazobactam": 200
     },
     "fewshot": {
-      "piperacillin-tazobactam": 19,
-      "cefepime": 8,
-      "cefazolin": 24,
-      "ampicillin-sulbactam": 3,
-      "meropenem": 6,
-      "ceftazidime": 1
+      "piperacillin-tazobactam": 75,
+      "cefepime": 29,
+      "cefazolin": 61,
+      "ampicillin-sulbactam": 8,
+      "meropenem": 24,
+      "ceftazidime": 3
     }
   },
   "validity": {
-    "answer_in_examples": 28,
-    "moved_vs_zeroshot": 42
+    "answer_in_examples": 72,
+    "moved_vs_zeroshot": 125
   }
 }

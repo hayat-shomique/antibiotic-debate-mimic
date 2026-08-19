@@ -14,6 +14,10 @@ te = R("tingting_endpoints.json")
 deg = R("policy_degeneracy.json")
 pri = R("primary_test.json")
 res = R("RESULTS.json")
+try:
+    fs = R("fewshot.json")
+except FileNotFoundError:
+    fs = None
 
 pa = te["primary_appropriateness"]
 sy = te["sycophancy_under_pressure"]
@@ -150,6 +154,38 @@ principal driver of carbapenem-resistant Enterobacterales, so this is not a neut
 Given the actual panel the model reaches %.0f%% carbapenem across %d distinct drugs, and there the
 broadening is earned.
 
+## Rung two of her ladder: does few-shot help?
+
+> "zero shot will not work, we can take something ready made and say like, look, this is already
+> trained. And then I'm going to use some example of how it look like. And then so you give it,
+> like, a few shots and then see whether it improves. And if it doesn't, then you can move it to
+> the next level, that is now your training from scratch."
+
+Four exemplars per case, %d cases. Two things were measured, because moving off the constant is not
+the same as doing better.
+
+| | zero-shot | few-shot |
+|---|---|---|
+| distinct antibiotics chosen | %d | %d |
+| Access-group (narrow) prescribing | %.1f%% | %.1f%% |
+| carbapenem prescribing | %.1f%% | %.1f%% |
+| covers the organism, paired subset of %d | %.1f%% | %.1f%% |
+
+Few-shot breaks the constant: the model moves off its default in %.1f%% of cases and chooses from
+%d agents instead of one, a third of them narrow-spectrum.
+
+**And it is significantly worse at the job.** On the %d cases where both conditions give a
+determinate verdict, few-shot loses %d correct recommendations and gains %d, exact McNemar
+p = %.4g.
+
+It is not simply copying what it was shown: the answer appears in that case's own exemplars only
+%.1f%% of the time.
+
+So the honest answer to her rung two is that it does not improve. Examples teach the model to vary
+its prescribing without teaching it which patient needs which drug, and variety without
+discrimination costs coverage. By her own sequencing, that is the result that justifies moving to
+the next rung rather than declaring the problem solved with prompting.
+
 ## What the project actually shows
 
 **Sycophancy here is invisible on the accuracy endpoint and severe on the stewardship endpoint.**
@@ -204,6 +240,19 @@ python3 analysis/render_story.py          # regenerates this document
     sp["panel_revealed"]["carbapenem_pct"], sp["panel_revealed"]["distinct_drugs"],
     sp["baseline"]["carbapenem_pct"], sp["under_pressure"]["carbapenem_pct"], b0["pct"],
     sp["panel_revealed"]["carbapenem_pct"], sp["panel_revealed"]["distinct_drugs"],
+    fs["n"],
+    fs["aware"]["zeroshot"]["distinct"], fs["aware"]["fewshot"]["distinct"],
+    100 * fs["aware"]["zeroshot"]["access"] / fs["aware"]["zeroshot"]["n"],
+    100 * fs["aware"]["fewshot"]["access"] / fs["aware"]["fewshot"]["n"],
+    100 * fs["aware"]["zeroshot"]["carbapenem"] / fs["aware"]["zeroshot"]["n"],
+    100 * fs["aware"]["fewshot"]["carbapenem"] / fs["aware"]["fewshot"]["n"],
+    fs["paired"]["n"],
+    100 * fs["paired"]["zeroshot_correct"] / fs["paired"]["n"],
+    100 * fs["paired"]["fewshot_correct"] / fs["paired"]["n"],
+    100 * fs["validity"]["moved_vs_zeroshot"] / fs["n"],
+    fs["aware"]["fewshot"]["distinct"],
+    fs["paired"]["n"], fs["paired"]["b_lost"], fs["paired"]["c_gained"], fs["paired"]["p_exact"],
+    100 * fs["validity"]["answer_in_examples"] / fs["n"],
 )
 open(os.path.join(ROOT, "STORY.md"), "w").write(doc)
 print("wrote STORY.md")

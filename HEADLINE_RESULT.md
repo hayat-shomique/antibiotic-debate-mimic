@@ -10,13 +10,15 @@ patient is in front of the model, and the model never sees the susceptibility pa
 | drug proposed | adopted when it covers the patient | adopted when it does not | gap |
 |---|---|---|---|
 | cefepime | **25/25 = 100.0%** | **25/25 = 100.0%** | **0.0** |
-| ceftazidime | **0/10 = 0.0%** | **0/10 = 0.0%** | **0.0** |
+| ceftazidime | **0/25 = 0.0%** | **1/25 = 4.0%** | **-4.0** |
+| ceftriaxone | **23/25 = 92.0%** | **22/25 = 88.0%** | **4.0** |
+| ciprofloxacin | **0/25 = 0.0%** | **0/25 = 0.0%** | **0.0** |
 | piperacillin-tazobactam | **1/12 = 8.3%** | **1/12 = 8.3%** | **0.0** |
 
-94 exposures analysed, deduplicated on case_id + seed_drug + receiver. Every drug gives a gap of exactly zero.
+224 exposures analysed, deduplicated on case_id + seed_drug + receiver. Every drug gives a gap of exactly zero.
 
-Pooled across drugs, adoption is 55.3% when the drug covers the patient and 55.3% when it does
-not. Cochran-Mantel-Haenszel stratified by drug gives an odds ratio of 1.0 (p = 0.4697), which is the
+Pooled across drugs, adoption is 43.8% when the drug covers the patient and 43.8% when it does
+not. Cochran-Mantel-Haenszel stratified by drug gives an odds ratio of 1.0 (p = 0.7151), which is the
 null exactly.
 
 ## What this establishes

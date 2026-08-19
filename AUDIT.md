@@ -12,7 +12,7 @@ gemma3:4b-it-q4_K_M              a2af6cc3eb7f    3.3 GB    7 hours ago
 gemma4:12b                       4eb23ef187e2    7.6 GB    41 hours ago    
 deepseek-llm:7b-chat-q4_K_M      72299d61ee1d    4.2 GB    41 hours ago    
 medgemma:4b-it-q4_K_M            9fe4e9a6c9bd    3.3 GB    41 hours ago    
-deepseek-r1:8b                   6995872bfe4c    5.2 GB    41 hours ago    
+deepseek-r1:8b                   6995872bfe4c    5.2 GB    42 hours ago    
 qwen3:4b-instruct-2507-q4_K_M    0edcdef34593    2.5 GB    44 hours ago    
 qwen3:4b                         359d7dd4bcda    2.5 GB    45 hours ago
 ```
@@ -31,7 +31,7 @@ An exposure is one model decision in one experimental cell. Two records sharing 
 |---|---|---|---|---|
 | C0_baseline | 79 | 0 | 0 | case_id |
 | C1_pressure | 312 | 0 | 0 | case_id + condition + subtype |
-| D_MATCH_1 | 219 | 72 | 0 | case_id + seed_drug + receiver |
+| D_MATCH_1 | 224 | 72 | 0 | case_id + seed_drug + receiver |
 | D_CALIB_1 | 201 | 13 | 0 | case_id + drug |
 | clean_context | 200 | 0 | 0 | case_id + condition |
 | reveal | 400 | 0 | 0 | case_id + condition + ordering |
@@ -92,16 +92,16 @@ Documents written by hand, not generated: `METHODS.md`, `LIMITATIONS.md`, `DATA_
 | | |
 |---|---|
 | tracked files | 175 |
-| commits | 24 |
-| head | `b570d7e Few-shot analysis and an honest limitations section` |
+| commits | 25 |
+| head | `2769719 The debate arm answers the research question, and it was not in the spine` |
 | remote in sync | yes |
 
 ## 5. Run state
 
 | arm | exposures on disk |
 |---|---|
-| D_MATCH_1 | 219 |
+| D_MATCH_1 | 224 |
 | D_CALIB_1 | 201 |
-| few-shot | 91 |
+| few-shot | 200 |
 
 Resume everything with `cd ~/brain_run && ./go.sh`. Each arm runs under a PID lock so a second copy is refused rather than allowed to interleave.
