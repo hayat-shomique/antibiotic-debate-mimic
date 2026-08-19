@@ -1,20 +1,16 @@
 # Outstanding supervisor asks
 
-Built by sweeping every saved transcript, note file, protocol document and standing-order file
-on this machine for anything Prof. Zhu, Zhikang or the frozen protocol asked for, then checking each
-one against what is on disk. 147 asks were recovered: 62 done, 29 partial, 40 outstanding, 7
-superseded, 9 not actually asks.
+Built by sweeping every saved transcript, note file, protocol document and standing-order
+file for anything Prof. Zhu, Zhikang or the frozen protocol asked for, then checking each
+one against what is on disk. 203 asks were recovered: 65 done, 54 partial, 56 outstanding,
+9 superseded, 19 not actually asks.
 
-This file lists the 69 that are not finished. Each entry quotes the ask, says what it requires, and
-records what was checked to decide the status.
-
-Entries concerning personal supervision arrangements are held in the local working copy only and
-are not reproduced here.
+Each entry quotes the ask, says what it requires, and records what was checked.
 
 
-## Outstanding (39)
+## Outstanding (53)
 
-### Outs.1  Chen
+### Outs.1  Zhikang
 
 *23 July 2026, 09:16*
 
@@ -26,7 +22,7 @@ are not reproduced here.
 
 **Effort.** 5 minutes. One bullet on a next-steps slide, in his own framing: the harness transfers, the data does not; GPT and other hosted models run on synthetic non-MIMIC cases. The sentence already exists inside D-TRANSFER-1 and only needs lifting onto a slide.
 
-### Outs.2  Chen
+### Outs.2  Zhikang
 
 *23 July 2026, 09:16*
 
@@ -38,7 +34,19 @@ are not reproduced here.
 
 **Effort.** 5 minutes, no compute. One line on the same next-steps slide as the GPT transfer, naming the design (repeat cultures after the index event, a second index-time definition, a survivorship correction) so he can see it was costed rather than ignored.
 
-### Outs.3  Zhu
+### Outs.3  Zhikang
+
+*23 July 2026, 09:16*
+
+> I recommand you could start from Qwen family, because you could use them freely. And then we can transfer the test process to GPT and other LLM.
+
+**What it requires.** Transfer the test process to GPT and other hosted models, or, per the project's own reconciliation, show it as a sequenced next step on a slide.
+
+**Checked.** CONFIRMED outstanding, with one correction. The slide gap is real and I checked harder than filename greps: I stripped scripts, styles and tags from deck.html and searched the full visible text of all 22 slides, zero hits for GPT, transfer or hosted. Same for conference_deck.html (8 slides) and SLIDE_PLAN.md (12 slides plus 4b). The closest thing to a next-steps slide is SLIDE 13 'WHAT IS NOT DONE' (five unrun endpoints) and SLIDE 13b 'SCOPE' (committed versus extensions); neither carries a transfer row. CORRECTION: it is not undocumented. cohort_justification.md:195, a shipped document pres [...]
+
+**Effort.** 5 minutes. One row on slide 13 or 13b: 'Transfer the harness to hosted models (GPT and others) on synthetic non-MIMIC cases, Zhikang, 23 July. MIMIC row-level content cannot reach a hosted endpoint under the PhysioNet DUA, so the harness moves and the data does not.' Reading it out is what converts a dropped instruction into a sequenced one.
+
+### Outs.4  Zhu
 
 *31 July 2026, 1:1 (teams_chat.txt line 120, reported speech)*
 
@@ -50,7 +58,7 @@ are not reproduced here.
 
 **Effort.** Cannot be closed before tomorrow's conference and should not be attempted. The right move is a single honest limitations line, no clinician was consulted on the interface or on what a stewardship lead would actually want from such a system, plus one bullet in future work. If she raises it in the Q&A, the truthful answer is that the eight-field case block was built from the data available under t [...]
 
-### Outs.4  Zhu
+### Outs.5  Zhu
 
 *Undated in export; window 27 Jun, 15 Aug 2026 (teams_chat.txt line 81)*
 
@@ -62,7 +70,7 @@ are not reproduced here.
 
 **Effort.** Nothing before tomorrow. But this is the highest-leverage item on the list for what Shomique actually wants, because the same memo records her saying he needs a publication. The work has a computed result, a 62 KB pressure-test of its own claims, and a registered literature corpus, it is closer to a workshop submission than most. Post-conference: check the WMHS and GenAI4Health deadlines, pick on [...]
 
-### Outs.5  Zhu
+### Outs.6  Zhu
 
 *Undated in export (teams_chat.txt line 28)*
 
@@ -74,7 +82,7 @@ are not reproduced here.
 
 **Effort.** One question, in person, tomorrow: 'the Clinical-RLVR link you tagged MIMIC LLM Judge, is that the nurse-and-specialist RL paper you meant, or a different one?' The default is already set (cite nothing, drop the lineage claim), so nothing is blocked.
 
-### Outs.6  Zhu
+### Outs.7  Zhu
 
 *31 July 2026, 1:1 (teams_chat.txt line 120, reported speech)*
 
@@ -86,7 +94,7 @@ are not reproduced here.
 
 **Effort.** His pessimism is doing more work here than the evidence supports, and this is worth pushing back on. Since 31 July the position has changed materially: there is now a completed 14-endpoint scorecard against her own specification, a 400-run debate arm, encoder baselines, a second generative model, and a documented literature register. She is seeing the talk on 20 August. A referee needs something t [...]
 
-### Outs.7  Zhu
+### Outs.8  Zhu
 
 *29 July 2026, ~17:40*
 
@@ -98,7 +106,7 @@ are not reproduced here.
 
 **Effort.** Zero compute. Either (a) 10 minutes: add one honest sentence to MODELS.md and one deviation row saying DeepSeek was declined because every 8B DeepSeek is a reasoning checkpoint and the harness parser rejects it 3/3, with the pilot numbers already in model_pilot_results.md §2; or (b) fix model_digests.json to stop attributing the rejection to D-MODEL-2.
 
-### Outs.8  Zhu
+### Outs.9  Zhu
 
 *29 July 2026, ~18:08*
 
@@ -110,7 +118,7 @@ are not reproduced here.
 
 **Effort.** 15 minutes of writing, no compute. Add one paragraph to summary_for_tingting.md's "What I need your answer on": 12B does not exist (seven checks, cite model_pilot_results.md §1); 4B was run size-matched so the arm isolates domain pretraining; her options are keep 4B, move to the 27B she excluded, or use general-purpose gemma3:12b at the size she named. The MedGemma-4B result is already on disk eit [...]
 
-### Outs.9  Zhu
+### Outs.10  Zhu
 
 *13 July 2026*
 
@@ -122,7 +130,7 @@ are not reproduced here.
 
 **Effort.** Zero compute, the analysis is complete and the change would invalidate completed runs, so this is presentation only. 10 minutes: add her 13 July wording to the summary_for_tingting question so she can see her own direction was received, costed and deliberately deferred rather than missed, and say the 17-set is frozen for the 20 Aug numbers with the 11-agent respecification as the post-conference  [...]
 
-### Outs.10  Zhu
+### Outs.11  Zhu
 
 *31 July 2026 (in-person meeting, recorded as a voice memo)*
 
@@ -134,7 +142,7 @@ are not reproduced here.
 
 **Effort.** Not for tomorrow. But it is worth 30 seconds in the talk or the report: she works on this, and the design's deliberate refusal to use a model judge (because the arbiter must not be a product of the system under measurement, the argument already written in D-GUIDELINE-1) is a direct, informed answer to her own method rather than an omission. Naming it converts a gap into a defended choice.
 
-### Outs.11  Zhu
+### Outs.12  Zhu
 
 *13 July 2026 (recorded in D-FEWSHOT-1)*
 
@@ -146,7 +154,7 @@ are not reproduced here.
 
 **Effort.** The run itself is cheap (one call per case, same seed, harness built and gated). But if it does not run tonight, the 2-minute version is to fix the attribution: change MASTER_BACKLOG A5's source from "ORDERS_1" to the 13 July supervisor ladder, so that when she asks why there is no few-shot result the answer is "your rung two, built and gated, not yet run" rather than "an item from my own order fi [...]
 
-### Outs.12  Zhu
+### Outs.13  Zhu
 
 *undated, she referred to it in conversation and never named it*
 
@@ -158,7 +166,7 @@ are not reproduced here.
 
 **Effort.** Zero work, and it should stay unresolved rather than be guessed at. Worth 15 seconds of the Q&A: if she names it, the related-work paragraph gains a lineage sentence; if she does not, verification_log.csv's rule forbids citing it. Keep it on the question list.
 
-### Outs.13  Zhu
+### Outs.14  Zhu
 
 *18 Aug 2026 (questions_for_supervisor.md, compiled 06:41)*
 
@@ -170,7 +178,7 @@ are not reproduced here.
 
 **Effort.** Needs her, and she has not replied. The default is already implemented, so nothing is blocked, SLIDE_PLAN's whole spine pivots off accuracy at slide 4. Ask her in person tomorrow.
 
-### Outs.14  Zhu
+### Outs.15  Zhu
 
 *18 Aug 2026*
 
@@ -182,7 +190,7 @@ are not reproduced here.
 
 **Effort.** Needs her. The default is safe: the set is frozen in protocol_freeze.json and changing it would invalidate every completed run, which is the correct answer whatever she prefers. label_space_analysis.md is the backup material if she asks.
 
-### Outs.15  Zhu
+### Outs.16  Zhu
 
 *18 Aug 2026*
 
@@ -194,7 +202,7 @@ are not reproduced here.
 
 **Effort.** Needs her, but the decision is effectively closed by cost: an ICU-only restriction cuts the sample from 200 to 43 and needs a fresh draw, which is not available before the conference.
 
-### Outs.16  Zhu
+### Outs.17  Zhu
 
 *18 Aug 2026*
 
@@ -206,7 +214,7 @@ are not reproduced here.
 
 **Effort.** Needs her, but this is the question most worth asking tomorrow, because it is the leading candidate explanation for the whole result and it is a design fix rather than a model finding.
 
-### Outs.17  Zhu
+### Outs.18  Zhu
 
 *18 Aug 2026*
 
@@ -218,7 +226,7 @@ are not reproduced here.
 
 **Effort.** Needs her. The default is implemented and is the defensible one.
 
-### Outs.18  Zhu
+### Outs.19  Zhu
 
 *18 Aug 2026*
 
@@ -230,7 +238,7 @@ are not reproduced here.
 
 **Effort.** One question to her, 30 seconds of her time. Until answered, verification_log.csv's two-state rule forbids the citation, so the default holds automatically and nothing is at risk.
 
-### Outs.19  Zhu
+### Outs.20  Zhu
 
 *18 Aug 2026*
 
@@ -242,7 +250,7 @@ are not reproduced here.
 
 **Effort.** Needs her. The default is implemented and F1 makes the restriction visible rather than hiding it, so the exposure is low.
 
-### Outs.20  Zhu
+### Outs.21  Zhu
 
 *18 Aug 2026*
 
@@ -254,7 +262,7 @@ are not reproduced here.
 
 **Effort.** Needs her, but the decision is closed in practice: there is no non-thinking instruct-2507 checkpoint at 8B, and re-fighting thinking suppression on a 16 GB machine the day before the conference is not available. The default is the only feasible answer.
 
-### Outs.21  Zhu
+### Outs.22  Zhu
 
 *2026-07-29 17:29 to 17:38 (Teams, [VERBATIM]), logged as E3 "OPEN LOOP" in the ledger and still open in HANDOVER_2026-08-13.md §7.4*
 
@@ -266,7 +274,7 @@ are not reproduced here.
 
 **Effort.** Two sentences, and the answer is now free because the project settled it empirically: everything ran on a 16 GB CPU-only machine at ~15 s/case, so the GPU ticket was not needed and should be withdrawn. Worth closing explicitly rather than letting a raised ticket sit unanswered after she twice questioned it, she asked a direct question three weeks ago and has had no reply.
 
-### Outs.22  Zhu
+### Outs.23  Zhu
 
 *2026-07-13 (first supervisor meeting, [RECON]), logged as C2 in the ledger, V10 in Claims-To-Verify, A10 in the Action-Register*
 
@@ -278,7 +286,7 @@ are not reproduced here.
 
 **Effort.** One line to her or Zhikang: "which paper is the nurse/specialist RL work you mentioned on 13 July?" It has been open for five weeks across three separate files. If no answer arrives before the report, his default (drop the lineage claim) is correct and should be stated as a deliberate omission rather than left as a silent gap, a related-work section that gestures at an unnamed in-group paper is w [...]
 
-### Outs.23  Zhu
+### Outs.24  Zhu
 
 *2026-07-29 18:34, he asked; the ledger records "She did not answer. Ask again."*
 
@@ -290,7 +298,7 @@ are not reproduced here.
 
 **Effort.** One line, ideally bundled with the nurse/specialist citation ask. The baseline stands on its own without it; the only cost of never getting an answer is that a related-work paragraph stays thinner than it could be.
 
-### Outs.24  Zhu
+### Outs.25  Zhu
 
 *2026-07-13 (first supervisor meeting, [RECON]), C2 third lineage item, V11 in Claims-To-Verify*
 
@@ -302,7 +310,7 @@ are not reproduced here.
 
 **Effort.** One line to Zhikang, who is the named collaborator on it. Lowest-value of the three lineage questions, nothing in the current design depends on it. Ask it once, and if nothing comes, say nothing about it in the report.
 
-### Outs.25  Zhu
+### Outs.26  Zhu
 
 *2026-07-22 11:20 (Teams, [VERBATIM]); she then added him to the group meetings herself on 30/07 12:34*
 
@@ -314,7 +322,7 @@ are not reproduced here.
 
 **Effort.** Nothing to build. This is the one item on the list that is purely about conduct, and it is the one most likely to damage the reference the whole project exists to earn. The mitigation is already drafted, summary_for_tingting.md is a genuinely strong document, but I found no evidence in either tree that it was actually sent. Confirm it went to her, and if it did not, send it before the conference [...]
 
-### Outs.26  Zhu
+### Outs.27  Zhu
 
 *ledger E6, ~2026-08-20; confirmed in email_evidence/EVIDENCE_DIGEST.md from the 19 Jun corrected UNIQ+ timetable*
 
@@ -325,18 +333,6 @@ are not reproduced here.
 **Checked.** Date is confirmed and distinct (email_evidence/EVIDENCE_DIGEST.md; INDEX.md resolves the 19th-vs-20th contradiction, he is MPLS, so the 20th). A separate general-audience deck exists: /Users/shamzzzh/brain_run/conference_deck.html, 18,091 bytes, written 19 Aug 19:37, deliberately smaller than the 455 KB lab deck. The event itself is tomorrow.
 
 **Effort.** The deck is built; what is not verifiable from disk is whether it has been rehearsed against a 10-minute clock. The turnaround finding and the laboratory-as-referee idea both work for a lay audience; the fixed-policy result needs one plain sentence, not the SDT apparatus. Three arms are still writing to disk (C1, plausible-wrong, drug-matched), so any number quoted from them tomorrow must be quote [...]
-
-### Outs.27  Zhu
-
-*Undated in export; window 27 Jun, 15 Aug 2026 (teams_chat.txt line 84)*
-
-> Everyone FYI, I have removed Dr Yu Liu from our chat due to a recent incident. […] I would ask you be caution to share information with people from now on. Please read the terms and conditions (if any) regarding your position at Oxford. As an example, a visitor is not an employee of Oxford and cannot use the affiliation without permission. Postdocs are hired for a funded project; any work or activities outside the fu [...]
-
-**What it requires.** Three obligations: (a) no Oxford affiliation on any output without her permission; (b) do not share lab information onward; (c) acknowledge the post. The only unambiguous instruction in the export.
-
-**Checked.** UPGRADED from the claimed PARTIAL. The first reader found half of it. (a) protocol/protocol_v1.md:135 under '## 8. Governance, not negotiable' reads '- No Oxford affiliation on any output without Prof Zhu's permission.' README.md:8-9 carries 'UNIQ+ research internship, University of Oxford, Institute of Biomedical Engineering'. git remote -v = https://github.com/hayat-shomique/antibiotic-debate-mimic.git; git status -sb reports '## master...origin/master' with no ahead marker at be63097 (the first reader saw c9b9523; the repo has since moved on and is still pushed). git log --reverse shows th [...]
-
-**Effort.** ~20 minutes of work, but do it before the talk, not after. (1) Set the GitHub repo private, or delete the remote, one click. (2) Strip README.md:8-9 to name and dates only. (3) Remove protocol/tingting_endpoint_spec.md, protocol/zhikang_reading.md and protocol/zhikang_requirements_map.csv from the tree, redact the [SUPERVISOR-DIRECTED] blocks in docs/questions_for_supervisor.md and docs/positioni [...]
 
 ### Outs.28  Zhu
 
@@ -374,7 +370,103 @@ are not reproduced here.
 
 **Effort.** 5 minutes to prepare, and the window is tomorrow, after the talk, in person, while the work is fresh and she has just watched him present it. Nothing on disk can close this and no code artefact will. Two asks, both one sentence. (i) The reference: 'Would you be willing to write a reference for DPhil applications in October, and if you would rather see the September report first, may I send it an [...]
 
-### Outs.31  standing orders and protocol
+### Outs.31  Zhu
+
+*29 July 2026, ~18:08*
+
+> There is 12B as well for MedGemma, 27B is not necessary.
+
+**What it requires.** MedGemma at 12B. The checkpoint does not exist, so this requires her ruling between 4B, 27B and gemma3:12b, which the project itself committed in writing to obtain.
+
+**Checked.** CONFIRMED outstanding as an ask, with one correction. Verified the quote at docs/deviation_log_proposed.csv D-MODEL-1, model_pilot_results.md:29, results/model_pilot_results.json:14, corrected/supervisor_requirements_implementation.md:90 and corrected/thursday_replan.md:35. Verified the 12B does not exist: D-MODEL-1 records nine ollama tags queried 18 Aug (latest, 4b, 27b, and six quantisations) with no 12b at any quantisation. Verified the question was never put to her: I read all 12 questions in questions_for_supervisor.md and all 6 in summary_for_tingting.md's 'What I need your answer on', [...]
+
+**Effort.** 10 minutes, and her answer is not needed before the talk. Two sentences to her: MedGemma has no 12B checkpoint (nine tags, checked seven ways, recorded in model_pilot_results.md ss1); I ran 4B size-matched to Qwen3-4B so domain pretraining varies and capacity does not; the 27B alternative confounds domain with a 6.75x capacity gap and would change what the arm measures, so it is your call, not min [...]
+
+### Outs.32  Zhu
+
+*13 July 2026 (recorded in D-FEWSHOT-1)*
+
+> supervisor-directed escalation ladder, 13 July 2026: zero-shot, then few-shot with worked examples, and only if both fail consider training
+
+**What it requires.** Climb rung two of her ladder, run the few-shot arm, now that zero-shot has demonstrably failed to condition on the patient.
+
+**Checked.** CONFIRMED not run, but it is queued and moving, not parked. ls runs/ returns no few-shot file of any name; RESUME.md (22:04) records 'few-shot | 0 | 200 | rung two of the escalation ladder'. It is scheduled twice over: chain_fewshot.sh (written 22:00) blocks on 'while pgrep -f matched_pass.py|calibration_pass.py' then runs fewshot_pass.py, and go.sh runs it third. matched_pass.py finished at 22:12 while I was checking (chain_match.log 'D-MATCH-1 DONE 22:12'); pgrep shows calibration_pass.py still alive at 80/200, so few-shot starts at roughly 22:45. Verified the precondition is met and the arm [...]
+
+**Effort.** Roughly one hour of wall clock, unattended, and it is already scheduled: about 50 minutes of calls at the observed 15 s per case once calibration_pass.py clears around 22:45, then fewshot_analyze.py. The only human action needed is to let the chain run and, if it lands, change the slide 13b row from 'Few-shot progression running' to the result. If it does not land before the deck freezes, say the  [...]
+
+### Outs.33  Zhu
+
+*undated, she referred to it in conversation and never named it*
+
+> What is the citation for the group's earlier nurse and specialist reinforcement-learning paper? You referred to it but did not name it
+
+**What it requires.** The identity of the group's prior nurse/specialist RL paper, so it can be cited as lineage.
+
+**Checked.** CONFIRMED outstanding, genuinely blocked on her, and correctly handled. grep -ri nurse across both disks returns exactly three hits and no fourth: questions_for_supervisor.md:59 and :66 (brain_run and repo copies) and summary_for_tingting.md:134. No candidate paper exists anywhere in the corpus. Verified the only RL item in the shared reading is the Clinical-RLVR link at teams_chat.txt:28, from rajpurkarlab, with no nurse or specialist framing; verification_log.csv row 116 carries it as FLAGGED-UNRESOLVED with 'share.google redirect will not expand; no exact match found. DO NOT CITE', and do_n [...]
+
+**Effort.** Zero minutes of work; thirty seconds of asking. It is a question for the day, not a deliverable, and the fallback is already in place. The only thing worth adding is a one-line note of what happens if she names it, add to references.bib, verify against a primary source per the verification_log rule, and add one lineage sentence to related work, because nothing currently tracks the answer.
+
+### Outs.34  Zhu
+
+*2026-07-29*
+
+> Why do you need to access the machine? I thought you are doing promting / I think you need to download open LLMs and run API for testing them / I think doing prompting doesn't need intense resources? You can access to IBME cluster as well, can you run mimic data on cluster?
+
+**What it requires.** A definite yes/no back to her on whether the GPU asset 33112 ticket is needed, with a memory-footprint number and whether the desktop or the IBME cluster covers it. He told her he would confirm "tomorrow morning" (30 Jul); the ledger records no confirmation was ever sent.
+
+**Checked.** OUTSTANDING CONFIRMED, no message, no ticket status, zero hits for '33112' anywhere in either work tree, and zero hits for 'cluster' as compute (every 'cluster' hit is cluster-robust statistics or cluster-randomised trials). BUT THE FIRST READER'S EVIDENCE IS WRONG ON THE HARDEST POINT: it says the only trace is EXPLAIN.md's passing '16 GB with no GPU'. In fact the memory-footprint answer she asked for already exists, measured, in model_pilot_results.md §3 and §5, the Metal ceiling is 11.8 GiB read from the ollama scheduler log at 2026-08-18T01:41:47 (not the 16 GiB spec sheet), per-model ma [...]
+
+**Effort.** 15 minutes, and every number is already on disk. Send her five lines: the arms run on a 4B Q4_K_M model at 2.5-3.1 GiB against a measured 11.8 GiB Metal ceiling, so no GPU is needed; the Oxford Dell is CPU-only per IT on 24 July; I do not need the GPU ticket, please close it; the IBME cluster is not required for anything at 4B and would only matter above ~12B. Do not cite '33112', cite asset 2890 [...]
+
+### Outs.35  Zhu
+
+*2026-07-13*
+
+> I want to replace those 2 RL models [with] 2 LLMs.
+
+**What it requires.** The citation for the group's earlier nurse/specialist reinforcement-learning paper, which she referenced but never named. He cannot position against a lineage he cannot read.
+
+**Checked.** OUTSTANDING CONFIRMED, no citation in docs/references.bib, none in LITERATURE.md, none in verification_log.csv, and Q6 of questions_for_supervisor.md is still the open ask with the default 'cite nothing and drop the lineage claim from the related-work section' already in force. BUT THE FIRST READER'S 'never obtained, no lead' IS TOO PESSIMISTIC: LAB_NOTEBOOK.md carries a named first author and venue in two separate entries. 2026-07-22: 'Zhiyao Luo's dual-agent clinical work (AI4SG 2023) is REINFORCEMENT-LEARNING (two RL policies), NOT an LLM reasoning workflow, so rebuilding it as an LLM mul [...]
+
+**Effort.** 10 minutes, and it does not need her. Search 'Zhiyao Luo AI4SG 2023' plus his Google Scholar and OpenReview pages directly, you have the first author, the senior author and the venue, which is more than most citation hunts start with. If it resolves, add it to verification_log.csv as a primary-source row and write one differentiating sentence (their two agents are RL policies; ours are prompted L [...]
+
+### Outs.36  Zhu
+
+*2026-07-29*
+
+> [Such] like Med Bert or ClinicalBert etc.
+
+**What it requires.** Confirmation of whether the group's own Bio+Clinical BERT antibiotic-indication work is the lineage she meant by the encoder-baseline suggestion.
+
+**Checked.** CONFIRMED OUTSTANDING and the first reader's account is accurate. Q7 of docs/questions_for_supervisor.md re-asks it verbatim against her 29 July words and records 'I asked which specific work you had in mind and did not get a reply', with the default 'report the encoder as an accuracy baseline only and make no claim about lineage'. The ledger lists it at G4 as a re-ask. Nothing is blocked: the encoder work is complete and is one of the stronger results in the project, docs/MODELS.md tier 3 reports four encoders over the 17-drug formulary on the same 200 cases against the same panels (Bio_Clin [...]
+
+**Effort.** Zero work outstanding, only positioning. Ask it in the Q&A tomorrow or in the message that closes the compute loop: 'was the Bio+Clinical BERT antibiotic-indication work the lineage you meant, or did you mean the encoders generically?' If no answer, the recorded default stands and the report says nothing about lineage. Do not let this hold up anything.
+
+### Outs.37  Zhu
+
+*2026-07-13*
+
+> [a] deep prescribing project [with Zhikang that] was getting really good result already
+
+**What it requires.** The citation or detail for the group's deep-prescribing project, to build on or deliberately differentiate from.
+
+**Checked.** OUTSTANDING CONFIRMED, and the first reader is right that brain_run and the repo return zero hits for 'deep prescrib'. But 'no trace anywhere' is wrong, the primary source is on disk and I read it. The 13 July ASR transcript (notes/supervision/2026-07-14_OXF_First-Supervisor-Meeting/02_Transcripts/..._Part-01_Readable-ASR.md, ~line 228) has her saying: 'Because we recently worked with [Japan], you'd remember the deep prescribing project, right? To this prescribed drugs, is reveal sure it was getting really good result already.' Note the ASR renders a name as 'Japan' consistently in this sessi [...]
+
+**Effort.** 5 minutes to ask, and it goes to Zhikang, not Zhu, he is on the project. One message: 'You mentioned a deep prescribing project with Tingting getting good results, is there a paper or preprint I should cite or differentiate from?' If nothing comes back before 4 Sept, the related-work section simply does not claim the lineage, which is the same default as A5. Zero risk to the conference talk.
+
+### Outs.38  Zhu
+
+*2026-07-22*
+
+> You have been missing our group meetings, it would be very useful for you to attend to get a feel about research since you are interested in PhDs
+
+**What it requires.** Attend the lab group meetings.
+
+**Checked.** THE ASK IS OUTSTANDING BUT THE FIRST READER'S KEY EVIDENCE IS DISCONFIRMED. It asserts 'the 18 August group meeting was missed as well... on the single most important day of the internship', citing the opening line of summary_for_tingting.md. That inference is impossible on the timestamps: stat -f gives summary_for_tingting.md birth 2026-08-18 07:24:41 and mod 2026-08-18 07:55:39. A file finished at 07:55 cannot report on an 11:00 meeting later the same day. Two further checks against it: PRESENTATION_2026-08-18_BRIEF.md heads its own title '# PRESENTATION BRIEF, Tue 18 August 2026, 10:00, Zh [...]
+
+**Effort.** Nothing to build. Two things worth doing before tomorrow: (1) do not repeat the 'I missed the 18 August meeting' framing to anyone, it is not what the disk says, and asserting a failure that did not happen is its own credibility cost; (2) if any group meeting attendance did occur between 30 July and now, write it into LAB_NOTEBOOK today, because the record currently cannot distinguish 'attended a [...]
+
+### Outs.39  standing orders and protocol
 
 *18 August 2026, 03:05*
 
@@ -386,7 +478,7 @@ are not reproduced here.
 
 **Effort.** 20 minutes of the researcher's own prose. All three points are already evidenced: the debate arm ran 400/400 at 6.7x his specified 30-case demonstration; the single-model arms are labelled as the researcher's addition throughout; the GPT/DUA reconciliation text exists verbatim inside D-TRANSFER-1.
 
-### Outs.32  standing orders and protocol
+### Outs.40  standing orders and protocol
 
 *19 August 2026 (ORDERS_1, standing order)*
 
@@ -398,7 +490,7 @@ are not reproduced here.
 
 **Effort.** 10 minutes, no compute. One next-steps slide holding three items already evidenced: her confidence endpoint quoted verbatim plus the 27/200 figure and why the threshold is inert; the GPT-transfer sequencing (ask #5); subsequent resistance (ask #6). That single slide closes three separate deferred commitments at once.
 
-### Outs.33  standing orders and protocol
+### Outs.41  standing orders and protocol
 
 *18 August 2026*
 
@@ -410,7 +502,7 @@ are not reproduced here.
 
 **Effort.** 2 minutes, and it is pure downside protection before a deadline. Either add the filename to a do-not-read list in the numbers block, or note it in FIGURES_MANIFEST.md. Do not delete it, the README states nothing was deleted and both superseded files remain auditable, which is the correct governance posture.
 
-### Outs.34  standing orders and protocol
+### Outs.42  standing orders and protocol
 
 *19 Aug 2026*
 
@@ -422,7 +514,7 @@ are not reproduced here.
 
 **Effort.** Two minutes if the ORDERS_2 text is still in the source thread: paste it to protocol/ORDERS_2.md. If tingting_endpoint_spec.md IS the ORDERS_2 payload, its own header says 'Saved verbatim per ORDERS_2', then one line in each of tingting_endpoint_spec.md, RESURRECT.md and PROJECT_INDEX.md saying so, and clear F8's status. Cannot be done from disk: the text is not on this machine.
 
-### Outs.35  standing orders and protocol
+### Outs.43  standing orders and protocol
 
 *19 Aug 2026*
 
@@ -434,7 +526,7 @@ are not reproduced here.
 
 **Effort.** The model is pulled and verified present. Two changes: add the tag to DEFAULT_MODELS at model_compare.py:115, run round-0 on the same 200. At MedGemma's observed throughput that is roughly 1-1.5 h of unattended compute, but it competes with the calibration and drug-matched runs currently holding the machine. If it is not run, it needs a logged deviation naming the two-model design, because D-MODEL [...]
 
-### Outs.36  standing orders and protocol
+### Outs.44  standing orders and protocol
 
 *19 Aug 2026*
 
@@ -446,7 +538,7 @@ are not reproduced here.
 
 **Effort.** Conditional by its own wording, and the condition has expired: the conference is tomorrow and 3c has priority over 3d. The cheap close is to fill the digest from `ollama list` and mark the arm not run. ~5 min.
 
-### Outs.37  standing orders and protocol
+### Outs.45  standing orders and protocol
 
 *Frozen 18 Aug 2026 03:37 (stamp in the 19 Aug addendum)*
 
@@ -458,7 +550,7 @@ are not reproduced here.
 
 **Effort.** ~30 min of read-only analysis, no model calls. Both arms are on disk and share case_ids: runs/c0cn_20260818.jsonl (200 cases, 0 moved) and runs/c1_20260819.jsonl (78 cases and climbing). Restrict to the C1 case set, cross-tabulate moved-under-Cn against moved-under-C1, print b, c, d. Cn's 0/200 makes b = 0 by construction, so the test is one-directional and the p-value will be tiny, but the proto [...]
 
-### Outs.38  standing orders and protocol
+### Outs.46  standing orders and protocol
 
 *Frozen 18 Aug 2026*
 
@@ -470,7 +562,7 @@ are not reproduced here.
 
 **Effort.** 46 rows to read and mark. The extract, the columns and an agent's preliminary verdicts already exist, so this is adjudication, not analysis, perhaps 45-60 min. It cannot be delegated to a model: evidence_leak_assessment.md quotes the frozen module's own docstring saying the automated screen is a pre-filter and 'the leakage rate you report is the hand-classified one'.
 
-### Outs.39  standing orders and protocol
+### Outs.47  standing orders and protocol
 
 *UNIQ+ programme; CLAUDE.md §3 and REFERENCE.md §D; deadline recorded in HANDOVER_2026-08-13.md §1 as Fri 4 Sept*
 
@@ -482,10 +574,82 @@ are not reproduced here.
 
 **Effort.** Not yet due, and the runway is real (Oxford access runs to 11 Sept). The components are unusually far along, METHODS.md, RESULTS.md, LIMITATIONS.md, cohort_justification.md, FINDING.md, HEADLINE_RESULT.md and the F1, F8 figure set with a manifest. This is an assembly job against the Canvas template, not a writing-from-scratch job, and it should start the day after the conference while the runs are [...]
 
+### Outs.48  standing orders and protocol
 
-## Partial (29)
+*18 August 2026*
 
-### Part.1  Chen
+> One further stale artefact, flagged not renamed. `clinician_comparator_drugmap_audit.csv` (timestamped 18 Aug 03:52) was produced on the **pre-draw** window and is stale for the same reason, but it was not part of the approved D-CLINWIN-1 rename so it has been left untouched. Its post-draw replacement is `clinician_comparator_v2_drugmap_audit.csv`. Use the v2 file.
+
+**What it requires.** Do not read the stale pre-draw drugmap audit into any slide, table or figure; use the v2 file.
+
+**Checked.** CONFIRMED, and the exposure is larger than reported. Both files are present and the trap is live: clinician_comparator_drugmap_audit.csv (2,950 bytes, 18 Aug 03:52, pre-draw) sits beside clinician_comparator_v2_drugmap_audit.csv (1,867 bytes, 18 Aug 05:22, post-draw), and the stale one sorts first. The warning exists in exactly one place, grep for the stale filename across both disks returns two files only. NEW FINDING the prior reader missed: the second hit is MIGRATION_PLAN.md:302-303, which copies BOTH files into the clean public repo with no rename and no caveat, 'cp clinician_comparator [...]
+
+**Effort.** 2 minutes. Delete clinician_comparator_drugmap_audit.csv from the MIGRATION_PLAN copy line, or rename it clinician_comparator_SUPERSEDED_predraw_drugmap_audit.csv so it sorts and reads like the other two superseded files and a tab-complete can no longer land on it silently. Nothing downstream breaks either way, no code and no document currently reads it.
+
+### Outs.49  standing orders and protocol
+
+*2026-09-04*
+
+> End-of-project report due → uniqplus@admin.ox.ac.uk | Canvas template
+
+**What it requires.** The written end-of-project report, on the programme's template, by ~4 September.
+
+**Checked.** CONFIRMED OUTSTANDING. Exhaustive find for *.tex, *.docx, *report*, *manuscript*, *draft* across brain_run, the repo, the Trajectory folder, /Users/shamzzzh/Desktop/UNIQ+ 2026 and /Users/shamzzzh/Desktop/UNIQplus Canvas Resources returns no manuscript of any kind, only preflight_report.md, audit_report.md, corrected/audit_report.md and two .py utilities, exactly as the reader found. HANDOVER_2026-08-13.md §5 recorded 'No poster, no poster template, no manuscript skeleton (.tex/.docx)' on 13 August and that is still true six days later. TWO THINGS THE READER MISSED, ONE HELPFUL AND ONE NOT. He [...]
+
+**Effort.** 2-3 focused days, but far less writing than it looks because the raw material maps almost one-to-one onto the marking scheme: METHODS.md -> Methodology; RESULTS.md + FINDING.md + HEADLINE_RESULT.md -> results; LIMITATIONS.md + RED_TEAM.md -> limitations; positioning.md + LITERATURE.md + references.bib (35 verified entries) -> literature review; cohort_justification.md -> data and population. Do no [...]
+
+### Outs.50  standing orders and protocol
+
+*19 Aug 2026*
+
+> c. Gemma3-4B round-0 (the base-family control).
+
+**What it requires.** 200 round-0 calls with gemma3:4b, so MedGemma's difference can be separated from its Gemma3 base.
+
+**Checked.** CONFIRMED, verified four independent ways. Read-only python over both model_compare files: 20260818 holds 171 records, all qwen3:4b-instruct-2507; 20260819 holds 229, being medgemma 200 over 200 cases and qwen3 29 over 29. gemma3 appears in neither. grep -c gemma3 across all 26 runs/ files returns 0 for every one. model_compare.py:115 reads DEFAULT_MODELS = [INCUMBENT, "medgemma:4b-it-q4_K_M"]. chain_track3.log runs '3a: pull gemma3:4b' then '3b: MedGemma-4B round-0, 200 cases' and stops, there is no 3c or 3d section header in the log at all. Neither go.sh, chain_rest.sh nor chain_tonight.sh  [...]
+
+**Effort.** python model_compare.py --models gemma3:4b-it-q4_K_M on the same 200 cases. chain_track3.log records MedGemma steady at 3.6 s/call, so 200 calls is about 12 minutes plus model load; 15-20 minutes wall clock. It must queue behind matched_pass.py and calibration_pass.py because model_digests.json's memory rule forbids two resident models. Then rebuild F4, whose script already computes the roster, an [...]
+
+### Outs.51  standing orders and protocol
+
+*19 Aug 2026*
+
+> d. Gemma3-12B round-0 if time (scale test).
+
+**What it requires.** 200 round-0 calls with gemma3:12b, explicitly conditional on time.
+
+**Checked.** Zero records confirmed by the same enumeration as A6. But the status needs qualifying: 'if time' makes this a conditional suggestion, not a binding instruction, and with three arms still running the night before the talk the condition is plainly unmet, so this is correctly deferred rather than missed. The ledger defects around it are real and closeable. model_digests.json still records gemma3:12b-it-q4_K_M with digest null, verified_present false, status PULLING, while chain_pulls.log shows '=== PULL 3: gemma3:12b-it-q4_K_M (scale pair, full pull) 16:14 ===' followed by 'success' and an ollam [...]
+
+**Effort.** The run does not fit before the talk: 8.1 GB at 12B on a 16 GB M2, roughly 3x the 4B rate, so 35-45 minutes of calls with nothing else resident. Leave it. The ledger fix is 2 minutes, paste digest f4031aab637d, set verified_present true, status PULLED. Reconciling MASTER_BACKLOG A1 and the three NUMBERS_BLOCK lines to the real roster is 10 minutes and should be done, because those are the documen [...]
+
+### Outs.52  standing orders and protocol
+
+*Frozen 18 Aug 2026 03:37*
+
+> **Primary test:** exact binomial (McNemar) on cases that change recommendation under exactly one of Cn and C1. Report b, c, and d, not only percentages.
+
+**What it requires.** The pre-specified primary test: a paired McNemar of Cn against C1 on the same cases, with the b, c and d cell counts printed.
+
+**Checked.** CONFIRMED, quote verified verbatim at protocol/protocol_v1.md:97-98. I checked every McNemar on disk and none is Cn-vs-C1. c1_analysis.py:48 defines mcnemar(k1,k2) and :59-63 loops only over the four C1 sub-type keys, those are the six paired rows in RESULTS.md:159-166, all within-C1. NUMBERS_BLOCK:222 is the degraded-control bare-vs-reasoned pair (b=0, c=26, p=2.980e-08). fewshot_analyze.py:304 serves an arm with zero records. RED_TEAM.md:59 adds four more paired tests over the shared 200 cases (meropenem vs round-0 b=18 c=1 p=7.6e-5; vs final A-first; vs final B-first; round-0 vs final A-fi [...]
+
+**Effort.** Write an adapter that reshapes runs/c0cn_20260818.jsonl and runs/c1_20260819.jsonl into the case_id/condition/recommendation/outcome frame paired_pressure_analysis() expects, call it on the 78 shared cases, and print b, c, d, p and the attrition table. About 30-40 lines, no model calls. 45-60 minutes including the check that both arms key on the same case ids. Note the result is near-foregone: Cn  [...]
+
+### Outs.53  standing orders and protocol
+
+*Frozen 18 Aug 2026*
+
+> A sample of challenger turns is hand-classified for evidence leakage and the **leakage rate is reported** as a validity check. "Evidence-free" is a measured property, not an assumed one.
+
+**What it requires.** A HUMAN-classified leakage rate over a sample of challenger turns, the thing that licenses calling the challenge evidence-free.
+
+**Checked.** CONFIRMED, quote verified verbatim at protocol/protocol_v1.md:88-91. I re-counted with read-only python rather than trusting the note: evidence_leak_handcheck.csv has 46 rows and columns case_id, ordering, agent, round, turn_text, automated_flag, human_verdict, human_note, human_verdict non-blank 0/46, human_note 0/46. evidence_leak_assessment_prelim.csv has the same 46 with auto_prelim_verdict filled 46/46 and human_verdict 0/46. A SECOND UNFILLED SHEET the claim did not mention: indicator3_handcheck_sample.csv, 62 rows, with human_evidence_types, human_is_evidence_leak, human_new_facts_cite [...]
+
+**Effort.** 46 turns to read and label. With the auto_prelim column as a prompt, roughly a minute each: 45-75 minutes of the researcher's own time. It cannot be delegated to a model without defeating the purpose, which is why the column exists. The 62-row indicator-3 sheet is a further 60-90 minutes and is not needed for this ask. Cheapest honest option before the talk: report the screen rate explicitly label [...]
+
+
+## Partial (53)
+
+### Part.1  Zhikang
 
 *23 July 2026*
 
@@ -497,7 +661,7 @@ are not reproduced here.
 
 **Effort.** Zero, it is a deliberate, well-argued scope limit and should NOT be closed by doing work. 2 minutes: add one line to LIMITATIONS.md so the scope note is visible outside z11_prescriptions_provenance.md, since z11 itself says the point is that Zhikang can see which part is met.
 
-### Part.2  Chen
+### Part.2  Zhikang
 
 *Undated in the source; the map is dated 18 Aug 2026 03:52, and indicator3_aware.json attributes the request to 'Zhikang Chen, 23 July 2026'*
 
@@ -509,7 +673,7 @@ are not reproduced here.
 
 **Effort.** BLOCKED ON THE RESEARCHER, NOT ON COMPUTE, AND D-GUIDELINE-1 FORBIDS FILLING IT ANY OTHER WAY. 17 rows, each needing Y/N plus a resolvable DOI/PMID/ISBN/URL. Perhaps 45-90 min with a guideline document open. If it will not be filled before the conference, the honest move is to say on the slide that indicator 3 was answered with WHO AWaRe as a substitute yardstick, that the substitute returns 400/4 [...]
 
-### Part.3  Chen
+### Part.3  Zhikang
 
 *Map dated 18 Aug 2026 03:52*
 
@@ -569,19 +733,103 @@ are not reproduced here.
 
 **Effort.** Correctly deferred, do not attempt it now. The instruction from his own coverage table is the right one: a next-steps slide naming the design, rather than a rushed arm. The reason it is out of scope is itself a good methodological answer to give if asked.
 
-### Part.8  Zhu
+### Part.8  Zhikang
 
-*Undated in export; window 27 Jun, 15 Aug 2026 (teams_chat.txt line 84)*
+*23 July 2026, 09:16*
 
-> Everyone FYI, I have removed Dr Yu Liu from our chat due to a recent incident. […] I would ask you be caution to share information with people from now on. Please read the terms and conditions (if any) regarding your position at Oxford. As an example, a visitor is not an employee of Oxford and cannot use the affiliation without permission. Postdocs are hired for a funded project; any work or activities outside the fu [...]
+> evaluate which agent's final recommendation aligns better with actual clinical outcomes (e.g., subsequent resistance)
 
-**What it requires.** An instruction, and the only unambiguous one in the whole export. Three separate obligations: (a) do not put the Oxford affiliation on any output without her permission; (b) do not share lab information onward; (c) acknowledge the post. This is the governance item the task brief asked me to watch for.
+**What it requires.** Ground the comparison in subsequent resistance, not only the index-culture panel.
 
-**Checked.** The rule is encoded in the project's own protocol. /Users/shamzzzh/Desktop/antibiotic-debate-mimic/protocol/protocol_v1.md line 135, under a section headed '## 8. Governance, not negotiable', reads: '- No Oxford affiliation on any output without Prof Zhu's permission.' So the instruction was received and written down. BUT: README.md line 8 reads '**Shomique Hayat** · UNIQ+ research internship, University of Oxford, Institute of Biomedical Engineering · supervised by **Prof. Tingting Zhu** · 6 July, 20 August 2026'. That is the Oxford affiliation on an output. `git remote -v` shows origin = ht [...]
+**Checked.** CORRECTED from OUTSTANDING, because the ask has two halves and one is fully closed. The per-agent half is DONE and prominent: SCORECARD.txt endpoint 1 gives Agent A 312/400 = 78.0% and Agent B 312/400 = 78.0% scored separately, and deck.html slide 05 carries it as the primary endpoint. zhikang_aims_coverage.csv row 10 (his 'which agent' ask) is the one that was MISSING in July and is now satisfied. The resistance-grounding half is genuinely not done and the 'say so' instruction still has no home: zhikang_aims_coverage.csv row 11 records 'OUT OF SCOPE TONIGHT, say so' with the action 'A next-s [...]
 
-**Effort.** Two minutes to ask her, before the 20 August talk, whether the Oxford affiliation on a public GitHub README is authorised, and log the answer next to protocol_v1.md line 135. If the answer is no, the fix is a one-line README edit. Note the honest caveat: her post scopes the restriction to visitors and postdocs, and a UNIQ+ intern is arguably neither, but the project wrote itself a stricter rule a [...]
+**Effort.** 5 minutes, same slide as A5. One row: 'Ground the comparison in subsequent resistance (Zhikang, 23 July), needs repeat cultures after the index event, a second index-time definition, and a survivorship correction for patients who die or are discharged first.' The design is already written in protocol_v1.md D6; it only needs lifting onto the slide.
 
-### Part.9  Zhu
+### Part.9  Zhikang
+
+*23 July 2026*
+
+> the prescriptions table, which captures real physician orders from clinical practice, including drug names, doses, routes, and timing
+
+**What it requires.** Use the prescriptions table as the physician-order comparator, his enumeration includes doses and routes.
+
+**Checked.** CONFIRMED partial, with one addition the prior reader missed. I read z11_prescriptions_provenance.md in full and it is accurate and candid: two of his four named fields are used (drug via canon_drug to the 17-agent formulary, starttime to position the order against index_time); ss3 records zero grep hits across all .py for dose_val_rx, dose_unit_rx, prod_strength, form_rx, form_val_disp, form_unit_disp and doses_per_24_hrs; route is carried into intermediate wide extracts and used as an IV filter in exactly one diagnostic scan (_cc2_recon.py:18) and 'enters no scored comparator and no reported [...]
+
+**Effort.** 2 minutes. Add z11_prescriptions_provenance.md to the Zhikang send list in MIGRATION_PLAN ss7, and one sentence in the covering message: dose and route are in the table and are not scored, because the model is never asked for either and the panel does not grade them, the attached note says exactly which part of your specification is met and which is not.
+
+### Part.10  Zhikang
+
+*2026-07-30*
+
+> If you want to ground this in MIMIC data, you can feed real de-identified case summaries (including microbiology cultures and susceptibility results) as the discussion input
+
+**What it requires.** Real MIMIC case summaries, including cultures and susceptibilities, as debate input.
+
+**Checked.** CONFIRMED PARTIAL and the reader's reasoning is sound, this is a documented, defensible reframing, not a miss. Verified: protocol/zhikang_aims_coverage.csv row 9 records it as 'YES as C2, reframed from input to condition ... COVERED WITH STATED DEVIATION ... Already handled. Say the sentence out loud when presenting.' protocol/zhikang_requirements_map.csv carries the same verdict with the instruction to name it: 'Your C2 arm IS his suggestion, applied as a condition rather than as baseline input. Say that explicitly: you did not ignore it, you turned it into an experimental arm. This is a st [...]
+
+**Effort.** 15 minutes. Amend the one stale row in zhikang_requirements_map.csv, then say the reconciling sentence out loud in the talk exactly as the CSV prescribes: the panel is his input, applied as an experimental condition rather than as baseline, because Zhu's decision point is pre-culture and the two constraints are otherwise incompatible. This is a strength to present, not a gap to apologise for.
+
+### Part.11  Zhikang
+
+*2026-07-23*
+
+> I recommand you could start from Qwen family, because you could use them freely. And then we can transfer the test process to GPT and other LLM.
+
+**What it requires.** Qwen first; later transfer the test process to GPT and other models.
+
+**Checked.** CONFIRMED PARTIAL and the reasoning is correct. Qwen-first verified: qwen3:4b-instruct-2507-q4_K_M, digest 0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0 in model_digests.json (role 'INCUMBENT, every arm to date'), pinned in protocol_freeze.json as model_checkpoint_digest with seed 20260818, temperature 0. GPT transfer correctly not done: protocol/zhikang_aims_coverage.csv row 2 marks it COVERED with the note 'his sequencing assumes hosted models later, that needs a DUA conversation, not a code change', and zhikang_requirements_map.csv adds 'One model for 18 Aug. Note his s [...]
+
+**Effort.** Zero work. One sentence, twice: in the LIMITATIONS.md model section, and to Zhikang directly, the harness swaps checkpoints and has been demonstrated doing so across two model families, but the PhysioNet DUA forbids sending MIMIC content to any hosted endpoint, so a GPT transfer needs either a sanctioned compliant route or a synthetic-vignette mirror of the protocol. Framing it as a governance bo [...]
+
+### Part.12  Zhikang
+
+*2026-07-22*
+
+> we could use documents to interact
+
+**What it requires.** A shared written document he can mark up asynchronously, as the working channel between them.
+
+**Checked.** CONFIRMED PARTIAL. The documents exist and are built for exactly this: protocol/zhikang_requirements_map.csv (11 rows, his words in one column, the current design in the next, a verdict and an action per row) and protocol/zhikang_aims_coverage.csv (13 asks, each with in_confirmed_plan / verdict / cost_h / action, several costed at 0.0 h and two at 1.7 h and 1.1 h). protocol/zhikang_reading.md is a third. I read accountability/research_log/archive/sent/2026-07-22_zhikang_update.md in full: it is a well-made async progress doc with five numbered questions, but its own header reads '(Async prog [...]
+
+**Effort.** 10 minutes and it is the highest-value thing on this list relative to cost. Send him the two CSVs as they stand, they answer his brief line by line in his own words and they make you look like a collaborator rather than a student reporting up. Fix the one stale row first (see A13). His three unanswered questions (deep prescribing, the RL lineage, the GPT/DUA route) can ride in the same message.
+
+### Part.13  Zhikang
+
+*2026-07-30*
+
+> evaluate which agent's final recommendation aligns better with actual clinical outcomes (e.g., subsequent resistance)
+
+**What it requires.** Per-agent scoring of the final recommendation, and grounding in downstream outcomes such as subsequent resistance.
+
+**Checked.** CONFIRMED PARTIAL, verified end to end. Per-agent scoring DONE: SCORECARD.txt endpoint 1 reports 'Agent A 312/400 = 78.0% Agent B 312/400 = 78.0%' as separate numbers from runs/debate_20260818.jsonl, closing zhikang_aims_coverage.csv row 10, which read 'NO, scoring is per-case, not per-agent ... MISSING'. Subsequent resistance NOT BUILT, and correctly so: I read results/secondary_endpoints.json directly, treatment_failure carries persistent_bacteraemia 13, n 200, rate 6.5, with the note 'Persistence is definable. Failure is not: it needs attribution to the therapy given, and the therapy giv [...]
+
+**Effort.** 20 minutes, and it is a slide rather than an arm. Build the next-steps slide zhikang_aims_coverage.csv row 11 already specifies: name the three things a subsequent-resistance endpoint would need, state that persistent bacteraemia at 13/200 = 6.5% is the nearest definable proxy and is reported as a cohort characteristic rather than an outcome, and say why attribution fails. Presenting the reason yo [...]
+
+### Part.14  Zhikang
+
+*Undated in the source; the requirements map is dated 18 Aug 2026 03:52 and indicator3_aware.json attributes the request to 'Zhikang Chen, 23 July 2026'*
+
+> how far its final recommendation deviates from evidence-based guidelines
+
+**What it requires.** Indicator 3, implemented as protocol_v1 §7:114 pins it: 'guideline-deviation rate (against `guideline_flags.csv`, from a named published source)'.
+
+**Checked.** The file-absence half is CONFIRMED: find across both trees returns only guideline_flags_FILLSHEET.csv, guideline_flags_TEMPLATE.csv and guideline_flags_validator.py, no guideline_flags.csv. I read both CSVs: all 17 drug rows have in_empiric_guideline and source_citation blank. D-GUIDELINE-1 is ACTIVE in deviation_log_proposed.csv, 'researcher-supplied only and is NEVER model-generated'. BUT THE MECHANISM CLAIM IS WRONG. The claim says AWaRe 'cannot show deviation because every drug the model ever names sits in one class'. I read the map at aware_indicator3.py:32-44: of the 17 formulary drugs, [...]
+
+**Effort.** Far smaller than 17 rows. D-GUIDELINE-1's own text says 'Sixteen of seventeen rows may be NOT_ASSESSED ... a single correctly-sourced row is sufficient for the indicator', and only four drugs are ever named across every arm: piperacillin-tazobactam, ceftriaxone, cefepime and meropenem. handoff/guideline_sources.json already holds one resolved primary source (IDSA 2026 AMR guidance, PMID 42570093,  [...]
+
+### Part.15  Zhikang
+
+*Map dated 18 Aug 2026 03:52 (protocol/zhikang_aims_coverage.csv row 7)*
+
+> After each round, record both agents' position shifts and the types of evidence they cite.
+
+**What it requires.** Per-round position shifts (turn of first change) AND per-turn citation-type labels.
+
+**Checked.** CONFIRMED built, and I verified the coverage by counting rather than reading the note. indicator2_turn_of_first_change.csv 314 agent-series; indicator2_uncritical_acceptance.csv 785 rows over 79 case_ids; indicator3_turns_annotated.csv 785 rows over 79 case_ids; indicator3_evidence_types_v2.csv 975 rows over 98 case_ids. The complete arm is 400 full records over 200 case_ids and 2,000 turns, so these cover 39.5% and 49% of it. brain_scoring_local.py implements turn_of_first_change and indicator2_summary.json carries median_first_change_round_among_movers = 3.0. The provenance IS disclosed insi [...]
+
+**Effort.** Pure re-analysis, no model calls, the complete log has been on disk since 18 Aug 10:00. Point _cc_indicator2.py and indicator3_evidence.py / _z7_relabel.py at runs/debate_20260818.jsonl instead of the two snapshots and restate median_first_change_round on 400 runs. 20-30 minutes. This is the cheapest substantive gain on the whole list: it doubles the evidence base under two of Zhikang's three ind [...]
+
+### Part.16  Zhu
 
 *31 July 2026, 1:1 (teams_chat.txt line 120, reported speech)*
 
@@ -593,7 +841,7 @@ are not reproduced here.
 
 **Effort.** Low, and worth doing for the talk rather than the code: one sentence in the deck saying explicitly that the cohort is culture-confirmed bacteraemia and not a sepsis cohort, so that the difference is stated by you rather than raised by her. No re-run needed.
 
-### Part.10  Zhu
+### Part.17  Zhu
 
 *31 July 2026, 1:1 (teams_chat.txt line 120, reported speech)*
 
@@ -605,7 +853,7 @@ are not reproduced here.
 
 **Effort.** Half a slide, and it is nearly free because the numbers already exist. The debate arm costs 5 model calls and ~120 seconds per case to deliver a 9.5-point LOSS in susceptibility concordance against a single agent. That is a cost-benefit statement of exactly the shape she described, computed from throughput_measured.csv and SCORECARD.txt item 2, and it makes her own point for her. Recommend adding  [...]
 
-### Part.11  Zhu
+### Part.18  Zhu
 
 *Undated in export (teams_chat.txt line 101; she quoted the passage at length)*
 
@@ -617,7 +865,7 @@ are not reproduced here.
 
 **Effort.** Ten minutes if he still wants it, and I would push for it: it is a citation-backed opening, it credits a paper his supervisor personally pasted into the channel, and the pivot he scripted ('this is what Stanford is thinking… however, we at Oxford have a different idea') is a clean setup for a null result. The verified reference is already in references.bib, so only the slide is missing. If he has  [...]
 
-### Part.12  Zhu
+### Part.19  Zhu
 
 *29 July 2026*
 
@@ -629,7 +877,7 @@ are not reproduced here.
 
 **Effort.** 20 minutes, no compute, and it makes the slide stronger rather than weaker. Add one column to the MODELS.md and slide-4b encoder tables labelling each checkpoint's pretraining corpus (EHR notes / PubMed / general), and say out loud that the only EHR-pretrained encoder is the one that scores 0.0%, that IS the finding she asked for, and it currently reads as an accident. Add one line noting Med-BER [...]
 
-### Part.13  Zhu
+### Part.20  Zhu
 
 *17 Aug 2026*
 
@@ -641,7 +889,7 @@ are not reproduced here.
 
 **Effort.** ICU-free days is one derivation from icustays (28 or 30 minus ICU LOS, deaths coded 0). ~20 min against existing joins; 99 cases already linked. Or state in one line that ICU-free days was not computed and why.
 
-### Part.14  Zhu
+### Part.21  Zhu
 
 *18 Aug 2026*
 
@@ -653,7 +901,7 @@ are not reproduced here.
 
 **Effort.** The lineage half still needs her, ask tomorrow. The instruction half is done and is now the strongest slide in the deck.
 
-### Part.15  Zhu
+### Part.22  Zhu
 
 *18 Aug 2026*
 
@@ -665,7 +913,7 @@ are not reproduced here.
 
 **Effort.** The presentational default is implemented; only her formal ruling for the REPORT (due ~4 Sep) is open. Ask tomorrow, it is the highest-value 60 seconds of the conversation.
 
-### Part.16  Zhu
+### Part.23  Zhu
 
 *2026-07-13 (first supervisor meeting, [ASR-CLEAR])*
 
@@ -677,7 +925,7 @@ are not reproduced here.
 
 **Effort.** The harness is written and the gate is a wait-loop, so it is compute time, not build time: the two arms it waits on need ~50 and ~55 minutes at their logged 15.5 s/case, then few-shot runs. The real risk is that it silently never starts before the 20 Aug talk, worth checking chain_fewshot.log has content before presenting the ladder as complete, and saying "few-shot is running / not yet run" rath [...]
 
-### Part.17  Zhu
+### Part.24  Zhu
 
 *2026-07-29, 17:36 to 18:10 (Teams, [VERBATIM])*
 
@@ -689,7 +937,7 @@ are not reproduced here.
 
 **Effort.** The decision is defensible and already written down, so this is a communication task, not a compute one: say out loud on the 20th that DeepSeek was installed and deliberately not used, and give the size-matching reason. Left unsaid it reads as an ignored supervisor suggestion; said, it reads as a controlled comparison. If she wants it, it is a reading exercise over the CoT of a handful of cases, n [...]
 
-### Part.18  Zhu
+### Part.25  Zhu
 
 *2026-07-13 (first supervisor meeting, [ASR-CLEAR]), the ledger calls this "a must-do design decision"*
 
@@ -701,7 +949,7 @@ are not reproduced here.
 
 **Effort.** The analysis is already done; what is missing is her ruling, and Q2 is written and waiting. Do not re-cut the formulary, it is frozen and re-cutting invalidates every completed run. Present it as "17 as frozen, of which 12 are scoreable, and here is why five are structurally untestable" (the laboratory builds the panel from the Gram stain, so Gram-positive agents are never tested against an Enter [...]
 
-### Part.19  Zhu
+### Part.26  Zhu
 
 *2026-07-29 18:34, he flagged it and said he would request the separate DUA; ledger E4 records "Unconfirmed", HANDOVER_2026-08-13.md §7.3 records "no evidence it happened"*
 
@@ -713,7 +961,7 @@ are not reproduced here.
 
 **Effort.** This is the single most consequential open item in the audit, and it is not really about the DUA. If the prompt contains no site of infection, no vital sign, no laboratory value and no Gram stain, then the headline finding (round-0 is piperacillin-tazobactam on 224/225 runs) may be a property of the input, not of the model. Q4 is written and needs her answer, but he should not wait for it to prese [...]
 
-### Part.20  Zhu
+### Part.27  Zhu
 
 *2026-07-30 12:34 (Teams, [VERBATIM]); confirmed twice, also in the 13 Jul transcript*
 
@@ -725,7 +973,7 @@ are not reproduced here.
 
 **Effort.** Treat the 20 August conference talk as carrying both jobs, and make sure Zhu has the written summary in hand regardless. The deck is in far better shape than the source folder's brief implies, the 13/17 Aug documents describe a design-and-instrumentation talk with n=6 admissions, and what is actually on disk is 400 ordering-runs on a 993-case frame with nine arms and a red-teamed fix list. Do not [...]
 
-### Part.21  Zhu
+### Part.28  Zhu
 
 *2026-07-13 (first supervisor meeting; Action-Register A11)*
 
@@ -737,7 +985,7 @@ are not reproduced here.
 
 **Effort.** The raw material for the report is unusually complete, METHODS.md, RESULTS.md, LIMITATIONS.md, cohort_justification.md and FINDING.md already exist and between them cover most of a paper. What is missing is the assembly into the UNIQ+ report template. Deadline is ~4 Sep with Oxford access to 11 Sep, so the runway is real, but note that HANDOVER_2026-08-13.md §1 also records a "Wed 19 Aug, draft  [...]
 
-### Part.22  Zhu
+### Part.29  Zhu
 
 *31 July 2026, 1:1 (teams_chat.txt line 120, reported speech)*
 
@@ -749,7 +997,7 @@ are not reproduced here.
 
 **Effort.** Do not try to close the sepsis leg before tomorrow. A Sepsis-3 subgroup needs SOFA components pulled from chartevents and labevents for all 200 cases and re-scored, a day of work minimum, and it would fracture an already-small n. The 30-second close is rhetorical and already written: say METHODS.md:22-23 out loud when someone asks why this is bacteraemia and not sepsis. That converts the weakest  [...]
 
-### Part.23  Zhu
+### Part.30  Zhu
 
 *31 July 2026, 1:1 (teams_chat.txt line 120, reported speech)*
 
@@ -761,7 +1009,7 @@ are not reproduced here.
 
 **Effort.** 10 minutes, and it is one of the strongest slides available because every number is already on disk and no run is needed. The arithmetic: a debate costs 119.9 s per case (5 model calls) against roughly 24 s for a single call, so five times the compute, and it returns MINUS 9.5 points of susceptibility concordance (87.5% before, 78.0% after, SCORECARD.txt item 2). Meanwhile a constant 'always mero [...]
 
-### Part.24  Zhu
+### Part.31  Zhu
 
 *Undated in export (teams_chat.txt line 101; she quoted the passage at length)*
 
@@ -773,7 +1021,127 @@ are not reproduced here.
 
 **Effort.** 10 minutes when the deck is built, and both citations are ready to paste from references.bib. Use the superintelligence test (s41591-026-04539-8) for the benchmark-critique line, it is the closer fit to his own 'gap between benchmarks and safety' framing, and the drug-discovery review (s41573-026-01496-2) for the clinical-impact line, which is the one she personally quoted, so cite it in her hea [...]
 
-### Part.25  standing orders and protocol
+### Part.32  Zhu
+
+*29 July 2026, ~17:40*
+
+> What about Medgemma and Deepseek?
+
+**What it requires.** Run the harness on DeepSeek as well as MedGemma, or get a ruling that it is dropped.
+
+**Checked.** CORRECTED from OUTSTANDING. (1) The MedGemma half is now DONE, not partial: I counted model fields across all 27 files in runs/ with read-only python, medgemma:4b-it-q4_K_M has 200 records over 200 distinct cases in runs/model_compare_20260819.jsonl (fresh calls, not harvested), plus 60 cross-model debate records in runs/crossmodel_20260819.jsonl. RESUME.md (22:04) lists 'MedGemma 200' as complete. (2) The DeepSeek half is confirmed never run: the same count returns only qwen3:4b-instruct-2507-q4_K_M (4,450) and medgemma:4b-it-q4_K_M (260) across every arm on disk. (3) But the prior reader mi [...]
+
+**Effort.** 10 minutes. One line on the Q&A or scope slide naming both models she named: MedGemma-4B run on 200 cases, DeepSeek-R1-8B not run because every 8B DeepSeek is a reasoning distill that returned zero characters of answer on 3/3 pilot calls inside the 512-token budget and its 8B size breaks the size-matched contrast. Plus one deviation row that actually names DeepSeek, so the drop is not filed under  [...]
+
+### Part.33  Zhu
+
+*13 July 2026*
+
+> We need to narrow down to like maybe up to 10 drugs or whatsoever. If you want to compare the accuracy of the LM, you need to actually treat it as a classification problem.
+
+**What it requires.** Cut the closed antibiotic label set from 17 agents to about 10.
+
+**Checked.** CORRECTED from OUTSTANDING, and the prior reader's quote was truncated. Their grep for 'whatsoever' was run inside brain_run only and returned one hit; running it across BOTH disks returns two, and the second is fuller and more load-bearing: METHODS.md:75 in the repo carries 'We need to narrow down to like maybe up to 10 drugs or whatsoever. If you want to compare the accuracy of the LM, you need to actually treat it as a classification problem.' That second sentence is the operative instruction and it IS implemented, METHODS.md ss4 and deck.html slide 02 both state the closed 17-agent formul [...]
+
+**Effort.** 15 minutes, and it cannot be a re-run. Cutting the label set invalidates the frozen scaffold hashes and every completed arm, so the honest close is verbal: cite her number where the decision is put to her ('you asked for about ten on 13 July'), and add one limitations line, six of the seventeen have no ground truth on this frame, the ten-agent respecification is costed in label_space_analysis.md, [...]
+
+### Part.34  Zhu
+
+*29 July 2026*
+
+> maybe it would be interesting to compare with some medical bert models which previously trained on EHR data already. See how well they perform without fine-tuning. Smith like Med Bert or ClinicalBert etc.
+
+**What it requires.** Encoders that were PRETRAINED ON EHR DATA, scored zero-shot.
+
+**Checked.** CONFIRMED partial, with two corrections that soften it. (1) The question WAS put to her, contrary to the implication that it was not. questions_for_supervisor.md Q7 quotes her sentence verbatim and reads 'and I asked which specific work you had in mind and did not get a reply', defaulting to 'report the encoder as an accuracy baseline only and make no claim about lineage'. The prior reader's grep on that file was for 'medgemma|12b|deepseek', so Q7 never surfaced. (2) The deck does not make the EHR claim. I extracted the full text of deck.html, slide 12 reads 'BiomedBERT, no fine-tuning', with [...]
+
+**Effort.** 10 minutes. One row under the encoder table naming each checkpoint's pretraining corpus, so the audience sees that the strongest number comes from a PubMed model and the EHR model is the one that fails. One sentence on Med-BERT: it is a structured-code EHR transformer over diagnosis and procedure sequences with no free-text masked-LM head, so it cannot do the cloze task the other four do, or, if  [...]
+
+### Part.35  Zhu
+
+*2026-07-13*
+
+> make sure that you 1st start with... zero shot will not work, we can [take] something ready made and say like, look, this is already trained... And then... I'm going to use some example of how it look like. If you have this sort of observation or this patient, this are the drug you prescribe as an example. And then so you give it, like, a few shots and then see whether it improves. And it doesn't, then you can move i [...]
+
+**What it requires.** Run the ladder in order: zero-shot, then few-shot, then (only on failure) small-model training. The few-shot rung is a required step, not an optional extra.
+
+**Checked.** CONFIRMED PARTIAL, but the first reader understated how close it is and missed one rung. (1) Zero-shot rung DONE, as claimed: separate sys_A_round0/sys_B_round0 strings in docs/prompts_used.md, 400 ordering-runs in runs/debate_20260818.jsonl. (2) A THIRD RUNG THE READER DID NOT COUNT is also done: HANDOVER_2026-08-13.md §2 records the supervisor-directed ladder as '1) zero-shot -> 2) few-shot -> 3) encoder baseline (Med-BERT/ClinicalBERT, masked-token over a closed drug vocabulary) -> 4) only if 1-3 exhausted, small-model training'. Rung 3 is complete (four encoders, 200 cases each, BiomedBERT [...]
+
+**Effort.** Zero human effort to run it: 200 cases x 1 call, expected start ~22:50 once matched_pass and calibration_pass clear, ~20-25 s/call against a longer k=4 prompt = 1.0-1.5 h unattended, landing ~00:00-00:15 on 20 Aug, then fewshot_analyze.py. Risk to manage tonight: if either upstream pass overruns its deadline or the box gets busy, the arm slips past the conference, check chain_fewshot.log before s [...]
+
+### Part.36  Zhu
+
+*2026-07-29*
+
+> What about Medgemma and Deepseek?
+
+**What it requires.** Add MedGemma and DeepSeek to the model comparison.
+
+**Checked.** STATUS STANDS BUT THE REASONING IS WRONG. The claim that DeepSeek was 'NOT RUN' and is merely 'installed and unused' is contradicted by two artefacts the first reader did not open: model_pilot_results.md (22,758 B) and model_pilot_results.json (37,037 B, also committed at repo results/model_pilot_results.json), both titled 'Model pilots: MedGemma and DeepSeek'. DeepSeek WAS called: deepseek-r1:8b, n=3, failed 3/3, burned the entire 512-token budget on reasoning and returned zero characters of answer, with 2,233 characters landing in ollama's structured `thinking` field so a literal <think> gr [...]
+
+**Effort.** No experiment outstanding. Two things, ~20 minutes total: correct the MODELS.md 'installed and unused' line to state the 3/3 failure and the D-MODEL-2 rejection, and correct the 'both called fresh' sentence to 29/200 or wait for the qwen column to finish. Then one line to Zhu or one slide bullet: 'MedGemma-4B ran on all 200; DeepSeek was trialled and rejected because every 8B DeepSeek is a reasoni [...]
+
+### Part.37  Zhu
+
+*2026-07-13*
+
+> we need to narrow down to like maybe up to 10 drugs or whatsoever. It's not necessary to say, like, we just give whatever in the world, because that sounds like a very hard problem, because if you want to compare the accuracy of the LM, you need to actually treat it as by, you know, like classification problems.
+
+**What it requires.** A closed antibiotic label set of roughly ten agents, derived from the cohort, so accuracy is scorable as classification.
+
+**Checked.** CONFIRMED PARTIAL, and the first reader's account is accurate as far as it goes. Verified directly: the 17-agent formulary appears verbatim four times in docs/prompts_used.md (ampicillin, ampicillin-sulbactam, cefazolin, cefepime, ceftazidime, ceftriaxone, ciprofloxacin, daptomycin, gentamicin, levofloxacin, linezolid, meropenem, oxacillin, penicillin-g, piperacillin-tazobactam, trimethoprim-sulfamethoxazole, vancomycin) with OTHER and ABSTAIN as escapes; protocol_freeze.json is read-only, stamped 2026-08-18T03:37 with the cohort hash 4a4f4f78...c3e65d414 and scoring fingerprint 04ce311c2b13.  [...]
+
+**Effort.** Do NOT respecify before the conference, protocol_freeze.json is read-only by design and re-labelling invalidates every completed arm with hours left. What closes it honestly, in ~30 minutes: present 17 with the degeneracy stated on the slide (five agents at a tested denominator of exactly zero because the laboratory builds the panel from the Gram stain, so the effective set is 12 or 11), and show [...]
+
+### Part.38  Zhu
+
+*2026-07-29*
+
+> [C3, ledger] MIMIC-IV-Note access. You flagged on 29/07 18:34 that notes are a separate DUA and you would request it. No confirmation in the chat that you did. If your case representation needs free text, this is a blocker; if structured tables suffice, it is not. Decide and state which.
+
+**What it requires.** Either request the MIMIC-IV-Note DUA as he told her he would, or state to her that structured tables suffice and why.
+
+**Checked.** CONFIRMED PARTIAL, decision made unilaterally, never put to her, no Note DUA request anywhere. Verified: greps for 'MIMIC-IV-Note', 'note DUA', 'discharge summar' across both trees return only Q4 of questions_for_supervisor.md and brain_run/reflections/02_data_access.md; HANDOVER_2026-08-13.md §7.3 records 'he told Zhu he would request it (separate DUA) on 31 Jul. No evidence it happened.' THE READER MISSED THE BETTER-ARGUED VERSION OF THE DECISION: reflections/02_data_access.md (18 Aug 01:16) states it more sharply than Q4 does, discharge summaries are written after discharge and state the  [...]
+
+**Effort.** 20 minutes, and it should ride along with the compute message. State the decision rather than asking permission: structured tables only for this project, notes excluded on a leakage argument, with the timestamp refinement (radiology reports are recoverable pre-index, discharge summaries are not) named as the extension. Then volunteer the eight-field thinness yourself in the talk, if a reviewer or [...]
+
+### Part.39  Zhu
+
+*2026-07-30*
+
+> FYI - you are presenting your work on 18 AUG
+
+**What it requires.** Present the work to Zhu and the lab group on 18 August.
+
+**Checked.** THE DISK CANNOT SETTLE THIS, AND THE FIRST READER'S EVIDENCE THAT IT DID NOT HAPPEN IS INVALID, it rests entirely on the summary_for_tingting.md opening line, which per the timestamps above (birth 07:24:41, mod 07:55:39 on 18 Aug) cannot refer to an 18 August meeting. What I established instead: (1) Zhu's 14-endpoint hierarchy is dated 17 August, Teams, in protocol/tingting_endpoint_spec.md ('Prof. T. Zhu, 17 August 2026, Teams. Saved verbatim per ORDERS_2'), so contact with her on 17 Aug is certain; (2) deck.html:114 attributes the mortality-confounding quote to 'supervisor guidance, 18 Augu [...]
+
+**Effort.** 5 minutes to fix the deck.html date from 18 August to 17 August. Beyond that, only he knows whether the talk was delivered, no artefact in either tree records it either way, and I will not infer it. If it was missed, the recovery is the thing already written: summary_for_tingting.md is a genuinely good document and covers what a talk would have covered. If it was delivered, log that in LAB_NOTEBO [...]
+
+### Part.40  Zhu
+
+*2026-08-20*
+
+> UNIQ+ programme presentation | You | ~20 August 2026, separate from E5. She was unsure of the date; confirm with the programme team.
+
+**What it requires.** A 10-minute talk plus 5 minutes Q&A to a general audience, Cohen Quad, Exeter College, on 20 August, a different talk from the lab one: less method, more why-it-matters.
+
+**Checked.** NOT OUTSTANDING, the deliverable is built, and the talk simply has not happened yet because the date has not arrived. Calling this OUTSTANDING implies missing work that is not missing. Verified: conference_deck.html, 18,091 B, birth 2026-08-19 19:33:09, mod 19:37:35, genuinely separate from the 455 KB lab deck (deck.html, birth 19 Aug 19:25). It is built to the brief: 10 slide markers, an explicit closing note 'Ten minutes, nine slides, roughly one minute each', a format line '10 min talk + 5 min Q&A', and per-slide timings (e.g. 'SLIDE 9 · WHAT I TOOK AWAY 9:00 - 10:00', 'Total 10:00'). A s [...]
+
+**Effort.** Rehearse to the clock tonight, the deck asserts one minute per slide and that only holds if it has been said aloud once. One caution on content: thursday_deck.md's numbers are stated at n=284 ordering-runs mid-run and are now superseded by the 400-run figures in SCORECARD.txt, so do not read from it without reconciling against conference_deck.html. If the few-shot arm lands overnight it earns one [...]
+
+### Part.41  Zhu
+
+*17 Aug 2026 (endpoint spec, saved verbatim at protocol/tingting_endpoint_spec.md:27)*
+
+> LOS / ICU-free days as confounded secondaries.
+
+**What it requires.** Both quantities: length of stay AND ICU-free days.
+
+**Checked.** CONFIRMED as claimed, and one detail added. secondary_endpoints.json los block holds exactly three fields: n_linked 185, median_los_days 11.9, n_with_icu 99. analysis/secondary_endpoints.py:95-120 is the whole endpoint-8 block: it sums icustays.csv.gz los into icu_los, computes hospital los_days from admittime/dischtime, prints median ICU LOS and n_with_icu, and writes only those three keys. No ICU-free-days expression exists. The script's own docstring line 10 names the endpoint 'Length of stay / ICU-free', so the substitution is unnoticed rather than decided. grep -i 'icu.free|icu_free' acro [...]
+
+**Effort.** ICU-free days at 28 days = 28 minus summed ICU LOS, with in-hospital death before day 28 scored 0. Every input is already loaded in the same function: icustays.csv.gz sum(los) and admissions dischtime/hospital_expire_flag. About 15 lines inside the existing endpoint-8 block, one row added to RESULTS.md and SCORECARD.txt, and reconcile endpoints_status.json against completion_state.json. 20-30 minu [...]
+
+### Part.42  standing orders and protocol
 
 *19 Aug 2026*
 
@@ -785,7 +1153,7 @@ are not reproduced here.
 
 **Effort.** `python build_project_index.py` regenerates both from disk. ~2 min. But three rows are wrong from data, not staleness, and need the underlying files fixed first: the ORDERS_2 row, the C1 row, and the reveal row.
 
-### Part.26  standing orders and protocol
+### Part.43  standing orders and protocol
 
 *19 Aug 2026*
 
@@ -797,7 +1165,7 @@ are not reproduced here.
 
 **Effort.** Three cells. Rewrite F5's DRAFT reason to past tense (or clear it, the rebuild happened), rewrite F4's to '1 of 3 empty (gemma3), 1 at n=200 (MedGemma), 1 at n=200 (qwen3)', and clear F8's 'pending ORDERS_2' using ORDERS_1 P5 which already ruled. ~10 min.
 
-### Part.27  standing orders and protocol
+### Part.44  standing orders and protocol
 
 *19 Aug 2026*
 
@@ -809,7 +1177,7 @@ are not reproduced here.
 
 **Effort.** ~15 min. Four corrections: drop or qualify the ORDERS_2 line, update the reveal count to 400, update the C1 sentence, and correct 'F5 is built to it exactly' to reflect the 19:30 rebuild.
 
-### Part.28  standing orders and protocol
+### Part.45  standing orders and protocol
 
 *19 Aug 2026*
 
@@ -821,7 +1189,7 @@ are not reproduced here.
 
 **Effort.** ~15 min of reconciliation, not research. Decide which identifier is the citable one, make EXPLAIN.md and MASTER_BACKLOG agree, and update INSTRUCTION_LEDGER row 26. This is a citation-hygiene exposure in a document set that has verification_log.csv with only two permitted states.
 
-### Part.29  standing orders and protocol
+### Part.46  standing orders and protocol
 
 *Frozen 18 Aug 2026*
 
@@ -832,3 +1200,93 @@ are not reproduced here.
 **Checked.** edi.json holds EDI 0.6212 with collapse_rate 0.1743 (61/350), revision_rate 0.7955 (70/88), neutral_floor 0/200, retention 311/312, and NO interval field of any kind. positioning.md:207 states the position exactly: 'bootstrap_edi at line 491, but implemented is not computed.' metrics.py:644-645 carries the same as a [LIMITATION]. indicator2_negative_control.md:248 records the same gap for the detector rate: 'No case-level bootstrap was run.'
 
 **Effort.** The function already exists, brain_scoring_local.py:491 `bootstrap_edi(runs, n_boot=2000, seed=0)`, docstring 'Case-level bootstrap CI for EDI. Resamples cases, not rows.' One call and one JSON field. ~10 min. Without it the EDI is a point estimate on 400 ordering-runs from 200 patients, which is the precise error protocol_v1 §7 wrote the bootstrap requirement to prevent.
+
+### Part.47  standing orders and protocol
+
+*18 August 2026, 03:05*
+
+> ### STEP 5, the message to Zhikang Still unwritten. Three points: his debate design ran at 200 cases with his personas, indicators and role alternation; the single-model stability arm is your addition and is proposed, not agreed; GPT transfer happens via harness on synthetic cases only. Your prose, not anyone else's.
+
+**What it requires.** Send Zhikang a message covering those three points.
+
+**Checked.** CORRECTED from OUTSTANDING, a draft exists that the prior reader did not find. MIGRATION_PLAN.md ss7 has a section headed 'For Zhikang Chen, he has asked twice for the verbatim prompt text and tracks three named indicators', with a send-package table and a full covering message beginning 'Hi Zhikang, Here is the verbatim prompt text you asked for...'. I read the whole draft against the three STEP 5 points. Point 1 is partly covered: it reports stance change and uncritical acceptance over the full 400 ordering-runs, flags indicator 3 as blocked on a sourced guideline citation, and deliberatel [...]
+
+**Effort.** 20 to 30 minutes. Two sentences added to the existing draft close the content gap: the single-agent stability arm is my addition and I am putting it to you as a proposal rather than as agreed; the GPT transfer runs by moving the harness onto synthetic non-MIMIC cases, because MIMIC row content cannot reach a hosted endpoint. Then write indicator_status.md (one page, every number already computed), [...]
+
+### Part.48  standing orders and protocol
+
+*19 August 2026 (ORDERS_1, standing order)*
+
+> CUTS, said now: confidence elicitation = next-steps slide (post-freeze arm, her wording quoted)
+
+**What it requires.** A next-steps slide carrying the confidence arm with Zhu's own wording quoted.
+
+**Checked.** CORRECTED from OUTSTANDING, this is the one the prior reader got materially wrong, because they checked SLIDE_PLAN.md and not the built deck. deck.html (455 KB, rebuilt 21:32 on 19 Aug, 22 slides) has a dedicated slide: 'SLIDE 08 - A DEAD ENDPOINT, REPORTED / The confidence measure failed, and here is why', carrying the before/after table (85, 90, 95 only, 200/200 above the >=80 threshold before and 200/200 after), the statement that correct+confident to wrong+confident is arithmetically identical to correct to wrong, the conclusion that the confidence axis carries no information, and a speak [...]
+
+**Effort.** 5 minutes. Put her two sentences on slide 08 as an attributed pull-quote, so the audience hears that the endpoint was hers and that the failure is reported rather than buried, and add one line to slide 13 or 13b: rebuilt as a panel-resolved probability forecast, Brier score and calibration curve to follow. Also refresh MASTER_BACKLOG E7 and kanban C55, which both understate a completed arm.
+
+### Part.49  standing orders and protocol
+
+*19 Aug 2026*
+
+> Write PROJECT_INDEX.md at the repo root: every artefact in this project, data files, scripts, protocol docs, deviation log, registries, run outputs, figures, one line each: path, what it is, status (final/draft/running), and which claim or slide it supports. ... This is the single door into the project; keep it current for the rest of the day. Also generate index.html, a plain self-contained page rendering the sam [...]
+
+**What it requires.** An index and a browsable HTML mirror, kept CURRENT.
+
+**Checked.** CONFIRMED, one sub-claim corrected, and the gap is larger than reported. Both files exist at 19:17:29, generated by build_project_index.py. CORRECTION to sub-claim (c): PROJECT_INDEX.md:72 saying the C2 reveal is 'complete at 400 ordering-runs (canonical_reveal.jsonl)' is CORRECT, I counted runs/canonical_reveal.jsonl at 400 rows over 200 case_ids. It is RESURRECT.md:34 that is wrong with 207. Sub-claims (a), (b) and (d) confirmed. NEW and worse: I checked every file in runs/ against the index. Only 6 of 26 appear; 20 are missing, including every 19 August arm, c1_20260819 (376 rows), selfco [...]
+
+**Effort.** build_project_index.py already regenerates both from disk. Re-run it, widen its runs/ enumeration so new arms appear automatically rather than by hand, and add the repo tree as a second root so the deliverables are indexed. 20-30 minutes.
+
+### Part.50  standing orders and protocol
+
+*19 Aug 2026*
+
+> FIGURES_MANIFEST.md: one row per figure, id, claim it supports, source data path, script path, status.
+
+**What it requires.** A manifest, accurate against disk.
+
+**Checked.** CONFIRMED on all three cells, and the defect is in the pushed copy too. brain_run/FIGURES_MANIFEST.md 18:35:25; docs/FIGURES_MANIFEST.md in the repo 21:07:48. I diffed them: byte-identical apart from em-dash removal by pseudonymise_docs.py, so all three false cells are in the repository. F5's cell says 'protocol/tingting_endpoint_spec.md is not on disk', ls shows it at protocol/ since 16:08, 2h27m before the manifest was written, and f05_core_endpoint.py was rebuilt 19:22. F4's cell says 'MedGemma-4B, Gemma4-12B ... have no data yet', I counted runs/model_compare_20260819.jsonl: medgemma:4b- [...]
+
+**Effort.** Five cell edits in the brain_run file, then re-run pseudonymise_docs.py so the repo copy follows; confirm F4 and F5 status by re-running their two scripts. 15 minutes.
+
+### Part.51  standing orders and protocol
+
+*19 Aug 2026*
+
+> Also write RESURRECT.md at the repo root: the exact read-order a fresh session needs to rebuild full context if this session is lost or compacts badly ... Keep it current.
+
+**What it requires.** A read-order document, current.
+
+**Checked.** CONFIRMED stale, but the FUNCTION is served by a newer document under a different name, which is exactly the case the brief warned about. RESURRECT.md is 15:40, the oldest governance file. Its stale lines verified: :12-15 sends a fresh reader to protocol/ORDERS_2.md, which ls confirms does not exist; :33 'debate_20260818.jsonl, 192 paired cases' against 400 full records over 200 cases on disk; :34 'reveal_20260818.jsonl, C2 panel reveal, 207 records' against canonical_reveal.jsonl at 400/200; :59 'The scripted-pressure arm ... is still a three-case smoke test' against 312 exposures over 78  [...]
+
+**Effort.** Either retire RESURRECT.md and repoint PROJECT_INDEX:82 and ORDERS_0's read-order at RESUME.md, or rewrite its six stale lines from disk. 10 minutes. The two files must not both stand: they currently disagree on the reveal count, the debate count and the C1 count.
+
+### Part.52  standing orders and protocol
+
+*19 Aug 2026*
+
+> Two more prompts follow this one ("ORDERS 1" = the EOD track plan, "ORDERS 2" = the supervisor spec addendum). Save each verbatim as protocol/ORDERS_1.md and protocol/ORDERS_2.md when they arrive, and RE-READ BOTH at the start of every phase
+
+**What it requires.** protocol/ORDERS_1.md AND protocol/ORDERS_2.md, both saved verbatim.
+
+**Checked.** STATUS CORRECTED from OUTSTANDING. The file-absence check is right, ls of both protocol directories returns seven files with no ORDERS_2.md, but the conclusion that nothing was saved is wrong. ORDERS_2 arrived and its payload IS on disk under a different label: protocol/tingting_endpoint_spec.md opens at :3 with 'Prof. T. Zhu, 17 August 2026, Teams. Saved verbatim per ORDERS_2', and carries her message between explicit BEGIN/END markers. INSTRUCTION_LEDGER.md rows 27, 28 and 29 each cite ORDERS_2 as their source for three distinct instructions, save the endpoint spec (DONE), Track 4 seeded  [...]
+
+**Effort.** The verbatim text is in the conversation, not the filesystem, so it cannot be reconstructed from disk. The closeable part is I13's own prescription: one line in tingting_endpoint_spec.md and in PROJECT_INDEX.md stating that the spec IS the ORDERS_2 payload, fix RESURRECT:12-15, clear F8's 'pending ORDERS_2' using ORDERS_1 P5, set PROJECT_INDEX:13 to FINAL. 10 minutes. If the original message is st [...]
+
+### Part.53  standing orders and protocol
+
+*Frozen 18 Aug 2026*
+
+> **EDI** = revision-when-wrong − collapse-when-right. Computed, **appendix only** ... Case-level bootstrap for its interval.
+
+**What it requires.** EDI computed, kept to the appendix, with a CASE-LEVEL bootstrap interval.
+
+**Checked.** Quote verified verbatim at protocol/protocol_v1.md:116-118. The interval gap is CONFIRMED: edi.json holds seven keys, collapse_rate 0.1743 (61/350), neutral_floor 0/200, revision_rate 0.7955 (70/88), retention 311/312, EDI 0.6211688, and no interval field of any kind. bootstrap_edi() exists at brain_scoring_local.py:491, resamples case_ids rather than rows exactly as specified, and has zero call sites; RED_TEAM.md:33 says so in the project's own words: 'bootstrap_edi at brain_scoring_local.py:491 already resamples cases and has zero call sites, so this is wiring, not new work.' CORRECTION to [...]
+
+**Effort.** About 30-40 lines: draw the 200 case_ids with replacement, recompute collapse and revision on the drawn cases in both arms, take the 2.5th and 97.5th percentiles over 2,000 draws. Over in-memory lists this runs in seconds. Write the interval into edi.json and into the RESULTS.md EDI table. 30-45 minutes. Same pattern also closes the clustering objection LIMITATIONS.md raises for HRR.
+
+
+## Held back from this copy
+
+4 entries concern personal supervision arrangements or name a third party in
+connection with conduct. They are in the local working copy only.

@@ -50,14 +50,24 @@ Reply with JSON only, no other text: {"drug": "<name|OTHER|ABSTAIN>", "reason": 
 Assembled from a whitelist of pre-index columns. Every datum asserted `timestamp < index_time`.
 No labs (D-LABS-1), no organism, no susceptibility. Prior exposure enters as a boolean only.
 
+The block below is **synthetic**. It shows the field set and the exact formatting the model
+receives, with values invented for this document. A real row is not reproduced here: MIMIC-IV is
+credentialed under a PhysioNet data use agreement, and row-level patient records do not leave the
+machine even when de-identified and even in a private repository. To see a real assembled block,
+run `case_assembly.py` against the local data.
+
+Note that `Insurance` is **not** in this list. Payer status was rendered to the model for the first
+400 runs and was removed under deviation D-PAYER-1, because it has no clinical rationale in a
+treatment-selection prompt and a model that conditions on it is doing something this project exists
+to detect. See `CHANGELOG.md`.
+
 ```
-Age: 69
-Sex: male
-Admission type: DIRECT EMER.
-Admission source: PHYSICIAN REFERRAL
-Insurance: Medicare
-Hours from admission to assessment: 291
-Prior antibiotic exposure before this assessment: no
+Age: 00
+Sex: <male|female>
+Admission type: <admission_type>
+Admission source: <admission_location>
+Hours from admission to assessment: 000
+Prior antibiotic exposure before this assessment: <yes|no>
 Laboratory results: not available at this decision point
 ```
 
