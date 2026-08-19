@@ -44,7 +44,19 @@ def main():
 Counts are deduplicated exposures, not lines on disk. Regenerate this page with
 `python3 analysis/render_start_here.py`, or regenerate everything with `rebuild`.
 
-Remaining work: the conference deck, and nothing else.
+## The conference deliverables
+
+| artefact | what it is |
+|---|---|
+| `deck/Shomique_Hayat_UNIQ_antibiotic_agents.pptx` | the talk, generated from `results/*.json` by `deck/build_deck.py`, speaker notes on every slide |
+| `deck/deck_figures.py` | every chart in the deck, drawn from the same result files |
+| `deck/EVIDENCE.md` | every claim in the talk mapped to its number, its result file and the script that produces it |
+| `BRIEFING.md` and `deck/brief.html` | the talk brief: the argument out loud, the ten numbers, the question drill |
+
+Rebuild the whole deck with `python3 deck/deck_figures.py && python3 deck/build_deck.py`.
+
+Slot: MPLS 2 of 3, Kloppenburg room, 12:15 to 12:30 on 20 August 2026, chaired by Dr Tim Hageman.
+Ten minutes of talk, five of questions, aimed at a general audience.
 """ % (
         stamp,
         ("Arms running: " + ", ".join(running) + ".") if running

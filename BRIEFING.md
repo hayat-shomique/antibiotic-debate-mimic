@@ -9,6 +9,30 @@ Rebuild it with `python3 deck/deck_figures.py && python3 deck/build_deck.py`.
 
 ---
 
+## 0. The room, before anything else
+
+| | |
+|---|---|
+| slot | **12:15 to 12:30**, Thursday 20 August, MPLS 2 of 3, **Kloppenburg room**, Exeter College Cohen Quad |
+| chair | Dr Tim Hageman |
+| format | **10 minutes of talk, 5 of questions.** Informal, not assessed |
+| audience | other interns and some supervisors, **aimed at a general audience with no knowledge of the subject area** |
+| arrive | the room starts at 09:00 and the guidance is to be there 15 minutes before your session |
+
+**Two talks in your room set you up, and you should use them.** At 11:30, Manaan Shahid presents
+Dr Jialin Yu's *Efficient Communication with LLM Agents*. At 09:30, Swera Gulfam and Tawfeeq Hamayun
+present Dr Seth Flaxman's *Understanding and mitigating bias in medical AI*. By the time you stand up,
+the room has already heard about agents communicating and about bias in medical AI. Your line, if it
+fits the mood: this morning you heard how agents can communicate efficiently, and how medical AI can be
+biased. I spent the summer asking whether the communication makes the clinical decision better, and in
+this one setting there is an answer key that neither agent can argue with.
+
+**What the guidelines ask for:** an overview of the research topic, key findings and conclusions, and
+what you learned. Slides 14, 15 and 16 carry the conclusions, and the honest-mistakes material on
+backup slide 21 is the strongest answer to what you learned.
+
+---
+
 ## 1. The 45 second version
 
 > Language models are trained to be agreeable. People are now building clinical systems where
@@ -88,33 +112,30 @@ which makes 400 ordering-runs behave like an effective 209.
 
 ## 4. The spine, slide by slide, with the sentence that moves you on
 
-| # | slide | the one claim | transition |
-|---|---|---|---|
-| 1 | title | who I am, one question | "the question is not mine, it is my supervisor's" |
-| 2 | the clinical decision | the drug is chosen before the evidence exists | "so there is a real answer, and it arrives later" |
-| 3 | the reference standard | the doctor is not the reference, the bacteria are | "with a referee, you can ask a question you could not ask before" |
-| 4 | the question | her sentence, verbatim | "so what does the literature already know" |
-| 5 | the gap | collaboration does not reliably help, and sycophancy is known. What is missing is the referee | "three questions follow" |
-| 6 | design one | two agents, opposed incentives, both speaking orders | "and four conditions on every case" |
-| 7 | design two | Cn is the condition that makes the rest interpretable | "and it runs on three tiers of model" |
-| 8 | the models | size and quantisation held fixed so each comparison answers one question | "start with what happens before anyone speaks" |
-| 9 | result one | the default is a constant, and it scores 87.5 | "so does it move when somebody speaks to it" |
-| 10 | result two | c is zero, b is 63 to 70, p on the order of 1e-21 | "it moves. Does the movement hurt anybody" |
-| 11 | result three | on accuracy, almost no damage | "if I stopped here I would be wrong, and she told me where to look" |
-| 12 | result four | an empty sentence, 0 to 84 per cent carbapenem | "one more control before the answer" |
-| 13 | result five | same drug, different patient, gap zero | "now the arm that answers the question" |
-| 14 | the answer | live agent minus 9.5 points, panel plus 17.2 | "so can prompting fix it" |
-| 15 | rung two | few-shot breaks the constant and costs coverage | "which is what licenses the next rung" |
-| 16 | the contribution | invisible on accuracy, severe on stewardship | "and here is how you can check all of it" |
-| 17 | discipline | nothing is typed, and the mistakes are on the record | "what it does not show" |
-| 18 | limitations | six bounds, stated as design properties | |
-| 19 | backup | her endpoint hierarchy, every row answered | only if asked |
-| 20 | close | the laboratory is the referee, the measurement is the contribution | |
+| # | slide | target | the one claim | the sentence that moves you on |
+|---|---|---|---|---|
+| 1 | title | 15s | Who I am, one question | "The question is not mine, it is my supervisor's." |
+| 2 | the clinical decision | 40s | The drug is chosen before the evidence exists | "So there is a real answer, and it arrives later." |
+| 3 | the referee | 40s | The doctor is not the reference, the bacteria are | "With a referee you can ask a question you could not ask before." |
+| 4 | the question | 15s | Her sentence, verbatim | "Here is how one patient becomes one measurement." |
+| 5 | the pipeline | 50s | Six stages, and only stage 4 ever changes | "And this is what the model actually sees." |
+| 6 | the instrument | 50s | The prompt verbatim, six patient fields, four pressure sentences | "So what does it do before anyone speaks to it." |
+| 7 | result one | 45s | The default is a constant, and it scores 87.5 | "Does it move when somebody speaks to it." |
+| 8 | result two | 55s | c is zero, b is 63 to 70, p on the order of 1e-21 | "It moves. Does the movement hurt anybody." |
+| 9 | result three | 25s | On accuracy, almost no damage | "If I stopped here I would be wrong, and she told me where to look." |
+| 10 | result four | 50s | An empty sentence, 0 to 84 per cent carbapenem | "One more control before the answer." |
+| 11 | result five | 35s | Same drug, different patient, gap zero | "Now the arm that answers the question." |
+| 12 | the answer | 55s | Live agent minus 9.5 points, panel plus 17.2 | "So can prompting fix it." |
+| 13 | rung two | 35s | Few-shot breaks the constant and costs coverage | "Which is what licenses the next rung." |
+| 14 | the contribution | 30s | Invisible on accuracy, severe on stewardship | "What it does not show." |
+| 15 | limitations | 25s | Six bounds, stated as design properties | "Where this goes." |
+| 16 | close | 20s | The laboratory is the referee, the measurement is the contribution |  |
 
-**If you have 10 minutes:** 1, 2, 3, 4, 7, 9, 10, 12, 14, 16, 18, 20. Keep 5, 6, 8, 11, 13, 15, 19
-in the deck as backup and say "there is a slide on that" when asked.
+Sixteen slides, **9 minutes 45 seconds** of targets, which leaves you fifteen seconds of slack and
+five minutes of questions. Every slide's speaker notes now open with its target and the running total,
+so you can pace the run-through off the deck itself.
 
-**If you have 15 minutes:** everything except 19.
+**Backup slides, after the close, for questions only:** 17 the gap, 18 design, part one, 19 design, part two, 20 the models, 21 how it was kept honest, 22 the endpoint hierarchy.
 
 ---
 
