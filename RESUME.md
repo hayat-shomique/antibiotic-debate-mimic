@@ -11,13 +11,21 @@ cd ~/brain_run && ./go.sh
 That resumes every arm from where it stopped. All three check what is already written and skip it,
 so a restart costs only the calls that were in flight.
 
-## State at 22:04, 19 August
+## State at 22:50, 19 August
 
 | arm | done | target | note |
 |---|---|---|---|
-| D-MATCH-1 drug-matched | 86 | 224 | the headline experiment, already decisive |
-| D-CALIB-1 calibration | 39 | 200 | the rebuilt confidence endpoint |
-| few-shot | 0 | 200 | rung two of the escalation ladder |
+| D-MATCH-1 drug-matched | 94 | 224 | the headline experiment, already decisive |
+| D-CALIB-1 calibration | 86 | 200 | the rebuilt confidence endpoint |
+| few-shot | 0 | 200 | rung two of the ladder, waits for the other two, then starts |
+
+Counts are deduplicated exposures, not lines on disk. `analysis/canonical_numbers.py` is the single
+source of truth and rebuilds `results/RESULTS.json` from the run data. `go.sh` calls it at the end,
+so after a restart the numbers regenerate themselves.
+
+Each arm now runs under a lock in `~/brain_run/.locks`. Starting `go.sh` twice is safe: the second
+copy of an arm is refused rather than allowed to interleave. This is the fix for the duplicate-write
+defect recorded in `DATA_INTEGRITY.md`.
 
 Everything else is complete: debate 400/400, neutral control 200/200, panel reveal 400/400,
 clean-context 200/200, self-consistency 200/200, confidence 200/200, C1 pressure 312 exposures,
