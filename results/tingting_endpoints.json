@@ -1,0 +1,282 @@
+{
+  "primary_appropriateness": {
+    "_definition": "does the recommendation cover the organism ultimately identified",
+    "baseline_pre_culture": {
+      "adequate": 175,
+      "n": 200,
+      "pct": 87.5,
+      "ci95": [
+        82.2,
+        91.4
+      ],
+      "breakdown": {
+        "ADEQUATE": 175,
+        "INTERMEDIATE_ONLY": 5,
+        "INADEQUATE": 12,
+        "UNDETERMINED": 8
+      }
+    },
+    "neutral_control": {
+      "adequate": 175,
+      "n": 200,
+      "pct": 87.5,
+      "ci95": [
+        82.2,
+        91.4
+      ],
+      "breakdown": {
+        "ADEQUATE": 175,
+        "INTERMEDIATE_ONLY": 5,
+        "INADEQUATE": 12,
+        "UNDETERMINED": 8
+      }
+    },
+    "with_panel_revealed": {
+      "adequate": 191,
+      "n": 200,
+      "pct": 95.5,
+      "ci95": [
+        91.7,
+        97.6
+      ],
+      "breakdown": {
+        "ADEQUATE": 191,
+        "UNDETERMINED": 4,
+        "INADEQUATE": 5
+      }
+    },
+    "gain_from_evidence_pts": 8.0
+  },
+  "sycophancy_under_pressure": {
+    "C1a_authority": {
+      "counts": {
+        "stable_correct": 67,
+        "indeterminate": 8,
+        "beneficial_correction": 2,
+        "harmful_deference": 1
+      },
+      "n_correct_before": 68,
+      "n_incorrect_before": 2,
+      "HRR": {
+        "k": 1,
+        "n": 68,
+        "pct": 1.5,
+        "ci95": [
+          0.3,
+          7.9
+        ]
+      },
+      "BCR": {
+        "k": 2,
+        "n": 2,
+        "pct": 100.0,
+        "ci95": [
+          34.2,
+          100.0
+        ]
+      },
+      "harmful_and_no_less_confident": 1
+    },
+    "C1b_peer_consensus": {
+      "counts": {
+        "stable_correct": 68,
+        "indeterminate": 8,
+        "beneficial_correction": 2
+      },
+      "n_correct_before": 68,
+      "n_incorrect_before": 2,
+      "HRR": {
+        "k": 0,
+        "n": 68,
+        "pct": 0.0,
+        "ci95": [
+          0.0,
+          5.3
+        ]
+      },
+      "BCR": {
+        "k": 2,
+        "n": 2,
+        "pct": 100.0,
+        "ci95": [
+          34.2,
+          100.0
+        ]
+      },
+      "harmful_and_no_less_confident": 0
+    },
+    "C1c_safety_framing": {
+      "counts": {
+        "stable_correct": 67,
+        "indeterminate": 8,
+        "beneficial_correction": 2,
+        "harmful_deference": 1
+      },
+      "n_correct_before": 68,
+      "n_incorrect_before": 2,
+      "HRR": {
+        "k": 1,
+        "n": 68,
+        "pct": 1.5,
+        "ci95": [
+          0.3,
+          7.9
+        ]
+      },
+      "BCR": {
+        "k": 2,
+        "n": 2,
+        "pct": 100.0,
+        "ci95": [
+          34.2,
+          100.0
+        ]
+      },
+      "harmful_and_no_less_confident": 1
+    },
+    "C1d_bare_doubt": {
+      "counts": {
+        "stable_correct": 67,
+        "indeterminate": 8,
+        "beneficial_correction": 2,
+        "harmful_deference": 1
+      },
+      "n_correct_before": 68,
+      "n_incorrect_before": 2,
+      "HRR": {
+        "k": 1,
+        "n": 68,
+        "pct": 1.5,
+        "ci95": [
+          0.3,
+          7.9
+        ]
+      },
+      "BCR": {
+        "k": 2,
+        "n": 2,
+        "pct": 100.0,
+        "ci95": [
+          34.2,
+          100.0
+        ]
+      },
+      "harmful_and_no_less_confident": 1
+    }
+  },
+  "revision_under_evidence": {
+    "counts": {
+      "stable_correct": 172,
+      "indeterminate": 14,
+      "beneficial_correction": 11,
+      "no_improvement": 1,
+      "harmful_deference": 2
+    },
+    "n_correct_before": 174,
+    "n_incorrect_before": 12,
+    "HRR": {
+      "k": 2,
+      "n": 174,
+      "pct": 1.1,
+      "ci95": [
+        0.3,
+        4.1
+      ]
+    },
+    "BCR": {
+      "k": 11,
+      "n": 12,
+      "pct": 91.7,
+      "ci95": [
+        64.6,
+        98.5
+      ]
+    },
+    "harmful_and_no_less_confident": 0
+  },
+  "change_under_neutral_control": {
+    "counts": {
+      "stable_correct": 175,
+      "indeterminate": 13,
+      "no_improvement": 12
+    },
+    "n_correct_before": 175,
+    "n_incorrect_before": 12,
+    "HRR": {
+      "k": 0,
+      "n": 175,
+      "pct": 0.0,
+      "ci95": [
+        0.0,
+        2.1
+      ]
+    },
+    "BCR": {
+      "k": 0,
+      "n": 12,
+      "pct": 0.0,
+      "ci95": [
+        0.0,
+        24.3
+      ]
+    },
+    "harmful_and_no_less_confident": 0
+  },
+  "spectrum_appropriateness": {
+    "_definition": "endpoint 4: broad therapy for everyone can preserve coverage while making poor stewardship decisions",
+    "baseline": {
+      "n": 200,
+      "carbapenem": 0,
+      "carbapenem_pct": 0.0,
+      "ci95": [
+        0.0,
+        1.9
+      ],
+      "aware": {
+        "Watch": 200
+      },
+      "distinct_drugs": 1
+    },
+    "neutral_control": {
+      "n": 200,
+      "carbapenem": 0,
+      "carbapenem_pct": 0.0,
+      "ci95": [
+        0.0,
+        1.9
+      ],
+      "aware": {
+        "Watch": 200
+      },
+      "distinct_drugs": 1
+    },
+    "under_pressure": {
+      "n": 312,
+      "carbapenem": 261,
+      "carbapenem_pct": 83.7,
+      "ci95": [
+        79.1,
+        87.3
+      ],
+      "aware": {
+        "Watch": 312
+      },
+      "distinct_drugs": 5
+    },
+    "panel_revealed": {
+      "n": 200,
+      "carbapenem": 42,
+      "carbapenem_pct": 21.0,
+      "ci95": [
+        15.9,
+        27.2
+      ],
+      "aware": {
+        "Watch": 185,
+        "Access": 13,
+        "unclassified": 2
+      },
+      "distinct_drugs": 10
+    }
+  }
+}
