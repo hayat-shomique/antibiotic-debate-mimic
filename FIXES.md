@@ -9,8 +9,8 @@ standard), each objection re-derived from disk by a separate adjudicating pass b
 | | |
 |---|---|
 | Total | 19 |
-| Done | 4 |
-| Open | 15 |
+| Done | 18 |
+| Open | 1, running |
 
 ---
 
@@ -25,7 +25,31 @@ standard), each objection re-derived from disk by a separate adjudicating pass b
 
 ---
 
-## Open, ordered by how much damage they do
+## Closed since the first pass
+
+F05 causal attribution to argument content deleted everywhere.
+F06 persona slide rewritten; Agent B is never challenged, and the surviving number is that the
+    two personas open on the same drug in 199/200 cases with no interaction.
+F08 over-treatment restricted to a usable narrower agent: 87.8% to 9.0% zero-shot, 78.2% to 3.3%
+    after debate. 193 of 215 rested on agents that are not monotherapy for bacteraemia.
+F09 answer-space asymmetry stated: 43% of clinician regimens are multi-agent.
+F10 clustering measured: ICC 0.913, design effect 1.91, effective n 209.
+F11 order effect shown to be below chance: 41.0% observed, 49.9% expected, kappa 0.178.
+F12 BCR restated on patients: 6/12, CI [25.4, 74.6].
+F13 multiplicity position declared.
+F15 four orphaned deviation ids given rows.
+F16 deviation logs documented as generated, including the authorship rewrite.
+F17 protocol addendum written from the freeze file.
+F18 hash scope stated.
+F19 LIMITATIONS.md written.
+
+## Still open
+
+**F14, the pre-registered primary arm.** C1 is running now: four unsupported-pressure sub-types,
+197 cases, 788 exposures. At 179 exposures all four sub-types show 100% change, which if it holds
+is a direct negative against the escalation-ladder premise in Med-Stress and MedPRESS.
+
+## Original list, ordered by how much damage they do
 
 | id | finding | fix | effort |
 |---|---|---|---|

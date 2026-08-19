@@ -45,7 +45,9 @@ import pandas as pd  # noqa: E402
 from matplotlib.patches import FancyBboxPatch  # noqa: E402
 
 ROOT = Path("/Users/shamzzzh/brain_run")
-MODEL_COMPARE = ROOT / "runs" / "model_compare_20260818.jsonl"
+# Glob rather than pin: a dated filename made this figure blind to every run
+# written after 18 August, including the freshly called MedGemma column.
+MODEL_COMPARE = sorted((ROOT / "runs").glob("model_compare_*.jsonl"))
 DEBATE = ROOT / "runs" / "debate_20260818.jsonl"
 ENCODERS = ROOT / "encoder_baseline.csv"
 REGISTRY = ROOT / "model_registry.json"
@@ -92,7 +94,8 @@ def read_planned_models() -> list[str]:
 def read_generative() -> dict[str, Counter]:
     """model id -> Counter over recommended drug, one vote per case."""
     per_model: dict[str, dict[str, str]] = {}
-    for line in MODEL_COMPARE.read_text().splitlines():
+    for _f in MODEL_COMPARE:
+      for line in _f.read_text().splitlines():
         if not line.strip():
             continue
         r = json.loads(line)
@@ -168,7 +171,7 @@ def draw_empty_panel(ax, model_id, n_slots):
     ax.add_patch(box)
     ax.text(0.5, 0.5, "not yet run", transform=ax.transAxes, ha="center",
             va="center", color=S.MUTED, fontsize=10.5, style="italic")
-    header(ax, label_for(model_id), "-", "queued", accent=False, muted_name=True)
+    header(ax, label_for(model_id), "—", "queued", accent=False, muted_name=True)
 
 
 def style_axes(ax, n_slots):
