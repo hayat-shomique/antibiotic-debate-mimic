@@ -1,64 +1,64 @@
 <title>The Laboratory as Referee</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 
 <style>
 :root{
-  --ink:#12303F;
-  --ground:#F4F7F8;
+  --ink:#161616;
+  --ground:#F4F4F4;
   --panel:#FFFFFF;
-  --panel-2:#EDF2F4;
-  --rule:#DCE4E8;
-  --rule-strong:#BCCBD3;
-  --muted:#6B7C85;
-  --primary:#1C7293;
-  --accent:#C64B3E;
-  --s:#2E7D6B;
-  --i:#B08019;
-  --r:#C64B3E;
-  --chip-s:#E4EFEB;
-  --chip-i:#F5EDDC;
-  --chip-r:#F6E5E2;
-  --shadow:0 1px 0 rgba(18,48,63,.05);
+  --panel-2:#E8E8E8;
+  --rule:#E0E0E0;
+  --rule-strong:#C6C6C6;
+  --muted:#525252;
+  --primary:#0F62FE;
+  --accent:#D02670;
+  --s:#007D79;
+  --i:#8E6A00;
+  --r:#D02670;
+  --chip-s:#D9FBFB;
+  --chip-i:#FCF4D6;
+  --chip-r:#FFF0F7;
+  --shadow:0 1px 0 rgba(22,22,22,.06);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --ink:#DDE8ED;
-    --ground:#0C1F29;
-    --panel:#12303F;
-    --panel-2:#16394A;
-    --rule:#1F485B;
-    --rule-strong:#2C5C72;
-    --muted:#93A8B2;
-    --primary:#67B6D2;
-    --accent:#E8837A;
-    --s:#6FBFA8;
-    --i:#DBB05A;
-    --r:#E8837A;
-    --chip-s:#123A32;
-    --chip-i:#3A2F16;
-    --chip-r:#3D2320;
-    --shadow:0 1px 0 rgba(0,0,0,.25);
+    --ink:#F4F4F4;
+    --ground:#161616;
+    --panel:#262626;
+    --panel-2:#393939;
+    --rule:#393939;
+    --rule-strong:#6F6F6F;
+    --muted:#A8A8A8;
+    --primary:#78A9FF;
+    --accent:#FF7EB6;
+    --s:#3DDBD9;
+    --i:#D2A106;
+    --r:#FF7EB6;
+    --chip-s:#022B30;
+    --chip-i:#302400;
+    --chip-r:#2A0A18;
+    --shadow:0 1px 0 rgba(0,0,0,.4);
   }
 }
 :root[data-theme="dark"]{
-  --ink:#DDE8ED;
-  --ground:#0C1F29;
-  --panel:#12303F;
-  --panel-2:#16394A;
-  --rule:#1F485B;
-  --rule-strong:#2C5C72;
-  --muted:#93A8B2;
-  --primary:#67B6D2;
-  --accent:#E8837A;
-  --s:#6FBFA8;
-  --i:#DBB05A;
-  --r:#E8837A;
-  --chip-s:#123A32;
-  --chip-i:#3A2F16;
-  --chip-r:#3D2320;
-  --shadow:0 1px 0 rgba(0,0,0,.25);
+    --ink:#F4F4F4;
+  --ground:#161616;
+  --panel:#262626;
+  --panel-2:#393939;
+  --rule:#393939;
+  --rule-strong:#6F6F6F;
+  --muted:#A8A8A8;
+  --primary:#78A9FF;
+  --accent:#FF7EB6;
+  --s:#3DDBD9;
+  --i:#D2A106;
+  --r:#FF7EB6;
+  --chip-s:#022B30;
+  --chip-i:#302400;
+  --chip-r:#2A0A18;
+  --shadow:0 1px 0 rgba(0,0,0,.4);
 }
 
 *{box-sizing:border-box}
@@ -78,16 +78,16 @@ body{
 .eyebrow{
   font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--accent);font-weight:600;margin:0 0 22px;
+  color:var(--primary);font-weight:600;margin:0 0 22px;
 }
 h1{
-  font-family:Newsreader,Georgia,"Times New Roman",serif;
-  font-weight:500;font-size:clamp(2.5rem,6vw,4.15rem);
-  line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance;
+  font-family:"IBM Plex Sans",Helvetica,Arial,sans-serif;
+  font-weight:600;font-size:clamp(2.4rem,5.6vw,3.9rem);
+  line-height:1.04;letter-spacing:-.03em;margin:0;text-wrap:balance;
 }
 .standfirst{
-  font-family:Newsreader,Georgia,serif;font-size:clamp(1.05rem,2.1vw,1.35rem);
-  line-height:1.5;color:var(--muted);max-width:56ch;margin:20px 0 0;font-style:italic;
+  font-family:"IBM Plex Sans",Helvetica,sans-serif;font-size:clamp(1.05rem,2.1vw,1.3rem);
+  line-height:1.5;color:var(--muted);max-width:58ch;margin:20px 0 0;font-weight:400;
 }
 .meta{
   display:flex;flex-wrap:wrap;gap:8px 30px;margin:30px 0 0;
@@ -141,14 +141,14 @@ section:first-of-type{border-top:0}
 .rail{position:sticky;top:26px;align-self:start;height:max-content}
 .code{
   font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--accent);font-weight:600;
+  text-transform:uppercase;color:var(--primary);font-weight:600;
 }
-.rail .code{display:block;padding-bottom:8px;border-bottom:2px solid var(--accent);margin-bottom:10px}
+.rail .code{display:block;padding-bottom:8px;border-bottom:2px solid var(--primary);margin-bottom:10px}
 .rail p{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);margin:0;line-height:1.5}
 .body{min-width:0;max-width:none}
 h2{
-  font-family:Newsreader,Georgia,serif;font-weight:500;
-  font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.12;letter-spacing:-.01em;
+  font-family:"IBM Plex Sans",Helvetica,sans-serif;font-weight:600;
+  font-size:clamp(1.5rem,3vw,2rem);line-height:1.14;letter-spacing:-.02em;
   margin:0 0 14px;text-wrap:balance;
 }
 h3{
@@ -163,8 +163,8 @@ code{background:var(--panel-2);padding:2px 6px;border:1px solid var(--rule)}
 
 /* ---------- pull quote: the spoken opener ---------- */
 .script{
-  border-left:3px solid var(--accent);padding:6px 0 6px 24px;margin:6px 0 18px;
-  font-family:Newsreader,Georgia,serif;font-size:1.22rem;line-height:1.52;max-width:60ch;
+  border-left:3px solid var(--primary);padding:6px 0 6px 24px;margin:6px 0 18px;
+  font-family:"IBM Plex Sans",Helvetica,sans-serif;font-size:1.16rem;line-height:1.55;max-width:62ch;
 }
 .script p{max-width:none;margin:0 0 14px}
 .script p:last-child{margin-bottom:0}
@@ -206,7 +206,7 @@ summary{
 }
 summary::-webkit-details-marker{display:none}
 summary::before{
-  content:"+";font-family:"IBM Plex Mono",monospace;color:var(--accent);font-weight:600;
+  content:"+";font-family:"IBM Plex Mono",monospace;color:var(--primary);font-weight:600;
 }
 details[open] summary::before{content:"\2212"}
 details[open] summary{background:var(--panel-2)}
@@ -229,7 +229,7 @@ ul.verdicts .verdict{justify-self:start;margin-top:2px}
 /* ---------- lines to have ready ---------- */
 ul.lines{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 ul.lines li{
-  font-family:Newsreader,Georgia,serif;font-size:1.1rem;line-height:1.45;
+  font-family:"IBM Plex Sans",Helvetica,sans-serif;font-size:1.06rem;line-height:1.5;font-weight:500;
   padding-left:18px;border-left:2px solid var(--rule-strong);max-width:62ch;
 }
 
