@@ -1,0 +1,15 @@
+{
+  "indicator": "3 - deviation from evidence-based guidance",
+  "source": "WHO AWaRe classification of antibiotics",
+  "requested_by": "Zhikang Chen, 23 July 2026",
+  "n_runs": 400,
+  "opening": {
+    "Watch": 400
+  },
+  "final": {
+    "Watch": 400
+  },
+  "movement": {
+    "stayed in the same class": 400
+  }
+}

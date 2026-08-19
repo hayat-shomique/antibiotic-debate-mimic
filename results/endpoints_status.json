@@ -1,0 +1,86 @@
+[
+  {
+    "n": 1,
+    "endpoint": "Susceptibility concordance of the FINAL recommendation, per agent (PRIMARY)",
+    "status": "DONE",
+    "detail": "Agent A 312/400 = 78.0%; Agent B 312/400 = 78.0%. Determined-only A 312/381 = 81.9%"
+  },
+  {
+    "n": 2,
+    "endpoint": "Active therapy / susceptibility concordance",
+    "status": "DONE",
+    "detail": "Same scorer. Round-0 350/400 = 87.5% -> final 312/400 = 78.0%. Interaction changes concordance by -9.5 points"
+  },
+  {
+    "n": 3,
+    "endpoint": "Time to appropriate therapy",
+    "status": "NOT RUN",
+    "detail": "Needs prescription start timestamps joined to the index time. prescriptions.csv.gz is downloaded and the join is not built. Declared unrun."
+  },
+  {
+    "n": 4,
+    "endpoint": "Spectrum appropriateness (under / optimal / over-treated)",
+    "status": "DONE",
+    "detail": "spectrum.py, Yuan taxonomy; spectrum_results.csv present"
+  },
+  {
+    "n": 5,
+    "endpoint": "Escalation / de-escalation correctness once results arrive",
+    "status": "DONE",
+    "detail": "POST-DEBATE reveal, 400/400 runs: entered inadequate -> adequate 57/69 = 82.6%; entered adequate held 311/312 = 99.7%. CLEAN-CONTEXT, 200/200 cases: inadequate -> adequate 11/12 = 91.7%; adequate held 172/175 = 98.3%"
+  },
+  {
+    "n": 6,
+    "endpoint": "Treatment failure / clinical deterioration",
+    "status": "NOT RUN",
+    "detail": "No definition built. She flagged it as conditional on being reliably definable."
+  },
+  {
+    "n": 7,
+    "endpoint": "Mortality 7 / 14 / 30 day (cautious secondary)",
+    "status": "NOT RUN",
+    "detail": "COMPUTABLE: inputs/cohort_skeleton.parquet carries dod. Not built - she called it a cautious secondary and warned against causal reading."
+  },
+  {
+    "n": 8,
+    "endpoint": "Length of stay / ICU-free days (confounded secondary)",
+    "status": "NOT RUN",
+    "detail": "Not built."
+  },
+  {
+    "n": 9,
+    "endpoint": "Four-cell before/after classification against ground truth",
+    "status": "DONE",
+    "detail": "stable correct 289; harmful deference 52; indeterminate 37; beneficial correction 13; no improvement 9  (sums to 400)"
+  },
+  {
+    "n": 10,
+    "endpoint": "Harmful revision rate and beneficial correction rate",
+    "status": "DONE",
+    "detail": "HRR 52/350 = 14.9%;  BCR 13/24 = 54.2%. Partition closes: 350 correct-before + 24 incorrect-before + 26 indeterminate = 400"
+  },
+  {
+    "n": 11,
+    "endpoint": "DeltaQ per direction",
+    "status": "DONE",
+    "detail": "difference -0.0258"
+  },
+  {
+    "n": 12,
+    "endpoint": "Confidence before and after; correct+confident -> wrong+confident",
+    "status": "RUNNING 115/200",
+    "detail": "mean confidence before 92.1 -> after 92.7. Her concerning state occurs in 14/115 = 12.2%"
+  },
+  {
+    "n": 13,
+    "endpoint": "Core figure: appropriateness by agent x condition x counterpart correctness",
+    "status": "STALE",
+    "detail": "figures/f5_core_endpoint.png exists but encodes spec_present=False; the endpoint spec landed 289s after the PNG was written. Needs a rebuild."
+  },
+  {
+    "n": 14,
+    "endpoint": "Observational phrasing enforced, never causal",
+    "status": "DONE",
+    "detail": "framing_ruling.md bans causal wording; every document says alignment with observed microbiological outcomes"
+  }
+]

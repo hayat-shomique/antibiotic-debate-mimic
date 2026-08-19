@@ -1,0 +1,910 @@
+{
+  "task": "T4c encoder baseline - masked-token prediction over the 17-drug formulary",
+  "produced_by": "_t4c_step_a_cases.py -> _t4c_step_b_mlm.py (within-span) and _t4c_step_b2_allmask.py (all-masked) -> _t4c_step_c_score.py -> _t4c_step_d_report.py",
+  "date": "18 August 2026",
+  "cohort_hash": "4a4f4f782eb17345e0e9eab1cc596aab9ebf6442890bd1c3b82761ae3c65d414",
+  "seed": 20260818,
+  "frame": "C_sampled_200",
+  "scoring_call": "DR.BS.score_case([drug], DR.pathogenic_panel(panel, micro_specimen_id))",
+  "primary_variant": "all_masked",
+  "what_this_measures": "accuracy only: whether a non-generative medical encoder, with no fine-tuning, picks an antibiotic that the recorded S/I/R panel calls adequate. There is no dialogue, so there is no flip rate, no position change and no sycophancy measure.",
+  "skipped_unparseable_prediction_files": [],
+  "models_missing_a_variant": [],
+  "models": {
+    "emilyalsentzer/Bio_ClinicalBERT": {
+      "all_masked_PRIMARY": {
+        "variant": "all_masked",
+        "n_cases": 200,
+        "n_forward_sequences": 3400,
+        "seconds": 208.0,
+        "device": "mps",
+        "mlm_head_missing_keys": [],
+        "n_mlm_head_missing_keys": 0,
+        "tokenizer_lengths": {
+          "ampicillin": 4,
+          "ampicillin-sulbactam": 10,
+          "cefazolin": 4,
+          "cefepime": 4,
+          "ceftazidime": 6,
+          "ceftriaxone": 5,
+          "ciprofloxacin": 7,
+          "daptomycin": 4,
+          "gentamicin": 4,
+          "levofloxacin": 6,
+          "linezolid": 3,
+          "meropenem": 4,
+          "oxacillin": 4,
+          "penicillin-g": 4,
+          "piperacillin-tazobactam": 10,
+          "trimethoprim-sulfamethoxazole": 12,
+          "vancomycin": 4
+        },
+        "top1_distribution": {
+          "vancomycin": 200
+        },
+        "n_distinct_top1": 1,
+        "constant_policy": true,
+        "top1_distribution_sum_aggregation": {
+          "linezolid": 200
+        },
+        "top1_identical_under_both_aggregations": false,
+        "outcomes": {
+          "ADEQUATE": 0,
+          "INADEQUATE": 0,
+          "INTERMEDIATE_ONLY": 0,
+          "UNDETERMINED": 200
+        },
+        "outcomes_pct": {
+          "ADEQUATE": 0.0,
+          "INADEQUATE": 0.0,
+          "INTERMEDIATE_ONLY": 0.0,
+          "UNDETERMINED": 100.0
+        },
+        "outcomes_sum_aggregation": {
+          "ADEQUATE": 0,
+          "INADEQUATE": 0,
+          "INTERMEDIATE_ONLY": 0,
+          "UNDETERMINED": 200
+        },
+        "adequate_pct_of_all": 0.0,
+        "adequate_pct_of_tested": null,
+        "margin_top1_minus_top2": {
+          "min": 0.315501,
+          "median": 0.507481,
+          "max": 0.670783
+        },
+        "top1_log_prob_per_wordpiece": {
+          "min": -3.355936,
+          "median": -3.162309,
+          "max": -3.074592
+        },
+        "rank_of_meropenem_distribution": {
+          "6": 43,
+          "7": 157
+        },
+        "rank_of_piperacillin_tazobactam_distribution": {
+          "15": 200
+        },
+        "top3_patterns": {
+          "vancomycin|linezolid|cefepime": 200
+        }
+      },
+      "within_span_SENSITIVITY": {
+        "variant": "within_span",
+        "n_cases": 200,
+        "n_forward_sequences": 19000,
+        "seconds": 419.3,
+        "device": "mps",
+        "mlm_head_missing_keys": [],
+        "n_mlm_head_missing_keys": 0,
+        "tokenizer_lengths": {
+          "ampicillin": 4,
+          "ampicillin-sulbactam": 10,
+          "cefazolin": 4,
+          "cefepime": 4,
+          "ceftazidime": 6,
+          "ceftriaxone": 5,
+          "ciprofloxacin": 7,
+          "daptomycin": 4,
+          "gentamicin": 4,
+          "levofloxacin": 6,
+          "linezolid": 3,
+          "meropenem": 4,
+          "oxacillin": 4,
+          "penicillin-g": 4,
+          "piperacillin-tazobactam": 10,
+          "trimethoprim-sulfamethoxazole": 12,
+          "vancomycin": 4
+        },
+        "top1_distribution": {
+          "ceftriaxone": 200
+        },
+        "n_distinct_top1": 1,
+        "constant_policy": true,
+        "top1_distribution_sum_aggregation": {
+          "ceftriaxone": 200
+        },
+        "top1_identical_under_both_aggregations": true,
+        "outcomes": {
+          "ADEQUATE": 152,
+          "INADEQUATE": 45,
+          "INTERMEDIATE_ONLY": 2,
+          "UNDETERMINED": 1
+        },
+        "outcomes_pct": {
+          "ADEQUATE": 76.0,
+          "INADEQUATE": 22.5,
+          "INTERMEDIATE_ONLY": 1.0,
+          "UNDETERMINED": 0.5
+        },
+        "outcomes_sum_aggregation": {
+          "ADEQUATE": 152,
+          "INADEQUATE": 45,
+          "INTERMEDIATE_ONLY": 2,
+          "UNDETERMINED": 1
+        },
+        "adequate_pct_of_all": 76.0,
+        "adequate_pct_of_tested": 76.4,
+        "margin_top1_minus_top2": {
+          "min": 0.001413,
+          "median": 0.001847,
+          "max": 0.002643
+        },
+        "top1_log_prob_per_wordpiece": {
+          "min": -0.00028,
+          "median": -0.000169,
+          "max": -0.000115
+        },
+        "rank_of_meropenem_distribution": {
+          "12": 61,
+          "13": 139
+        },
+        "rank_of_piperacillin_tazobactam_distribution": {
+          "14": 200
+        },
+        "top3_patterns": {
+          "ceftriaxone|gentamicin|levofloxacin": 84,
+          "ceftriaxone|gentamicin|ceftazidime": 52,
+          "ceftriaxone|levofloxacin|gentamicin": 22
+        }
+      },
+      "variant_top1_agreement_n": 0,
+      "variant_top1_agreement_pct": 0.0
+    },
+    "dmis-lab/biobert-base-cased-v1.2": {
+      "all_masked_PRIMARY": {
+        "variant": "all_masked",
+        "n_cases": 200,
+        "n_forward_sequences": 3400,
+        "seconds": 188.5,
+        "device": "mps",
+        "mlm_head_missing_keys": [],
+        "n_mlm_head_missing_keys": 0,
+        "tokenizer_lengths": {
+          "ampicillin": 4,
+          "ampicillin-sulbactam": 10,
+          "cefazolin": 4,
+          "cefepime": 4,
+          "ceftazidime": 6,
+          "ceftriaxone": 5,
+          "ciprofloxacin": 7,
+          "daptomycin": 4,
+          "gentamicin": 4,
+          "levofloxacin": 6,
+          "linezolid": 3,
+          "meropenem": 4,
+          "oxacillin": 4,
+          "penicillin-g": 4,
+          "piperacillin-tazobactam": 10,
+          "trimethoprim-sulfamethoxazole": 12,
+          "vancomycin": 4
+        },
+        "top1_distribution": {
+          "linezolid": 177,
+          "meropenem": 23
+        },
+        "n_distinct_top1": 2,
+        "constant_policy": false,
+        "top1_distribution_sum_aggregation": {
+          "linezolid": 200
+        },
+        "top1_identical_under_both_aggregations": false,
+        "outcomes": {
+          "ADEQUATE": 22,
+          "INADEQUATE": 0,
+          "INTERMEDIATE_ONLY": 0,
+          "UNDETERMINED": 178
+        },
+        "outcomes_pct": {
+          "ADEQUATE": 11.0,
+          "INADEQUATE": 0.0,
+          "INTERMEDIATE_ONLY": 0.0,
+          "UNDETERMINED": 89.0
+        },
+        "outcomes_sum_aggregation": {
+          "ADEQUATE": 0,
+          "INADEQUATE": 0,
+          "INTERMEDIATE_ONLY": 0,
+          "UNDETERMINED": 200
+        },
+        "adequate_pct_of_all": 11.0,
+        "adequate_pct_of_tested": 100.0,
+        "margin_top1_minus_top2": {
+          "min": 0.000188,
+          "median": 0.266093,
+          "max": 0.62857
+        },
+        "top1_log_prob_per_wordpiece": {
+          "min": -7.415354,
+          "median": -6.776267,
+          "max": -6.300266
+        },
+        "rank_of_meropenem_distribution": {
+          "1": 23,
+          "2": 121,
+          "3": 18,
+          "4": 14,
+          "5": 17,
+          "6": 6,
+          "7": 1
+        },
+        "rank_of_piperacillin_tazobactam_distribution": {
+          "9": 2,
+          "10": 4,
+          "11": 3,
+          "12": 38,
+          "13": 31,
+          "14": 98,
+          "15": 24
+        },
+        "top3_patterns": {
+          "linezolid|meropenem|ampicillin": 86,
+          "linezolid|meropenem|gentamicin": 32,
+          "linezolid|ampicillin|gentamicin": 24
+        }
+      },
+      "within_span_SENSITIVITY": {
+        "variant": "within_span",
+        "n_cases": 200,
+        "n_forward_sequences": 19000,
+        "seconds": 805.9,
+        "device": "mps",
+        "mlm_head_missing_keys": [],
+        "n_mlm_head_missing_keys": 0,
+        "tokenizer_lengths": {
+          "ampicillin": 4,
+          "ampicillin-sulbactam": 10,
+          "cefazolin": 4,
+          "cefepime": 4,
+          "ceftazidime": 6,
+          "ceftriaxone": 5,
+          "ciprofloxacin": 7,
+          "daptomycin": 4,
+          "gentamicin": 4,
+          "levofloxacin": 6,
+          "linezolid": 3,
+          "meropenem": 4,
+          "oxacillin": 4,
+          "penicillin-g": 4,
+          "piperacillin-tazobactam": 10,
+          "trimethoprim-sulfamethoxazole": 12,
+          "vancomycin": 4
+        },
+        "top1_distribution": {
+          "gentamicin": 200
+        },
+        "n_distinct_top1": 1,
+        "constant_policy": true,
+        "top1_distribution_sum_aggregation": {
+          "gentamicin": 200
+        },
+        "top1_identical_under_both_aggregations": true,
+        "outcomes": {
+          "ADEQUATE": 171,
+          "INADEQUATE": 22,
+          "INTERMEDIATE_ONLY": 2,
+          "UNDETERMINED": 5
+        },
+        "outcomes_pct": {
+          "ADEQUATE": 85.5,
+          "INADEQUATE": 11.0,
+          "INTERMEDIATE_ONLY": 1.0,
+          "UNDETERMINED": 2.5
+        },
+        "outcomes_sum_aggregation": {
+          "ADEQUATE": 171,
+          "INADEQUATE": 22,
+          "INTERMEDIATE_ONLY": 2,
+          "UNDETERMINED": 5
+        },
+        "adequate_pct_of_all": 85.5,
+        "adequate_pct_of_tested": 87.7,
+        "margin_top1_minus_top2": {
+          "min": 0.000181,
+          "median": 0.000227,
+          "max": 0.000287
+        },
+        "top1_log_prob_per_wordpiece": {
+          "min": -0.000125,
+          "median": -0.000106,
+          "max": -9.8e-05
+        },
+        "rank_of_meropenem_distribution": {
+          "6": 128,
+          "7": 58,
+          "8": 14
+        },
+        "rank_of_piperacillin_tazobactam_distribution": {
+          "16": 200
+        },
+        "top3_patterns": {
+          "gentamicin|ceftriaxone|ciprofloxacin": 119,
+          "gentamicin|ciprofloxacin|ceftriaxone": 81
+        }
+      },
+      "variant_top1_agreement_n": 0,
+      "variant_top1_agreement_pct": 0.0
+    },
+    "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext": {
+      "all_masked_PRIMARY": {
+        "variant": "all_masked",
+        "n_cases": 200,
+        "n_forward_sequences": 3400,
+        "seconds": 86.5,
+        "device": "mps",
+        "mlm_head_missing_keys": [],
+        "n_mlm_head_missing_keys": 0,
+        "tokenizer_lengths": {
+          "ampicillin": 1,
+          "ampicillin-sulbactam": 6,
+          "cefazolin": 3,
+          "cefepime": 3,
+          "ceftazidime": 4,
+          "ceftriaxone": 1,
+          "ciprofloxacin": 1,
+          "daptomycin": 2,
+          "gentamicin": 1,
+          "levofloxacin": 2,
+          "linezolid": 4,
+          "meropenem": 3,
+          "oxacillin": 3,
+          "penicillin-g": 2,
+          "piperacillin-tazobactam": 7,
+          "trimethoprim-sulfamethoxazole": 5,
+          "vancomycin": 1
+        },
+        "top1_distribution": {
+          "ceftazidime": 159,
+          "meropenem": 41
+        },
+        "n_distinct_top1": 2,
+        "constant_policy": false,
+        "top1_distribution_sum_aggregation": {
+          "vancomycin": 200
+        },
+        "top1_identical_under_both_aggregations": false,
+        "outcomes": {
+          "ADEQUATE": 169,
+          "INADEQUATE": 18,
+          "INTERMEDIATE_ONLY": 8,
+          "UNDETERMINED": 5
+        },
+        "outcomes_pct": {
+          "ADEQUATE": 84.5,
+          "INADEQUATE": 9.0,
+          "INTERMEDIATE_ONLY": 4.0,
+          "UNDETERMINED": 2.5
+        },
+        "outcomes_sum_aggregation": {
+          "ADEQUATE": 0,
+          "INADEQUATE": 0,
+          "INTERMEDIATE_ONLY": 0,
+          "UNDETERMINED": 200
+        },
+        "adequate_pct_of_all": 84.5,
+        "adequate_pct_of_tested": 86.7,
+        "margin_top1_minus_top2": {
+          "min": 0.00011,
+          "median": 0.029417,
+          "max": 0.175336
+        },
+        "top1_log_prob_per_wordpiece": {
+          "min": -1.347226,
+          "median": -1.163153,
+          "max": -1.022405
+        },
+        "rank_of_meropenem_distribution": {
+          "1": 41,
+          "2": 159
+        },
+        "rank_of_piperacillin_tazobactam_distribution": {
+          "5": 12,
+          "6": 35,
+          "7": 153
+        },
+        "top3_patterns": {
+          "ceftazidime|meropenem|linezolid": 159,
+          "meropenem|ceftazidime|linezolid": 41
+        }
+      },
+      "within_span_SENSITIVITY": {
+        "variant": "within_span",
+        "n_cases": 200,
+        "n_forward_sequences": 9800,
+        "seconds": 239.7,
+        "device": "mps",
+        "mlm_head_missing_keys": [],
+        "n_mlm_head_missing_keys": 0,
+        "tokenizer_lengths": {
+          "ampicillin": 1,
+          "ampicillin-sulbactam": 6,
+          "cefazolin": 3,
+          "cefepime": 3,
+          "ceftazidime": 4,
+          "ceftriaxone": 1,
+          "ciprofloxacin": 1,
+          "daptomycin": 2,
+          "gentamicin": 1,
+          "levofloxacin": 2,
+          "linezolid": 4,
+          "meropenem": 3,
+          "oxacillin": 3,
+          "penicillin-g": 2,
+          "piperacillin-tazobactam": 7,
+          "trimethoprim-sulfamethoxazole": 5,
+          "vancomycin": 1
+        },
+        "top1_distribution": {
+          "ceftazidime": 200
+        },
+        "n_distinct_top1": 1,
+        "constant_policy": true,
+        "top1_distribution_sum_aggregation": {
+          "ceftazidime": 200
+        },
+        "top1_identical_under_both_aggregations": true,
+        "outcomes": {
+          "ADEQUATE": 159,
+          "INADEQUATE": 26,
+          "INTERMEDIATE_ONLY": 10,
+          "UNDETERMINED": 5
+        },
+        "outcomes_pct": {
+          "ADEQUATE": 79.5,
+          "INADEQUATE": 13.0,
+          "INTERMEDIATE_ONLY": 5.0,
+          "UNDETERMINED": 2.5
+        },
+        "outcomes_sum_aggregation": {
+          "ADEQUATE": 159,
+          "INADEQUATE": 26,
+          "INTERMEDIATE_ONLY": 10,
+          "UNDETERMINED": 5
+        },
+        "adequate_pct_of_all": 79.5,
+        "adequate_pct_of_tested": 81.5,
+        "margin_top1_minus_top2": {
+          "min": 0.000455,
+          "median": 0.002153,
+          "max": 0.003047
+        },
+        "top1_log_prob_per_wordpiece": {
+          "min": -0.003553,
+          "median": -0.002652,
+          "max": -0.002336
+        },
+        "rank_of_meropenem_distribution": {
+          "5": 181,
+          "6": 19
+        },
+        "rank_of_piperacillin_tazobactam_distribution": {
+          "8": 200
+        },
+        "top3_patterns": {
+          "ceftazidime|linezolid|oxacillin": 198,
+          "ceftazidime|linezolid|levofloxacin": 2
+        }
+      },
+      "variant_top1_agreement_n": 159,
+      "variant_top1_agreement_pct": 79.5
+    },
+    "google-bert/bert-base-uncased": {
+      "all_masked_PRIMARY": {
+        "variant": "all_masked",
+        "n_cases": 200,
+        "n_forward_sequences": 3400,
+        "seconds": 184.2,
+        "device": "mps",
+        "mlm_head_missing_keys": [],
+        "n_mlm_head_missing_keys": 0,
+        "tokenizer_lengths": {
+          "ampicillin": 3,
+          "ampicillin-sulbactam": 8,
+          "cefazolin": 4,
+          "cefepime": 4,
+          "ceftazidime": 5,
+          "ceftriaxone": 5,
+          "ciprofloxacin": 6,
+          "daptomycin": 4,
+          "gentamicin": 4,
+          "levofloxacin": 5,
+          "linezolid": 3,
+          "meropenem": 3,
+          "oxacillin": 4,
+          "penicillin-g": 4,
+          "piperacillin-tazobactam": 10,
+          "trimethoprim-sulfamethoxazole": 12,
+          "vancomycin": 4
+        },
+        "top1_distribution": {
+          "ampicillin": 198,
+          "linezolid": 2
+        },
+        "n_distinct_top1": 2,
+        "constant_policy": false,
+        "top1_distribution_sum_aggregation": {
+          "ampicillin": 198,
+          "linezolid": 2
+        },
+        "top1_identical_under_both_aggregations": true,
+        "outcomes": {
+          "ADEQUATE": 50,
+          "INADEQUATE": 73,
+          "INTERMEDIATE_ONLY": 2,
+          "UNDETERMINED": 75
+        },
+        "outcomes_pct": {
+          "ADEQUATE": 25.0,
+          "INADEQUATE": 36.5,
+          "INTERMEDIATE_ONLY": 1.0,
+          "UNDETERMINED": 37.5
+        },
+        "outcomes_sum_aggregation": {
+          "ADEQUATE": 50,
+          "INADEQUATE": 73,
+          "INTERMEDIATE_ONLY": 2,
+          "UNDETERMINED": 75
+        },
+        "adequate_pct_of_all": 25.0,
+        "adequate_pct_of_tested": 40.0,
+        "margin_top1_minus_top2": {
+          "min": 0.004677,
+          "median": 0.393729,
+          "max": 0.599047
+        },
+        "top1_log_prob_per_wordpiece": {
+          "min": -9.121737,
+          "median": -8.816302,
+          "max": -8.521542
+        },
+        "rank_of_meropenem_distribution": {
+          "3": 47,
+          "4": 42,
+          "5": 91,
+          "6": 20
+        },
+        "rank_of_piperacillin_tazobactam_distribution": {
+          "3": 19,
+          "4": 14,
+          "5": 46,
+          "6": 111,
+          "7": 10
+        },
+        "top3_patterns": {
+          "ampicillin|linezolid|cefepime": 70,
+          "ampicillin|linezolid|gentamicin": 56,
+          "ampicillin|linezolid|meropenem": 47
+        }
+      },
+      "within_span_SENSITIVITY": {
+        "variant": "within_span",
+        "n_cases": 200,
+        "n_forward_sequences": 17600,
+        "seconds": 430.2,
+        "device": "mps",
+        "mlm_head_missing_keys": [],
+        "n_mlm_head_missing_keys": 0,
+        "tokenizer_lengths": {
+          "ampicillin": 3,
+          "ampicillin-sulbactam": 8,
+          "cefazolin": 4,
+          "cefepime": 4,
+          "ceftazidime": 5,
+          "ceftriaxone": 5,
+          "ciprofloxacin": 6,
+          "daptomycin": 4,
+          "gentamicin": 4,
+          "levofloxacin": 5,
+          "linezolid": 3,
+          "meropenem": 3,
+          "oxacillin": 4,
+          "penicillin-g": 4,
+          "piperacillin-tazobactam": 10,
+          "trimethoprim-sulfamethoxazole": 12,
+          "vancomycin": 4
+        },
+        "top1_distribution": {
+          "vancomycin": 200
+        },
+        "n_distinct_top1": 1,
+        "constant_policy": true,
+        "top1_distribution_sum_aggregation": {
+          "vancomycin": 200
+        },
+        "top1_identical_under_both_aggregations": true,
+        "outcomes": {
+          "ADEQUATE": 0,
+          "INADEQUATE": 0,
+          "INTERMEDIATE_ONLY": 0,
+          "UNDETERMINED": 200
+        },
+        "outcomes_pct": {
+          "ADEQUATE": 0.0,
+          "INADEQUATE": 0.0,
+          "INTERMEDIATE_ONLY": 0.0,
+          "UNDETERMINED": 100.0
+        },
+        "outcomes_sum_aggregation": {
+          "ADEQUATE": 0,
+          "INADEQUATE": 0,
+          "INTERMEDIATE_ONLY": 0,
+          "UNDETERMINED": 200
+        },
+        "adequate_pct_of_all": 0.0,
+        "adequate_pct_of_tested": null,
+        "margin_top1_minus_top2": {
+          "min": 0.024911,
+          "median": 0.063457,
+          "max": 0.126814
+        },
+        "top1_log_prob_per_wordpiece": {
+          "min": -0.085694,
+          "median": -0.051404,
+          "max": -0.041596
+        },
+        "rank_of_meropenem_distribution": {
+          "6": 184,
+          "7": 4,
+          "8": 12
+        },
+        "rank_of_piperacillin_tazobactam_distribution": {
+          "11": 10,
+          "12": 87,
+          "13": 103
+        },
+        "top3_patterns": {
+          "vancomycin|gentamicin|ciprofloxacin": 200
+        }
+      },
+      "variant_top1_agreement_n": 0,
+      "variant_top1_agreement_pct": 0.0
+    }
+  },
+  "floor_reference_A_entero_all_cohort_3104": {
+    "meropenem": {
+      "pct_of_all": 98.0,
+      "pct_of_tested": 99.6
+    },
+    "piperacillin-tazobactam": {
+      "pct_of_all": 91.3,
+      "pct_of_tested": 95.0
+    },
+    "gentamicin": {
+      "pct_of_all": 87.4,
+      "pct_of_tested": 88.5
+    }
+  },
+  "floor_reference_C_sampled_200": {
+    "meropenem": {
+      "n_cases": 200,
+      "n_adequate": 192,
+      "pct_of_all": 96.0,
+      "pct_of_tested": 99.0,
+      "n_undetermined": 6
+    },
+    "piperacillin-tazobactam": {
+      "n_cases": 200,
+      "n_adequate": 175,
+      "pct_of_all": 87.5,
+      "pct_of_tested": 91.1,
+      "n_undetermined": 8
+    },
+    "gentamicin": {
+      "n_cases": 200,
+      "n_adequate": 171,
+      "pct_of_all": 85.5,
+      "pct_of_tested": 87.7,
+      "n_undetermined": 5
+    },
+    "cefepime": {
+      "n_cases": 200,
+      "n_adequate": 159,
+      "pct_of_all": 79.5,
+      "pct_of_tested": 81.5,
+      "n_undetermined": 5
+    },
+    "ceftazidime": {
+      "n_cases": 200,
+      "n_adequate": 159,
+      "pct_of_all": 79.5,
+      "pct_of_tested": 81.5,
+      "n_undetermined": 5
+    },
+    "ceftriaxone": {
+      "n_cases": 200,
+      "n_adequate": 152,
+      "pct_of_all": 76.0,
+      "pct_of_tested": 76.4,
+      "n_undetermined": 1
+    },
+    "trimethoprim-sulfamethoxazole": {
+      "n_cases": 200,
+      "n_adequate": 148,
+      "pct_of_all": 74.0,
+      "pct_of_tested": 74.0,
+      "n_undetermined": 0
+    },
+    "ciprofloxacin": {
+      "n_cases": 200,
+      "n_adequate": 130,
+      "pct_of_all": 65.0,
+      "pct_of_tested": 65.7,
+      "n_undetermined": 2
+    },
+    "cefazolin": {
+      "n_cases": 200,
+      "n_adequate": 101,
+      "pct_of_all": 50.5,
+      "pct_of_tested": 65.2,
+      "n_undetermined": 45
+    },
+    "ampicillin-sulbactam": {
+      "n_cases": 200,
+      "n_adequate": 81,
+      "pct_of_all": 40.5,
+      "pct_of_tested": 51.9,
+      "n_undetermined": 44
+    },
+    "ampicillin": {
+      "n_cases": 200,
+      "n_adequate": 51,
+      "pct_of_all": 25.5,
+      "pct_of_tested": 40.5,
+      "n_undetermined": 74
+    },
+    "levofloxacin": {
+      "n_cases": 200,
+      "n_adequate": 4,
+      "pct_of_all": 2.0,
+      "pct_of_tested": 80.0,
+      "n_undetermined": 195
+    },
+    "daptomycin": {
+      "n_cases": 200,
+      "n_adequate": 0,
+      "pct_of_all": 0.0,
+      "pct_of_tested": null,
+      "n_undetermined": 200
+    },
+    "linezolid": {
+      "n_cases": 200,
+      "n_adequate": 0,
+      "pct_of_all": 0.0,
+      "pct_of_tested": null,
+      "n_undetermined": 200
+    },
+    "oxacillin": {
+      "n_cases": 200,
+      "n_adequate": 0,
+      "pct_of_all": 0.0,
+      "pct_of_tested": null,
+      "n_undetermined": 200
+    },
+    "penicillin-g": {
+      "n_cases": 200,
+      "n_adequate": 0,
+      "pct_of_all": 0.0,
+      "pct_of_tested": null,
+      "n_undetermined": 200
+    },
+    "vancomycin": {
+      "n_cases": 200,
+      "n_adequate": 0,
+      "pct_of_all": 0.0,
+      "pct_of_tested": null,
+      "n_undetermined": 200
+    }
+  },
+  "llm_round0_comparator": {
+    "source_file": "/Users/shamzzzh/brain_run/runs/debate_20260818.jsonl",
+    "snapshot_utc": "2026-08-18T06:14:51Z",
+    "n_round0_records": 274,
+    "n_unique_cases": 137,
+    "note": "the debate run was still writing at snapshot time; both turn orderings contribute a round-0 record per case, so this is a partial arm",
+    "drug_distribution": {
+      "piperacillin-tazobactam": 273,
+      "ceftriaxone": 1
+    },
+    "outcomes": {
+      "ADEQUATE": 242,
+      "INADEQUATE": 12,
+      "INTERMEDIATE_ONLY": 6,
+      "UNDETERMINED": 14
+    },
+    "outcomes_pct": {
+      "ADEQUATE": 88.3,
+      "INADEQUATE": 4.4,
+      "INTERMEDIATE_ONLY": 2.2,
+      "UNDETERMINED": 5.1
+    }
+  },
+  "comparison": {
+    "emilyalsentzer/Bio_ClinicalBERT": {
+      "primary_variant": "all_masked",
+      "modal_top1": "vancomycin",
+      "modal_top1_share_pct": 100.0,
+      "constant_policy": true,
+      "adequate_pct_of_all": 0.0,
+      "gap_vs_fixed_meropenem_on_same_200": -96.0
+    },
+    "dmis-lab/biobert-base-cased-v1.2": {
+      "primary_variant": "all_masked",
+      "modal_top1": "linezolid",
+      "modal_top1_share_pct": 88.5,
+      "constant_policy": false,
+      "adequate_pct_of_all": 11.0,
+      "gap_vs_fixed_meropenem_on_same_200": -85.0
+    },
+    "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext": {
+      "primary_variant": "all_masked",
+      "modal_top1": "ceftazidime",
+      "modal_top1_share_pct": 79.5,
+      "constant_policy": false,
+      "adequate_pct_of_all": 84.5,
+      "gap_vs_fixed_meropenem_on_same_200": -11.5
+    },
+    "google-bert/bert-base-uncased": {
+      "primary_variant": "all_masked",
+      "modal_top1": "ampicillin",
+      "modal_top1_share_pct": 99.0,
+      "constant_policy": false,
+      "adequate_pct_of_all": 25.0,
+      "gap_vs_fixed_meropenem_on_same_200": -71.0
+    }
+  },
+  "consistency_check": {
+    "rule": "a constant policy must reproduce the floor_reconciled.csv row for its agent on frame C_sampled_200 exactly; a mismatch would mean the encoder pipeline and the harness are not using the same scoring path",
+    "results": {
+      "emilyalsentzer/Bio_ClinicalBERT | all_masked": {
+        "agent": "vancomycin",
+        "encoder_adequate_pct": 0.0,
+        "floor_row_pct": 0.0,
+        "match": true
+      },
+      "emilyalsentzer/Bio_ClinicalBERT | within_span": {
+        "agent": "ceftriaxone",
+        "encoder_adequate_pct": 76.0,
+        "floor_row_pct": 76.0,
+        "match": true
+      },
+      "dmis-lab/biobert-base-cased-v1.2 | within_span": {
+        "agent": "gentamicin",
+        "encoder_adequate_pct": 85.5,
+        "floor_row_pct": 85.5,
+        "match": true
+      },
+      "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext | within_span": {
+        "agent": "ceftazidime",
+        "encoder_adequate_pct": 79.5,
+        "floor_row_pct": 79.5,
+        "match": true
+      },
+      "google-bert/bert-base-uncased | within_span": {
+        "agent": "vancomycin",
+        "encoder_adequate_pct": 0.0,
+        "floor_row_pct": 0.0,
+        "match": true
+      }
+    }
+  }
+}

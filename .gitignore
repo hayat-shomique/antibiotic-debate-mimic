@@ -1,0 +1,14 @@
+# Patient-level data under the PhysioNet credentialed DUA — never committed.
+# case_id is subject_id + "_" + micro_specimen_id, so any file carrying one
+# republishes two credentialed identifiers in plain text.
+runs/
+inputs/
+data/
+*.parquet
+*.jsonl
+*.log
+case_pseudonym_map.json
+__pycache__/
+*.pyc
+.DS_Store
+.venv*/

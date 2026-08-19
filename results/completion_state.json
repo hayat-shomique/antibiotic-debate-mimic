@@ -1,0 +1,236 @@
+[
+  {
+    "section": "design",
+    "item": "Two clinical personas, distinct incentives",
+    "status": "DONE",
+    "evidence": "sys_A = infectious disease specialist; sys_B = antimicrobial stewardship lead"
+  },
+  {
+    "section": "design",
+    "item": "Round-0 prompt carries NO debate framing",
+    "status": "DONE",
+    "evidence": "zero-shot position uncontaminated by knowledge a challenge is coming"
+  },
+  {
+    "section": "design",
+    "item": "Closed answer space, parse failure separated from wrong answer",
+    "status": "DONE",
+    "evidence": "17-drug formulary + OTHER + ABSTAIN"
+  },
+  {
+    "section": "design",
+    "item": "Scaffold hash-pinned, asserted every launch",
+    "status": "DONE",
+    "evidence": "StaticScaffold.assert_unchanged on every run"
+  },
+  {
+    "section": "design",
+    "item": "Both speaking orders, paired within patient",
+    "status": "DONE",
+    "evidence": "400 ordering-runs over 200 cases"
+  },
+  {
+    "section": "design",
+    "item": "External arbiter: susceptibility panel, not clinician choice",
+    "status": "DONE",
+    "evidence": "138,513 panel rows; 4 outcome classes"
+  },
+  {
+    "section": "design",
+    "item": "Cohort frozen by content hash BEFORE any model call",
+    "status": "DONE",
+    "evidence": "hash asserted every run; nothing tunable after results"
+  },
+  {
+    "section": "design",
+    "item": "Leakage gate, three provenance classes, fault-injection proven",
+    "status": "DONE",
+    "evidence": "10/10 fault injection incl. 4 cases the old gate missed"
+  },
+  {
+    "section": "tingting",
+    "item": "1. Susceptibility concordance of FINAL rec, per agent (PRIMARY)",
+    "status": "DONE",
+    "evidence": "A 312/400 = 78.0%; B identical"
+  },
+  {
+    "section": "tingting",
+    "item": "2. Active therapy / susceptibility concordance",
+    "status": "DONE",
+    "evidence": "round-0 87.5% -> final 78.0%, interaction costs 9.5 points"
+  },
+  {
+    "section": "tingting",
+    "item": "3. Time to appropriate therapy",
+    "status": "DONE",
+    "evidence": "observed median 8.6 h to an active drug (185/200); counterfactual reported with its artefact"
+  },
+  {
+    "section": "tingting",
+    "item": "4. Spectrum appropriateness",
+    "status": "DONE",
+    "evidence": "77.6% over-treated; + WHO AWaRe 0/400 Access"
+  },
+  {
+    "section": "tingting",
+    "item": "5. Escalation / de-escalation correctness",
+    "status": "DONE",
+    "evidence": "reveal 400/400: 57/69 = 82.6% repaired; clean-context 200/200"
+  },
+  {
+    "section": "tingting",
+    "item": "6. Treatment failure / deterioration",
+    "status": "DONE",
+    "evidence": "persistent bacteraemia 13/200 = 6.5%; definable, but not attributable to a therapy"
+  },
+  {
+    "section": "tingting",
+    "item": "7. Mortality 7/14/30d (cautious secondary)",
+    "status": "DONE",
+    "evidence": "9.5 / 15.0 / 18.5%; adequate-recommendation stratum dies MORE (19.5 vs 15.2) - severity confounding, demonstrated"
+  },
+  {
+    "section": "tingting",
+    "item": "8. Length of stay / ICU-free days",
+    "status": "DONE",
+    "evidence": "median LOS 11.9 d (185 linked); 99 with an ICU stay, median ICU LOS 5.0 d"
+  },
+  {
+    "section": "tingting",
+    "item": "9. Four-cell before/after classification",
+    "status": "DONE",
+    "evidence": "289 stable / 13 beneficial / 52 harmful / 9 none / 37 indeterminate = 400"
+  },
+  {
+    "section": "tingting",
+    "item": "10. HRR and BCR",
+    "status": "DONE",
+    "evidence": "HRR 52/350 = 14.9%; BCR 13/24 = 54.2%"
+  },
+  {
+    "section": "tingting",
+    "item": "11. DeltaQ across both directions",
+    "status": "DONE",
+    "evidence": "doctor-first -0.120; pharmacist-first -0.094"
+  },
+  {
+    "section": "tingting",
+    "item": "12. Confidence before and after",
+    "status": "DONE",
+    "evidence": "200/200; 27 harmful deference, all at high confidence, +1.30 mean shift"
+  },
+  {
+    "section": "tingting",
+    "item": "13. Core figure, 3-way stratified",
+    "status": "DONE",
+    "evidence": "F5 rebuilt on canonical 400; counterpart-correctness panel flagged as entailed"
+  },
+  {
+    "section": "tingting",
+    "item": "14. Observational phrasing, never causal",
+    "status": "DONE",
+    "evidence": "enforced across every document"
+  },
+  {
+    "section": "tingting",
+    "item": "15. Working style: zero-shot BEFORE few-shot",
+    "status": "DONE",
+    "evidence": "few-shot RUNNING now"
+  },
+  {
+    "section": "zhikang",
+    "item": "Dual-agent doctor-pharmacist debate as step one",
+    "status": "DONE",
+    "evidence": "400 runs"
+  },
+  {
+    "section": "zhikang",
+    "item": "The instrument shown (he asked twice)",
+    "status": "DONE",
+    "evidence": "prompts_used.md + now a verbatim slide in the deck"
+  },
+  {
+    "section": "zhikang",
+    "item": "Both orderings, same cases",
+    "status": "DONE",
+    "evidence": "paired design"
+  },
+  {
+    "section": "zhikang",
+    "item": "Indicator 1: stance change after dialogue",
+    "status": "DONE",
+    "evidence": "400/400 = 100%"
+  },
+  {
+    "section": "zhikang",
+    "item": "Indicator 2: uncritical acceptance",
+    "status": "DONE",
+    "evidence": "235/785 turns = 29.9%; 799/800 adopt the counterpart's drug"
+  },
+  {
+    "section": "zhikang",
+    "item": "Indicator 3: deviation from evidence-based guidance",
+    "status": "DONE",
+    "evidence": "WHO AWaRe: 400/400 Watch, 0/400 Access, 0/400 move class"
+  },
+  {
+    "section": "zhikang",
+    "item": "Per-turn stance / insistency",
+    "status": "DONE",
+    "evidence": "VERIFIED: opener 400/400 changes; responder 200/400 - it is the PERSONA not the position"
+  },
+  {
+    "section": "zhikang",
+    "item": "Seeded counterpart correctness",
+    "status": "DONE",
+    "evidence": "172 runs; drug-matched J = 0.000, confound found and reported"
+  },
+  {
+    "section": "zhikang",
+    "item": "Start with Qwen family, transfer later",
+    "status": "DONE",
+    "evidence": "Qwen3-4B study model; hosted transfer blocked by the DUA, declared"
+  },
+  {
+    "section": "controls",
+    "item": "Null arm: neutral re-ask",
+    "status": "DONE",
+    "evidence": "0/200 movement - the number that makes everything else interpretable"
+  },
+  {
+    "section": "controls",
+    "item": "Content-degraded: bare vs reasoned",
+    "status": "DONE",
+    "evidence": "34/60 vs 60/60, McNemar p = 3.0e-8"
+  },
+  {
+    "section": "controls",
+    "item": "Prompt-clause ablation",
+    "status": "DONE",
+    "evidence": "60/60 with and without; drug identical, text differs 55/60"
+  },
+  {
+    "section": "controls",
+    "item": "Encoder baselines, no fine-tuning",
+    "status": "DONE",
+    "evidence": "4 encoders; BiomedBERT 84.5% vs debate 77.0%"
+  },
+  {
+    "section": "controls",
+    "item": "Single agent at MATCHED COMPUTE",
+    "status": "PARTIAL",
+    "evidence": "self-consistency 68/200 running; 5/5 unanimous so far"
+  },
+  {
+    "section": "controls",
+    "item": "Acceptance suite",
+    "status": "DONE",
+    "evidence": "36/36 passing after every patch"
+  },
+  {
+    "section": "controls",
+    "item": "Second model, same 200 cases",
+    "status": "DONE",
+    "evidence": "MedGemma 200/200 called; Qwen re-call queued"
+  }
+]

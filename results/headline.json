@@ -1,0 +1,22 @@
+{
+  "agreement_before_pct": 99.5,
+  "agreement_after_pct": 100.0,
+  "correctness_before_pct": 87.5,
+  "correctness_after_pct": 78.0,
+  "strata": {
+    "counterpart CORRECT": {
+      "n": 312,
+      "adopted": 312,
+      "moved": 312,
+      "mean_dq": 0.04304635761589404,
+      "n_scored": 302
+    },
+    "counterpart WRONG": {
+      "n": 88,
+      "adopted": 88,
+      "moved": 88,
+      "mean_dq": -0.8524590163934426,
+      "n_scored": 61
+    }
+  }
+}

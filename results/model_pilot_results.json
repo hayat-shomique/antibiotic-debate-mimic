@@ -1,0 +1,603 @@
+{
+  "title": "Model pilot: MedGemma and DeepSeek candidate resolution",
+  "date_step": "18 August 2026",
+  "host": {
+    "hw_model": "Mac14,15",
+    "cpu": "Apple M2",
+    "hw_memsize_bytes": 17179869184,
+    "hw_memsize_gib": 16,
+    "source": "sysctl -n hw.model hw.memsize machdep.cpu.brand_string, run 18 Aug 2026",
+    "ollama_version": "0.32.14",
+    "concurrent_load_note": "debate_run.py stage D (qwen3:4b-instruct-2507-q4_K_M) was resident on GPU throughout; a separate agent was concurrently pulling gemma3:12b (pid 99922 observed in pgrep -fl 'ollama pull')."
+  },
+  "problem_1_medgemma_12b": {
+    "supervisor_request": "MedGemma-12B; Tingting's stated constraint was 'There is 12B as well for MedGemma, 27B is not necessary'",
+    "finding": "NO 12B MedGemma exists, from any publisher, in any format.",
+    "evidence": [
+      {
+        "check": "Ollama official library tag list",
+        "command": "curl https://ollama.com/library/medgemma/tags",
+        "result": "9 tags, all 4b or 27b: medgemma:latest, 4b, 4b-it-q4_K_M, 4b-it-q8_0, 4b-it-bf16, 27b, 27b-it-q4_K_M, 27b-it-q8_0, 27b-it-bf16. No 12b tag.",
+        "http_status": 200
+      },
+      {
+        "check": "Ollama official library, MedGemma 1.5 family",
+        "command": "curl https://ollama.com/library/medgemma1.5/tags",
+        "result": "5 tags, all 4b: medgemma1.5:latest, 4b, 4b-it-q4_K_M, 4b-it-q8_0, 4b-it-bf16. No 12b, and no 27b either."
+      },
+      {
+        "check": "Ollama community/namespaced models",
+        "command": "curl 'https://ollama.com/search?q=medgemma', model hrefs extracted",
+        "result": "21 hrefs. Community namespaces found: aadide/medgemma-1.5-4b-it-Q4_K_S, AntAngelMed/MedGemma, AntAngelMed/MedGemma1.5, billylo/medgemma-1.5-4b-vision, dcarrascosa/medgemma-1.5-4b-it, jordimurgo/medgemma1.5-thinking, ktiyab/coheara-medgemma-4b-{f16,q4,q4s,q8}, leniartekpiotr/EyeGemma, MedAIBase/MedGemma1.0, MedAIBase/MedGemma1.5, MedAIBase/TranslateGemma, thiagomoraes/medgemma-{1.5-4b-it,27b-it,4b-it}, yukhon/medgemma-tuned. Every size-bearing name is 4b or 27b. No user/medgemma-12b of any kind."
+      },
+      {
+        "check": "HuggingFace API, publisher google",
+        "command": "curl 'https://huggingface.co/api/models?author=google&search=medgemma&limit=50'",
+        "result": "5 models: google/medgemma-1.5-4b-it, google/medgemma-27b-text-it, google/medgemma-27b-it, google/medgemma-4b-it, google/medgemma-4b-pt. No 12B."
+      },
+      {
+        "check": "HuggingFace API, full-text search for a 12B",
+        "command": "curl 'https://huggingface.co/api/models?search=medgemma-12b' and '...search=medgemma%2012b'",
+        "result": "empty array [] for both queries; no repository on HuggingFace, from any publisher, matches medgemma-12b."
+      },
+      {
+        "check": "ollama client fail-fast probe",
+        "command": "ollama pull <tag> for medgemma:12b, medgemma:12b-it-q4_K_M, medgemma1.5:12b, google/medgemma-12b, unsloth/medgemma-12b-it",
+        "result": "all five returned 'Error: pull model manifest: file does not exist' immediately, no bytes downloaded. The same probe against deepseek-r1:8b-instruct, deepseek:8b and deepseek-v3:8b also returned 'file does not exist'."
+      },
+      {
+        "check": "Google HAI-DEF MedGemma model card",
+        "url": "https://developers.google.com/health-ai-developer-foundations/medgemma/model-card",
+        "result": "MedGemma 1.5 ships as 4B multimodal instruction-tuned only; MedGemma 1 shipped 4B multimodal, 27B text-only, 27B multimodal. No 12B variant in either generation."
+      }
+    ],
+    "no_medical_model_at_12b_at_all": {
+      "check": "every medical family in the ollama official library, tag lists pulled 18 Aug 2026",
+      "result": "medgemma 4b/27b; medgemma1.5 4b; meditron 7b/70b; medllama2 7b. https://ollama.com/library/med42, /openbiollm and /biomistral all return HTTP 404, i.e. those are community namespaces only (e.g. koesn/llama3-openbiollm-8b). No medically post-trained open model at 12B exists in the library at any size-tag, not just no MedGemma."
+    },
+    "likely_source_of_the_12b_belief": "Gemma 3 (the base family MedGemma is built on) does ship a 12B: gemma3:12b. MedGemma's medical post-training was only ever applied to the 4B and 27B Gemma 3 checkpoints. A 12B MedGemma would have to be trained, not downloaded.",
+    "decision_owner": "Tingting",
+    "why_it_goes_back_to_her": "Her instruction ruled out 27B and named 12B as the intended size. 12B does not exist, so the surviving MedGemma options are 4B and 27B - and 27B is the one she excluded. Substituting either one silently would change the model-size arm of the design without her agreeing to it.",
+    "what_she_needs_to_decide": [
+      "MedGemma 4B (medgemma:4b-it-q4_K_M, or medgemma1.5:4b-it-q4_K_M for the newer 1.5 generation), which runs on this hardware; or",
+      "MedGemma 27B (medgemma:27b-it-q4_K_M), which does NOT run on this hardware and needs a machine with more memory; or",
+      "drop MedGemma and use the 12B she may actually have meant, gemma3:12b, which is the general-purpose Gemma 3 at that size with no medical post-training."
+    ],
+    "if_the_12b_substitute_route_is_taken": {
+      "gemma3:12b": "tags 12b, 12b-it-q4_K_M, 12b-it-q8_0, 12b-it-fp16, 12b-it-qat. The ollama library page declares capability 'vision' ONLY - no thinking badge. This is the safe 12B.",
+      "gemma4:12b": "a newer Gemma 4 family also exists in the library (12b, 26b-a4b MoE, 31b). Its page declares 'audio', 'thinking', 'tools', 'vision'. The thinking badge means picking gemma4:12b would restart the thinking-suppression fight that model_registry.json records as already lost once against qwen3:4b hybrid. [OPINION] if a 12B substitute is chosen, take gemma3:12b-it-q4_K_M, not gemma4:12b, unless someone first demonstrates gemma4 can be held non-thinking.",
+      "checked": "https://ollama.com/library/gemma3/tags and /gemma4/tags, capability badge spans extracted, 18 Aug 2026",
+      "no_newer_medgemma": "https://ollama.com/library/medgemma2, /medgemma-2, /medgemma3 and /medgemma4 all return HTTP 404. Only medgemma and medgemma1.5 exist, so there is no MedGemma built on Gemma 4 either."
+    }
+  },
+  "problem_2_deepseek_8b": {
+    "supervisor_request": "DeepSeek-8B",
+    "finding": "Every 8B DeepSeek that exists is a reasoning model. There is no non-reasoning DeepSeek at 8B.",
+    "evidence": [
+      {
+        "check": "Ollama library, deepseek-r1 tags",
+        "command": "curl https://ollama.com/library/deepseek-r1/tags",
+        "result": "8B tags are deepseek-r1:8b, 8b-0528-qwen3-{q4_K_M,q8_0,fp16}, 8b-llama-distill-{q4_K_M,q8_0,fp16}. Both 8B lineages are R1 distills, i.e. reasoning models."
+      },
+      {
+        "check": "Ollama library capability badge on the deepseek-r1 page",
+        "result": "the deepseek-r1 tags page carries the capability badges 'tools' and 'thinking'. The medgemma and medgemma1.5 tags pages carry only 'vision'.",
+        "caveat": "the ollama capability flag is template-derived and over-reports. /api/show on qwen3:4b-instruct-2507-q4_K_M returns capabilities ['tools','thinking','completion'] even though that model is the one this project switched TO because it cannot think, and it emits a mean of 60.6 output tokens per call with no think tags across the 830 calls logged so far in runs/debate_20260818.jsonl. So the badge is suggestive, not decisive - the absence of a thinking badge on medgemma is the more informative half, and the 3-case trial below is the arbiter."
+      },
+      {
+        "check": "Ollama library, every other DeepSeek family",
+        "command": "curl 'https://ollama.com/search?q=deepseek', library hrefs extracted",
+        "result": "deepseek-r1, deepseek-llm, deepseek-coder, deepseek-coder-v2, deepseek-v2, deepseek-v2.5, deepseek-v3, deepseek-v3.1, deepseek-v4-flash, deepseek-v4-pro, deepseek-ocr, deepscaler, r1-1776, openthinker. None of them publishes an 8B non-reasoning chat tag: deepseek-llm is 7b/67b only; deepseek-v4-flash and deepseek-v4-pro are cloud-only tags (:cloud, :preview-cloud, :0731-cloud, :0813-cloud) with no local weights; the v2/v2.5/v3/v3.1 families start at 16B and run to 671B."
+      },
+      {
+        "check": "HuggingFace API, publisher deepseek-ai, full listing",
+        "command": "curl 'https://huggingface.co/api/models?author=deepseek-ai&limit=200&sort=downloads'",
+        "result": "103 repositories. The only 8B chat models are DeepSeek-R1-0528-Qwen3-8B and DeepSeek-R1-Distill-Llama-8B, both reasoning. Non-reasoning DeepSeek chat models nearest in size are deepseek-llm-7b-chat (7B, 2023), deepseek-coder-7b-instruct-v1.5 (code), deepseek-moe-16b-chat and DeepSeek-V2-Lite-Chat (16B MoE). The 8B entries dspark_qwen3_8b_block7 / dflash_qwen3_8b_block7 are speculative-decoding side modules for V4, not standalone chat models."
+      }
+    ],
+    "thinking_mode_flag": "deepseek-r1:8b WILL reintroduce the exact failure class this project spent the night of 18 Aug eliminating. qwen3:4b (hybrid) could not be made non-thinking: think:false relocated reasoning into content, /no_think only moved it to a separate field, and both still spent 1000-1588 output tokens per call. R1 is worse than a hybrid: the R1 distills are trained to always open a reasoning block, and the ollama page declares 'thinking' as a model capability rather than an optional mode.",
+    "decision_owner": "user (this is explicitly not decided here)",
+    "options_to_put_to_the_supervisor": [
+      "deepseek-r1:8b, accepting thinking tokens and the token-budget / latency cost, and accepting that the round-0 purity argument now has to cope with a visible reasoning trace.",
+      "deepseek-llm:7b-chat-q4_K_M - genuinely non-reasoning, but 7B not 8B, released Nov 2023, and trained at 4096 context.",
+      "drop DeepSeek and use a current non-reasoning 8B from another publisher, which is what qwen3:4b-instruct-2507 already is at 4B."
+    ]
+  },
+  "registry_manifest_sizes": {
+    "source": "curl -H 'Accept: application/vnd.docker.distribution.manifest.v2+json' https://registry.ollama.ai/v2/library/<name>/manifests/<tag>, summed layer sizes, 18 Aug 2026",
+    "medgemma:4b-it-q4_K_M": {
+      "model_layer_bytes": 3338929952,
+      "total_bytes": 3338942067,
+      "gb": 3.34
+    },
+    "medgemma:27b-it-q4_K_M": {
+      "model_layer_bytes": 17397211520,
+      "total_bytes": 17397223635,
+      "gb": 17.4
+    },
+    "medgemma:27b": {
+      "model_layer_bytes": 17397211520,
+      "total_bytes": 17397223635,
+      "gb": 17.4,
+      "note": "identical model layer digest to 27b-it-q4_K_M; the bare 27b tag IS the q4_K_M build"
+    },
+    "deepseek-r1:8b": {
+      "model_layer_bytes": 5225373760,
+      "total_bytes": 5225375560,
+      "gb": 5.23
+    },
+    "deepseek-llm:7b-chat-q4_K_M": {
+      "model_layer_bytes": 4223770400,
+      "total_bytes": 4223770845,
+      "gb": 4.22
+    }
+  },
+  "hardware_feasibility": {
+    "metal_budget": {
+      "gpu_total_gib": 11.8,
+      "gpu_available_gib": 11.3,
+      "system_total_gib": 16.0,
+      "source": "/Users/shamzzzh/.ollama/logs/server.log, line at 2026-08-18T01:41:47.404+01:00 (msg=\"inference compute\" library=Metal description=\"Apple M2\" type=iGPU total=\"11.8 GiB\" available=\"11.8 GiB\") and the scheduler line at 2026-08-18T02:54:01.983+01:00 (msg=\"gpu memory\" library=Metal available=\"11.3 GiB\" free=\"11.8 GiB\"; msg=\"system memory\" total=\"16.0 GiB\")",
+      "note": "debug.iogpu.wired_limit is 0, i.e. the macOS default; ollama's own figure of 11.8 GiB is the operative ceiling, not the 16 GiB of system RAM."
+    },
+    "statement": "medgemma:27b-it-q4_K_M cannot run on this machine. Its model layer alone is 17.40 GB = 16.20 GiB (17397211520 bytes, from the ollama registry manifest) against an 11.8 GiB Metal budget, before any KV cache and before the qwen3 stage-D model that is already resident. It was therefore not pulled and not trialled - the download would have been 17.4 GB spent to prove a number that the manifest already gives.",
+    "sub_q4_options_if_27b_is_insisted_on": {
+      "source": "https://huggingface.co/api/models/unsloth/medgemma-27b-text-it-GGUF?blobs=true, file sizes 18 Aug 2026",
+      "fits_under_11.8_GiB": [
+        "Q2_K 10.50 GB = 9.78 GiB",
+        "Q2_K_L 10.50 GB",
+        "UD-Q2_K_XL 10.68 GB",
+        "UD-IQ3_XXS 10.81 GB",
+        "UD-IQ2_M 9.62 GB",
+        "UD-IQ1_S 6.51 GB",
+        "UD-IQ1_M 6.99 GB"
+      ],
+      "does_not_fit": [
+        "Q3_K_S 12.17 GB = 11.33 GiB (no headroom for KV)",
+        "Q3_K_M 13.44 GB",
+        "IQ4_XS 14.77 GB",
+        "Q4_K_S 15.67 GB",
+        "Q4_K_M 16.55 GB"
+      ],
+      "assessment": "[OPINION] running a 27B clinical model at Q2 to make it fit is a worse methodological compromise than running 4B at Q4. It also means leaving the ollama registry - the ollama library ships only the multimodal 27b-it, not the text-only medgemma-27b-text-it that this text-only task actually wants - so a 27B route adds an out-of-registry GGUF import and a new provenance problem on top of the quantisation one."
+    },
+    "corollary": "If Tingting chooses 27B at a defensible quantisation, it needs a different machine. That is a memory-capacity fact, not a scheduling one.",
+    "headroom_for_the_pilots_predicted_vs_actual": "PREDICTED before the trials: qwen3:4b-instruct-2507-q4_K_M resident at 3.9 GB per 'ollama ps', plus medgemma (3.11 GiB) or deepseek-r1 (4.87 GiB), all inside the 11.3 GiB Metal 'available' figure, so no eviction expected. ACTUAL: eviction on every call. The prediction was wrong because ollama gates on system free RAM as well as GPU memory and logged system_limited=true with only 1.7-3.6 GiB of system RAM free. See measurement_caveats.eviction_thrash."
+  },
+  "licensing_note": {
+    "medgemma_license": "Health AI Developer Foundations Terms of Use (last modified 15 November 2024), shipped as a license layer in the ollama manifest (sha256:12cef37dd8275db7a4adf6d29f85c21b66903d9bb3976c0948e437bc4a2945f2, 11684 bytes).",
+    "points_that_matter_for_this_project": [
+      "Section 1.1(a) defines 'Clinical Use' as any use in diagnosis or treatment of patients, including as part of a research study.",
+      "Section 3.1 requires that any redistribution carry the Section 3.2 use restrictions as an enforceable provision, ship a copy of the agreement, mark modified files, and include a HAI-DEF notice file.",
+      "Section 3.2 prohibits uses listed in the HAI-DEF Prohibited Use Policy and any use that could cause a Health Regulatory Authority to deem Google a medical-device manufacturer."
+    ],
+    "assessment": "[OPINION] retrospective scoring of model recommendations against MIMIC-IV S/I/R, with no patient contact and no clinical deployment, is not diagnosis or treatment of a patient. But this is a licence the report should name explicitly, and it is a stricter licence than the MIT that DeepSeek-R1 ships under.",
+    "deepseek_r1_license": "MIT (1065-byte license layer in the deepseek-r1:8b manifest)."
+  },
+  "trial_protocol": {
+    "prompts": "the 3 case prompts the real harness builds: DR.build_frame() -> DR.load_panel() -> DR.select(frame, 3, sample=False, panel=panel) -> DR.assemble_cases(sel, panel), user message = SCAFFOLD.texts['case_header'] + case block text, exactly as CaseRunner.round0 assembles it.",
+    "system_prompt": "DR.SCAFFOLD.texts['sys_A_round0']",
+    "system_prompt_sha256": "cccaf44405e102b52e891acda4d0147ede5de3b07903c55004405b06274ed283",
+    "system_prompt_hash_matches_frozen_registry": true,
+    "case_ids": [
+      "P01",
+      "P02",
+      "C003"
+    ],
+    "options": {
+      "temperature": 0,
+      "seed": 20260818,
+      "num_predict": 512,
+      "num_ctx": 8192
+    },
+    "think": false,
+    "keep_alive": "30m",
+    "endpoint": "http://localhost:11434/api/chat, stream false",
+    "producing_files": [
+      "/Users/shamzzzh/brain_run/_cc_pilot_prompts.py",
+      "/Users/shamzzzh/brain_run/_cc_pilot_prompts.json",
+      "/Users/shamzzzh/brain_run/_cc_pilot_trial.py",
+      "/Users/shamzzzh/brain_run/_cc_pilot_trial_raw.json"
+    ],
+    "duckdb_capped": "duckdb.connect patched to SET threads TO 2 and memory_limit 2GB in _cc_pilot_prompts.py so the live model run is not starved.",
+    "qwen_baseline_for_comparison": {
+      "model": "qwen3:4b-instruct-2507-q4_K_M",
+      "tok_per_s": 24.6,
+      "tok_per_s_source": "throughput_measured.csv row generation_tok_per_s_single_call, note 'instruct-2507 warm, requirement 5', measured_at 2026-08-18T03:36:17+01:00",
+      "output_tokens_per_call_mean": 60.6,
+      "output_tokens_per_call_median": 60,
+      "output_tokens_n_calls": 830,
+      "output_tokens_source": "eval_count aggregated over the 830 model calls in the first 278 records of runs/debate_20260818.jsonl, 18 Aug 2026",
+      "prompt_eval_count_median": 358,
+      "prompt_eval_count_max": 579
+    },
+    "live_run_context": "the trials ran 05:40:23-05:51:53 on 18 Aug 2026 while runs/debate_20260818.jsonl was being written by debate_run.py --stage D; each pilot model was unloaded (keep_alive 0) immediately after its 3 calls."
+  },
+  "measurement_caveats": {
+    "eviction_thrash": {
+      "what_happened": "the machine could not hold the live qwen3 runner and a pilot model at the same time, so ollama alternately evicted each for the other on every call.",
+      "evidence": "/Users/shamzzzh/.ollama/logs/server.log contains 18 lines of msg=\"llama-server model predicted to exceed available memory, evicting\" between 05:40 and 05:51 on 18 Aug 2026, and none outside that window. Independently, every one of the 9 pilot calls recorded a non-zero load_duration (9.92-30.09 s) in _cc_pilot_trial_raw.json, i.e. the model was cold on every single call.",
+      "the_binding_constraint_was_system_ram_not_the_gpu": "those eviction lines read system_limited=true with system_free between 1.7 and 3.6 GiB while gpu_free was 5.8-9.1 GiB. This CORRECTS the naive reading of the 11.8 GiB Metal figure: with stage D running and other agents active on the box, the real co-residency headroom was under ~3 GiB, so any second model at all triggers eviction."
+    },
+    "cost_to_the_live_run": {
+      "baseline": "median 66.0 s/case, mean 67.8 s/case over cases 2-76 of run_stageD2.log (n=75 inter-case deltas)",
+      "during_pilots": "median 72.0 s/case, mean 74.6 s/case over cases 77-92 (n=16)",
+      "spike": "case 94 took 108 s and case 95 took 540 s (elapsed 108.7 -> 117.7 min in run_stageD2.log), coinciding with the deepseek-llm trial at 05:49-05:52 when the eviction log shows 6 evictions in two minutes.",
+      "total_estimated_cost": "on the order of 10 minutes of wall clock added to stage D. I caused this. [ASSUMPTION, not verified] the run's OUTPUTS should be unaffected - temperature 0, fixed seed 20260818, greedy decoding, and debate_run.py persists per case - but a model reload between calls is a state change I did not test for determinism, and I did not re-run any case to check because that would mean issuing a chat call against qwen3.",
+      "recommendation": "no further model pilots on this machine until stage D finishes. Re-measure the pilot throughput then.",
+      "second_slower_cost_still_running": "The eviction thrash stopped at 05:51 (no 'evicting' lines after that in server.log), but stage D has not returned to baseline: cases 97->98 took 180 s. 'ps -Ao pcpu,comm -r' at 05:59 shows two mdworker_shared processes at ~14% each plus spotlightknowledged.updater at 12.6%, and 'mdutil -s /' reports indexing enabled. Spotlight is indexing the 12.8 GB of model blobs the pulls wrote into ~/.ollama/models. Excluding /Users/shamzzzh/.ollama from Spotlight would stop it; NOT DONE - that is a system-settings change and the user's call."
+    },
+    "what_the_tok_per_s_numbers_are_and_are_not": {
+      "are": "generation-only rates: tok/s = eval_count / (eval_duration/1e9), and ollama reports load_duration separately, so the cold-load penalty is NOT inside these figures.",
+      "are_not": "clean benchmarks. They were taken on a memory-pressured, thrashing box. The incumbent's 24.6 tok/s in throughput_measured.csv was taken at 03:36:17 on 18 Aug, before stage D2 started, i.e. uncontended. Comparing 10.17 against 24.6 is therefore biased against the pilot, and the three pilots are only fairly comparable to EACH OTHER, all having been measured under the same conditions.",
+      "n": "3 calls per model. Every figure below carries n=3."
+    }
+  },
+  "trial_targets": [
+    "medgemma:4b-it-q4_K_M",
+    "deepseek-r1:8b",
+    "deepseek-llm:7b-chat-q4_K_M"
+  ],
+  "verdicts": {
+    "medgemma:4b-it-q4_K_M": {
+      "viable": true,
+      "confidence": "high on the thinking question, low on the speed question",
+      "why": [
+        "Does not think. /api/show returns capabilities ['completion','vision'] with no 'thinking'. Across 3/3 calls: zero '<think>' occurrences in content, zero characters in the response 'thinking' field, done_reason 'stop' every time. It accepted think:false without error.",
+        "Output length is in the same band as the incumbent: eval_count 60, 84, 56 (mean 66.7, n=3) against the incumbent's mean 60.6 over 830 calls in runs/debate_20260818.jsonl. No token-budget blow-up.",
+        "Harness-parser compatible: DR.parse_drug returned a valid closed-formulary agent on 3/3 calls (cefazolin each time).",
+        "It is the only MedGemma that fits this machine at a defensible quantisation."
+      ],
+      "against": [
+        "10.17 tok/s (n=3) against the incumbent's 24.6 tok/s in throughput_measured.csv - but the pilot number was taken during eviction thrash and the incumbent number was not, so this comparison is not yet fair. Re-measure after stage D.",
+        "If 10.17 tok/s survives a clean re-measure, generation alone costs about 6.6 s per call against about 2.5 s for the incumbent; at 10 calls per case (5 turns x 2 orderings) that is roughly 66 s/case of pure generation versus 25 s/case.",
+        "4.3B parameters, not 4.0B, because the Gemma 3 vision tower ships inside the same GGUF and this is a text-only task.",
+        "Choosing 4B at all is Tingting's decision to make, not a default to fall into - see problem_1_medgemma_12b."
+      ]
+    },
+    "deepseek-r1:8b": {
+      "viable": false,
+      "confidence": "high - the failure is total, not marginal",
+      "why_not": [
+        "think:false did not suppress reasoning. It relocated it. 3/3 calls returned 2233, 2219 and 2292 characters in the response 'thinking' field and ZERO characters in 'content'.",
+        "3/3 calls hit the num_predict ceiling: eval_count 512, done_reason 'length'. The model never reached an answer inside the harness's own token budget.",
+        "DR.parse_drug returned INVALID on 3/3. In the real harness that fires the retry path, which would fail identically, and the case position would land on INVALID.",
+        "4.70 tok/s (n=3) and a mean wall of 138.96 s for ONE call. The harness needs 10 calls per case before retries; that is roughly 23 minutes per case at best and about double that once every call retries. 192 cases is not reachable.",
+        "This is the same failure the project already paid for once: model_registry.json records that /no_think on qwen3:4b merely moved reasoning to a separate field. deepseek-r1:8b reproduces it exactly."
+      ],
+      "the_grep_result_is_a_trap": "the task asked for a '<think>' grep with zero required. deepseek-r1:8b SCORES ZERO on that grep and still fails completely, because ollama 0.32.14 strips the reasoning into a structured 'thinking' field instead of leaving literal tags in content. The literal-tag count is not a sufficient acceptance test; thinking-field length and done_reason are.",
+      "decision": "NOT MINE. Reported, not decided. The user and Tingting choose whether to accept a reasoning model."
+    },
+    "deepseek-llm:7b-chat-q4_K_M": {
+      "viable": "on the thinking criterion yes; as a substitute for 'DeepSeek-8B' that is a judgement call, not a technical one",
+      "why": [
+        "Cleanest non-thinking signal of the three: /api/show returns capabilities ['completion'] and nothing else.",
+        "3/3 calls: zero '<think>', zero thinking-field characters, done_reason 'stop', eval_count 64/52/57 (mean 57.7, n=3), all parsed to a valid formulary agent (meropenem).",
+        "Its 4096 trained context is NOT a blocker: the largest prompt anywhere in the live run is 579 tokens (max prompt_eval_count over 830 calls in runs/debate_20260818.jsonl), so a full 5-turn debate fits with a wide margin."
+      ],
+      "against": [
+        "5.76 tok/s (n=3), slower than the 4B MedGemma despite similar output length.",
+        "It is 7B, not 8B, and it is the DeepSeek LLM of November 2023. Calling it 'DeepSeek-8B' in a report would be wrong.",
+        "I ran it at num_ctx 8192 to match the frozen harness options, which is above its trained 4096. That extrapolates RoPE for no benefit; if this model is used, num_ctx should be set to 4096 and the deviation recorded.",
+        "All 3 cases got meropenem where MedGemma gave cefazolin on the same 3 cases. At n=3 and temperature 0 that is not evidence of anything, but a carbapenem-by-default prior versus a narrow-spectrum prior is exactly the axis the S/I/R arbiter scores, so it needs a real n before anyone reads meaning into it."
+      ]
+    },
+    "medgemma:27b-it-q4_K_M": {
+      "viable": false,
+      "trial_run": false,
+      "why_not": "17.40 GB model layer against an 11.8 GiB Metal budget on this machine. Not pulled - the download would have cost 17.4 GB to confirm a number the registry manifest already states. See hardware_feasibility."
+    }
+  },
+  "recommended_next_steps": [
+    "Put the MedGemma size question back to Tingting with the fact that 12B does not exist. Do not substitute silently.",
+    "Put the deepseek-r1:8b numbers to the user and let them decide; do not adopt a reasoning model by default.",
+    "Re-run this exact 3-case trial after stage D finishes, on an idle machine, so the tok/s figures are clean. The script takes one argument list: _cc_pilot_trial.py <tag> [<tag> ...].",
+    "If MedGemma 4B is chosen, decide between medgemma:4b-it-q4_K_M and the newer medgemma1.5:4b-it-q4_K_M before freezing a second registry entry. medgemma1.5:4b-it-q4_K_M was NOT pulled in this session (the pull was paused at 9% to free bandwidth for the three requested models).",
+    "No further model pilots on this machine while stage D is running."
+  ],
+  "integrity": {
+    "statement": "nothing in the frozen set was modified. SHA-256 taken before the pilots (05:0x) and again after (05:5x); diff of the two lists is empty.",
+    "sha256_after": {
+      "debate_run.py": "5a53017ed44b27ed0ca4f6cb7413ab9fe5ef577d3180d1cf31d0b8cfcf7afca3",
+      "case_assembly.py": "af548b8dd80da38ed6664d621df4787cd19db3b701ef7ed9aad68df8067ad479",
+      "provenance.py": "7a50a6a770acce4dbe95f05d248386ef696d11a04a71c853888e2cbb1f2aeaf1",
+      "population.py": "b8a125e239fdd321711cd0f67bebeac9ab124dfc3dc159a7ea0db2f0e2570eff",
+      "acceptance.py": "ca30a348b0329eaa6fcc17aa7ab655f4a1246000e795afb56c7a363743593bc5",
+      "model_registry.json": "05995ce7ccc12f0ba056fc4a47eb681327178e0c1b2d47ebb857f21f1858ca7a",
+      "inputs/brain_scoring_local.py": "6f298a53925b244e65c9687fce80e9a826694fdb0e99c49fa42f011ceb6b20bb",
+      "inputs/cohort_skeleton.parquet": "69362042931cdb968373bfa98c7cb9f524c9ff07a5c2508904fbf716ef083753",
+      "inputs/panel_rows.parquet": "ea134735f08b59d1f24bd93f4335e3ffcb86f031b10544ddc1fc78eeed2b0090"
+    },
+    "files_created_by_this_workstream": [
+      "/Users/shamzzzh/brain_run/model_pilot_results.md",
+      "/Users/shamzzzh/brain_run/model_pilot_results.json",
+      "/Users/shamzzzh/brain_run/_cc_pilot_prompts.py",
+      "/Users/shamzzzh/brain_run/_cc_pilot_prompts.json",
+      "/Users/shamzzzh/brain_run/_cc_pilot_trial.py",
+      "/Users/shamzzzh/brain_run/_cc_pilot_trial_raw.json",
+      "/Users/shamzzzh/brain_run/_cc_pilot_static.json",
+      "/Users/shamzzzh/brain_run/_cc_pilot_report.py"
+    ],
+    "note_on_the_two_raw_files": "_cc_pilot_prompts.json holds the assembled case prompts and _cc_pilot_trial_raw.json holds full model responses, so both contain MIMIC-derived case text. Neither is echoed into model_pilot_results.json or .md - the assembler strips the 'content' and 'thinking' bodies. They sit in the working directory alongside the other _cc_* artefacts."
+  },
+  "generated_at": "2026-08-18T06:00:49.155945+01:00",
+  "trials": {
+    "medgemma:4b-it-q4_K_M": {
+      "trial_run": true,
+      "digest": "9fe4e9a6c9bda2d007bb595515550eafbc8e226622adff9257f3241eba334c4d",
+      "local_size_bytes": 3338942556,
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "gemma3",
+        "families": [
+          "gemma3"
+        ],
+        "parameter_size": "4.3B",
+        "quantization_level": "Q4_K_M"
+      },
+      "capabilities": [
+        "completion",
+        "vision"
+      ],
+      "trained_context_length": 131072,
+      "parameter_count": 4300079472,
+      "per_call": [
+        {
+          "case_id": "P01",
+          "think_field_rejected": false,
+          "eval_count": 60,
+          "eval_duration_ns": 5741996000,
+          "eval_duration_s": 5.741996,
+          "tok_per_s": 10.45,
+          "prompt_eval_count": 256,
+          "prompt_eval_duration_s": 1.385622,
+          "load_duration_s": 9.920710208,
+          "total_duration_s": 17.073032291,
+          "wall_s": 17.16,
+          "content_chars": 293,
+          "thinking_field_chars": 0,
+          "think_tag_open_count": 0,
+          "think_tag_close_count": 0,
+          "parsed_drug": "cefazolin",
+          "done_reason": "stop"
+        },
+        {
+          "case_id": "P02",
+          "think_field_rejected": false,
+          "eval_count": 84,
+          "eval_duration_ns": 8413316000,
+          "eval_duration_s": 8.413316,
+          "tok_per_s": 9.98,
+          "prompt_eval_count": 254,
+          "prompt_eval_duration_s": 1.017557,
+          "load_duration_s": 23.924968625,
+          "total_duration_s": 33.386902292,
+          "wall_s": 33.72,
+          "content_chars": 367,
+          "thinking_field_chars": 0,
+          "think_tag_open_count": 0,
+          "think_tag_close_count": 0,
+          "parsed_drug": "cefazolin",
+          "done_reason": "stop"
+        },
+        {
+          "case_id": "C003",
+          "think_field_rejected": false,
+          "eval_count": 56,
+          "eval_duration_ns": 5560048000,
+          "eval_duration_s": 5.560048,
+          "tok_per_s": 10.07,
+          "prompt_eval_count": 252,
+          "prompt_eval_duration_s": 2.168896,
+          "load_duration_s": 29.129692875,
+          "total_duration_s": 36.901641667,
+          "wall_s": 37.12,
+          "content_chars": 267,
+          "thinking_field_chars": 0,
+          "think_tag_open_count": 0,
+          "think_tag_close_count": 0,
+          "parsed_drug": "cefazolin",
+          "done_reason": "stop"
+        }
+      ],
+      "summary": {
+        "n_calls": 3,
+        "mean_eval_count": 66.66666666666667,
+        "mean_tok_per_s": 10.17,
+        "mean_wall_s": 29.33,
+        "total_think_tags": 0,
+        "total_thinking_field_chars": 0,
+        "parsed_drugs": [
+          "cefazolin",
+          "cefazolin",
+          "cefazolin"
+        ]
+      }
+    },
+    "deepseek-r1:8b": {
+      "trial_run": true,
+      "digest": "6995872bfe4c521a67b32da386cd21d5c6e819b6e0d62f79f64ec83be99f5763",
+      "local_size_bytes": 5225376047,
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen3",
+        "families": [
+          "qwen3"
+        ],
+        "parameter_size": "8.2B",
+        "quantization_level": "Q4_K_M"
+      },
+      "capabilities": [
+        "tools",
+        "thinking",
+        "completion"
+      ],
+      "trained_context_length": 131072,
+      "parameter_count": 8190735360,
+      "per_call": [
+        {
+          "case_id": "P01",
+          "think_field_rejected": false,
+          "eval_count": 512,
+          "eval_duration_ns": 106823142000,
+          "eval_duration_s": 106.823142,
+          "tok_per_s": 4.79,
+          "prompt_eval_count": 264,
+          "prompt_eval_duration_s": 4.518459,
+          "load_duration_s": 18.312817042,
+          "total_duration_s": 129.730738375,
+          "wall_s": 130.25,
+          "content_chars": 0,
+          "thinking_field_chars": 2233,
+          "think_tag_open_count": 0,
+          "think_tag_close_count": 0,
+          "parsed_drug": "INVALID",
+          "done_reason": "length"
+        },
+        {
+          "case_id": "P02",
+          "think_field_rejected": false,
+          "eval_count": 512,
+          "eval_duration_ns": 107520806000,
+          "eval_duration_s": 107.520806,
+          "tok_per_s": 4.76,
+          "prompt_eval_count": 263,
+          "prompt_eval_duration_s": 3.782204,
+          "load_duration_s": 27.209662708,
+          "total_duration_s": 138.7335765,
+          "wall_s": 139.37,
+          "content_chars": 0,
+          "thinking_field_chars": 2219,
+          "think_tag_open_count": 0,
+          "think_tag_close_count": 0,
+          "parsed_drug": "INVALID",
+          "done_reason": "length"
+        },
+        {
+          "case_id": "C003",
+          "think_field_rejected": false,
+          "eval_count": 512,
+          "eval_duration_ns": 112280366000,
+          "eval_duration_s": 112.280366,
+          "tok_per_s": 4.56,
+          "prompt_eval_count": 260,
+          "prompt_eval_duration_s": 3.911351,
+          "load_duration_s": 30.089787792,
+          "total_duration_s": 146.452778167,
+          "wall_s": 147.27,
+          "content_chars": 0,
+          "thinking_field_chars": 2292,
+          "think_tag_open_count": 0,
+          "think_tag_close_count": 0,
+          "parsed_drug": "INVALID",
+          "done_reason": "length"
+        }
+      ],
+      "summary": {
+        "n_calls": 3,
+        "mean_eval_count": 512.0,
+        "mean_tok_per_s": 4.7,
+        "mean_wall_s": 138.96,
+        "total_think_tags": 0,
+        "total_thinking_field_chars": 6744,
+        "parsed_drugs": [
+          "INVALID",
+          "INVALID",
+          "INVALID"
+        ]
+      }
+    },
+    "deepseek-llm:7b-chat-q4_K_M": {
+      "trial_run": true,
+      "digest": "72299d61ee1d8d0fcd9873f10963434aea92adc80b11d90520b27ee27b48b0b9",
+      "local_size_bytes": 4223771228,
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "llama",
+        "families": null,
+        "parameter_size": "7B",
+        "quantization_level": "Q4_K_M"
+      },
+      "capabilities": [
+        "completion"
+      ],
+      "trained_context_length": 4096,
+      "parameter_count": 6910365696,
+      "per_call": [
+        {
+          "case_id": "P01",
+          "think_field_rejected": false,
+          "eval_count": 64,
+          "eval_duration_ns": 10441697000,
+          "eval_duration_s": 10.441697,
+          "tok_per_s": 6.13,
+          "prompt_eval_count": 285,
+          "prompt_eval_duration_s": 3.172138,
+          "load_duration_s": 14.933798375,
+          "total_duration_s": 28.567435833,
+          "wall_s": 28.73,
+          "content_chars": 287,
+          "thinking_field_chars": 0,
+          "think_tag_open_count": 0,
+          "think_tag_close_count": 0,
+          "parsed_drug": "meropenem",
+          "done_reason": "stop"
+        },
+        {
+          "case_id": "P02",
+          "think_field_rejected": false,
+          "eval_count": 52,
+          "eval_duration_ns": 9096607000,
+          "eval_duration_s": 9.096607,
+          "tok_per_s": 5.72,
+          "prompt_eval_count": 283,
+          "prompt_eval_duration_s": 4.094313,
+          "load_duration_s": 25.76448775,
+          "total_duration_s": 39.111537125,
+          "wall_s": 39.32,
+          "content_chars": 213,
+          "thinking_field_chars": 0,
+          "think_tag_open_count": 0,
+          "think_tag_close_count": 0,
+          "parsed_drug": "meropenem",
+          "done_reason": "stop"
+        },
+        {
+          "case_id": "C003",
+          "think_field_rejected": false,
+          "eval_count": 57,
+          "eval_duration_ns": 10517659000,
+          "eval_duration_s": 10.517659,
+          "tok_per_s": 5.42,
+          "prompt_eval_count": 279,
+          "prompt_eval_duration_s": 3.255625,
+          "load_duration_s": 21.898579875,
+          "total_duration_s": 35.786830458,
+          "wall_s": 36.02,
+          "content_chars": 244,
+          "thinking_field_chars": 0,
+          "think_tag_open_count": 0,
+          "think_tag_close_count": 0,
+          "parsed_drug": "meropenem",
+          "done_reason": "stop"
+        }
+      ],
+      "summary": {
+        "n_calls": 3,
+        "mean_eval_count": 57.666666666666664,
+        "mean_tok_per_s": 5.76,
+        "mean_wall_s": 34.69,
+        "total_think_tags": 0,
+        "total_thinking_field_chars": 0,
+        "parsed_drugs": [
+          "meropenem",
+          "meropenem",
+          "meropenem"
+        ]
+      }
+    }
+  }
+}

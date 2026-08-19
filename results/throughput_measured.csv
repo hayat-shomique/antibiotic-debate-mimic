@@ -1,0 +1,11 @@
+metric,value,unit,note
+n_ordering_runs_measured,8,runs,"acceptance suite, 2 cases x 2 orderings x 2 passes"
+seconds_per_ordering_run_mean,59.95,s,
+seconds_per_ordering_run_sd,10.69,s,
+seconds_per_ordering_run_min,50.4,s,
+seconds_per_ordering_run_max,82.2,s,
+seconds_per_case_both_orderings,119.9,s,primary planning figure
+seconds_per_case_plus_1sd,141.29,s,conservative planning figure
+model_calls_per_ordering_run,5,calls,A-B-A-B-A
+generation_tok_per_s_single_call,24.6,tok/s,"instruct-2507 warm, requirement 5"
+measured_at,2026-08-18T03:36:17.672440+01:00,iso8601,

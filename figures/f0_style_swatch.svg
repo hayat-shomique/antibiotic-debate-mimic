@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="615.744pt" height="390.6pt" viewBox="0 0 615.744 390.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-19T16:02:52.769520</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 390.6 
+L 615.744 390.6 
+L 615.744 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 93.384 335.16 
+L 595.584 335.16 
+L 595.584 115.56 
+L 93.384 115.56 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1"/>
+   <g id="matplotlib.axis_2"/>
+   <g id="patch_3">
+    <path d="M 93.384 325.178182 
+L 332.526857 325.178182 
+L 332.526857 298.387155 
+L 93.384 298.387155 
+z
+" clip-path="url(#pb0081c252b)" style="fill: #12303f"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 93.384 281.966848 
+L 332.526857 281.966848 
+L 332.526857 255.175821 
+L 93.384 255.175821 
+z
+" clip-path="url(#pb0081c252b)" style="fill: #1c7293"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 93.384 238.755514 
+L 332.526857 238.755514 
+L 332.526857 211.964486 
+L 93.384 211.964486 
+z
+" clip-path="url(#pb0081c252b)" style="fill: #c64b3e"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 93.384 195.544179 
+L 332.526857 195.544179 
+L 332.526857 168.753152 
+L 93.384 168.753152 
+z
+" clip-path="url(#pb0081c252b)" style="fill: #6b7c85"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 93.384 152.332845 
+L 332.526857 152.332845 
+L 332.526857 125.541818 
+L 93.384 125.541818 
+z
+" clip-path="url(#pb0081c252b)" style="fill: #dce4e8"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 10.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="339.701143" y="315.662418" transform="rotate(-0 339.701143 315.662418)">ink  #12303F</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 10.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="339.701143" y="272.451084" transform="rotate(-0 339.701143 272.451084)">primary  #1C7293</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 10.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="339.701143" y="229.23975" transform="rotate(-0 339.701143 229.23975)">accent  #C64B3E</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="339.701143" y="186.028416" transform="rotate(-0 339.701143 186.028416)">muted  #6B7C85</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 10.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="339.701143" y="142.817082" transform="rotate(-0 339.701143 142.817082)">grid  #DCE4E8</text>
+   </g>
+  </g>
+  <g id="text_6">
+   <text style="font-weight: 700; font-size: 10px; font-family: 'Menlo'; text-anchor: start; fill: #c64b3e" x="20.16" y="28.799844" transform="rotate(-0 20.16 28.799844)">STYLE CONTRACT</text>
+  </g>
+  <g id="text_7">
+   <text style="font-weight: 700; font-size: 16.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="20.16" y="56.0475" transform="rotate(-0 20.16 56.0475)">The palette, fixed for every figure in the set.</text>
+  </g>
+  <g id="text_8">
+   <text style="font-size: 11px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #6b7c85" x="20.16" y="72.032" transform="rotate(-0 20.16 72.032)">ORDERS_0. Kicker in accent caps, claim as the title, direct labels, y-grid only.</text>
+  </g>
+  <g id="text_9">
+   <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #6b7c85" x="20.16" y="368.6082" transform="rotate(-0 20.16 368.6082)">F0 · generated 19 Aug 2026 16:02 from no data — contract check</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pb0081c252b">
+   <rect x="93.384" y="115.56" width="502.2" height="219.6"/>
+  </clipPath>
+ </defs>
+</svg>

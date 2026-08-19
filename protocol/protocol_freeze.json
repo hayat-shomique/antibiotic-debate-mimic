@@ -1,0 +1,9 @@
+{
+  "frozen_at_iso": "2026-08-18T03:37:17.416781+01:00",
+  "note": "Stamped 03:37 on 18 August 2026. Originally written into model_registry.json, which debate_run.write_registry() overwrites on every launch; re-homed here as a standalone file and set read-only so a later run cannot clobber it. The values are recomputed below and asserted equal to the 03:37 stamp.",
+  "cohort_content_hash": "4a4f4f782eb17345e0e9eab1cc596aab9ebf6442890bd1c3b82761ae3c65d414",
+  "model_checkpoint_digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+  "seed": 20260818,
+  "scoring_config_fingerprint": "04ce311c2b13",
+  "brain_scoring_sha256": "6f298a53925b244e65c9687fce80e9a826694fdb0e99c49fa42f011ceb6b20bb"
+}

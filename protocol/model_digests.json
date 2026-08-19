@@ -1,0 +1,84 @@
+{
+  "note": "Digest ledger for every model this project has touched. It lives here and NOT in model_registry.json because debate_run.write_registry() overwrites that file on every launch \u2014 the same defect that erased the protocol freeze on 18 August. This file is append-only and is never written by a run.",
+  "updated": "2026-08-19T16:15:09+0100",
+  "quantisation_policy": "Q4_K_M class across all models so quantisation is not a confound",
+  "memory_rule": "the 12B is never resident alongside another model; model_compare.unload() evicts only models it loaded",
+  "models": {
+    "gemma3:4b-it-q4_K_M": {
+      "digest": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+      "size_bytes": 3338801804,
+      "quantization": "Q4_K_M",
+      "parameter_size": "4.3B",
+      "family": "gemma3",
+      "context_length": null,
+      "role": "BASE-FAMILY CONTROL \u2014 MedGemma is built on Gemma3, so this isolates domain",
+      "verified_present": true
+    },
+    "gemma4:12b": {
+      "digest": "4eb23ef187e2c5462566d6a1d3bbbc2f1346d0b4327cbb66d58fffbcc9b2b05c",
+      "size_bytes": 7556508396,
+      "quantization": "Q4_K_M",
+      "parameter_size": "11.9B",
+      "family": "gemma4",
+      "context_length": 262144,
+      "role": "NOT IN THE SET \u2014 different family generation, kept but unused",
+      "verified_present": true
+    },
+    "deepseek-llm:7b-chat-q4_K_M": {
+      "digest": "72299d61ee1d8d0fcd9873f10963434aea92adc80b11d90520b27ee27b48b0b9",
+      "size_bytes": 4223771228,
+      "quantization": "Q4_K_M",
+      "parameter_size": "7B",
+      "family": "llama",
+      "context_length": 4096,
+      "role": "AVAILABLE, not in the approved set",
+      "verified_present": true
+    },
+    "medgemma:4b-it-q4_K_M": {
+      "digest": "9fe4e9a6c9bda2d007bb595515550eafbc8e226622adff9257f3241eba334c4d",
+      "size_bytes": 3338942556,
+      "quantization": "Q4_K_M",
+      "parameter_size": "4.3B",
+      "family": "gemma3",
+      "context_length": null,
+      "role": "DOMAIN TEST \u2014 medical pretraining, scale held at 4B",
+      "verified_present": true
+    },
+    "deepseek-r1:8b": {
+      "digest": "6995872bfe4c521a67b32da386cd21d5c6e819b6e0d62f79f64ec83be99f5763",
+      "size_bytes": 5225376047,
+      "quantization": "Q4_K_M",
+      "parameter_size": "8.2B",
+      "family": "qwen3",
+      "context_length": 131072,
+      "role": "REJECTED by D-MODEL-2 \u2014 reasoning model, reintroduces think tags",
+      "verified_present": true
+    },
+    "qwen3:4b-instruct-2507-q4_K_M": {
+      "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+      "size_bytes": 2497293803,
+      "quantization": "Q4_K_M",
+      "parameter_size": "4.0B",
+      "family": "qwen3",
+      "context_length": 262144,
+      "role": "INCUMBENT \u2014 every arm to date",
+      "verified_present": true
+    },
+    "qwen3:4b": {
+      "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+      "size_bytes": 2497293931,
+      "quantization": "Q4_K_M",
+      "parameter_size": "4.0B",
+      "family": "qwen3",
+      "context_length": 262144,
+      "role": "SUPERSEDED \u2014 hybrid checkpoint, thinking could not be suppressed",
+      "verified_present": true
+    },
+    "gemma3:12b-it-q4_K_M": {
+      "digest": null,
+      "role": "SCALE PAIR \u2014 same family as the 4B control, varies size only",
+      "verified_present": false,
+      "status": "PULLING"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+import json,collections,glob
+def load(p): return [json.loads(l) for l in open(p) if l.strip()]
+print('=== TRACK 3 model round-0, per file/model ===')
+for f in ['runs/model_compare_20260818.jsonl','runs/model_compare_20260819.jsonl']:
+    R=load(f)
+    print('FILE',f,' records:',len(R),' unique case_id:',len(set(r['case_id'] for r in R)))
+    for m in sorted({r['model'] for r in R}):
+        v=[r for r in R if r['model']==m]; n=len(v)
+        print('  model  :',m)
+        print('  digest :',sorted({r['digest'] for r in v}))
+        print('  quant  :',sorted({str(r.get('quantization')) for r in v}),' source:',sorted({str(r.get('source')) for r in v}),' seed:',sorted({r['seed'] for r in v}))
+        print('  round-0 cases completed: %d  unique case_id: %d  INTENDED N=200 -> %s'%(n,len(set(r['case_id'] for r in v)),'PARTIAL' if n<200 else 'COMPLETE'))
+        print('  drug dist   :',dict(collections.Counter(r['drug'] for r in v).most_common()))
+        md=collections.Counter(r['drug'] for r in v).most_common(1)[0]
+        print('  modal share : %s %d/%d = %.1f%%'%(md[0],md[1],n,100*md[1]/n))
+        print('  outcome dist:',dict(collections.Counter(r['outcome'] for r in v).most_common()))
+        print('  harvest_note:',sorted({str(r.get('harvest_note')) for r in v}))
+print('gemma4:12b records anywhere in model_compare files:',sum(1 for f in ['runs/model_compare_20260818.jsonl','runs/model_compare_20260819.jsonl'] for l in open(f) if 'gemma4' in l))
+print('DEFAULT_MODELS line:',[l.strip() for l in open('model_compare.py') if l.startswith('DEFAULT_MODELS')])
+print()
+print('=== PAIRED COMPARISON ON THE SHARED CASE SET ===')
+Q=load('runs/model_compare_20260818.jsonl'); M=load('runs/model_compare_20260819.jsonl')
+qi={r['case_id']:r for r in Q}; mi={r['case_id']:r for r in M}
+inter=set(qi)&set(mi)
+print('qwen n=%d  medgemma n=%d  intersection=%d  medgemma ids subset of qwen ids: %s  medgemma-only ids: %d'%(len(qi),len(mi),len(inter),set(mi)<=set(qi),len(set(mi)-set(qi))))
+qa=sum(1 for c in inter if qi[c]['outcome']=='ADEQUATE'); ma=sum(1 for c in inter if mi[c]['outcome']=='ADEQUATE')
+print('PAIRED on the %d shared cases: qwen3 ADEQUATE %d/%d = %.4f%% | medgemma ADEQUATE %d/%d = %.4f%%'%(len(inter),qa,len(inter),100*qa/len(inter),ma,len(inter),100*ma/len(inter)))
+print('  qwen outcome on shared    :',dict(collections.Counter(qi[c]['outcome'] for c in inter)))
+print('  medgemma outcome on shared:',dict(collections.Counter(mi[c]['outcome'] for c in inter)))
+print('  discordant pairs (qwen ADEQ, medg not): %d | (medg ADEQ, qwen not): %d'%(
+  sum(1 for c in inter if qi[c]['outcome']=='ADEQUATE' and mi[c]['outcome']!='ADEQUATE'),
+  sum(1 for c in inter if mi[c]['outcome']=='ADEQUATE' and qi[c]['outcome']!='ADEQUATE')))
+print()
+print('=== CROSSMODEL ===')
+print('crossmodel files present:',sorted(glob.glob('runs/crossmodel_*.jsonl')))
+X=load('runs/crossmodel_20260819.jsonl')
+print('runs/crossmodel_20260819.jsonl records:',len(X),' unique case_id:',len(set(r['case_id'] for r in X)),' arm:',sorted({r['arm'] for r in X}),' seed:',sorted({r['seed'] for r in X}))
+print('CHAIR A doctor    :',sorted({r['doctor_model'] for r in X}),sorted({r['doctor_digest'] for r in X}))
+print('CHAIR B pharmacist:',sorted({r['pharmacist_model'] for r in X}),sorted({r['pharmacist_digest'] for r in X}))
+print('turns per case:',dict(collections.Counter(len(r['turns']) for r in X)))
+print('changed_A:',dict(collections.Counter(r['changed_A'] for r in X)),'| agreement:',dict(collections.Counter(r['agreement'] for r in X)),'| doctor_adopted_pharmacist_count:',dict(collections.Counter(r['doctor_adopted_pharmacist_count'] for r in X)))
+print('round0_drug:',dict(collections.Counter(r['round0_drug'] for r in X).most_common()))
+print('final_A:',dict(collections.Counter(r['final_A'] for r in X).most_common()),'| final_B:',dict(collections.Counter(r['final_B'] for r in X).most_common()))
+print()
+print('=== SUPPORTING: qwen3 round-0 constancy on the FULL 200-case debate frame ===')
+R=load('runs/debate_20260818.jsonl')
+af=[r for r in R if r.get('kind')=='round0' and r.get('ordering')=='A-first']
+print('debate A-first round0 records:',len(af),' unique case_id:',len(set(r['case_id'] for r in af)),' drug dist:',dict(collections.Counter(r['drug'] for r in af).most_common()))
+mc=set(qi)
+print('A-first round0 case_ids present in model_compare_20260818:',len(mc & set(r['case_id'] for r in af)),' absent:',len(set(r['case_id'] for r in af)-mc))
