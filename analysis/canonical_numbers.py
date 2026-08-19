@@ -238,12 +238,29 @@ def integrity(res):
     res["_integrity"] = audit
 
 
+def merge_primary(res):
+    """Fold in the pre-specified primary test so RESULTS.json stays the one file
+    every document cites. primary_test.py writes it; this only merges."""
+    root = os.path.dirname(HERE)
+    cands = [os.path.join(OUT_DIR, "primary_test.json"),
+             os.path.join(OUT_DIR, "results", "primary_test.json"),
+             os.path.join(root, "results", "primary_test.json"),
+             os.path.join(HERE, "primary_test.json")]
+    p = next((c for c in cands if os.path.exists(c)), None)
+    if p:
+        res["pre_specified_primary_test"] = json.load(open(p))
+    else:
+        res["pre_specified_primary_test"] = {"status": "not yet computed; "
+                                             "run analysis/primary_test.py"}
+
+
 def main():
     res = {"generated_by": "canonical_numbers.py",
            "model": "qwen3:4b-instruct-2507-q4_K_M", "temperature": 0, "seed": 20260818}
     integrity(res)
     endpoint_c1(res)
     endpoint_match(res)
+    merge_primary(res)
     out = os.path.join(OUT_DIR, "RESULTS.json")
     with open(out, "w") as fh:
         json.dump(res, fh, indent=2, sort_keys=False)

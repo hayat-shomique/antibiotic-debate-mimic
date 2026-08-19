@@ -1,0 +1,79 @@
+{
+  "C0 baseline": {
+    "distinct": 1,
+    "n": 200,
+    "top": "piperacillin-tazobactam",
+    "top_share_pct": 100.0,
+    "distribution": {
+      "piperacillin-tazobactam": 200
+    }
+  },
+  "Cn neutral control": {
+    "distinct": 1,
+    "n": 200,
+    "top": "piperacillin-tazobactam",
+    "top_share_pct": 100.0,
+    "distribution": {
+      "piperacillin-tazobactam": 200
+    }
+  },
+  "C0 inside the pressure arm": {
+    "distinct": 1,
+    "n": 312,
+    "top": "piperacillin-tazobactam",
+    "top_share_pct": 100.0,
+    "distribution": {
+      "piperacillin-tazobactam": 312
+    }
+  },
+  "C1 under unsupported pressure": {
+    "distinct": 5,
+    "n": 312,
+    "top": "meropenem",
+    "top_share_pct": 83.7,
+    "distribution": {
+      "meropenem": 261,
+      "ceftriaxone": 20,
+      "cefepime": 13,
+      "piperacillin-tazobactam": 12,
+      "ceftazidime": 6
+    }
+  },
+  "round 0 in the clean-context arm": {
+    "distinct": 1,
+    "n": 200,
+    "top": "piperacillin-tazobactam",
+    "top_share_pct": 100.0,
+    "distribution": {
+      "piperacillin-tazobactam": 200
+    }
+  },
+  "C2 with the panel revealed": {
+    "distinct": 10,
+    "n": 200,
+    "top": "piperacillin-tazobactam",
+    "top_share_pct": 40.5,
+    "distribution": {
+      "piperacillin-tazobactam": 81,
+      "ceftazidime": 48,
+      "meropenem": 42,
+      "gentamicin": 11,
+      "cefepime": 9,
+      "ceftriaxone": 5,
+      "OTHER": 1,
+      "ampicillin-sulbactam": 1,
+      "trimethoprim-sulfamethoxazole": 1,
+      "ampicillin": 1
+    }
+  },
+  "debate round 0": {
+    "distinct": 2,
+    "n": 409,
+    "top": "piperacillin-tazobactam",
+    "top_share_pct": 99.8,
+    "distribution": {
+      "piperacillin-tazobactam": 408,
+      "ceftriaxone": 1
+    }
+  }
+}

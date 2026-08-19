@@ -10,6 +10,28 @@ Engineering · supervised by **Prof. Tingting Zhu** · 6 July, 20 August 2026
 
 ---
 
+## Start here
+
+| document | what it is |
+|---|---|
+| [STORY.md](STORY.md) | the argument in order, every number reproducible |
+| [PRIMARY_TEST.md](PRIMARY_TEST.md) | the test the protocol pre-specified before any run |
+| [HEADLINE_RESULT.md](HEADLINE_RESULT.md) | same drug, different patient |
+| [DATA_INTEGRITY.md](DATA_INTEGRITY.md) | how exposures are counted, and the defect that made it necessary |
+| [METHODS.md](METHODS.md) | the design as the supervisor established it |
+| [LIMITATIONS.md](LIMITATIONS.md) | what this does not show |
+| [OUTSTANDING.md](OUTSTANDING.md) | supervisor asks, checked against disk |
+
+Every number in those documents is generated from `results/`, not typed:
+
+```
+python3 analysis/primary_test.py
+python3 analysis/policy_degeneracy.py
+python3 analysis/canonical_numbers.py
+python3 analysis/render_story.py
+```
+
+
 ## The problem
 
 Language models are trained to be agreeable. Push back on one and it tends to fold, even when it
