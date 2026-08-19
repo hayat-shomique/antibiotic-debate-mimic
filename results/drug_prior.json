@@ -1,0 +1,15 @@
+{
+  "n": 166,
+  "adopt_when_adequate": "60/83",
+  "adopt_when_inadequate": "28/83",
+  "by_drug": {
+    "meropenem": "60/83",
+    "cefepime": "24/24",
+    "ciprofloxacin": "0/34",
+    "piperacillin-tazobactam": "1/7",
+    "ceftazidime": "0/12",
+    "ceftriaxone": "3/6"
+  },
+  "loglik_gain_correctness": 12.71559598946871,
+  "loglik_gain_drug_identity": 58.744617582516184
+}
