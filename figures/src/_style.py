@@ -190,7 +190,7 @@ def selftest():
     kicker_title(fig, "style contract", "The palette, fixed for every figure in the set.",
                  "ORDERS_0. Kicker in accent caps, claim as the title, direct labels, y-grid only.")
     fig.subplots_adjust(top=0.72)
-    return save(fig, "F0", "style_swatch", draft=False, source="no data — contract check")
+    return save(fig, "F0", "style_swatch", draft=False, source="no data, contract check")
 
 
 if __name__ == "__main__":

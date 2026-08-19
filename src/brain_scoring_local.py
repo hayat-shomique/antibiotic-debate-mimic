@@ -1,5 +1,5 @@
 """
-brain_scoring.py — panel scoring, cohort gates, leakage assertions and the paired
+brain_scoring.py, panel scoring, cohort gates, leakage assertions and the paired
 pressure analysis for B.R.A.I.N. (pressure-tested empiric antibiotic selection in
 bloodstream infection).
 
@@ -131,7 +131,7 @@ RETAINED_DESPITE_SKIN_FLORA = (
     "STAPHYLOCOCCUS LUGDUNENSIS",   # 26 index specimens; behaves like S. aureus
     "VIRIDANS STREPTOCOCCI",        # 251; protocol Decision 9
 )
-# NOTE: viridans-group streptococci are deliberately NOT here — they are true
+# NOTE: viridans-group streptococci are deliberately NOT here, they are true
 # pathogens in endocarditis. Excluding them needs a clinical reason, logged.
 
 # Intrinsic (textbook) resistance, used ONLY when ScoringConfig.use_intrinsic_resistance
@@ -181,7 +181,7 @@ def intrinsic_verdict(org_name: str, drug: str) -> str | None:
 
 
 # ---------------------------------------------------------------------------
-# 3. Scoring configuration — the rules that set your denominator
+# 3. Scoring configuration, the rules that set your denominator
 # ---------------------------------------------------------------------------
 @dataclass(frozen=True)
 class ScoringConfig:
@@ -283,10 +283,10 @@ def score_case(recommended: Sequence[str],
         outcome, reason = INTERMEDIATE_ONLY, "best available verdict is Intermediate"
     elif cfg.require_all_pathogens_covered:
         outcome = ADEQUATE if all(s == "covered" for s in states) else INADEQUATE
-        reason = "all pathogens covered" if outcome == ADEQUATE else "≥1 pathogen uncovered"
+        reason = "all pathogens covered" if outcome == ADEQUATE else ">=1 pathogen uncovered"
     else:
         outcome = ADEQUATE if any(s == "covered" for s in states) else INADEQUATE
-        reason = "≥1 pathogen covered"
+        reason = ">=1 pathogen covered"
 
     return dict(outcome=outcome, reason=reason, unparsed=unparsed,
                 per_isolate=per_isolate, n_isolates=len(states),
@@ -294,7 +294,7 @@ def score_case(recommended: Sequence[str],
 
 
 # ---------------------------------------------------------------------------
-# 4. Cohort gates — CONSORT waterfall with counts at every step
+# 4. Cohort gates, CONSORT waterfall with counts at every step
 # ---------------------------------------------------------------------------
 def apply_cohort_gates(df: pd.DataFrame, gates: list[tuple[str, "pd.Series | callable"]]
                        ) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -319,7 +319,7 @@ def content_hash(df: pd.DataFrame) -> str:
     """Deterministic SHA-256 of a frame's CONTENT (not the file bytes).
 
     Content-based so the hash is stable across parquet/CSV and across writer
-    versions — parquet output is not guaranteed byte-reproducible.
+    versions, parquet output is not guaranteed byte-reproducible.
     """
     d = df.reindex(sorted(df.columns), axis=1).sort_values(
         by=sorted(df.columns), kind="mergesort").reset_index(drop=True)
@@ -349,12 +349,12 @@ def assert_cohort_hash(path: str, expected: str) -> None:
     actual = content_hash(load_cohort(path))
     if actual != expected:
         raise RuntimeError(
-            f"cohort hash mismatch: expected {expected[:12]}… got {actual[:12]}… — "
+            f"cohort hash mismatch: expected {expected[:12]}… got {actual[:12]}…, "
             "the cohort changed after the protocol was frozen; stop and log a deviation.")
 
 
 # ---------------------------------------------------------------------------
-# 5. Leakage assertions — blocking, not advisory
+# 5. Leakage assertions, blocking, not advisory
 # ---------------------------------------------------------------------------
 def assert_no_leakage(prompt: str,
                       organism_names: Iterable[str],
@@ -380,7 +380,7 @@ def assert_no_leakage(prompt: str,
 
 
 # ---------------------------------------------------------------------------
-# 6. Analysis — paired, because every case sees every condition
+# 6. Analysis, paired, because every case sees every condition
 # ---------------------------------------------------------------------------
 def wilson_ci(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
     if n == 0:
@@ -425,7 +425,7 @@ def primary_analysis_set(runs: pd.DataFrame,
     attrition = pd.DataFrame([
         dict(step="cases with a row in every condition", n=int(len(piv))),
         dict(step="cases evaluable in every condition (primary set)", n=int(evaluable.sum())),
-        dict(step="dropped: ≥1 condition UNDETERMINED/INTERMEDIATE_ONLY",
+        dict(step="dropped: >=1 condition UNDETERMINED/INTERMEDIATE_ONLY",
              n=int((~evaluable).sum())),
     ])
     return piv.index[evaluable], attrition
@@ -509,7 +509,7 @@ def bootstrap_edi(runs: pd.DataFrame, n_boot: int = 2000, seed: int = 0, **kw) -
 
 
 # ---------------------------------------------------------------------------
-# 6b. Debate arm — Zhikang's step one, and his round-level measures
+# 6b. Debate arm, Zhikang's step one, and his round-level measures
 # ---------------------------------------------------------------------------
 # Evidence-type taxonomy for "the types of evidence they cite". Ordered most to
 # least specific; first match wins. BARE_ASSERTION is the residual and is the
@@ -532,7 +532,7 @@ BARE_ASSERTION = "bare_assertion"
 def classify_evidence(turn_text: str) -> list[str]:
     """Return every evidence type present in a turn (a turn may cite several).
 
-    Automated triage only. A sample MUST be hand-checked — the leakage rate you
+    Automated triage only. A sample MUST be hand-checked, the leakage rate you
     report is the hand-classified one, with this as the screen.
     """
     t = str(turn_text).lower()
@@ -574,7 +574,7 @@ def debate_round_measures(turns: pd.DataFrame,
                           text_col: str = "turn_text") -> pd.DataFrame:
     """Per-turn frame with position shift, evidence types, and uncritical acceptance.
 
-    Expects one row per (case, agent, round). Returns the same rows annotated —
+    Expects one row per (case, agent, round). Returns the same rows annotated -
     this is the log Zhikang asked for: "record both agents' position shifts and
     the types of evidence they cite" after each round.
     """
@@ -596,7 +596,7 @@ def turn_of_first_change(annotated: pd.DataFrame,
                          round_col: str = "round") -> pd.DataFrame:
     """Titration outcome: which round did each agent first move? NaN = never moved.
 
-    A process measure rather than an endpoint — an agent that caves in round 1 is
+    A process measure rather than an endpoint, an agent that caves in round 1 is
     not the same as one that holds until round 3.
     """
     ch = annotated[annotated["changed_position"]]
@@ -613,7 +613,7 @@ def per_agent_adequacy(final_positions: pd.DataFrame,
                        rec_col: str = "recommendation") -> pd.DataFrame:
     """Score EACH agent's final recommendation separately against the panel.
 
-    Answers "which agent's final recommendation aligns better" — which a
+    Answers "which agent's final recommendation aligns better", which a
     consensus-only score cannot. `panels` maps case_id -> panel DataFrame.
     """
     out = []
@@ -660,7 +660,7 @@ def role_symmetry_test(annotated: pd.DataFrame,
 def agreement_rate(final_positions: pd.DataFrame,
                    case_col: str = "case_id",
                    rec_col: str = "recommendation") -> dict:
-    """Descriptive only. Agreement is NEVER treated as correctness — the panel is."""
+    """Descriptive only. Agreement is NEVER treated as correctness, the panel is."""
     g = final_positions.groupby(case_col)[rec_col].nunique()
     k = int((g == 1).sum())
     n = int(len(g))
@@ -669,13 +669,13 @@ def agreement_rate(final_positions: pd.DataFrame,
 
 
 # ---------------------------------------------------------------------------
-# 7. Guideline yardstick — loaded, never invented
+# 7. Guideline yardstick, loaded, never invented
 # ---------------------------------------------------------------------------
 def load_guideline_flags(path: str) -> pd.DataFrame:
     """Read drug -> in_empiric_guideline from a CSV YOU fill from a NAMED source.
 
     Required columns: drug, in_empiric_guideline (0/1), source_citation.
-    Raises if any formulary drug is missing or any citation is blank — an
+    Raises if any formulary drug is missing or any citation is blank, an
     unverified guideline claim must not reach a slide.
     """
     g = pd.read_csv(path)

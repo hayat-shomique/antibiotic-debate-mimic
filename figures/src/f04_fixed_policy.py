@@ -168,7 +168,7 @@ def draw_empty_panel(ax, model_id, n_slots):
     ax.add_patch(box)
     ax.text(0.5, 0.5, "not yet run", transform=ax.transAxes, ha="center",
             va="center", color=S.MUTED, fontsize=10.5, style="italic")
-    header(ax, label_for(model_id), "—", "queued", accent=False, muted_name=True)
+    header(ax, label_for(model_id), "-", "queued", accent=False, muted_name=True)
 
 
 def style_axes(ax, n_slots):

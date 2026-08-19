@@ -6,7 +6,7 @@ recommendation against something neither agent can see and neither agent can arg
 patient's own microbiology.
 
 **Shomique Hayat** · UNIQ+ research internship, University of Oxford, Institute of Biomedical
-Engineering · supervised by **Prof. Tingting Zhu** · 6 July – 20 August 2026
+Engineering · supervised by **Prof. Tingting Zhu** · 6 July, 20 August 2026
 
 ---
 
@@ -18,7 +18,7 @@ means changing a prescription.
 
 People are now building clinical systems where several models confer and reach a decision
 together, on the assumption that they check each other's work. To find out whether they do, you
-need to know who was actually right — and in medicine you usually cannot, because the human you
+need to know who was actually right, and in medicine you usually cannot, because the human you
 would compare against was guessing too.
 
 ## The idea this project is built on
@@ -30,7 +30,7 @@ susceptible, intermediate or resistant.
 That panel is an answer key that does not depend on the model *or* on the treating clinician. My
 supervisor put the objection that produced this design more sharply than I could:
 
-> "The doctor makes the right decision — that's a huge assumption you make."
+> "The doctor makes the right decision, that's a huge assumption you make."
 
 So the doctor is not the reference. The bacteria are.
 
@@ -38,18 +38,18 @@ So the doctor is not the reference. The bacteria are.
 
 Two prompted agents with deliberately opposed clinical incentives:
 
-- **Agent A** — an infectious disease specialist, who wants coverage
-- **Agent B** — an antimicrobial stewardship lead, whose job is to resist unnecessary breadth
+- **Agent A**, an infectious disease specialist, who wants coverage
+- **Agent B**, an antimicrobial stewardship lead, whose job is to resist unnecessary breadth
 
 They exchange five turns and settle on one drug from a closed 17-agent formulary. Every case is
-run **twice** — once with each agent speaking first — so speaking order becomes a variable I
+run **twice**, once with each agent speaking first, so speaking order becomes a variable I
 measure rather than a nuisance I average away.
 
 - 200 MIMIC-IV bloodstream-infection cases, 400 ordering-runs, 2,000 turns
 - Qwen3-4B-instruct, 4-bit, temperature 0, fixed seed, run locally
 - Cohort content-hashed and scorer SHA-pinned **before the first model call**, so nothing could be
   tuned after seeing a result
-- Decision point fixed at the moment cultures are sent — the model is graded on exactly the
+- Decision point fixed at the moment cultures are sent, the model is graded on exactly the
   information the clinician had
 
 ## What I found
@@ -69,7 +69,7 @@ agent took the counterpart's drug whether that drug covered the organism or not.
 | **wrong** | 88 | **88/88 = 100%** | **−0.853** | **52** | **0** |
 
 Adoption is 100% in both rows. The behaviour is identical; only the counterpart differs. Decision
-quality is not being weighed — it is being inherited. And it is one-directional in both cells.
+quality is not being weighed, it is being inherited. And it is one-directional in both cells.
 
 **The system's output is whoever spoke second.** Final adequacy equals the counterpart's own
 adequacy exactly: 77.0% in one direction, 79.0% in the other, matching to the case.
@@ -84,8 +84,8 @@ model alone: 87.5%. The 4B model after two-agent debate: 77.0%.
 
 ## What makes the numbers trustworthy
 
-The most useful thing here is the least interesting one. A **neutral re-ask** — same question,
-same decoding, no disagreement — moved the model in **0 of 200** cases. Without that zero, "it
+The most useful thing here is the least interesting one. A **neutral re-ask**, same question,
+same decoding, no disagreement, moved the model in **0 of 200** cases. Without that zero, "it
 folds every time" could just mean "it is unstable". With it, the movement is a response to being
 contradicted.
 
@@ -98,7 +98,7 @@ post-freeze decision with the measurement that forced it.
 Kept here deliberately, because they are the parts I learned most from.
 
 - **A leakage gate deleted 220 runs and I did not notice.** It was aborting whenever the *model*
-  used the word "resistant" in its own reasoning. The dropout was not random — it removed exactly
+  used the word "resistant" in its own reasoning. The dropout was not random, it removed exactly
   the runs where the model was thinking about microbiology. On the truncated data one arm read a
   perfect 160/160. On the recovered data it is 311/312, and the single counterexample was inside
   the deleted pile. Fixed, fault-injection tested at 10/10, every dropped run recovered.
@@ -106,8 +106,8 @@ Kept here deliberately, because they are the parts I learned most from.
   evidence discrimination. Drug-matched, it is exactly zero: ampicillin was refused 0/34 when the
   panel called it susceptible and 0/44 when it called it resistant. The model has a fixed spectrum
   preference. The pooled number was measuring which drugs happened to be resistant.
-- **A confidence endpoint with no variance.** I elicited confidence 0–100 and pre-registered
-  "confident" at ≥80. Every observation came back 85, 90 or 95 — all 200, before and after. A
+- **A confidence endpoint with no variance.** I elicited confidence 0 to 100 and pre-registered
+  "confident" at >=80. Every observation came back 85, 90 or 95, all 200, before and after. A
   threshold that cannot fail is not a pre-registration. The endpoint is withdrawn.
 
 ## Repository
@@ -127,7 +127,7 @@ tests/      36-check acceptance suite plus gate fault injection
 
 MIMIC-IV v3.1 under a PhysioNet credentialed data use agreement. **No patient-level data is in
 this repository and none can be.** `case_id` is literally `subject_id` + `micro_specimen_id`, so
-anything carrying one would republish two credentialed identifiers — every run file, every input
+anything carrying one would republish two credentialed identifiers, every run file, every input
 table and every per-case CSV is excluded by `.gitignore`.
 
 To reproduce: obtain MIMIC-IV v3.1 access yourself through PhysioNet, place it locally, and run
@@ -137,7 +137,7 @@ the cohort build. The code is here; the data must be your own.
 
 Observational data, so every result is alignment with recorded microbiology and never a claim that
 a recommendation changed an outcome. One 4B model as the subject with a second as a robustness
-check — the findings are scoped to these checkpoints. Only 3 of 17 formulary drugs ever appear as
+check, the findings are scoped to these checkpoints. Only 3 of 17 formulary drugs ever appear as
 a final answer. Confidence intervals treat ordering-runs as independent when they are patients
 seen twice. The cohort is 200/200 microbiology-evaluable because it was selected on having an
 interpretable panel, which is a declared post-baseline selection.
@@ -150,8 +150,8 @@ is partly entailed by the abandonment rate rather than independently measured.
 Susceptibility-arbitrated LLM antibiotic recommendation already exists (Antonie et al., *Antibiotics*
 2026). Doctor-and-pharmacist agent pairs already exist (MedCoAct, arXiv 2510.10461). Multi-agent
 coordination failing to help is already documented (Kim et al., *Nature Machine Intelligence*
-2026 — mean improvement 0.0% across 260 configurations).
+2026, mean improvement 0.0% across 260 configurations).
 
 What I have not found is any study that puts the arbiter *inside* the debate and measures the
-**revision** — with both speaking orders on every case and a null arm separating being asked again
+**revision**, with both speaking orders on every case and a null arm separating being asked again
 from being contradicted. If that study exists, this is a replication and I will say so.

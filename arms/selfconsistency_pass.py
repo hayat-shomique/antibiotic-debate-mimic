@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""D-SELFCON-1 — the single-agent control at matched compute.
+"""D-SELFCON-1, the single-agent control at matched compute.
 
 The gap this closes. The study reports that two agents finish with the accuracy of
 one. Without a single-agent arm given the SAME compute, that claim is partly entailed

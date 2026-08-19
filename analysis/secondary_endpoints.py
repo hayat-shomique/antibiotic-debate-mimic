@@ -54,7 +54,7 @@ def final_positions() -> pd.DataFrame:
 
 def main():
     print("=" * 78)
-    print("  TINGTING'S ENDPOINTS 3, 6, 7, 8 — the deprioritised tier, computed")
+    print("  TINGTING'S ENDPOINTS 3, 6, 7, 8, the deprioritised tier, computed")
     print("=" * 78)
     coh = cohort_200(); fin = final_positions()
     df = coh.merge(fin, on="case_id", how="inner")
@@ -62,11 +62,11 @@ def main():
     print(f"\n  {len(df)} cases with a final recommendation and an index time")
     n_hadm = int(df["hadm_id"].notna().sum())
     print(f"  {n_hadm}/{len(df)} carry a linked hospital admission id "
-          f"({100*n_hadm/len(df):.0f}%) — admission-level endpoints are limited to these")
+          f"({100*n_hadm/len(df):.0f}%), admission-level endpoints are limited to these")
 
     # ---------------- 7. MORTALITY ----------------
     print("\n" + "-" * 78)
-    print("  ENDPOINT 7 — mortality at 7, 14 and 30 days from the index culture")
+    print("  ENDPOINT 7, mortality at 7, 14 and 30 days from the index culture")
     pat = con.execute(f"""
         SELECT subject_id, dod FROM read_csv_auto('{HOSP}/patients.csv.gz')
     """).df()
@@ -94,7 +94,7 @@ def main():
 
     # ---------------- 8. LOS and ICU ----------------
     print("\n" + "-" * 78)
-    print("  ENDPOINT 8 — length of stay and ICU exposure")
+    print("  ENDPOINT 8, length of stay and ICU exposure")
     adm = con.execute(f"""
         SELECT hadm_id, subject_id, admittime, dischtime, hospital_expire_flag
         FROM read_csv_auto('{HOSP}/admissions.csv.gz')
@@ -111,7 +111,7 @@ def main():
     print(f"    linked admissions: {int(ok.sum())}/{len(df)}")
     if ok.sum():
         print(f"    hospital length of stay   median {l.loc[ok,'los_days'].median():.1f} d   "
-              f"IQR {l.loc[ok,'los_days'].quantile(.25):.1f}–{l.loc[ok,'los_days'].quantile(.75):.1f}")
+              f"IQR {l.loc[ok,'los_days'].quantile(.25):.1f}-{l.loc[ok,'los_days'].quantile(.75):.1f}")
         ni = int(l["icu_los"].notna().sum())
         print(f"    of those, {ni} had an ICU stay; median ICU LOS "
               f"{l['icu_los'].median():.1f} d" if ni else "    no ICU stays linked")
@@ -121,7 +121,7 @@ def main():
 
     # ---------------- 3. TIME TO APPROPRIATE THERAPY ----------------
     print("\n" + "-" * 78)
-    print("  ENDPOINT 3 — time to appropriate therapy, observed vs counterfactual")
+    print("  ENDPOINT 3, time to appropriate therapy, observed vs counterfactual")
     import debate_run as DR
     panel = DR.load_panel()
     subj = tuple(int(x) for x in df["subject_id"].unique())
@@ -156,7 +156,7 @@ def main():
     obs = t["observed_hours_to_active"].dropna()
     print(f"\n    observed: {len(obs)}/{len(t)} cases reached an active drug in the record")
     if len(obs):
-        print(f"      median {obs.median():.1f} h   IQR {obs.quantile(.25):.1f}–{obs.quantile(.75):.1f} h")
+        print(f"      median {obs.median():.1f} h   IQR {obs.quantile(.25):.1f}-{obs.quantile(.75):.1f} h")
     both = t[(t["observed_hours_to_active"].notna()) & (t["agent_would_be_active"])]
     if len(both):
         earlier = int((both["observed_hours_to_active"] > 0).sum())
@@ -175,7 +175,7 @@ def main():
 
     # ---------------- 6. TREATMENT FAILURE ----------------
     print("\n" + "-" * 78)
-    print("  ENDPOINT 6 — treatment failure, tested against her condition")
+    print("  ENDPOINT 6, treatment failure, tested against her condition")
     micro = con.execute(f"""
         SELECT subject_id, micro_specimen_id, charttime, spec_type_desc, org_name
         FROM read_csv_auto('{HOSP}/microbiologyevents.csv.gz')

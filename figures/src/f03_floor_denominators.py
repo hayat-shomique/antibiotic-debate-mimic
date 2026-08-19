@@ -80,7 +80,7 @@ def build(d: pd.DataFrame) -> dict:
             solid_capstyle="butt", zorder=2)
     S.direct_label(
         ax, 4.0, (min(uy) + max(uy)) / 2,
-        f"no isolate was tested\nagainst these {len(uy)} — the rate\n"
+        f"no isolate was tested\nagainst these {len(uy)}, the rate\n"
         "is undefined, not zero",
         color=S.ACCENT, ha="left", va="center", fontsize=10.5, linespacing=1.35,
     )
@@ -90,7 +90,7 @@ def build(d: pd.DataFrame) -> dict:
     mid = (widest["pct_of_all"] + widest["pct_of_tested"]) / 2
     S.annotate_key(
         ax, 46.0, wrow + 2.35,
-        f"{widest['gap_points']:.0f}-point swing on {widest['agent']} —\n"
+        f"{widest['gap_points']:.0f}-point swing on {widest['agent']} -\n"
         f"{int(widest['n_tested'])} of {n_cases} cases carried a result",
         arrow_to=(mid, wrow), ha="left", va="center", fontsize=11.5,
     )
@@ -138,7 +138,7 @@ def build(d: pd.DataFrame) -> dict:
     S.kicker_title(
         fig, "denominator effect",
         "How good the floor looks depends on which denominator you name.",
-        f"Frame {FRAME} — the {n_cases} cases actually run. Hollow mark counts every case; "
+        f"Frame {FRAME}, the {n_cases} cases actually run. Hollow mark counts every case; "
         "filled mark counts only cases the laboratory tested.",
     )
 
@@ -157,7 +157,7 @@ def main():
     print(f"F3  source: {SRC}")
     print(f"F3  frame plotted: {FRAME}   excluded: {EXCLUDED_FRAME}")
     print()
-    print(d[cols].to_string(index=False, na_rep="—"))
+    print(d[cols].to_string(index=False, na_rep="-"))
     print()
 
     scoreable = d[d["scoreable"]]

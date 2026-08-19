@@ -20,7 +20,7 @@ none got better. When it was right, 13 got better and none got worse.
 ## The sentence
 
 > The two agents already agreed on 199 of 200 cases before they communicated. Five turns of
-> debate added 0.5 points of agreement and cost 9.5 points of susceptibility concordance — and
+> debate added 0.5 points of agreement and cost 9.5 points of susceptibility concordance, and
 > the entire loss sits in the 88 runs where the counterpart was wrong, in which adoption was
 > still 100%.
 
@@ -32,24 +32,24 @@ conversation made them worse.
 
 Every weaker version of this finding is vulnerable:
 
-- *"It abandons its position 400/400"* — answerable with "it is a small model, its output changes
+- *"It abandons its position 400/400"*, answerable with "it is a small model, its output changes
   when the prompt changes".
-- *"Order changes the answer in 41% of cases"* — answerable with "only three drugs are ever used,
+- *"Order changes the answer in 41% of cases"*, answerable with "only three drugs are ever used,
   so a flip is not surprising".
-- *"Two agents perform like one"* — partly entailed by the abandonment rate.
+- *"Two agents perform like one"*, partly entailed by the abandonment rate.
 
 The stratified table is not vulnerable to any of those, because **the comparison is internal**.
-The same model, the same prompt structure, the same 100% adoption — and opposite outcomes decided
+The same model, the same prompt structure, the same 100% adoption, and opposite outcomes decided
 entirely by the counterpart. No external baseline is needed to make the point.
 
 ## What supports it in the literature
 
-**Kim et al. 2026, _Nature Machine Intelligence_ 8:1157–1172, doi 10.1038/s42256-026-01268-y.**
+**Kim et al. 2026, _Nature Machine Intelligence_ 8:1157 to 1172, doi 10.1038/s42256-026-01268-y.**
 A controlled grid of 260 configurations across six benchmarks, five coordination topologies and
 nine models, holding prompts, tools and compute fixed. Aggregate mean multi-agent improvement:
 **0.0%** (95% CI −58.7% to 77.2%). Their one doubly-robust predictor is the single-agent baseline.
 *Use:* a null coordination effect in a clinical frame is consistent with a large controlled prior,
-not an isolated negative. Cite the direction only — their leave-one-dataset-out R² is −2.09, so
+not an isolated negative. Cite the direction only, their leave-one-dataset-out R² is −2.09, so
 no coefficient transports.
 
 **Oh, Kim, Park & Kim 2026, _JMIR_ 28:e90693, doi 10.2196/90693.**
@@ -59,19 +59,19 @@ optimal scaling strategies fail to restore baseline performance"* (p. 14). They 
 models are *"particularly sensitive to the expertise level of the physician providing the
 additional input"* (p. 13).
 *Use:* the closest published precedent, and it licenses the persona design directly. State both
-halves — scaling *does* recover baseline on easier tasks (p. 13).
+halves, scaling *does* recover baseline on easier tasks (p. 13).
 
 **Zheng, Shi & Yi 2025, MedCoAct, arXiv 2510.10461.**
 Doctor and pharmacist agents collaborating; reports collaboration **helping** by 7.04 points on
 the DrugCareQA benchmark.
 *Use:* the contrast, stated openly. Their arbiter is a constructed benchmark key; this study's is
-a per-patient laboratory result. Opposite sign, different arbiter — say so rather than hide it.
+a per-patient laboratory result. Opposite sign, different arbiter, say so rather than hide it.
 
 **Mohsin, Bilal, Umer & Fox 2026, arXiv 2604.05279.**
 Formalises the distinction between *pressure capitulation* (changing a correct answer under social
 pressure) and *evidence blindness* (ignoring provided context), and fixes them by training.
 *Use:* their vocabulary. The stratified table above is a direct measurement of pressure
-capitulation with the evidence axis held externally — training-free, in a clinical setting.
+capitulation with the evidence axis held externally, training-free, in a clinical setting.
 
 **Antonie et al. 2026, _Antibiotics_ 15(4):368, doi 10.3390/antibiotics15040368.**
 LLM empiric antibiotic recommendations scored against susceptibility, versus clinicians, 493

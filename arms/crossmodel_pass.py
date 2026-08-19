@@ -8,7 +8,7 @@ options, the same 60 cases.
 
 WHY IT MATTERS
 In the same-model arm both chairs are one checkpoint, so a deference asymmetry cannot be
-a capability difference — it has to be persona or position. Putting a different model in
+a capability difference, it has to be persona or position. Putting a different model in
 the pharmacist's chair asks whether the deference survives when the counterpart is
 genuinely a different system, and whether a medically pretrained counterpart changes what
 the specialist does.

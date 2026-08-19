@@ -1,4 +1,4 @@
-# Supervisor endpoint specification — AUTHORITATIVE
+# Supervisor endpoint specification, AUTHORITATIVE
 
 Prof. T. Zhu, 17 August 2026, Teams. Saved verbatim per ORDERS_2. Where any
 paraphrase elsewhere in this project differs from this text, THIS TEXT WINS.

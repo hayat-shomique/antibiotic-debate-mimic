@@ -18,7 +18,7 @@ allergy history, no white cell count.
 | febrile / fever | 193 | 12.82% |
 | immunocompromised | 36 | 2.39% |
 | no known allergies | 10 | 0.66% |
-| any of the above | 208 | 13.82% (95% CI 12.17–15.66) |
+| any of the above | 208 | 13.82% (95% CI 12.17 to 15.66) |
 
 Round-0 openers asserting an unsupplied attribute: 50/301 = 16.61%.
 The invention is present in the opening recommendation, not only under debate pressure.

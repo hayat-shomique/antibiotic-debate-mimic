@@ -1,4 +1,4 @@
-# DO NOT CITE — FLAGGED-UNRESOLVED
+# DO NOT CITE, FLAGGED-UNRESOLVED
 
 **Regenerated 18 August 2026 from `verification_log.csv`.** Three items. None may appear in a slide,
 a thesis, a bibliography, or a spoken claim. There is no third state: an item is VERIFIED with full
@@ -30,10 +30,10 @@ Register totals: 38 entries, 35 VERIFIED, 3 FLAGGED-UNRESOLVED.
 Both were `share.google` redirects that would not expand; both resolved by bibliographic search with an
 exact title-and-venue match and a full author list:
 
-- **Small language models in medicine** — *Nature Biomedical Engineering* (2026), DOI `10.1038/s41551-026-01734-3`,
+- **Small language models in medicine**, *Nature Biomedical Engineering* (2026), DOI `10.1038/s41551-026-01734-3`,
   11 authors. Directly relevant: the pilot runs a 4B model, and this is the natural citation for small-model
   performance ceilings when justifying that choice.
-- **Large reasoning models as thinking machines for medicine** — *Nature Biomedical Engineering* (2026),
+- **Large reasoning models as thinking machines for medicine**, *Nature Biomedical Engineering* (2026),
   DOI `10.1038/s41551-026-01701-y`, 7 authors including Rajpurkar and Topol.
 
 ## One item was demoted

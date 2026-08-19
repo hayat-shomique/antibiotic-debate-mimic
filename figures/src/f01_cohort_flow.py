@@ -45,11 +45,11 @@ PROTOCOL = ROOT / "protocol" / "protocol_v1.md"
 # parsing
 # --------------------------------------------------------------------------
 def _int(tok) -> int | None:
-    """'7,796' / '**993**' / '-1,437' / '—' / '' -> int or None."""
+    """'7,796' / '**993**' / '-1,437' / '-' / '' -> int or None."""
     if tok is None:
         return None
     t = str(tok).replace("*", "").replace(",", "").replace("−", "-").strip()
-    if t in ("", "-", "—", "nan", "None"):
+    if t in ("", "-", "-", "nan", "None"):
         return None
     return abs(int(t))
 

@@ -201,7 +201,7 @@ def build(d: pd.DataFrame, ct: pd.DataFrame) -> dict:
     # --- the one number that matters -------------------------------------------
     S.annotate_key(
         ax, XL - BARW - NAMEPAD, span + 48,
-        f"{n_disc} of {n_pairs} cases — {pct_disc:.1f}% — land on a different drug when the\n"
+        f"{n_disc} of {n_pairs} cases, {pct_disc:.1f}%, land on a different drug when the\n"
         "other agent opens. Nothing about the patient changed, and the\n"
         f"adequacy rate moves only {pb - pa:+.1f} points.",
         ha="left", va="center", fontsize=12.5,
@@ -251,9 +251,9 @@ def build(d: pd.DataFrame, ct: pd.DataFrame) -> dict:
 def freeze_check(full: list[dict]) -> None:
     """Re-derive the frozen 192-pair numbers by removing the topped-up cases."""
     ids = topup_case_ids()
-    print("FREEZE CHECK  (logic validation only — the figure ships the full file)")
+    print("FREEZE CHECK  (logic validation only, the figure ships the full file)")
     if not ids:
-        print(f"  {TOPUP_LOG.name} absent — check skipped")
+        print(f"  {TOPUP_LOG.name} absent, check skipped")
         return
     pre = [r for r in full if r["case_id"] not in set(ids)]
     d = pair_up(pre)

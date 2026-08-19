@@ -50,7 +50,7 @@ def rows(pat):
 
 def main():
     full = [r for r in rows("runs/debate_20260818.jsonl") if r.get("kind") == "full"]
-    print("Indicator 3 — deviation from evidence-based guidance (WHO AWaRe)")
+    print("Indicator 3, deviation from evidence-based guidance (WHO AWaRe)")
     print("=" * 72)
     print(f"  {len(full)} ordering-runs\n")
 

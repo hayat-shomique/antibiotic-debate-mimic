@@ -2,7 +2,7 @@
 """track4_pass.py - D-SEED-1. Seeded counterpart correctness, BOTH directions (R1).
 
 WHY
-In the debate arm, counterpart correctness was whatever the other agent happened to say —
+In the debate arm, counterpart correctness was whatever the other agent happened to say -
 observational. Here it is MANIPULATED. The harness chooses the counterpart's recommendation
 so that "the counterpart is right" and "the counterpart is wrong" become a designed factor,
 which is what turns a correlation into an experiment.

@@ -1,3 +1,10 @@
+# NOTE, 19 Aug 2026: payer status (`insurance`) was removed from the case block.
+# It had no clinical rationale in a treatment-selection prompt, and a payer field
+# feeding an antibiotic decision is a fairness problem regardless of measured effect.
+# The 400 completed ordering-runs were produced WITH the field present; that is
+# disclosed rather than hidden, and the measured effect is zero because the round-0
+# recommendation is constant across all 200 cases and across all four payer values.
+# Deviation D-PAYER-1.
 """case_assembly.py - builds the DYNAMIC CASE BLOCK (provenance class 2).
 
 HARD CONSTRAINT: this module must have no import or code path reaching
@@ -23,7 +30,7 @@ WHITELIST: dict[str, set[str]] = {
     "cohort_skeleton.parquet": {"subject_id", "hadm_id", "index_time",
                                 "gender", "age_at_index"},
     "admissions.csv.gz": {"hadm_id", "subject_id", "admittime",
-                          "admission_type", "admission_location", "insurance"},
+                          "admission_type", "admission_location"},
     "prescriptions.csv.gz": {"subject_id", "starttime", "drug"},
 }
 
@@ -102,12 +109,12 @@ def load_admissions(hadm_ids) -> dict[int, dict]:
     if not ids:
         return {}
     for c in ("hadm_id", "admittime", "admission_type",
-              "admission_location", "insurance"):
+              "admission_location"):
         _check("admissions.csv.gz", c)
     con = duckdb.connect()
     q = f"""
       SELECT hadm_id, subject_id, admittime, admission_type,
-             admission_location, insurance
+             admission_location
       FROM read_csv_auto('{HOSP}/admissions.csv.gz')
       WHERE hadm_id IN ({",".join(str(i) for i in ids)})
     """
@@ -200,11 +207,9 @@ def build_case_block(row, adm: dict | None, prior_abx: bool) -> CaseBlock:
                 f"{case_id}: admittime {at} is not before index_time {idx}")
         atype = adm.get("admission_type") or "unknown"
         aloc = adm.get("admission_location") or "unknown"
-        ins = adm.get("insurance") or "unknown"
         hours = f"{(idx - at).total_seconds()/3600.0:.0f}"
         for lbl, col, val in (("Admission type", "admission_type", atype),
                               ("Admission source", "admission_location", aloc),
-                              ("Insurance", "insurance", ins),
                               ("Hours from admission to assessment", "admittime", hours)):
             f.append(CaseField(lbl, val, "admissions.csv.gz", col,
                                ts=at, ts_ok=True))

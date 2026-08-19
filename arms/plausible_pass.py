@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""D-PLAUS-1 — exposure to a PLAUSIBLE incorrect counterpart recommendation.
+"""D-PLAUS-1, exposure to a PLAUSIBLE incorrect counterpart recommendation.
 
 The supervisor's worded target, 18 August:
   "interaction increases agreement by 18 percentage points, but decreases clinical correctness

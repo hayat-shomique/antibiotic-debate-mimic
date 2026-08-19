@@ -1,4 +1,4 @@
-# Models — the simple version
+# Models, the simple version
 
 What was committed to the supervisor on Teams: *"I'm using Ollama Qwen3:4b, medgemma:4b and
 I am going to add in my bert encoder results too."* She then asked for two more things: a
@@ -25,7 +25,7 @@ formulary, 200 cases, scored against the same susceptibility panels as everythin
 
 | encoder | distinct predictions across 200 cases | most frequent | adequate |
 |---|---|---|---|
-| `emilyalsentzer/Bio_ClinicalBERT` | **1** | vancomycin ×200 | 0/200 — every case UNDETERMINED |
+| `emilyalsentzer/Bio_ClinicalBERT` | **1** | vancomycin ×200 | 0/200, every case UNDETERMINED |
 | `dmis-lab/biobert-base-cased-v1.2` | 2 | linezolid ×177 | 22/200 |
 | `google-bert/bert-base-uncased` (general, control) | 2 | ampicillin ×198 | 50/200 |
 | `microsoft/BiomedNLP-BiomedBERT` | 2 | ceftazidime ×159 | **169/200 = 84.5%** |
@@ -33,29 +33,29 @@ formulary, 200 cases, scored against the same susceptibility panels as everythin
 Two things to say about this table:
 
 1. **All four encoders are near-constant too.** One to two distinct predictions across 200
-   different patients. The fixed-policy behaviour is not a quirk of the generative model — it
+   different patients. The fixed-policy behaviour is not a quirk of the generative model, it
    appears in a 110M encoder as well.
 2. **BiomedBERT reaches 84.5% against Qwen's 87.5%.** A 110M-parameter encoder with no
    fine-tuning and no dialogue lands within three points of a 4B generative model. That is the
    sharpest way to say the task is not discriminating what people think it discriminates.
 
-Bio_ClinicalBERT scoring 0/200 is not a failure to answer — it answers vancomycin every time,
+Bio_ClinicalBERT scoring 0/200 is not a failure to answer, it answers vancomycin every time,
 and vancomycin is a Gram-positive agent that the laboratory does not test against the
 Gram-negative organisms in this cohort. It is UNDETERMINED, not wrong. That distinction is the
 whole reason the scorer has four outcome classes.
 
 ## What was dropped, and why
 
-- **`gemma4:12b`** — was in the code's default model list and never ran a single case. Removed.
+- **`gemma4:12b`**, was in the code's default model list and never ran a single case. Removed.
   A 12B model varies size *and* family generation at once, so it could not have isolated either.
-- **MedGemma-12B** — she said "there is 12B as well, 27B is not necessary". Not used, for the
+- **MedGemma-12B**, she said "there is 12B as well, 27B is not necessary". Not used, for the
   same size-matching reason. It is the right model for a *scale* question, which is a different
   experiment.
-- **DeepSeek-R1-8B** — installed and unused. Her reason for suggesting it was visible chain of
+- **DeepSeek-R1-8B**, installed and unused. Her reason for suggesting it was visible chain of
   thought, which is an interpretability question, not an accuracy comparison. It is 8B, so it
   cannot join the size-matched contrast. If it is used, it must be framed as reading the
   reasoning, never as a fourth accuracy column.
-- **`gemma3:4b`, `gemma3:12b`, `deepseek-llm:7b`, `qwen3:4b` (base)** — installed during
+- **`gemma3:4b`, `gemma3:12b`, `deepseek-llm:7b`, `qwen3:4b` (base)**, installed during
   exploration, in no analysis. Left on disk; removed from every code path.
 
 ## The one defect that was fixed today
