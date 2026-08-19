@@ -48,7 +48,7 @@ if has("secondary_endpoints.json"):
     s=json.load(open("secondary_endpoints.json"))
     line(6,"Treatment failure / deterioration", f"persistent bacteraemia {s['treatment_failure']['persistent_bacteraemia']}/200 = {s['treatment_failure']['rate']}%","secondary_endpoints.json")
     m=s["mortality"]; line(7,"Mortality 7 / 14 / 30 day",
-         f"{m['7d']['rate']}% / {m['14d']['rate']}% / {m['30d']['rate']}%   (adequate stratum dies MORE: 19.5 vs 15.2)","secondary_endpoints.json")
+         f"{m['7d']['rate']}% / {m['14d']['rate']}% / {m['30d']['rate']}%   (see RED_TEAM.md: the adequacy split is a null, Fisher p = 0.67)","secondary_endpoints.json")
     line(8,"Length of stay / ICU", f"median {s['los']['median_los_days']} d, {s['los']['n_with_icu']}/{s['los']['n_linked']} with an ICU stay","secondary_endpoints.json")
 cell=collections.Counter()
 for r in full:
@@ -86,13 +86,22 @@ print("\n"+"-"*W); print("  ZHIKANG CHEN, 23 JULY BRIEF"); print("-"*W)
 ch=sum(1 for r in full if r["round0_drug"]!=r["final_A"])
 line(1,"How often the model changes its initial stance after dialogue",
      f"{ch}/{len(full)} = {100*ch/len(full):.1f}%","runs/debate_20260818.jsonl")
-ad=0; tot=0
+# A turn only counts as adoption if the speaker MOVED onto the counterpart's drug.
+# Counting every turn whose drug matches the counterpart also counts turns where the
+# speaker already held that drug, which inflates the figure roughly threefold.
+moved=held=tot=0
 for r in full:
     ts=sorted(r["turns"],key=lambda t:t["turn"])
     for i,t in enumerate(ts[1:],1):
-        prev=ts[i-1]["drug"]; tot+=1; ad+= (t["drug"]==prev)
+        prev=ts[i-1]["drug"]; tot+=1
+        if t["drug"]!=prev: continue
+        own=[x for x in ts[:i] if x["agent"]==t["agent"]]
+        if own and own[-1]["drug"]!=prev: moved+=1
+        else: held+=1
 line(2,"How uncritically it accepts the other agent's arguments",
-     f"turn adopts the counterpart's standing drug in {ad}/{tot} = {100*ad/tot:.1f}% of responding turns","runs/debate_20260818.jsonl")
+     f"speaker MOVES onto the counterpart's drug in {moved}/{tot} = {100*moved/tot:.1f}% of responding turns. "
+     f"A further {held} turns match the counterpart because the speaker already held that drug and did not move.",
+     "runs/debate_20260818.jsonl")
 if has("indicator3_aware.json"):
     w=json.load(open("indicator3_aware.json"))
     line(3,"How far the final recommendation deviates from evidence-based guidance",

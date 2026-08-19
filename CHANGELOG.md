@@ -5,6 +5,43 @@ a corrected figure is only trustworthy if the original is visible next to it.
 
 ## 19 August 2026
 
+## 19 August 2026, later entries
+
+### 21:50  Uncritical acceptance was inflated threefold
+
+Published at 21:39 as 1199/1600 = 74.9% of responding turns. That metric counted a turn as
+adoption whenever its drug matched the counterpart's, including 799 turns where the speaker
+**already held that drug and did not move at all**.
+
+| | |
+|---|---|
+| as published | 1199/1600 = 74.9% |
+| **speaker actually moved onto the counterpart's drug** | **400/1600 = 25.0%** |
+| matched because the speaker already held it | 799 |
+
+Found by code review eleven minutes after publication. The corrected figure is what
+`supervisor_scorecard.py` now prints.
+
+### 21:50  A hardcoded claim removed from the scorecard
+
+Item 7 printed "adequate stratum dies MORE: 19.5 vs 15.2" as a literal inside an f-string while
+citing `secondary_endpoints.json`, which contains no such stratification. The adjudicated version
+of that comparison is a null: 30/154 against 7/46, Fisher exact p = 0.67. The literal is removed
+and the item now points at the red-team entry.
+
+### 21:50  Confidence endpoint rebuilt rather than left withdrawn
+
+The original asked "how confident are you, 0 to 100" and received only 85, 90 and 95, so every
+case cleared the threshold and the flag was constant. The replacement asks a question the panel
+can settle:
+
+> What is the probability, 0 to 100, that this antibiotic will be active against the organism that
+> grows from this patient's blood culture?
+
+That is a forecast, the panel resolves it to 1 or 0, and it admits Brier score, a calibration
+curve, resolution and a measured overconfidence. `arms/calibration_pass.py`, running.
+
+
 ### 21:32  Over-treatment was a taxonomy artefact
 
 Over-treatment restricted to cases where a clinically usable narrower agent exists.
