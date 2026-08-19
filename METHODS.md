@@ -196,3 +196,25 @@ It cannot claim a representative cohort. Every case was selected on having an in
 susceptibility panel, which enriches for organisms that receive full panels. Published comparators
 report microbiology-evaluable rates around 32%; this cohort is 100% by construction, and that is a
 declared post-baseline selection.
+
+## The escalation ladder
+
+The sequence of what to try, and in what order, was set by the supervisor at the first meeting:
+
+> "zero shot will not work, we can take something ready made and say like, look, this is already
+> trained. And then I'm going to use some example of how it look like. And then so you give it,
+> like, a few shots and then see whether it improves. And if it doesn't, then you can move it to
+> the next level, that is now your training from scratch."
+
+Three rungs, climbed in order, with the result at each deciding whether to climb further.
+
+| rung | what it is | status | result |
+|---|---|---|---|
+| 1. zero-shot | the model asked directly, no examples | run, 200 cases | one constant recommendation for every patient, 87.5 percent coverage |
+| 2. few-shot | four worked examples prepended per case | run, 200 cases | breaks the constant but coverage falls to 84.0 percent on the paired subset, exact McNemar p = 0.0004 |
+| 3. fine-tuning | training on the task | not run | the rung the rung-2 result justifies moving to, out of scope for this internship |
+
+Rung two is reported in full in `STORY.md` and computed by `analysis/fewshot_analysis.py`. The
+honest reading is that it does not improve: examples teach the model to vary its prescribing
+without teaching it which patient needs which drug. By the supervisor's own sequencing that is the
+result that licenses moving to rung three rather than concluding that prompting solved it.

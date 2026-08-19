@@ -10,11 +10,11 @@ NAME                             ID              SIZE      MODIFIED
 gemma3:12b-it-q4_K_M             f4031aab637d    8.1 GB    7 hours ago     
 gemma3:4b-it-q4_K_M              a2af6cc3eb7f    3.3 GB    7 hours ago     
 gemma4:12b                       4eb23ef187e2    7.6 GB    41 hours ago    
-deepseek-llm:7b-chat-q4_K_M      72299d61ee1d    4.2 GB    41 hours ago    
-medgemma:4b-it-q4_K_M            9fe4e9a6c9bd    3.3 GB    41 hours ago    
+deepseek-llm:7b-chat-q4_K_M      72299d61ee1d    4.2 GB    42 hours ago    
+medgemma:4b-it-q4_K_M            9fe4e9a6c9bd    3.3 GB    42 hours ago    
 deepseek-r1:8b                   6995872bfe4c    5.2 GB    42 hours ago    
 qwen3:4b-instruct-2507-q4_K_M    0edcdef34593    2.5 GB    44 hours ago    
-qwen3:4b                         359d7dd4bcda    2.5 GB    45 hours ago
+qwen3:4b                         359d7dd4bcda    2.5 GB    46 hours ago
 ```
 
 Store: `~/.ollama/models`, 35G on disk. Models persist across restart.
@@ -91,9 +91,9 @@ Documents written by hand, not generated: `METHODS.md`, `LIMITATIONS.md`, `DATA_
 
 | | |
 |---|---|
-| tracked files | 175 |
-| commits | 25 |
-| head | `2769719 The debate arm answers the research question, and it was not in the spine` |
+| tracked files | 159 |
+| commits | 26 |
+| head | `96bbb3c Few-shot complete at 200 cases: rung two does not improve` |
 | remote in sync | yes |
 
 ## 5. Run state
