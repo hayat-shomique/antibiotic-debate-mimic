@@ -15,6 +15,8 @@ Engineering · supervised by **Prof. Tingting Zhu** · 6 July, 20 August 2026
 | document | what it is |
 |---|---|
 | [START_HERE.md](START_HERE.md) | one page for a fresh session: findings, commands, ground rules, live state |
+| [BRIEFING.md](BRIEFING.md) | the talk brief: the argument out loud, the gap, the ladder, and the question-and-answer drill |
+| [deck/](deck/) | the UNIQ+ conference deck, generated from `results/*.json` by `deck/build_deck.py` |
 | [STORY.md](STORY.md) | the argument in order, every number reproducible |
 | [PRIMARY_TEST.md](PRIMARY_TEST.md) | the test the protocol pre-specified before any run |
 | [HEADLINE_RESULT.md](HEADLINE_RESULT.md) | same drug, different patient |
