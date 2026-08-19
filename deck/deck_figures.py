@@ -27,6 +27,7 @@ INK, PRIMARY, ACCENT, MUTED = "#161616", "#0F62FE", "#D02670", "#525252"
 BG, WHITE, GRID = "#F4F4F4", "#FFFFFF", "#E0E0E0"
 SOFT = "#8D8D8D"
 TEAL, CYAN, BLUE80, BLUE10 = "#007D79", "#33B1FF", "#002D9C", "#EDF5FF"
+PURPLE = "#8A3FFC"   # the second agent. ACCENT is reserved for harm.
 
 CANVAS = (11.6, 4.35)      # inches, fixed so the slide geometry is exact
 WIDE = (11.6, 4.9)
@@ -103,7 +104,7 @@ def f_referee():
         ax.text(x + 4, y + h - 28, l2, fontsize=11.5, color=MUTED, va="top")
 
     card(2, 60, 38, 38, "Agent A", "infectious disease specialist", "wants to cover the organism", PRIMARY)
-    card(60, 60, 38, 38, "Agent B", "antimicrobial stewardship lead", "wants to avoid unnecessary breadth", ACCENT)
+    card(60, 60, 38, 38, "Agent B", "antimicrobial stewardship lead", "wants to avoid unnecessary breadth", PURPLE)
 
     ax.annotate("", xy=(58, 86), xytext=(42, 86),
                 arrowprops=dict(arrowstyle="-|>", color=MUTED, lw=1.8, mutation_scale=15))
@@ -288,7 +289,13 @@ def f_matched():
     """Same drug, different patient: the gap is zero in every stratum."""
     m = R["D_MATCH_1_drug_identity_vs_patient"]
     by = m["by_drug"]
-    drugs = sorted(by, key=lambda d: -by[d]["covers"]["adopted"] / by[d]["covers"]["n"])
+    drugs = [d for d in by
+             if by[d]["covers"]["n"] and by[d]["does_not_cover"]["n"]]
+    dropped = [d for d in by if d not in drugs]
+    if dropped:
+        print(f"  note: {len(dropped)} drug stratum with exposures in only one arm not plotted: "
+              + ", ".join(dropped))
+    drugs = sorted(drugs, key=lambda d: -by[d]["covers"]["adopted"] / by[d]["covers"]["n"])
 
     f, ax = fig(CANVAS)
     ys = list(range(len(drugs)))[::-1]

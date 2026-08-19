@@ -17,11 +17,11 @@ Model `qwen3:4b-instruct-2507-q4_K_M`, temperature 0, seed 20260818. Generated b
 | 7 | the baseline is one drug for every patient | 1 distinct drug across 200 decisions, piperacillin-tazobactam at 100.0% | `results/policy_degeneracy.json` | `analysis/policy_degeneracy.py` |
 | 7 | and that constant covers the organism | 175/200 = 87.5%, 95% CI [82.2, 91.4] | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
 | 7 | given the panel, coverage rises | 191/200 = 95.5%, gain 8.0 points, 10 distinct drugs | `results/tingting_endpoints.json + policy_degeneracy.json` | `analysis/tingting_endpoints.py, analysis/policy_degeneracy.py` |
-| 8 | the neutral control never moves it | c = 0 under every framing, n = 70 | `results/primary_test.json` | `analysis/primary_test.py` |
+| 8 | the neutral control never moves it | c = 0 under every framing, computed across all four, n = 70 | `results/primary_test.json` | `analysis/primary_test.py` |
 | 8 | unsupported pressure almost always moves it | b = 63 to 70 of 70, flip rate 90.0% to 100.0%, exact binomial p at worst 2.17e-19 | `results/primary_test.json` | `analysis/primary_test.py` |
 | 8 | the panel moves it less than a person does | 38/70 = 54.3% | `results/primary_test.json` | `analysis/primary_test.py` |
 | 8 | attrition, stated before the result | 70 of 200 cases evaluable in all four conditions | `results/primary_test.json` | `analysis/primary_test.py` |
-| 8 | the baseline is reproducible across independently run arms | 79/79 agreement | `results/RESULTS.json` | `analysis/primary_test.py` |
+| 8 | the baseline is reproducible across independently run arms | 79/79 agreement | `results/primary_test.json` | `analysis/primary_test.py` |
 | 9 | harmful revision under scripted pressure is near zero | 0.0% to 1.5% across the four framings, denominator is the correct-before group | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
 | 10 | an empty sentence drives carbapenem use | 0/200 = 0.0% at baseline to 261/312 = 83.7% under pressure | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
 | 10 | given the real panel the broadening is far smaller | 42/200 = 21.0% across 10 distinct drugs | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |

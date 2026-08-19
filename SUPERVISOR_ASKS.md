@@ -28,9 +28,9 @@ deviation log. **deferred** means it is not done and the reason is on the closin
 | 29 Jul | *"maybe it would be interesting to compare with some medical bert models which previously trained on EHR data already. See how well they perform without fine-tuning."* and *"like Med Bert or ClinicalBert etc."* | Four encoders, no fine-tuning, masked-token prediction over the same 17-drug formulary, same 200 cases, same panels. BiomedBERT reaches 84.5 per cent against the 4B model's 87.5, and every encoder is near-constant too. | **built** backup slide 20 |
 | 29 Jul | *"Which dataset are you doing your experiments on and which population? I.e. disease(s). You cannot just look at everyone going into ICU."* | MIMIC-IV v3.1, adults with a panel-bearing first positive blood culture. 9,236 index events gated to a frozen cohort of 7,796, 200 evaluated. | **built** slide 5 |
 | 30 Jul | *"You can also compare LLM with clinician, see if they agree or LLM is worse or better?"* | Computed on comparable ground: on the cases where both can be scored the model reaches 91.1 per cent and the clinician 90.6 per cent. The 25-point margin on the full cohort is a denominator artefact and is reported as one. | **built** `RESULTS.md` |
-| 17 Aug | *"I'd avoid making mortality alone the main measure ... heavily confounded by severity, source control, comorbidities, timing ... I'd build the evaluation around a hierarchy of endpoints."* | All eight endpoints of the hierarchy are computed, with mortality demoted and reported as a confounded secondary. | **built** backup slide 22, `SCORECARD.txt` |
-| 14 Aug | *"That directly answers the more interesting research question: does multi-agent communication improve clinical decision quality, or does it merely make the models agree?"* | The debate arm answers it: a live counterpart costs 9.5 points of coverage and abandons a correct answer 15.2 per cent of the time, while the panel gains 17.2 points at 1.1 per cent. | **built** slide 12 |
-| 18 Aug | The four-cell before and after classification, harmful revision rate and beneficial correction rate | Computed per condition, denominators stated, with the neutral control alongside. | **built** slides 9 and 12 |
+| Aug | *"I'd avoid making mortality alone the main measure ... heavily confounded by severity, source control, comorbidities, timing ... I'd build the evaluation around a hierarchy of endpoints."* | All eight endpoints of the hierarchy are computed, with mortality demoted and reported as a confounded secondary. | **built** backup slide 22, `SCORECARD.txt` |
+| Aug | *"That directly answers the more interesting research question: does multi-agent communication improve clinical decision quality, or does it merely make the models agree?"* | The debate arm answers it: a live counterpart costs 9.5 points of coverage and abandons a correct answer 15.2 per cent of the time, while the panel gains 17.2 points at 1.1 per cent. | **built** slide 12 |
+| Aug | The four-cell before and after classification, harmful revision rate and beneficial correction rate | Computed per condition, denominators stated, with the neutral control alongside. | **built** slides 9 and 12 |
 
 ---
 
@@ -69,6 +69,15 @@ is a study rather than an arm. Named on the closing slide so it reads as costed 
 clinicians are going to obviously be doing it with their patients."* No practising clinician has
 reviewed the personas, the formulary or the adequacy rule. It is on the limitations slide and it is
 the first thing I would do next.
+
+---
+
+## One thing to check against your own thread
+
+The repository dates the endpoint hierarchy inconsistently: `STORY.md` says 14 August, `METHODS.md`
+and `SCORECARD.txt` say 18 August, and an earlier page said 17 August. The content is not in doubt
+and every endpoint is computed, but the date is, so the deck now names her hierarchy without a date
+and the rows above say only the month. Confirm the date from the Teams thread and it goes back in.
 
 ---
 

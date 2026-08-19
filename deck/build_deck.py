@@ -35,6 +35,7 @@ SOFT = RGBColor(0xA8, 0xA8, 0xA8)       # gray 40, legible on both grounds
 GRID = RGBColor(0xE0, 0xE0, 0xE0)       # gray 20
 BG = RGBColor(0xF4, 0xF4, 0xF4)         # gray 10
 WHITE = RGBColor(0xFF, 0xFF, 0xFF)
+PURPLE = RGBColor(0x8A, 0x3F, 0xFC)     # purple 60, the second agent
 PAPER = RGBColor(0xED, 0xF5, 0xFF)      # blue 10
 
 SANS = "IBM Plex Sans"
@@ -70,7 +71,11 @@ NICE = {"C1a_authority": "authority", "C1b_peer_consensus": "peer consensus",
 
 def prose(pattern, source=METHODS):
     """A number stated in a hand-written document, pulled out rather than retyped."""
-    return re.search(pattern, source).group(1)
+    m = re.search(pattern, source)
+    if not m:
+        raise ValueError(f"no match for {pattern!r} in the source document. The wording changed, "
+                         "so update the pattern rather than typing the number onto the slide.")
+    return m.group(1)
 
 
 def pct(k, n):
@@ -376,7 +381,7 @@ text(s, M, 1.95, CW - 1.3, 2.4,
      "or does it merely make the models agree?”",
      size=33, color=WHITE, bold=True, line=1.22)
 rule(s, M, 4.62, 1.6, 0.040, PRIMARY)
-text(s, M, 4.92, CW - 2.2, 0.4, "Prof. Tingting Zhu, 14 August 2026", size=14, color=SOFT)
+text(s, M, 4.92, CW - 2.2, 0.4, "Prof. Tingting Zhu, on the research question", size=14, color=SOFT)
 text(s, M, 5.62, CW - 2.2, 0.9,
      "People are building clinical systems in which several models confer and reach a decision together, "
      "on the assumption that they check each other's work. To find out whether they do, you need to know "
@@ -389,7 +394,7 @@ The reason it matters commercially and clinically: people are shipping multi-age
 assumption that agents check each other. That assumption is testable, and in medicine it is testable
 against something neither agent can argue with.
 """)
-footer(s, "the endpoint hierarchy of 14 August is the spine of this study", dark=True)
+footer(s, "her endpoint hierarchy is the spine of this study", dark=True)
 
 # ============================================================== pipeline
 s = new_slide()
@@ -467,9 +472,13 @@ head(s, "the instrument", "What the model actually sees, verbatim",
      "Reproduced exactly, because a result is only as good as the prompt that produced it.")
 
 _pm = (ROOT / "docs" / "prompts_used.md").read_text()
-_fences = re.findall(r"```\n(.*?)```", _pm, re.S)
-_sys_prompt = _fences[0].strip()
-_case_block = next(f.strip() for f in _fences if f.strip().startswith("Age:"))
+_fences = re.findall(r"```[a-z]*\n(.*?)```", _pm, re.S)
+_sys_prompt = next((f.strip() for f in _fences
+                    if f.lstrip().startswith("You are an infectious disease specialist")), None)
+_case_block = next((f.strip() for f in _fences if f.lstrip().startswith("Age:")), None)
+if _sys_prompt is None or _case_block is None:
+    raise ValueError("docs/prompts_used.md no longer exposes the Agent A prompt and the case block "
+                     "as fenced code. The instrument slide must show the real instrument.")
 
 LW = 6.85
 block(s, M, 2.22, LW, 3.05, BG)
@@ -546,13 +555,16 @@ s = new_slide()
 head(s, "result two  ·  pre-specified in protocol section 7",
      "A neutral turn never moves it. Unsupported pressure almost always does.")
 figure(s, "primary_test", y=2.18)
+C_VALUES = sorted({PT[f]["discordant"]["c_control_only"] for f in FRAMINGS})
+C_LABEL = f"c = {C_VALUES[0]}" if len(C_VALUES) == 1 else f"c = {C_VALUES[0]} to {C_VALUES[-1]}"
+C_SUFFIX = "in every framing" if len(C_VALUES) == 1 else "range across the four framings"
 stat_strip(s, [(f"b = {B_RANGE[0]} to {B_RANGE[1]}", "changed under pressure only"),
-               ("c = 0", "changed under the neutral control only, every framing"),
+               (C_LABEL, f"changed under the neutral control only, {C_SUFFIX}"),
                (f"p ≤ {WORST_P:.1e}", "exact binomial, worst of the four framings"),
                (f"{N_PRIMARY} of {PRIM['baseline_pre_culture']['n']}", "cases evaluable in all four conditions")],
            y=5.55, value_size=21, label_size=11)
 text(s, M, 6.55, CW, 0.4,
-     "Stated before the result: 130 cases are dropped because at least one condition returns UNDETERMINED, "
+     f"Stated before the result: {PRIM['baseline_pre_culture']['n'] - N_PRIMARY} cases are dropped because at least one condition returns UNDETERMINED, "
      "which is a property of what the laboratory chose to test. The primary result rests on the surviving third.",
      size=11.5, color=MUTED, line=1.3)
 notes(s, f"""
@@ -887,7 +899,7 @@ cards(s, [("Agent A  ·  infectious disease specialist",
            "Proposes the empiric regimen. Its incentive is coverage: do not miss the organism."),
           ("Agent B  ·  antimicrobial stewardship lead",
            "Reviews and challenges. Its incentive is restraint: do not spend last-line therapy.")],
-      y=2.20, h=1.35, per_row=2, accent=[PRIMARY, ACCENT])
+      y=2.20, h=1.35, per_row=2, accent=[PRIMARY, PURPLE])
 cards(s, [("Closed formulary",
            "17 agents plus OTHER and ABSTAIN. An off-list answer is recorded as a parse failure, never scored as a wrong answer."),
           ("Both directions, every case",
@@ -1017,14 +1029,16 @@ footer(s, "AUDIT.md  ·  DATA_INTEGRITY.md  ·  CHANGELOG.md records every corre
 
 # ============================================================== appendix, asks
 s = new_slide(paper=True)
-head(s, "backup slide", "The endpoint hierarchy of 14 August, every row answered",
+head(s, "backup slide", "Her endpoint hierarchy, every row answered",
      "The measures were specified by the supervisor before the analysis, with mortality explicitly demoted.")
 def sc(pattern):
+    """Pull a computed line out of SCORECARD.txt. Raises rather than degrading into a
+    placeholder, because a placeholder rendered beside real numbers reads as a number."""
     m = re.search(pattern, SCORE)
     if not m:
-        return "see SCORECARD.txt"
-    val = m.group(1).strip()
-    return re.split(r"\s{2,}\(", val)[0].strip()
+        raise ValueError(f"SCORECARD.txt no longer contains a line matching {pattern!r}. "
+                         "Fix the pattern rather than shipping a slide with a gap in it.")
+    return re.split(r"\s{2,}\(", m.group(1).strip())[0].strip()
 rows = [
     ["1  susceptibility concordance of the final recommendation, per agent",
      f"Agent A and Agent B both {DCOV['after_debate']['adequate']}/{DCOV['after_debate']['n']} = {DCOV['after_debate']['pct']}%"],
@@ -1114,5 +1128,5 @@ for _i, _slide in enumerate(prs.slides):
                 + _tf.text)
 
 prs.save(OUTFILE)
-print(f"  wrote {OUTFILE.relative_to(ROOT)}  ({PAGE + 3} slides)")
+print(f"  wrote {OUTFILE.relative_to(ROOT)}  ({len(prs.slides._sldIdLst)} slides)")
 

@@ -26,7 +26,8 @@ SPEC = T["spectrum_appropriateness"]
 DCOV = T["debate_coverage"]
 DBT, EVID, NEUT = T["debate_with_live_agent"], T["revision_under_evidence"], T["change_under_neutral_control"]
 MATCH = R["D_MATCH_1_drug_identity_vs_patient"]
-PT = R["pre_specified_primary_test"]["by_framing"]
+PTEST = json.loads((RES / "primary_test.json").read_text())
+PT = PTEST["by_framing"]
 FRAMINGS = ["C1a_authority", "C1b_peer_consensus", "C1c_safety_framing", "C1d_bare_doubt"]
 
 TE, PTJ, PD, FSJ, RJ, LKJ = ("tingting_endpoints.json", "primary_test.json",
@@ -34,6 +35,27 @@ TE, PTJ, PD, FSJ, RJ, LKJ = ("tingting_endpoints.json", "primary_test.json",
 S_TE, S_PT = "analysis/tingting_endpoints.py", "analysis/primary_test.py"
 S_PD, S_FS = "analysis/policy_degeneracy.py", "analysis/fewshot_analysis.py"
 S_CN, S_LK = "analysis/canonical_numbers.py", "analysis/leakage_check.py"
+
+def across(path, agg):
+    """Read one value out of every framing and aggregate, so a row that says
+    'every framing' is computed from every framing."""
+    vals = []
+    for f in FRAMINGS:
+        node = PT[f]
+        for key in path:
+            node = node[key]
+        vals.append(node)
+    return agg(vals)
+
+
+def one(path):
+    """A value that must be identical across the four framings, asserted rather than assumed."""
+    distinct = set(across(path, tuple))
+    if len(distinct) != 1:
+        raise ValueError(f"{path} differs across framings ({sorted(distinct)}), so no row may "
+                         "state it as a single number. Report the range instead.")
+    return distinct.pop()
+
 
 b_lo = min(PT[f]["discordant"]["b_pressure_only"] for f in FRAMINGS)
 b_hi = max(PT[f]["discordant"]["b_pressure_only"] for f in FRAMINGS)
@@ -61,21 +83,19 @@ ROWS = [
      f"{PRIM['with_panel_revealed']['pct']}%, gain {PRIM['gain_from_evidence_pts']} points, "
      f"{P['C2 with the panel revealed']['distinct']} distinct drugs", f"{TE} + {PD}", f"{S_TE}, {S_PD}"),
     ("8", "the neutral control never moves it",
-     f"c = {PT[FRAMINGS[0]]['discordant']['c_control_only']} under every framing, "
-     f"n = {PT[FRAMINGS[0]]['n_primary']}", PTJ, S_PT),
+     f"c = {one(('discordant', 'c_control_only'))} under every framing, computed across all four, "
+     f"n = {one(('n_primary',))}", PTJ, S_PT),
     ("8", "unsupported pressure almost always moves it",
-     f"b = {b_lo} to {b_hi} of {PT[FRAMINGS[0]]['n_primary']}, flip rate {flip_lo:.1f}% to {flip_hi:.1f}%, "
+     f"b = {b_lo} to {b_hi} of {one(('n_primary',))}, flip rate {flip_lo:.1f}% to {flip_hi:.1f}%, "
      f"exact binomial p at worst {p_worst:.2e}", PTJ, S_PT),
     ("8", "the panel moves it less than a person does",
-     f"{PT[FRAMINGS[0]]['flip_rates']['C2']['k']}/{PT[FRAMINGS[0]]['flip_rates']['C2']['n']} = "
-     f"{100.0 * PT[FRAMINGS[0]]['flip_rates']['C2']['k'] / PT[FRAMINGS[0]]['flip_rates']['C2']['n']:.1f}%",
-     PTJ, S_PT),
+     f"{one(('flip_rates', 'C2', 'k'))}/{one(('flip_rates', 'C2', 'n'))} = "
+     f"{100.0 * one(('flip_rates', 'C2', 'k')) / one(('flip_rates', 'C2', 'n')):.1f}%", PTJ, S_PT),
     ("8", "attrition, stated before the result",
-     f"{PT[FRAMINGS[0]]['n_primary']} of {PRIM['baseline_pre_culture']['n']} cases evaluable in all four conditions",
+     f"{one(('n_primary',))} of {PRIM['baseline_pre_culture']['n']} cases evaluable in all four conditions",
      PTJ, S_PT),
     ("8", "the baseline is reproducible across independently run arms",
-     f"{R['pre_specified_primary_test']['baseline_agreement']['agree']}/"
-     f"{R['pre_specified_primary_test']['baseline_agreement']['n']} agreement", RJ, S_PT),
+     f"{PTEST['baseline_agreement']['agree']}/{PTEST['baseline_agreement']['n']} agreement", PTJ, S_PT),
     ("9", "harmful revision under scripted pressure is near zero",
      f"{hrr_lo:.1f}% to {hrr_hi:.1f}% across the four framings, denominator is the correct-before group",
      TE, S_TE),
