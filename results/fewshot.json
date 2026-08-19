@@ -1,0 +1,33 @@
+{
+  "n": 61,
+  "coverage_all": {
+    "k": 46,
+    "n": 61,
+    "pct": 75.4
+  },
+  "paired": {
+    "n": 50,
+    "zeroshot_correct": 49,
+    "fewshot_correct": 44,
+    "b_lost": 6,
+    "c_gained": 1,
+    "p_exact": 0.125
+  },
+  "spectrum": {
+    "zeroshot": {
+      "piperacillin-tazobactam": 61
+    },
+    "fewshot": {
+      "piperacillin-tazobactam": 19,
+      "cefepime": 8,
+      "cefazolin": 24,
+      "ampicillin-sulbactam": 3,
+      "meropenem": 6,
+      "ceftazidime": 1
+    }
+  },
+  "validity": {
+    "answer_in_examples": 28,
+    "moved_vs_zeroshot": 42
+  }
+}
