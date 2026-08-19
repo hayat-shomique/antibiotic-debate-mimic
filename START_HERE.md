@@ -73,9 +73,9 @@ scripts in `analysis/`. If a number needs changing, change the analysis, not the
 19 August. Every arm now runs under a PID lock in `~/brain_run/.locks`. Start arms with `gogo`, not
 by hand.
 
-## State as of 20 August 2026, 00:14
+## State as of 20 August 2026, 00:43
 
-All experiments complete. Nothing running. Repository at `c6f1216 Add the rehearsal brief as a published page`.
+All experiments complete. Nothing running. Repository at `bf4e921 Ignore PowerPoint lock files`.
 
 | arm | exposures |
 |---|---|
@@ -102,6 +102,7 @@ Counts are deduplicated exposures, not lines on disk. Regenerate this page with
 | `deck/Shomique_Hayat_UNIQ_antibiotic_agents.pptx` | the talk, generated from `results/*.json` by `deck/build_deck.py`, speaker notes on every slide |
 | `deck/deck_figures.py` | every chart in the deck, drawn from the same result files |
 | `deck/EVIDENCE.md` | every claim in the talk mapped to its number, its result file and the script that produces it |
+| `SUPERVISOR_ASKS.md` | every supervisor instruction, quoted, against what exists on disk |
 | `BRIEFING.md` and `deck/brief.html` | the talk brief: the argument out loud, the ten numbers, the question drill |
 
 Rebuild the whole deck with `python3 deck/deck_figures.py && python3 deck/build_deck.py`.

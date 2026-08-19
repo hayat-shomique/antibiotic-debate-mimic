@@ -21,9 +21,12 @@ RES = ROOT / "results"
 OUT = Path(__file__).resolve().parent / "figures"
 OUT.mkdir(parents=True, exist_ok=True)
 
-INK, PRIMARY, ACCENT, MUTED = "#12303F", "#1C7293", "#C64B3E", "#6B7C85"
-BG, WHITE, GRID = "#F4F7F8", "#FFFFFF", "#DCE4E8"
-SOFT = "#A7BAC4"
+# IBM Carbon palette. Blue is the project's voice and the good outcome, magenta is harm,
+# teal is the laboratory, and the grays are Carbon's neutral ramp rather than a tinted grey.
+INK, PRIMARY, ACCENT, MUTED = "#161616", "#0F62FE", "#D02670", "#525252"
+BG, WHITE, GRID = "#F4F4F4", "#FFFFFF", "#E0E0E0"
+SOFT = "#8D8D8D"
+TEAL, CYAN, BLUE80, BLUE10 = "#007D79", "#33B1FF", "#002D9C", "#EDF5FF"
 
 CANVAS = (11.6, 4.35)      # inches, fixed so the slide geometry is exact
 WIDE = (11.6, 4.9)
@@ -41,12 +44,12 @@ def style():
     plt.rcParams.update({
         "figure.facecolor": WHITE, "axes.facecolor": WHITE, "savefig.facecolor": WHITE,
         "font.family": "sans-serif",
-        "font.sans-serif": ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"],
+        "font.sans-serif": ["IBM Plex Sans", "Helvetica Neue", "Arial", "DejaVu Sans"],
         "font.size": 13, "text.color": INK, "axes.labelcolor": INK,
         "axes.edgecolor": GRID, "axes.linewidth": 0.9, "axes.labelsize": 13,
         "axes.spines.top": False, "axes.spines.right": False,
         "axes.grid": True, "axes.axisbelow": True,
-        "grid.color": GRID, "grid.linewidth": 0.8,
+        "grid.color": GRID, "grid.linewidth": 1.0,
         "xtick.color": MUTED, "ytick.color": MUTED,
         "xtick.labelsize": 12.5, "ytick.labelsize": 12,
         "xtick.major.size": 0, "ytick.major.size": 0,
@@ -77,6 +80,57 @@ def save(f, name):
     plt.close(f)
     print(f"  wrote {path.relative_to(ROOT)}")
     return path
+
+
+# ------------------------------------------------------- 0. the referee idea
+def f_referee():
+    """Two agents argue. A third thing that neither can see decides who was right."""
+    W, H = 11.6, 4.15
+    f, ax = fig((W, H))
+    ax.set_xlim(0, 100); ax.set_ylim(-4, 100); ax.axis("off")
+    # a true circle in a non-square axes: x and y units are different physical sizes
+    kx, ky = 100.0 / W, 104.0 / H
+
+    def circle(cx, cy, r_in, **kw):
+        from matplotlib.patches import Ellipse
+        ax.add_patch(Ellipse((cx, cy), 2 * r_in * kx, 2 * r_in * ky, **kw))
+
+    def card(x, y, w, h, title, l1, l2, col):
+        ax.add_patch(plt.Rectangle((x, y), w, h, facecolor=WHITE, edgecolor=GRID, lw=1.4, zorder=2))
+        ax.add_patch(plt.Rectangle((x, y), 1.3, h, facecolor=col, edgecolor="none", zorder=3))
+        ax.text(x + 4, y + h - 8, title, fontsize=14, fontweight="bold", color=INK, va="top")
+        ax.text(x + 4, y + h - 19, l1, fontsize=12, color=INK, va="top")
+        ax.text(x + 4, y + h - 28, l2, fontsize=11.5, color=MUTED, va="top")
+
+    card(2, 60, 38, 38, "Agent A", "infectious disease specialist", "wants to cover the organism", PRIMARY)
+    card(60, 60, 38, 38, "Agent B", "antimicrobial stewardship lead", "wants to avoid unnecessary breadth", ACCENT)
+
+    ax.annotate("", xy=(58, 86), xytext=(42, 86),
+                arrowprops=dict(arrowstyle="-|>", color=MUTED, lw=1.8, mutation_scale=15))
+    ax.annotate("", xy=(42, 74), xytext=(58, 74),
+                arrowprops=dict(arrowstyle="-|>", color=MUTED, lw=1.8, mutation_scale=15))
+    ax.text(50, 93, "five turns", fontsize=11.5, color=MUTED, ha="center", va="center")
+
+    cx, cy = 50, 30
+    circle(cx, cy, 0.60, facecolor=BLUE10, edgecolor=TEAL, lw=2.4, zorder=3)
+    for dx, dy in [(-2.0, 4), (-0.4, -5), (1.8, 6), (2.6, -2), (0.2, 9), (-2.6, -7), (1.2, 0), (-3.2, 1)]:
+        circle(cx + dx, cy + dy, 0.075, facecolor=TEAL, edgecolor="none", zorder=4)
+
+    for x0, xt in ((21, 45), (79, 55)):
+        ax.annotate("", xy=(xt, cy + 15.5), xytext=(x0, 59),
+                    arrowprops=dict(arrowstyle="-|>", color=SOFT, lw=1.5,
+                                    linestyle=(0, (5, 4)), mutation_scale=13))
+    ax.text(19, 50, "was this drug right\nfor this patient?", fontsize=11.5, color=MUTED,
+            ha="center", va="center", linespacing=1.4)
+    ax.text(81, 50, "and was that one?", fontsize=11.5, color=MUTED, ha="center", va="center")
+
+    ax.text(cx, 9, "the patient's own susceptibility panel", fontsize=14, fontweight="bold",
+            color=TEAL, ha="center", va="center")
+    ax.text(cx, 1.5, "neither agent can see it, neither can argue with it, neither of them produced it",
+            fontsize=11.5, color=MUTED, ha="center", va="center")
+
+    f.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
+    return save(f, "referee")
 
 
 # ---------------------------------------------------------------- 1. timeline
@@ -127,7 +181,7 @@ def f_baseline():
     xs = range(len(conds))
     vals = [prim[k]["pct"] for _, k, _ in conds]
     cols = [SOFT, SOFT, PRIMARY]
-    a.bar(list(xs), vals, width=0.56, color=cols, zorder=3)
+    a.bar(list(xs), vals, width=0.52, color=cols, zorder=3)
     for x, v, (_, k, _) in zip(xs, vals, conds):
         a.text(x, v + 2.0, f"{v:.1f}%", ha="center", va="bottom", fontsize=15,
                fontweight="bold", color=INK)
@@ -140,7 +194,7 @@ def f_baseline():
     a.set_title("Coverage of the organism", fontsize=13.5, color=MUTED, loc="left", pad=12)
 
     ds = [P[k]["distinct"] for _, _, k in conds]
-    b.bar(list(xs), ds, width=0.56, color=[ACCENT, ACCENT, PRIMARY], zorder=3)
+    b.bar(list(xs), ds, width=0.52, color=[ACCENT, ACCENT, PRIMARY], zorder=3)
     for x, v in zip(xs, ds):
         b.text(x, v + 0.25, str(v), ha="center", va="bottom", fontsize=15,
                fontweight="bold", color=INK)
@@ -369,6 +423,6 @@ def f_fewshot():
 
 if __name__ == "__main__":
     print("deck figures, drawn from results/")
-    f_timeline(); f_baseline(); f_primary(); f_stewardship()
+    f_referee(); f_timeline(); f_baseline(); f_primary(); f_stewardship()
     f_matched(); f_debate(); f_fewshot()
     print("done")

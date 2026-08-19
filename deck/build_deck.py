@@ -24,17 +24,21 @@ FIGS = DECK / "figures"
 OUTFILE = DECK / "Shomique_Hayat_UNIQ_antibiotic_agents.pptx"
 
 # ------------------------------------------------------------------ palette
-INK = RGBColor(0x12, 0x30, 0x3F)
-PRIMARY = RGBColor(0x1C, 0x72, 0x93)
-ACCENT = RGBColor(0xC6, 0x4B, 0x3E)
-MUTED = RGBColor(0x6B, 0x7C, 0x85)
-SOFT = RGBColor(0xA7, 0xBA, 0xC4)
-GRID = RGBColor(0xDC, 0xE4, 0xE8)
-BG = RGBColor(0xF4, 0xF7, 0xF8)
+# IBM Carbon. Blue carries the project and the good outcome, magenta is reserved for harm,
+# teal is the laboratory, and the neutrals are Carbon's gray ramp.
+INK = RGBColor(0x16, 0x16, 0x16)        # gray 100
+PRIMARY = RGBColor(0x0F, 0x62, 0xFE)    # blue 60
+ACCENT = RGBColor(0xD0, 0x26, 0x70)     # magenta 60, harm only
+TEAL = RGBColor(0x00, 0x7D, 0x79)       # teal 60, the laboratory
+MUTED = RGBColor(0x52, 0x52, 0x52)      # gray 70
+SOFT = RGBColor(0xA8, 0xA8, 0xA8)       # gray 40, legible on both grounds
+GRID = RGBColor(0xE0, 0xE0, 0xE0)       # gray 20
+BG = RGBColor(0xF4, 0xF4, 0xF4)         # gray 10
 WHITE = RGBColor(0xFF, 0xFF, 0xFF)
-PAPER = RGBColor(0xE8, 0xEE, 0xF1)
+PAPER = RGBColor(0xED, 0xF5, 0xFF)      # blue 10
 
-SANS = "Helvetica Neue"
+SANS = "IBM Plex Sans"
+MONO = "IBM Plex Mono"
 
 # ------------------------------------------------------------------- layout
 W, H = 13.333, 7.5
@@ -172,7 +176,7 @@ def block(slide, x, y, w, h, color=BG, line_color=None):
 def head(slide, kicker, title, sub=None, dark=False, title_size=30):
     ink = WHITE if dark else INK
     sub_col = SOFT if dark else MUTED
-    text(slide, M, KICK_Y, CW, 0.3, kicker.upper(), size=11.5, color=ACCENT, bold=True,
+    text(slide, M, KICK_Y, CW, 0.3, kicker.upper(), size=11.5, color=PRIMARY, bold=True,
          caps_track=190)
     text(slide, M, TITLE_Y, CW - 0.4, 1.0, title, size=title_size, color=ink, bold=True,
          line=1.12)
@@ -207,7 +211,7 @@ def stat_strip(slide, items, y, x=M, w=CW, value_size=25, label_size=11.5, color
     cw = (w - gap * (n - 1)) / n
     for i, (val, lab) in enumerate(items):
         cx = x + i * (cw + gap)
-        rule(slide, cx, y, cw, 0.022, rule_color or (ACCENT if not dark else ACCENT))
+        rule(slide, cx, y, cw, 0.022, rule_color or PRIMARY)
         text(slide, cx, y + 0.18, cw, 0.5, val, size=value_size, bold=True,
              color=WHITE if dark else color, line=1.05)
         text(slide, cx, y + 0.18 + value_size / 72.0 * 1.12, cw, 0.7, lab, size=label_size,
@@ -265,7 +269,7 @@ def cards(slide, items, y, x=M, w=CW, h=1.55, per_row=None, title_size=14.5,
 
 
 def quote(slide, x, y, w, body, attrib, size=19, dark=False, h=1.5):
-    block(slide, x, y, 0.055, h, ACCENT)
+    block(slide, x, y, 0.055, h, PRIMARY)
     text(slide, x + 0.32, y + 0.02, w - 0.4, h, body, size=size,
          color=WHITE if dark else INK, italic=True, line=1.3)
     text(slide, x + 0.32, y + h - 0.30, w - 0.4, 0.3, attrib, size=11.5,
@@ -288,11 +292,11 @@ def page():
 # ============================================================== 1. title
 s = new_slide(dark=True)
 text(s, M, 1.30, CW, 0.3, "UNIQ+ RESEARCH INTERNSHIP  ·  UNIVERSITY OF OXFORD  ·  INSTITUTE OF BIOMEDICAL ENGINEERING",
-     size=11.5, color=ACCENT, bold=True, caps_track=170)
+     size=11.5, color=PRIMARY, bold=True, caps_track=170)
 text(s, M, 1.80, CW - 1.4, 2.0,
      "Two clinical LLM agents, one antibiotic,\nand a laboratory as referee",
      size=42, color=WHITE, bold=True, line=1.10)
-rule(s, M, 3.58, 1.6, 0.028, ACCENT)
+rule(s, M, 3.58, 1.6, 0.040, PRIMARY)
 text(s, M, 3.86, CW - 2.6, 1.0,
      "Does multi-agent communication improve clinical decision quality, or does it merely make the models agree?",
      size=17.5, color=SOFT, line=1.35, italic=True)
@@ -343,44 +347,35 @@ footer(s, "METHODS.md sections 1 and 2  ·  timing measured on the frozen cohort
 
 # ============================================================== 3. reference standard
 s = new_slide()
-head(s, "the reference standard", "The doctor is not the reference. The bacteria are.")
-quote(s, M, 2.05, 6.05,
-      "“The doctor makes the right decision, that’s a huge assumption you make.”",
-      "Prof. Tingting Zhu, on the first version of this design", size=18, h=1.35)
-text(s, M, 3.62, 6.05, 2.2,
-     "Scoring a model against what the clinician actually prescribed measures agreement, not correctness. "
-     "The blood culture susceptibility panel measures whether the recommended drug would have covered the "
-     "organism that grew. It is indifferent to what anyone decided, and it is the one piece of evidence in "
-     "the record that genuinely arrives after the decision.",
-     size=14, color=MUTED, line=1.4)
-cards(s, [("Adequate", "tested against every isolate on this patient and called susceptible"),
-          ("Inadequate", "resistant or intermediate against at least one isolate"),
-          ("Intermediate only", "the only verdicts available are intermediate"),
-          ("Undetermined", "the laboratory never tested this drug against this organism")],
-      y=2.05, x=M + 6.55, w=CW - 6.55, h=1.02, per_row=1, title_size=13.5, body_size=11.5,
-      accent=[PRIMARY, ACCENT, MUTED, SOFT], gap=0.18)
-text(s, M + 6.55, 6.35, CW - 6.55, 0.5,
-     "Four classes, not two. Undetermined is a property of what the laboratory chose to test, "
-     "so folding it into a denominator would inflate every rate in the study.",
-     size=11.5, color=MUTED, line=1.3)
+head(s, "the reference standard", "The doctor is not the reference. The bacteria are.",
+     "“The doctor makes the right decision, that’s a huge assumption you make.”   Prof. Tingting Zhu, on the first version of this design")
+figure(s, "referee", y=2.34, width=11.2, x=M + (CW - 11.2) / 2)
+text(s, M, 6.42, CW, 0.4,
+     [[("Scored four ways against that panel, never two: ", {"bold": True}),
+       ("adequate, inadequate, intermediate only, and undetermined when the laboratory never tested "
+        "that drug against that organism. Folding undetermined into a denominator would inflate every rate in the study.",
+        {"color": MUTED})]], size=12, line=1.3)
 notes(s, """
 The objection that produced this design came from my supervisor and it is the sharpest sentence in
 the project: the doctor makes the right decision, that is a huge assumption you make.
 So I do not score the model against the clinician. I score it against the patient's own microbiology.
+Two agents with opposite jobs argue for five turns. The thing at the bottom of this slide decides who
+was right, and it has three properties that matter: neither agent can see it, neither agent can argue
+with it, and neither agent produced it. It is the patient's own biology.
 Four outcome classes, not two, because when the laboratory never tested a drug against that organism
-the honest answer is undetermined, and pretending otherwise would inflate every number I am about to
-show you.
+the honest answer is undetermined, and pretending otherwise would inflate every number I show you.
 """)
 footer(s, "METHODS.md section 3  ·  outcome classes as pre-specified in protocol/", page())
 
+
 # ============================================================== 4. the question
 s = new_slide(dark=True)
-text(s, M, 1.25, CW, 0.3, "THE RESEARCH QUESTION", size=11.5, color=ACCENT, bold=True, caps_track=190)
+text(s, M, 1.25, CW, 0.3, "THE RESEARCH QUESTION", size=11.5, color=PRIMARY, bold=True, caps_track=190)
 text(s, M, 1.95, CW - 1.3, 2.4,
      "“does multi-agent communication improve clinical decision quality, "
      "or does it merely make the models agree?”",
      size=33, color=WHITE, bold=True, line=1.22)
-rule(s, M, 4.62, 1.6, 0.028, ACCENT)
+rule(s, M, 4.62, 1.6, 0.040, PRIMARY)
 text(s, M, 4.92, CW - 2.2, 0.4, "Prof. Tingting Zhu, 14 August 2026", size=14, color=SOFT)
 text(s, M, 5.62, CW - 2.2, 0.9,
      "People are building clinical systems in which several models confer and reach a decision together, "
@@ -416,7 +411,7 @@ stages = [
     ("4", "Four conditions",
      "C0 baseline, Cn neutral re-ask, C1 pressure with no clinical content, C2 the real panel.", ACCENT),
     ("5", "The scorer",
-     "SHA-pinned. Adequate, inadequate, intermediate only, undetermined, against this patient's own panel.", PRIMARY),
+     "SHA-pinned. Adequate, inadequate, intermediate only, undetermined, against this patient's own panel.", TEAL),
     ("6", "Endpoints",
      "Coverage, harmful revision, beneficial correction, spectrum. Pre-specified, computed per agent.", SOFT),
 ]
@@ -444,13 +439,15 @@ for i, (num, name, body, col) in enumerate(stages):
     text(s, cx, top + 1.02, cw, 0.3, num, size=11, color=col, bold=True)
     text(s, cx, top + 1.30, cw - 0.06, 1.5, body, size=11, color=MUTED, line=1.32)
 
-block(s, M, 5.62, CW, 0.92, BG)
-block(s, M, 5.62, 0.055, 0.92, ACCENT)
-text(s, M + 0.32, 5.80, CW - 0.7, 0.7,
-     [[("The one thing to notice. ", {"bold": True}),
-       ("Stage 4 is the only place anything changes. The patient, the prompt, the model, the decoding and the "
-        "scorer are identical across all four conditions, so a difference between them is caused by what the "
-        "agent was told, and by nothing else.", {"color": MUTED})]], size=13.5, line=1.35)
+text(s, M, 5.40, CW, 0.3,
+     "STAGE 4 IS THE ONLY PLACE ANYTHING CHANGES. SAME PATIENT, SAME PROMPT, SAME MODEL, SAME SCORER.",
+     size=10.5, color=PRIMARY, bold=True, caps_track=90)
+cards(s, [("C0  baseline", "the case, before any culture result exists"),
+          ("Cn  neutral re-ask", "asked again, no disagreement and no new facts"),
+          ("C1  unsupported pressure", "a challenge with no clinical content, in four framings"),
+          ("C2  the panel", "the organism and its susceptibility results")],
+      y=5.70, h=0.96, per_row=4, title_size=12.5, body_size=10.5,
+      accent=[SOFT, SOFT, ACCENT, TEAL], gap=0.22)
 notes(s, f"""
 This is the whole machine on one slide.
 Start with {int(_start):,} blood cultures in MIMIC-IV, gate them down to a frozen cohort of {int(_end):,}, hash it,
@@ -479,7 +476,7 @@ block(s, M, 2.22, LW, 3.05, BG)
 text(s, M + 0.26, 2.38, LW - 0.5, 0.3, "SYSTEM PROMPT, AGENT A, OPENING TURN",
      size=10, color=ACCENT, bold=True, caps_track=110)
 text(s, M + 0.26, 2.68, LW - 0.5, 2.5, _sys_prompt, size=8.6, color=INK, line=1.30,
-     font="Menlo")
+     font=MONO)
 text(s, M, 5.36, LW, 0.9,
      [[("Hash-pinned and asserted on every launch, so a silent edit aborts the run rather than producing "
         "results under a changed instrument. Seventeen agents, closed. OTHER and ABSTAIN exist so that an "
@@ -491,7 +488,7 @@ RW = CW - LW - 0.34
 block(s, RX, 2.22, RW, 1.62, BG)
 text(s, RX + 0.26, 2.38, RW - 0.5, 0.3, "THE CASE BLOCK, THE ONLY PATIENT-DERIVED TEXT",
      size=10, color=ACCENT, bold=True, caps_track=110)
-text(s, RX + 0.26, 2.68, RW - 0.5, 1.1, _case_block, size=9.2, color=INK, line=1.34, font="Menlo")
+text(s, RX + 0.26, 2.68, RW - 0.5, 1.1, _case_block, size=9.2, color=INK, line=1.34, font=MONO)
 text(s, RX, 3.94, RW, 0.6,
      "Values shown are synthetic. Every field is asserted earlier than the decision time, and there is no "
      "laboratory value, no organism and no susceptibility anywhere in it.",
@@ -731,7 +728,7 @@ footer(s, "results/fewshot.json  ·  analysis/fewshot_analysis.py  ·  paired on
 
 # ============================================================== 14. contribution
 s = new_slide(dark=True)
-text(s, M, 0.95, CW, 0.3, "THE CONTRIBUTION", size=11.5, color=ACCENT, bold=True, caps_track=190)
+text(s, M, 0.95, CW, 0.3, "THE CONTRIBUTION", size=11.5, color=PRIMARY, bold=True, caps_track=190)
 text(s, M, 1.42, CW - 1.2, 1.6,
      "Sycophancy here is invisible on the accuracy endpoint\nand severe on the stewardship endpoint",
      size=31, color=WHITE, bold=True, line=1.16)
@@ -746,8 +743,8 @@ for i, (n_, hd, body) in enumerate([
 ]):
     x = M + i * ((CW + 0.34) / 3)
     cwid = (CW - 0.68) / 3
-    rule(s, x, rows_y, cwid, 0.022, ACCENT)
-    text(s, x, rows_y + 0.20, cwid, 0.4, n_, size=13, color=ACCENT, bold=True)
+    rule(s, x, rows_y, cwid, 0.030, PRIMARY)
+    text(s, x, rows_y + 0.20, cwid, 0.4, n_, size=13, color=PRIMARY, bold=True)
     text(s, x, rows_y + 0.62, cwid, 0.9, hd, size=17, color=WHITE, bold=True, line=1.18)
     text(s, x, rows_y + 1.62, cwid, 1.6, body, size=12.5, color=SOFT, line=1.38)
 notes(s, """
@@ -803,11 +800,11 @@ footer(s, "LIMITATIONS.md  ·  stated in full, with the measurements that establ
 
 # ============================================================== 17. close
 s = new_slide(dark=True)
-text(s, M, 1.15, CW, 0.3, "WHERE THIS GOES", size=11.5, color=ACCENT, bold=True, caps_track=190)
+text(s, M, 1.15, CW, 0.3, "WHERE THIS GOES", size=11.5, color=PRIMARY, bold=True, caps_track=190)
 text(s, M, 1.66, CW - 2.2, 1.6,
      "The laboratory is the referee,\nand the measurement is the contribution",
      size=34, color=WHITE, bold=True, line=1.16)
-rule(s, M, 3.62, 1.6, 0.028, ACCENT)
+rule(s, M, 3.62, 1.6, 0.040, PRIMARY)
 text(s, M, 3.98, CW - 3.9, 2.1,
      [[("Rung three. ", {"bold": True, "color": WHITE}), "Few-shot did not improve the decision, which by the supervisor's own sequencing is what licenses fine-tuning on the task."],
       [("Transfer the harness, not the data. ", {"bold": True, "color": WHITE}), "Hosted models on synthetic non-MIMIC cases, because record-level data cannot leave this machine under the data use agreement."],
@@ -1058,6 +1055,48 @@ threshold at 80 and every single observation came back 85, 90 or 95, so the thre
 That is not a pre-registration, so the endpoint is withdrawn rather than reported as a null.
 """)
 footer(s, "SCORECARD.txt, computed live from the run data  ·  AUDIT.md section 3  ·  OUTSTANDING.md sweeps every ask against disk", page())
+
+# ============================================================== backup, zhikang
+s = new_slide(paper=True)
+head(s, "backup slide", "The collaborator's three indicators, all computed",
+     "Zhikang Chen set the sycophancy measures on 23 July, before any arm was built.")
+quote(s, M, 2.22, CW - 0.6,
+      "“start by operationalising sycophancy with clear, measurable indicators, for example, how often a "
+      "model changes its initial stance after the dialogue, how uncritically it accepts the other agent's "
+      "arguments, and how far its final recommendation deviates from evidence-based guidelines.”",
+      "Zhikang Chen, 23 July 2026", size=14.5, h=1.15)
+
+def _sc(pattern):
+    m = re.search(pattern, SCORE)
+    return m.group(1).strip() if m else "see SCORECARD.txt"
+
+table(s, ["his indicator", "what the run data says"],
+      [[("1  how often it changes its initial stance after dialogue", {"bold": True}),
+        (_sc(r"changes its initial stance after dialogue\n\s+(.+)"), {"color": ACCENT, "bold": True})],
+       [("2  how uncritically it accepts the other agent's arguments", {"bold": True}),
+        (_sc(r"accepts the other agent's arguments\n\s+(.+)"), {"size": 11.5})],
+       [("3  how far the final recommendation deviates from guidance", {"bold": True}),
+        (_sc(r"deviates from evidence-based guidance\n\s+(.+)"), {"size": 11.5})]],
+      x=M, y=3.72, w=CW, col_w=[0.42, 0.58], row_h=0.62, size=12.5, head_size=10.5)
+
+text(s, M, 5.95, CW, 0.8,
+     [[("His design decisions are in the study verbatim. ", {"bold": True}),
+       ("The two personas with conflicting incentives, the alternating protocol over several rounds, the "
+        "position shift recorded after every turn, and Qwen as the starting family. The one thing not done is "
+        "transferring the harness to GPT, which the data use agreement forbids with record-level data, so it "
+        "runs on synthetic cases and it is on the closing slide.", {"color": MUTED})]], size=12.5, line=1.34)
+notes(s, """
+Backup slide for the collaborator's side of the design.
+Zhikang gave me three indicators on 23 July and all three are computed. The model changes its opening
+stance in 400 of 400 runs. It moves onto the counterpart's drug in a quarter of responding turns, and
+a further 799 turns match the counterpart because it already held that drug and did not move, which is
+the distinction that stops the number being inflated. And guideline deviation is scored on the WHO
+AWaRe classification, which is externally maintained rather than a flag I invented.
+His personas are in the system prompt word for word. The one thing I could not do is transfer the
+harness to GPT, because MIMIC cannot go to a hosted service.
+""")
+footer(s, "SCORECARD.txt, computed live  ·  SUPERVISOR_ASKS.md maps every ask from both supervisors to what exists on disk", page())
+
 
 # ---------------------------------------------------------------- timing cues
 # Ten minutes of talk, five of questions. Targets for the sixteen core slides,

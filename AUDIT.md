@@ -13,7 +13,7 @@ gemma4:12b                       4eb23ef187e2    7.6 GB    43 hours ago
 deepseek-llm:7b-chat-q4_K_M      72299d61ee1d    4.2 GB    43 hours ago    
 medgemma:4b-it-q4_K_M            9fe4e9a6c9bd    3.3 GB    43 hours ago    
 deepseek-r1:8b                   6995872bfe4c    5.2 GB    43 hours ago    
-qwen3:4b-instruct-2507-q4_K_M    0edcdef34593    2.5 GB    45 hours ago    
+qwen3:4b-instruct-2507-q4_K_M    0edcdef34593    2.5 GB    46 hours ago    
 qwen3:4b                         359d7dd4bcda    2.5 GB    47 hours ago
 ```
 
@@ -91,9 +91,9 @@ Documents written by hand, not generated: `METHODS.md`, `LIMITATIONS.md`, `DATA_
 
 | | |
 |---|---|
-| tracked files | 177 |
-| commits | 30 |
-| head | `c6f1216 Add the rehearsal brief as a published page` |
+| tracked files | 179 |
+| commits | 32 |
+| head | `bf4e921 Ignore PowerPoint lock files` |
 | remote in sync | yes |
 
 ## 5. Run state
