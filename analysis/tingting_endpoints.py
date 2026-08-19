@@ -166,6 +166,27 @@ def main():
     # ---- and for the neutral control, the floor
     out["change_under_neutral_control"] = transitions(base, "c0_outcome", "cn_outcome")
 
+    # ---- the arm that answers her actual question: a LIVE second agent, not a
+    # scripted sentence. round0 is the agent's own answer before it hears the
+    # other agent; final_A is its answer after the exchange; reveal is after the
+    # susceptibility panel is disclosed.
+    rev = read("canonical_reveal.jsonl")
+    out["debate_with_live_agent"] = transitions(rev, "round0_outcome", "final_A_outcome")
+    out["debate_then_evidence"] = transitions(rev, "final_A_outcome", "reveal_outcome")
+    out["debate_coverage"] = {
+        "before_debate": coverage(rev, "round0_outcome"),
+        "after_debate": coverage(rev, "final_A_outcome"),
+        "after_panel": coverage(rev, "reveal_outcome"),
+    }
+    dc = out["debate_coverage"]
+    dc["debate_change_pts"] = round(dc["after_debate"]["pct"] - dc["before_debate"]["pct"], 1)
+    dc["evidence_change_pts"] = round(dc["after_panel"]["pct"] - dc["after_debate"]["pct"], 1)
+    out["debate_spectrum"] = {
+        "before_debate": spectrum(rev, "round0_drug"),
+        "after_debate": spectrum(rev, "final_A"),
+        "after_panel": spectrum(rev, "reveal_drug"),
+    }
+
     out["spectrum_appropriateness"] = {
         "_definition": "endpoint 4: broad therapy for everyone can preserve coverage "
                        "while making poor stewardship decisions",
@@ -227,6 +248,22 @@ def main():
         v = sp[key]
         print("  %-22s %5d/%-4d %5.1f%% %10d"
               % (lbl, v["carbapenem"], v["n"], v["carbapenem_pct"], v["distinct_drugs"]))
+
+    dw, de = out["debate_with_live_agent"], out["debate_then_evidence"]
+    dc = out["debate_coverage"]
+    print("\nTHE ARM THAT ANSWERS HER QUESTION: a live second agent, not a scripted sentence")
+    print("  %-26s %7s %7s %7s %7s %8s %8s"
+          % ("stimulus", "stable", "benefit", "HARM", "noimp", "HRR", "BCR"))
+    print("  " + "-" * 78)
+    for lbl, v in (("debate, live agent", dw), ("then the panel revealed", de)):
+        c = v["counts"]
+        print("  %-26s %7d %7d %7d %7d %7s%% %7s%%"
+              % (lbl, c.get("stable_correct", 0), c.get("beneficial_correction", 0),
+                 c.get("harmful_deference", 0), c.get("no_improvement", 0),
+                 v["HRR"]["pct"], v["BCR"]["pct"]))
+    print("  coverage  before debate %.1f%%  after debate %.1f%% (%+.1f)  after panel %.1f%% (%+.1f)"
+          % (dc["before_debate"]["pct"], dc["after_debate"]["pct"], dc["debate_change_pts"],
+             dc["after_panel"]["pct"], dc["evidence_change_pts"]))
 
     print("\n  written: results/tingting_endpoints.json")
 

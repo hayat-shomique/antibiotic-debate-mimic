@@ -20,6 +20,9 @@ sy = te["sycophancy_under_pressure"]
 ev = te["revision_under_evidence"]
 nc = te["change_under_neutral_control"]
 sp = te["spectrum_appropriateness"]
+dw = te["debate_with_live_agent"]
+de = te["debate_then_evidence"]
+dc = te["debate_coverage"]
 
 b0, b2 = pa["baseline_pre_culture"], pa["with_panel_revealed"]
 hrrs = [v["HRR"]["pct"] for v in sy.values() if v["HRR"]["pct"] is not None]
@@ -49,18 +52,25 @@ doc = """# The story
 The spine is Prof. Zhu's endpoint hierarchy of 14 August, because that hierarchy is what the
 evaluation was built to answer. Every number here is generated from `results/`.
 
-## The question
+## The question, in her words
 
-Two language-model agents discuss which antibiotic to give a patient with a bloodstream infection.
-Does talking to each other improve the clinical decision, or does it only make them agree?
+> That directly answers the more interesting research question: does multi-agent communication
+> improve clinical decision quality, or does it merely make the models agree?
 
-Her framing of why that is answerable at all:
+## The answer
 
-> The strongest primary indicator is probably appropriateness of the final antibiotic
-> recommendation against the eventual microbiology result. For each agent, ask: would the
-> recommended treatment actually cover the organism ultimately identified?
+| what the agent hears | harmful revision rate | coverage |
+|---|---|---|
+| a scripted sentence with no content | %.1f to %.1f%% | unchanged |
+| **a second agent arguing a case** | **%.1f%%** | **%.1f%% to %.1f%%, %+.1f points** |
+| the susceptibility panel | **%.1f%%** | %.1f%% to %.1f%%, %+.1f points |
 
-The laboratory is a referee neither agent can see and neither can argue with.
+**Multi-agent communication makes the decision worse.** Agent A abandons a correct recommendation
+in %.1f%% of the cases where it had one, and coverage of the organism falls %.1f points. The
+laboratory result, by contrast, never once caused a correct answer to become incorrect across %d
+opportunities, and raised coverage %.1f points.
+
+The rest of this document is how that was established and what it does not mean.
 
 ## Endpoint 1, appropriateness: the default is a constant, and it is a good one
 
@@ -161,6 +171,10 @@ python3 analysis/canonical_numbers.py     # everything else, into results/RESULT
 python3 analysis/render_story.py          # regenerates this document
 ```
 """ % (
+    min(hrrs), max(hrrs),
+    dw["HRR"]["pct"], dc["before_debate"]["pct"], dc["after_debate"]["pct"], dc["debate_change_pts"],
+    de["HRR"]["pct"], dc["after_debate"]["pct"], dc["after_panel"]["pct"], dc["evidence_change_pts"],
+    dw["HRR"]["pct"], abs(dc["debate_change_pts"]), de["HRR"]["n"], dc["evidence_change_pts"],
     deg["C0 baseline"]["top"], deg["C0 baseline"]["top_share_pct"],
     deg["C0 baseline"]["distinct"], deg["C0 baseline"]["n"],
     deg["C0 baseline"]["n"] + deg["C0 inside the pressure arm"]["n"]

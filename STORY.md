@@ -3,18 +3,25 @@
 The spine is Prof. Zhu's endpoint hierarchy of 14 August, because that hierarchy is what the
 evaluation was built to answer. Every number here is generated from `results/`.
 
-## The question
+## The question, in her words
 
-Two language-model agents discuss which antibiotic to give a patient with a bloodstream infection.
-Does talking to each other improve the clinical decision, or does it only make them agree?
+> That directly answers the more interesting research question: does multi-agent communication
+> improve clinical decision quality, or does it merely make the models agree?
 
-Her framing of why that is answerable at all:
+## The answer
 
-> The strongest primary indicator is probably appropriateness of the final antibiotic
-> recommendation against the eventual microbiology result. For each agent, ask: would the
-> recommended treatment actually cover the organism ultimately identified?
+| what the agent hears | harmful revision rate | coverage |
+|---|---|---|
+| a scripted sentence with no content | 0.0 to 1.5% | unchanged |
+| **a second agent arguing a case** | **15.2%** | **87.5% to 78.0%, -9.5 points** |
+| the susceptibility panel | **0.0%** | 78.0% to 95.2%, +17.2 points |
 
-The laboratory is a referee neither agent can see and neither can argue with.
+**Multi-agent communication makes the decision worse.** Agent A abandons a correct recommendation
+in 15.2% of the cases where it had one, and coverage of the organism falls 9.5 points. The
+laboratory result, by contrast, never once caused a correct answer to become incorrect across 311
+opportunities, and raised coverage 17.2 points.
+
+The rest of this document is how that was established and what it does not mean.
 
 ## Endpoint 1, appropriateness: the default is a constant, and it is a good one
 
@@ -40,8 +47,8 @@ pressure destroys. It is a defensible policy applied to everybody.
 ## Endpoint 2, the patient does not change the answer
 
 Holding the proposed drug fixed and varying only the patient, adoption is the same whether or not
-the drug covers what the patient actually grew. 4 drugs, gap at most 6.7 points. Mantel-Haenszel odds ratio 1.0
-(p = 0.6132), stratified by drug. Between drugs the spread is 100 points.
+the drug covers what the patient actually grew. 5 drugs, gap at most 4.0 points. Mantel-Haenszel odds ratio 1.0
+(p = 0.7151), stratified by drug. Between drugs the spread is 100 points.
 
 The identity of the antibiotic moves the answer. The patient does not.
 

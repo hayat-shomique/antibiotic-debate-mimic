@@ -222,6 +222,156 @@
     },
     "harmful_and_no_less_confident": 0
   },
+  "debate_with_live_agent": {
+    "counts": {
+      "stable_correct": 289,
+      "indeterminate": 37,
+      "harmful_deference": 52,
+      "beneficial_correction": 13,
+      "no_improvement": 9
+    },
+    "n_correct_before": 341,
+    "n_incorrect_before": 22,
+    "HRR": {
+      "k": 52,
+      "n": 341,
+      "pct": 15.2,
+      "ci95": [
+        11.8,
+        19.5
+      ]
+    },
+    "BCR": {
+      "k": 13,
+      "n": 22,
+      "pct": 59.1,
+      "ci95": [
+        38.7,
+        76.7
+      ]
+    },
+    "harmful_and_no_less_confident": 0
+  },
+  "debate_then_evidence": {
+    "counts": {
+      "stable_correct": 311,
+      "beneficial_correction": 57,
+      "no_improvement": 8,
+      "indeterminate": 24
+    },
+    "n_correct_before": 311,
+    "n_incorrect_before": 65,
+    "HRR": {
+      "k": 0,
+      "n": 311,
+      "pct": 0.0,
+      "ci95": [
+        0.0,
+        1.2
+      ]
+    },
+    "BCR": {
+      "k": 57,
+      "n": 65,
+      "pct": 87.7,
+      "ci95": [
+        77.5,
+        93.6
+      ]
+    },
+    "harmful_and_no_less_confident": 0
+  },
+  "debate_coverage": {
+    "before_debate": {
+      "adequate": 350,
+      "n": 400,
+      "pct": 87.5,
+      "ci95": [
+        83.9,
+        90.4
+      ],
+      "breakdown": {
+        "ADEQUATE": 350,
+        "INTERMEDIATE_ONLY": 10,
+        "UNDETERMINED": 16,
+        "INADEQUATE": 24
+      }
+    },
+    "after_debate": {
+      "adequate": 312,
+      "n": 400,
+      "pct": 78.0,
+      "ci95": [
+        73.7,
+        81.8
+      ],
+      "breakdown": {
+        "ADEQUATE": 312,
+        "INADEQUATE": 69,
+        "UNDETERMINED": 9,
+        "INTERMEDIATE_ONLY": 10
+      }
+    },
+    "after_panel": {
+      "adequate": 381,
+      "n": 400,
+      "pct": 95.2,
+      "ci95": [
+        92.7,
+        96.9
+      ],
+      "breakdown": {
+        "ADEQUATE": 381,
+        "INADEQUATE": 8,
+        "UNDETERMINED": 11
+      }
+    },
+    "debate_change_pts": -9.5,
+    "evidence_change_pts": 17.2
+  },
+  "debate_spectrum": {
+    "before_debate": {
+      "n": 400,
+      "carbapenem": 0,
+      "carbapenem_pct": 0.0,
+      "ci95": [
+        0.0,
+        1.0
+      ],
+      "aware": {
+        "Watch": 400
+      },
+      "distinct_drugs": 2
+    },
+    "after_debate": {
+      "n": 400,
+      "carbapenem": 0,
+      "carbapenem_pct": 0.0,
+      "ci95": [
+        0.0,
+        1.0
+      ],
+      "aware": {
+        "Watch": 400
+      },
+      "distinct_drugs": 3
+    },
+    "after_panel": {
+      "n": 400,
+      "carbapenem": 39,
+      "carbapenem_pct": 9.8,
+      "ci95": [
+        7.2,
+        13.1
+      ],
+      "aware": {
+        "Watch": 373,
+        "Access": 24,
+        "unclassified": 3
+      },
+      "distinct_drugs": 9
+    }
+  },
   "spectrum_appropriateness": {
     "_definition": "endpoint 4: broad therapy for everyone can preserve coverage while making poor stewardship decisions",
     "baseline": {

@@ -41,7 +41,7 @@
         "seed_drug",
         "receiver"
       ],
-      "n": 219,
+      "n": 224,
       "duplicate_writes_dropped": 72,
       "gate_quarantined": 0,
       "note": "drug name held fixed, patient varied"
@@ -278,7 +278,7 @@
         "seed_drug",
         "receiver"
       ],
-      "n": 219,
+      "n": 224,
       "duplicate_writes_dropped": 72,
       "gate_quarantined": 0,
       "note": "drug name held fixed, patient varied"
@@ -320,11 +320,11 @@
       "ciprofloxacin": {
         "covers": {
           "adopted": 0,
-          "n": 23
+          "n": 25
         },
         "does_not_cover": {
           "adopted": 0,
-          "n": 22
+          "n": 25
         },
         "gap_pct": 0.0
       },
@@ -343,23 +343,23 @@
     "pooled": {
       "covers": {
         "adopted": 49,
-        "n": 110,
-        "pct": 44.5,
+        "n": 112,
+        "pct": 43.8,
         "ci95": [
-          35.6,
-          53.9
+          34.9,
+          53.0
         ]
       },
       "does_not_cover": {
         "adopted": 49,
-        "n": 109,
-        "pct": 45.0,
+        "n": 112,
+        "pct": 43.8,
         "ci95": [
-          35.9,
-          54.3
+          34.9,
+          53.0
         ]
       },
-      "gap_pct": -0.4
+      "gap_pct": 0.0
     },
     "cmh_stratified_by_drug": {
       "strata": 3,
