@@ -1,0 +1,605 @@
+<title>The Laboratory as Referee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+
+<style>
+:root{
+  --ink:#12303F;
+  --ground:#F4F7F8;
+  --panel:#FFFFFF;
+  --panel-2:#EDF2F4;
+  --rule:#DCE4E8;
+  --rule-strong:#BCCBD3;
+  --muted:#6B7C85;
+  --primary:#1C7293;
+  --accent:#C64B3E;
+  --s:#2E7D6B;
+  --i:#B08019;
+  --r:#C64B3E;
+  --chip-s:#E4EFEB;
+  --chip-i:#F5EDDC;
+  --chip-r:#F6E5E2;
+  --shadow:0 1px 0 rgba(18,48,63,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#DDE8ED;
+    --ground:#0C1F29;
+    --panel:#12303F;
+    --panel-2:#16394A;
+    --rule:#1F485B;
+    --rule-strong:#2C5C72;
+    --muted:#93A8B2;
+    --primary:#67B6D2;
+    --accent:#E8837A;
+    --s:#6FBFA8;
+    --i:#DBB05A;
+    --r:#E8837A;
+    --chip-s:#123A32;
+    --chip-i:#3A2F16;
+    --chip-r:#3D2320;
+    --shadow:0 1px 0 rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#DDE8ED;
+  --ground:#0C1F29;
+  --panel:#12303F;
+  --panel-2:#16394A;
+  --rule:#1F485B;
+  --rule-strong:#2C5C72;
+  --muted:#93A8B2;
+  --primary:#67B6D2;
+  --accent:#E8837A;
+  --s:#6FBFA8;
+  --i:#DBB05A;
+  --r:#E8837A;
+  --chip-s:#123A32;
+  --chip-i:#3A2F16;
+  --chip-r:#3D2320;
+  --shadow:0 1px 0 rgba(0,0,0,.25);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"IBM Plex Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:16.5px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px 96px}
+
+/* ---------- masthead ---------- */
+.mast{padding:56px 0 30px;border-bottom:2px solid var(--ink)}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);font-weight:600;margin:0 0 22px;
+}
+h1{
+  font-family:Newsreader,Georgia,"Times New Roman",serif;
+  font-weight:500;font-size:clamp(2.5rem,6vw,4.15rem);
+  line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance;
+}
+.standfirst{
+  font-family:Newsreader,Georgia,serif;font-size:clamp(1.05rem,2.1vw,1.35rem);
+  line-height:1.5;color:var(--muted);max-width:56ch;margin:20px 0 0;font-style:italic;
+}
+.meta{
+  display:flex;flex-wrap:wrap;gap:8px 30px;margin:30px 0 0;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);
+}
+.meta b{color:var(--ink);font-weight:500}
+
+/* ---------- hero panel: the finding as a susceptibility report ---------- */
+.report{
+  margin:34px 0 0;border:1px solid var(--rule-strong);background:var(--panel);
+  box-shadow:var(--shadow);
+}
+.report-head{
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:13px 20px;border-bottom:1px solid var(--rule-strong);background:var(--panel-2);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);
+}
+.report-scroll{overflow-x:auto}
+table.panel{border-collapse:collapse;width:100%;min-width:660px;font-variant-numeric:tabular-nums}
+table.panel th{
+  text-align:left;font-family:"IBM Plex Mono",monospace;font-weight:500;
+  font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  padding:14px 20px 10px;border-bottom:1px solid var(--rule);
+}
+table.panel td{padding:15px 20px;border-bottom:1px solid var(--rule);vertical-align:middle}
+table.panel tr:last-child td{border-bottom:0}
+.stim{font-weight:500}
+.stim small{display:block;color:var(--muted);font-weight:400;font-size:13px;margin-top:2px}
+.num{font-family:"IBM Plex Mono",monospace;font-size:1.32rem;font-weight:500;letter-spacing:-.01em}
+.delta{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--muted);display:block;margin-top:1px}
+.verdict{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.1em;
+  padding:4px 9px;border:1px solid currentColor;white-space:nowrap;
+}
+.v-s{color:var(--s);background:var(--chip-s)}
+.v-i{color:var(--i);background:var(--chip-i)}
+.v-r{color:var(--r);background:var(--chip-r)}
+.report-foot{
+  padding:12px 20px;border-top:1px solid var(--rule-strong);background:var(--panel-2);
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);
+}
+
+/* ---------- section grid ---------- */
+.layout{display:grid;grid-template-columns:132px minmax(0,1fr);gap:0 40px}
+section{
+  grid-column:1/-1;display:grid;grid-template-columns:subgrid;
+  padding:44px 0 8px;border-top:1px solid var(--rule);
+}
+section:first-of-type{border-top:0}
+.rail{position:sticky;top:26px;align-self:start;height:max-content}
+.code{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);font-weight:600;
+}
+.rail .code{display:block;padding-bottom:8px;border-bottom:2px solid var(--accent);margin-bottom:10px}
+.rail p{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);margin:0;line-height:1.5}
+.body{min-width:0;max-width:none}
+h2{
+  font-family:Newsreader,Georgia,serif;font-weight:500;
+  font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.12;letter-spacing:-.01em;
+  margin:0 0 14px;text-wrap:balance;
+}
+h3{
+  font-size:1rem;font-weight:600;margin:30px 0 8px;letter-spacing:-.005em;
+}
+p{margin:0 0 15px;max-width:68ch}
+.lede{font-size:1.06rem;color:var(--muted);max-width:64ch}
+a{color:var(--primary)}
+strong{font-weight:600}
+code,.mono{font-family:"IBM Plex Mono",monospace;font-size:.88em}
+code{background:var(--panel-2);padding:2px 6px;border:1px solid var(--rule)}
+
+/* ---------- pull quote: the spoken opener ---------- */
+.script{
+  border-left:3px solid var(--accent);padding:6px 0 6px 24px;margin:6px 0 18px;
+  font-family:Newsreader,Georgia,serif;font-size:1.22rem;line-height:1.52;max-width:60ch;
+}
+.script p{max-width:none;margin:0 0 14px}
+.script p:last-child{margin-bottom:0}
+
+/* ---------- beats: a real sequence ---------- */
+ol.beats{list-style:none;counter-reset:b;margin:0;padding:0;display:grid;gap:2px}
+ol.beats li{
+  counter-increment:b;display:grid;grid-template-columns:44px minmax(0,1fr);gap:18px;
+  padding:15px 0;border-bottom:1px solid var(--rule);
+}
+ol.beats li:last-child{border-bottom:0}
+ol.beats li::before{
+  content:counter(b,decimal-leading-zero);
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);padding-top:4px;
+}
+ol.beats b{display:block;margin-bottom:2px}
+
+/* ---------- data tables ---------- */
+.tablewrap{overflow-x:auto;margin:8px 0 18px;border:1px solid var(--rule)}
+table.data{border-collapse:collapse;width:100%;min-width:640px;background:var(--panel)}
+table.data th{
+  text-align:left;font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  padding:12px 16px;border-bottom:1px solid var(--rule-strong);background:var(--panel-2);
+}
+table.data td{padding:12px 16px;border-bottom:1px solid var(--rule);font-size:14.5px;vertical-align:top}
+table.data tr:last-child td{border-bottom:0}
+td.figure{font-family:"IBM Plex Mono",monospace;font-weight:500;color:var(--primary);white-space:nowrap;font-variant-numeric:tabular-nums}
+td.caution{color:var(--muted)}
+td.step{font-family:"IBM Plex Mono",monospace;color:var(--muted);white-space:nowrap;font-size:13px}
+
+/* ---------- q and a drill ---------- */
+.drill{display:grid;gap:0;border:1px solid var(--rule);background:var(--panel)}
+details{border-bottom:1px solid var(--rule)}
+details:last-child{border-bottom:0}
+summary{
+  cursor:pointer;list-style:none;padding:15px 18px;font-weight:500;
+  display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;align-items:baseline;
+}
+summary::-webkit-details-marker{display:none}
+summary::before{
+  content:"+";font-family:"IBM Plex Mono",monospace;color:var(--accent);font-weight:600;
+}
+details[open] summary::before{content:"\2212"}
+details[open] summary{background:var(--panel-2)}
+summary:hover{background:var(--panel-2)}
+summary:focus-visible{outline:2px solid var(--primary);outline-offset:-2px}
+.answer{padding:4px 18px 18px 52px}
+.answer p{max-width:64ch;font-size:15.5px}
+.answer p:last-child{margin-bottom:0}
+.lead-in{color:var(--ink);font-weight:600}
+
+/* ---------- verdict lists: say / hedge / never ---------- */
+ul.verdicts{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+ul.verdicts li{
+  display:grid;grid-template-columns:74px minmax(0,1fr);gap:16px;align-items:start;
+  padding:13px 0;border-bottom:1px solid var(--rule);
+}
+ul.verdicts li:last-child{border-bottom:0}
+ul.verdicts .verdict{justify-self:start;margin-top:2px}
+
+/* ---------- lines to have ready ---------- */
+ul.lines{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+ul.lines li{
+  font-family:Newsreader,Georgia,serif;font-size:1.1rem;line-height:1.45;
+  padding-left:18px;border-left:2px solid var(--rule-strong);max-width:62ch;
+}
+
+/* ---------- schedule ---------- */
+.clock{display:grid;gap:0;border:1px solid var(--rule);background:var(--panel)}
+.clock div{display:grid;grid-template-columns:96px minmax(0,1fr);gap:18px;padding:13px 18px;border-bottom:1px solid var(--rule)}
+.clock div:last-child{border-bottom:0}
+.clock b{font-family:"IBM Plex Mono",monospace;font-weight:500;color:var(--accent);font-size:13px}
+
+footer{
+  margin-top:56px;padding-top:22px;border-top:2px solid var(--ink);
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:8px 28px;
+}
+
+@media (max-width:860px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  section{grid-template-columns:minmax(0,1fr);gap:14px}
+  .rail{position:static}
+  .rail .code{display:inline-block}
+  .rail p{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <p class="eyebrow">UNIQ+ 2026 · talk brief · read before you rehearse</p>
+    <h1>The laboratory<br>as referee</h1>
+    <p class="standfirst">Two clinical agents argue about an antibiotic. The patient's own susceptibility panel decides who was right. This is what to say, in what order, and what to do when someone pushes.</p>
+    <div class="meta">
+      <span><b>Shomique Hayat</b> · Institute of Biomedical Engineering</span>
+      <span>supervised by <b>Prof. Tingting Zhu</b></span>
+      <span>deck <b>20 slides</b>, notes on every one</span>
+      <span>every figure regenerates from <b>results/*.json</b></span>
+    </div>
+
+    <div class="report">
+      <div class="report-head">
+        <span>Finding, stated as the panel states it</span>
+        <span>n = 400 ordering-runs · 200 patients · qwen3:4b-instruct, temperature 0</span>
+      </div>
+      <div class="report-scroll">
+        <table class="panel">
+          <thead>
+            <tr><th>What the agent hears</th><th>Harmful revision</th><th>Coverage of the organism</th><th>Verdict</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="stim">A scripted sentence with no content<small>the neutral control, and the reason the other two rows mean anything</small></td>
+              <td><span class="num">0.0%</span><span class="delta">0 of 175</span></td>
+              <td><span class="num">87.5%</span><span class="delta">unchanged</span></td>
+              <td><span class="verdict v-s">S · inert</span></td>
+            </tr>
+            <tr>
+              <td class="stim">A second agent arguing a case<small>the multi-agent condition the whole field is building on</small></td>
+              <td><span class="num">15.2%</span><span class="delta">52 of 341</span></td>
+              <td><span class="num">78.0%</span><span class="delta">down 9.5 points</span></td>
+              <td><span class="verdict v-r">R · harmful</span></td>
+            </tr>
+            <tr>
+              <td class="stim">The susceptibility panel<small>the only thing in the study carrying real information about the patient</small></td>
+              <td><span class="num">1.1%</span><span class="delta">2 of 174</span></td>
+              <td><span class="num">95.2%</span><span class="delta">up 17.2 points</span></td>
+              <td><span class="verdict v-s">S · beneficial</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="report-foot">Communication makes the decision worse. Evidence makes it better. Everything else in this brief is how that was established and what it does not mean.</p>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <section>
+      <div class="rail"><span class="code">§1</span><p>Say this one out loud twice. It is the whole talk in 45 seconds.</p></div>
+      <div class="body">
+        <h2>The 45 second version</h2>
+        <div class="script">
+          <p>Language models are trained to be agreeable. People are now building clinical systems where several models confer and reach a decision together, on the assumption that they check each other's work. I tested that assumption on 200 real bloodstream infection cases, and the thing that makes the test work is the referee: the patient's own laboratory susceptibility panel, which neither agent can see and neither agent can argue with.</p>
+          <p>When a second agent argues a case, the first abandons a correct recommendation 15.2 per cent of the time and coverage of the organism falls 9.5 points. Give the same system the laboratory panel instead and harmful revision is 1.1 per cent and coverage rises 17.2 points. So communication makes the decision worse and evidence makes it better.</p>
+          <p>The part I did not expect is that on a standard accuracy endpoint this failure is invisible. Score whether the answer was right and the debate looks harmless. Score what kind of answer it was and a sentence containing no clinical evidence at all pushes carbapenem use from 0 to 84 per cent. The contribution is not that models are agreeable, that is known. It is that the usual way of measuring the harm cannot see this one.</p>
+        </div>
+        <p class="lede">Slow down on the middle paragraph. Those are the two rows of the panel at the top of this page, and they are the two rows of slide 14.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="rail"><span class="code">§2</span><p>For the interns, the family, anyone in the room without a clinical background.</p></div>
+      <div class="body">
+        <h2>The three minute version, no jargon</h2>
+        <p class="lede">Five beats in this order. The order matters: nobody can hear the finding until they believe there is a right answer at all.</p>
+        <ol class="beats">
+          <li><b>The situation.</b> Someone comes into hospital with bacteria in their blood. That kills people in days, so you give an antibiotic now. But you do not yet know which bacterium it is, and different bacteria need different drugs. The doctor is guessing, sensibly, from experience.</li>
+          <li><b>The answer arrives later.</b> The lab grows the bacterium from the blood and tests it against each antibiotic in turn. On my cohort that takes a median of 134 hours. So there is a real answer, and it lands days after the decision was made.</li>
+          <li><b>Why that is a gift.</b> Normally, to grade a medical AI, you compare it against what a doctor did, which assumes the doctor was right. My supervisor put it best: "the doctor makes the right decision, that's a huge assumption you make." Here I do not need the doctor. The bacteria tell you who was right.</li>
+          <li><b>The experiment.</b> Two AI agents with opposite jobs. One is an infectious disease specialist who wants to cover the infection. One is a stewardship pharmacist whose job is to stop over-prescribing. They argue for five turns and settle on one drug, and I check that drug against the patient's lab result. Then I run the same case three more ways: nobody disagrees, somebody disagrees but says nothing of substance, and the model is simply handed the lab result.</li>
+          <li><b>What happened.</b> An empty sentence of disagreement moved it in 90 to 100 per cent of cases. The actual laboratory result moved it in 54 per cent. It responds more to a person pushing back than to the evidence.</li>
+        </ol>
+        <h3>The analogy that lands</h3>
+        <p>It is a junior doctor who changes the prescription because a senior frowned, not because a test came back. The test is the thing that should move a prescription.</p>
+        <p><span class="mono" style="color:var(--accent)">Never use without defining in the same breath:</span> empiric, susceptibility panel, carbapenem, sycophancy, McNemar, ICC.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="rail"><span class="code">§3</span><p>Know these cold. The right column is what stops you overclaiming under pressure.</p></div>
+      <div class="body">
+        <h2>Ten numbers, and what each one does not mean</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th style="width:110px">Number</th><th style="width:34%">What it is</th><th>What it does not mean</th></tr></thead>
+            <tbody>
+              <tr><td class="figure">87.5%</td><td>baseline coverage, 175 of 200 opening recommendations cover the organism that grew</td><td class="caution">Not skill. It is one drug given to everybody, and a constant meropenem policy would score 96.0 per cent.</td></tr>
+              <tr><td class="figure">1 drug</td><td>piperacillin-tazobactam for 200 of 200 patients before any conversation</td><td class="caution">Not a broken prompt. Nothing in the case block predicts the organism.</td></tr>
+              <tr><td class="figure">0 of 70</td><td>cases that changed under the neutral re-ask, in every framing</td><td class="caution">Not a result about pressure. It is the control that makes the pressure number mean something.</td></tr>
+              <tr><td class="figure">90 to 100%</td><td>cases that changed under an empty challenge sentence, four framings</td><td class="caution">Not instability. Cn is zero, so the movement is specific to being contradicted.</td></tr>
+              <tr><td class="figure">54.3%</td><td>cases that changed when handed the actual susceptibility panel</td><td class="caution">Not a failure to read the panel. Given the panel it repairs 82.6 per cent of runs that entered inadequate.</td></tr>
+              <tr><td class="figure">0.0 to 1.5%</td><td>harmful revision under scripted pressure</td><td class="caution">Not reassurance. This is exactly why accuracy alone hides the problem.</td></tr>
+              <tr><td class="figure">0 to 83.7%</td><td>carbapenem use, baseline to under pressure</td><td class="caution">Prescribing behaviour, not demonstrated patient harm. Overuse drives resistance at population level.</td></tr>
+              <tr><td class="figure">15.2%</td><td>harmful revision when a live second agent argues, 52 of 341</td><td class="caution">The debate arm, not the scripted-pressure arm. Different stimulus, different number, both real.</td></tr>
+              <tr><td class="figure">OR 1.0</td><td>same drug proposed, patient varied, adoption identical, p = 0.7151</td><td class="caution">It is a null, and the null is the finding. Within a drug, coverage makes no difference.</td></tr>
+              <tr><td class="figure">p = 0.0004</td><td>few-shot loses 18 correct answers and gains 2, exact McNemar on 175 paired cases</td><td class="caution">Few-shot did change the behaviour. It moved off the constant, and changed it for the worse.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Two more worth carrying: <b>70 of 200</b> cases enter the pre-specified primary test, and <b>ICC 0.913</b>, which makes 400 ordering-runs behave like an effective 209.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="rail"><span class="code">§4</span><p>The spine. The right column is the sentence that gets you off the slide.</p></div>
+      <div class="body">
+        <h2>Slide by slide, with the transition</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th style="width:52px">#</th><th style="width:36%">The one claim</th><th>The line that moves you on</th></tr></thead>
+            <tbody>
+              <tr><td class="step">1</td><td>Who I am, one question</td><td class="caution">"The question is not mine, it is my supervisor's."</td></tr>
+              <tr><td class="step">2</td><td>The drug is chosen before the evidence exists</td><td class="caution">"So there is a real answer, and it arrives later."</td></tr>
+              <tr><td class="step">3</td><td>The doctor is not the reference, the bacteria are</td><td class="caution">"With a referee, you can ask a question you could not ask before."</td></tr>
+              <tr><td class="step">4</td><td>Her question, verbatim</td><td class="caution">"So what does the literature already know."</td></tr>
+              <tr><td class="step">5</td><td>Collaboration is known not to help, and sycophancy is known. What is missing is the referee</td><td class="caution">"Three questions follow."</td></tr>
+              <tr><td class="step">6</td><td>Two agents, opposed incentives, both speaking orders</td><td class="caution">"And four conditions on every case."</td></tr>
+              <tr><td class="step">7</td><td>Cn is the condition that makes the rest interpretable</td><td class="caution">"And it runs on three tiers of model."</td></tr>
+              <tr><td class="step">8</td><td>Size and quantisation held fixed so each comparison answers one question</td><td class="caution">"Start with what happens before anyone speaks."</td></tr>
+              <tr><td class="step">9</td><td>The default is a constant, and it scores 87.5</td><td class="caution">"So does it move when somebody speaks to it."</td></tr>
+              <tr><td class="step">10</td><td>c is zero, b is 63 to 70, p on the order of 1e-21</td><td class="caution">"It moves. Does the movement hurt anybody."</td></tr>
+              <tr><td class="step">11</td><td>On accuracy, almost no damage</td><td class="caution">"If I stopped here I would be wrong, and she told me where to look."</td></tr>
+              <tr><td class="step">12</td><td>An empty sentence, 0 to 84 per cent carbapenem</td><td class="caution">"One more control before the answer."</td></tr>
+              <tr><td class="step">13</td><td>Same drug, different patient, gap zero</td><td class="caution">"Now the arm that answers the question."</td></tr>
+              <tr><td class="step">14</td><td>Live agent minus 9.5 points, panel plus 17.2</td><td class="caution">"So can prompting fix it."</td></tr>
+              <tr><td class="step">15</td><td>Few-shot breaks the constant and costs coverage</td><td class="caution">"Which is what licenses the next rung."</td></tr>
+              <tr><td class="step">16</td><td>Invisible on accuracy, severe on stewardship</td><td class="caution">"And here is how you can check all of it."</td></tr>
+              <tr><td class="step">17</td><td>Nothing is typed, and the mistakes are on the record</td><td class="caution">"What it does not show."</td></tr>
+              <tr><td class="step">18</td><td>Six bounds, stated as design properties</td><td class="caution"></td></tr>
+              <tr><td class="step">19</td><td>Her endpoint hierarchy, every row answered</td><td class="caution">Backup. Only if asked.</td></tr>
+              <tr><td class="step">20</td><td>The laboratory is the referee, the measurement is the contribution</td><td class="caution"></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><b>Ten minutes:</b> 1, 2, 3, 4, 7, 9, 10, 12, 14, 16, 18, 20. Keep the rest in the deck and say "there is a slide on that."<br><b>Fifteen minutes:</b> everything except 19.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="rail"><span class="code">§5</span><p>Somebody will ask "has this not been done". Concede first, then land it.</p></div>
+      <div class="body">
+        <h2>The gap, in the form you will be asked for it</h2>
+        <ol class="beats">
+          <li><b>Yes, collaboration between agents is already known not to help reliably.</b> Kim et al., Nature Machine Intelligence 2026, the paper Tingting sent me: across 260 configurations with prompts, tools and compute held constant, the mean multi-agent improvement is 0.0 per cent. MedAgentBoard at NeurIPS 2025 finds the same in medicine.</li>
+          <li><b>Yes, sycophancy is documented.</b> Position abandonment under challenge, and adopting a peer's answer whether it is right or wrong, are established results. I do not claim to discover either.</li>
+          <li><b>What is missing is the arbiter.</b> In those studies the thing that decides who was right is a benchmark key or another model. I arbitrate against the individual patient's own susceptibility panel, which neither agent can see, neither can argue with, and neither produced. That gives me something the literature does not have: transitions conditioned on what the run entered with, and a harm that appears only on the stewardship endpoint.</li>
+        </ol>
+        <p>The full claim-by-claim adversarial check is <code>docs/LITERATURE_PRESSURE_TEST.md</code>. Point at it if someone presses hard. It is deliberately unflattering, which is the point.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="rail"><span class="code">§6</span><p>Zero-shot and few-shot are run. Rung three is designed, and the design is the interesting part.</p></div>
+      <div class="body">
+        <h2>The ladder, and the training plan</h2>
+        <p class="lede">The order came from Tingting at the first meeting: zero-shot, then few-shot, then training only if few-shot fails.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th style="width:150px">Rung</th><th style="width:150px">Status</th><th>What it produced</th></tr></thead>
+            <tbody>
+              <tr><td class="step">1 · zero-shot</td><td class="figure">complete, 200 cases</td><td>One constant recommendation for every patient, 87.5 per cent coverage.</td></tr>
+              <tr><td class="step">2 · few-shot</td><td class="figure">complete, 200 cases</td><td>6 drugs instead of 1 and 34.5 per cent narrow prescribing, but coverage falls to 84.0 per cent on the paired subset, exact p = 0.0004.</td></tr>
+              <tr><td class="step">3 · fine-tuning</td><td class="figure">designed, not run</td><td>Out of scope for the internship, and rung 2 is precisely what licenses it.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>How few-shot was kept honest, because this is the obvious attack</h3>
+        <p>Exemplars are drawn from a pool disjoint from the 200 evaluation cases, with disjointness asserted on <code>case_id</code> and on <code>subject_id</code> so one patient cannot appear on both sides, a separate exemplar seed from the model seed, and an answer rule fixed in advance: the narrowest agent the laboratory reports susceptible. The answer to a case appears in that case's own exemplars only 36.0 per cent of the time, so it is not copying.</p>
+        <h3>Rung three, if asked what you would actually do</h3>
+        <ol class="beats">
+          <li><b>Target.</b> Not the clinician's prescription, because that assumes the clinician was right. The label is the set of agents the panel called susceptible, so it is set-valued and any member counts as correct.</li>
+          <li><b>Split.</b> Patient-level, on cases outside the frozen 200, held out on <code>subject_id</code> and not on <code>case_id</code>. The evaluation cohort stays untouched, which is the same discipline as rung two.</li>
+          <li><b>The trap, and this is the part worth saying out loud.</b> Fine-tuning on coverage alone would produce carbapenem for everybody, because on this cohort a constant meropenem policy scores 96.0 per cent. The objective has to be coverage penalised by spectrum, weighted by WHO AWaRe class, or you train exactly the failure this project measured.</li>
+          <li><b>Pre-specified success criterion.</b> Beat the best constant policy on coverage and on spectrum simultaneously, on held-out patients, and hold it under the C1 pressure conditions. Winning one and losing the other is not success, it is the degenerate policy again.</li>
+          <li><b>Compute.</b> LoRA on the 4B checkpoint fits locally. The IBME cluster is the alternative Tingting already suggested, and putting MIMIC on the cluster is a data-governance question I would settle first.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <div class="rail"><span class="code">§7</span><p>One breath each. The size matching is the bit that shows design judgement.</p></div>
+      <div class="body">
+        <h2>The models</h2>
+        <ul class="verdicts">
+          <li><span class="verdict v-s">TIER 1</span><span><b>Qwen3-4B-instruct, 4-bit, temperature 0, seed 20260818.</b> The subject of every debate arm, not a comparison.</span></li>
+          <li><span class="verdict v-s">TIER 2</span><span><b>MedGemma-4B, same quantisation.</b> The domain comparison. Same size on purpose: a 12B model would vary scale and training corpus at once and answer neither question. It also produces a near-constant opening, on a different drug, which localises the choice of drug to the weights rather than the prompt.</span></li>
+          <li><span class="verdict v-s">TIER 3</span><span><b>Four BERT encoders, 110M, no fine-tuning.</b> Tingting asked for a medical BERT without fine-tuning. BiomedBERT reaches 84.5 per cent against the 4B model's 87.5, and every encoder is near-constant too. The sharpest way to say this task does not discriminate what people assume it discriminates.</span></li>
+          <li><span class="verdict v-i">LOCAL</span><span><b>Everything runs on this machine.</b> MIMIC-IV is credentialed under a PhysioNet agreement, so record-level data cannot reach a hosted service. The harness transfers to GPT and other hosted models on synthetic non-MIMIC cases, which is Zhikang's ask and is on the closing slide.</span></li>
+          <li><span class="verdict v-i">UNUSED</span><span><b>DeepSeek-R1-8B</b> is installed and unused. Its value is visible chain of thought, which is an interpretability question, and at 8B it cannot join the size-matched contrast, so using it as a fourth accuracy column would be dishonest.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="rail"><span class="code">§8</span><p>Cover the answer, say it out loud, then open it. Anything you fumble, say twice more.</p></div>
+      <div class="body">
+        <h2>The question drill</h2>
+        <p class="lede">Sixteen questions. The first sentence of each answer is the one to lead with, so the room hears the position before the reasoning.</p>
+        <div class="drill">
+
+          <details><summary>Is 200 cases not very small?</summary><div class="answer">
+            <p><span class="lead-in">It is small, and it is paired.</span> Every case is its own control: the same patient is put to the same model in four conditions with a fixed seed, so I am not comparing 200 patients against another 200, I am comparing each patient against himself. That is what gets p on the order of 1e-21 out of 70 evaluable cases. The cohort is small because everything runs locally under the data agreement, and I would rather have 200 cases in four conditions than 2,000 in one.</p>
+          </div></details>
+
+          <details><summary>Your model recommends the same drug for everyone. Is this not just a broken model?</summary><div class="answer">
+            <p><span class="lead-in">That is the first result, and I put it on slide 9 deliberately.</span> Look at what the constant scores: 87.5 per cent. Nothing in the prompt predicts the organism, so one broad empiric agent for everybody is the rational policy under that uncertainty, not a broken one. It does bound what I can claim, and I say so: this study cannot separate a model that reasons about patients from a model with one good default. What it can still do is ask what moves that default, and the answer is social pressure rather than evidence.</p>
+          </div></details>
+
+          <details><summary>Would a bigger model not just fix this?</summary><div class="answer">
+            <p><span class="lead-in">Possibly, and I cannot tell you from this data.</span> One 4B checkpoint is the subject and a second 4B is the comparison, so the findings are scoped to those checkpoints. What I can say is that the degenerate policy is not unique to the generative model: four BERT encoders show it too, and a 110M encoder gets within three points of the 4B model. That makes me think it is a property of the task as posed rather than of capacity. Testing scale is a clean experiment, and it is the wrong one for the size-matched contrast I needed.</p>
+          </div></details>
+
+          <details><summary>Is sycophancy not already well known?</summary><div class="answer">
+            <p><span class="lead-in">Yes, and I do not claim it.</span> Then give the three-part answer in section 5: collaboration is known not to help, sycophancy is documented, and what is missing is the arbiter. Conceding the first two is what makes the third credible.</p>
+          </div></details>
+
+          <details><summary>Carbapenem for everybody actually maximises coverage on your cohort. Is the model not right to escalate?</summary><div class="answer">
+            <p><span class="lead-in">This is the sharpest question in the deck and the answer is yes and no.</span> Yes: a constant meropenem policy scores 96.0 per cent coverage here, so if coverage is your only endpoint, carbapenem-for-all wins. That is exactly why coverage cannot be your only endpoint, and it is why stewardship exists as a discipline.</p>
+            <p>No: the escalation here is not paid for by anything. It happens in response to a sentence containing no clinical information, coverage was already 87.5 and harmful revision near zero. Under the actual panel the model escalates far less, 21 per cent, and there the broadening is earned.</p>
+          </div></details>
+
+          <details><summary>You say harmful revision is 15.2 per cent with a live agent but 0 to 1.5 per cent under pressure. Which is it?</summary><div class="answer">
+            <p><span class="lead-in">Both, and the difference is the point.</span> They are different stimuli. The pressure conditions are four fixed sentences with no content, and the model usually swaps to another drug that also covers. The debate arm is a second model constructing a case for a specific drug, and there it lands on something that fails the patient in 52 of 341 opportunities. A scripted challenge and a reasoned challenge are not the same intervention, which is itself a finding.</p>
+          </div></details>
+
+          <details><summary>Only 70 of your 200 cases enter the primary test. Is that not fatal?</summary><div class="answer">
+            <p><span class="lead-in">It is the honest denominator and I put the attrition on the slide.</span> Cases drop when any of the four conditions returns undetermined, which happens when the laboratory never tested the recommended drug against that patient's organism. That is a property of what the lab chose to test, not of the model, and it is not random: it enriches for organisms that get full panels. The direction of the result does not depend on it, because c is zero in every framing and it would take a very odd missingness mechanism to hide 63 discordant pairs.</p>
+          </div></details>
+
+          <details><summary>What is McNemar and why is it the right test?</summary><div class="answer">
+            <p><span class="lead-in">It is the test for a before-and-after on the same subject.</span> It ignores everybody who did the same thing in both conditions and asks, among those who changed, whether they changed in one direction more than the other. Here b is the cases that changed under pressure only, c is the cases that changed under the neutral turn only, and c is zero.</p>
+          </div></details>
+
+          <details><summary>Your two agents are the same model. Is that not one model talking to itself?</summary><div class="answer">
+            <p><span class="lead-in">Yes, and that is a limitation I state.</span> Both personas are served by the same checkpoint, so what I measure is deference within a homogeneous system. A heterogeneous pair is a different and interesting experiment. It also means I should not report the agreement between the two agents as an independent result: once you know the model abandons its position and adopts the counterpart's drug, the diagonal is entailed rather than discovered, and I flag that in the repository.</p>
+          </div></details>
+
+          <details><summary>Have you shown any patient harm?</summary><div class="answer">
+            <p><span class="lead-in">No, and I am careful about this.</span> MIMIC-IV is observational. Every claim is alignment with recorded microbiology or counterfactual appropriateness of a recommendation. The stewardship result is a difference in prescribing behaviour. Carbapenem overuse drives carbapenem-resistant Enterobacterales at population level, but I cannot and do not show a resistance outcome in these patients.</p>
+          </div></details>
+
+          <details><summary>Did a clinician check any of this?</summary><div class="answer">
+            <p><span class="lead-in">No, and it is on the limitations slide.</span> The personas, the 17-drug formulary and the adequacy rule come from my supervisor and from published guidance, not from a treating physician or a clinical microbiologist. The stewardship interpretation is standard in the literature but has not been checked against a clinician's judgement on these specific cases. If I continue this, consulting a stewardship pharmacist about what they would want from such a system is the first thing I would do, and it is on the closing slide.</p>
+          </div></details>
+
+          <details><summary>How do you know the model was not told the answer somewhere in the prompt?</summary><div class="answer">
+            <p><span class="lead-in">Three ways.</span> The case block passes a provenance gate that aborts on any organism name or susceptibility phrasing. The pressure sentences are a closed set of four and I censused all 312 turns rather than sampling: zero contain any microbiology. And the model's own turns are hashed and measured rather than aborted, because a model writing "await culture results" is reasoning aloud, not leaking.</p>
+          </div></details>
+
+          <details><summary>Is your leakage gate not just deleting inconvenient data?</summary><div class="answer">
+            <p><span class="lead-in">It was, and I caught it.</span> An early version aborted whenever the model itself used the word resistant, which deleted 220 runs non-randomly, exactly the runs where it was reasoning about microbiology. On the truncated data one arm read a perfect 160 of 160. On the recovered data it is 311 of 312, and the single counterexample was inside the deleted pile. Fixed, fault-injection tested at 10 of 10, every dropped run recovered. It is in the repository as a defect, not a footnote.</p>
+          </div></details>
+
+          <details><summary>Why is your confidence endpoint missing?</summary><div class="answer">
+            <p><span class="lead-in">Because I withdrew it.</span> I pre-registered "confident" at 80 or above, then every one of 200 observations came back 85, 90 or 95, before and after. A threshold that cannot fail is not a pre-registration, so reporting it as a null would be worse than removing it.</p>
+          </div></details>
+
+          <details><summary>Why not use GPT-4 or Claude?</summary><div class="answer">
+            <p><span class="lead-in">Because the data is credentialed and cannot leave this machine.</span> That is a PhysioNet data use agreement, not a preference. The harness transfers to hosted models on synthetic non-MIMIC cases and that is on the closing slide as Zhikang's ask. It is also why the study model is 4B: it is what runs locally at temperature 0 with a fixed seed, which is what makes the paired tests valid.</p>
+          </div></details>
+
+          <details><summary>What would change your mind about the finding?</summary><div class="answer">
+            <p><span class="lead-in">A heterogeneous pair, or a live opposing agent that varies its argument with the case.</span> If a stronger or differently trained counterpart produced beneficial corrections at a rate that outran the harmful ones, the net effect would flip and I would say so. The arithmetic is on the record: at this base rate the break-even correction rate is unattainable, so the sign of the net effect is forced by base rates rather than discovered. That is a caveat I raise myself rather than wait for.</p>
+          </div></details>
+
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="rail"><span class="code">§9</span><p>Three moves, in this order. Never bluff a number.</p></div>
+      <div class="body">
+        <h2>When you do not know</h2>
+        <ol class="beats">
+          <li><b>Name the honest state.</b> "I do not have that measured."</li>
+          <li><b>Give the nearest thing you do have.</b> "The closest number I have is X, which speaks to a neighbouring question because ..."</li>
+          <li><b>Say what it would take.</b> "To answer yours properly you would need arm Y, and the reason I did not run it is Z."</li>
+        </ol>
+        <h3>Worked, so the shape is in your mouth already</h3>
+        <ul class="verdicts">
+          <li><span class="verdict v-i">3 AGENTS</span><span>Not run. The nearest thing is the four pressure framings, where a single unsupported challenge already moves it 90 to 100 per cent, so a majority condition should saturate rather than reveal anything. The published range suggests unanimity matters more than count, and that is the experiment I would run.</span></li>
+          <li><span class="verdict v-i">GRAM POS</span><span>Not tested. My cohort selects on having an interpretable panel, which enriches Gram-negatives, and the formulary is built around them. The Gram-positive half needs a different intrinsic-resistance table, which is genuine work rather than a rerun.</span></li>
+          <li><span class="verdict v-i">AMPC</span><span>Unhandled, and it is on the limitations slide. Roughly 18 per cent of this cohort can de-repress AmpC, so a recommendation scored adequate against the reported panel could still fail clinically. Correcting it needs organism-specific rules.</span></li>
+        </ul>
+        <p>If someone asserts something you believe is wrong, do not fold. That is literally the failure mode you are presenting. Say: "that may be right, and here is what my data shows, so let me check it and come back to you." Then check it.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="rail"><span class="code">§10</span><p>Each of these was checked and cut for a reason. Read the reason, not just the rule.</p></div>
+      <div class="body">
+        <h2>Things not to say</h2>
+        <ul class="verdicts">
+          <li><span class="verdict v-r">R</span><span><b>Sycophancy or peer conformity as a discovery.</b> Both are published, and claiming them is the fastest way to lose the room's trust in everything else.</span></li>
+          <li><span class="verdict v-r">R</span><span><b>"The model underperforms meropenem."</b> Coverage on this cohort is maximised by the degenerate carbapenem-for-all policy, so that framing argues against your own stewardship point.</span></li>
+          <li><span class="verdict v-r">R</span><span><b>The speaking-order effect as an independent discovery.</b> With a near-constant opening and near-universal adoption, permuting order permutes the input to a nearly deterministic rule. Cohen's kappa is 0.178.</span></li>
+          <li><span class="verdict v-r">R</span><span><b>"The model is unstable."</b> Cn is zero. It is stable and it is deferential, and those are different words.</span></li>
+          <li><span class="verdict v-r">R</span><span><b>The confidence endpoint.</b> Withdrawn, and withdrawing it is the stronger story.</span></li>
+          <li><span class="verdict v-r">R</span><span><b>Anything causal.</b> Observational data, so always alignment with recorded microbiology or counterfactual appropriateness.</span></li>
+          <li><span class="verdict v-i">I</span><span><b>A number you cannot see in section 3.</b> Say "there is a slide on that" and go to the backup rather than reconstructing it live.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="rail"><span class="code">§11</span><p>Deploy one per section. They are load-bearing, not ornamental.</p></div>
+      <div class="body">
+        <h2>Sentences worth having ready</h2>
+        <ul class="lines">
+          <li>"The doctor is not the reference. The bacteria are."</li>
+          <li>"It is moved more by a person disagreeing with it than by the laboratory result."</li>
+          <li>"Zero of 70 under a neutral turn is what makes the rest of this deck an inference rather than a description."</li>
+          <li>"A sentence carrying no clinical evidence pushed it to last-line therapy for four out of five patients, and bought nothing."</li>
+          <li>"Score whether it was right and debate looks harmless. Score what kind of answer it gave and the harm appears."</li>
+          <li>"Examples taught it to vary its prescribing without teaching it which patient needs which drug."</li>
+          <li>"The contribution is the referee, not the phenomenon."</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="rail"><span class="code">§12</span><p>Do not add slides in the last hour. Fix only what the run-through exposes.</p></div>
+      <div class="body">
+        <h2>The 90 minutes</h2>
+        <div class="clock">
+          <div><b>0 to 15</b><span>Read sections 1, 3, 5 and 10. Out loud, not skimmed.</span></div>
+          <div><b>15 to 35</b><span>Open the deck. Read the speaker notes on slides 9 to 16, then say each in your own words.</span></div>
+          <div><b>35 to 55</b><span>Full run through, standing, timed. Aim for your slot minus two minutes.</span></div>
+          <div><b>55 to 75</b><span>Section 8 with the answers closed. Anything you fumble, say twice more.</span></div>
+          <div><b>75 to 85</b><span>Fix only what the run-through exposed.</span></div>
+          <div><b>85 to 90</b><span>Section 11, then stop. Water, and open on slide 1.</span></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>Every number here regenerates from results/*.json</span>
+    <span>BRIEFING.md · STORY.md · PRIMARY_TEST.md · LIMITATIONS.md</span>
+    <span>github.com/hayat-shomique/antibiotic-debate-mimic</span>
+  </footer>
+
+</div>
