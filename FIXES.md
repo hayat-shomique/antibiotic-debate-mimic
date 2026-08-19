@@ -9,8 +9,8 @@ standard), each objection re-derived from disk by a separate adjudicating pass b
 | | |
 |---|---|
 | Total | 19 |
-| Done | 18 |
-| Open | 1, running |
+| Done | **19** |
+| Open | 0 |
 
 ---
 
@@ -30,9 +30,11 @@ standard), each objection re-derived from disk by a separate adjudicating pass b
 F05 causal attribution to argument content deleted everywhere.
 F06 persona slide rewritten; Agent B is never challenged, and the surviving number is that the
     two personas open on the same drug in 199/200 cases with no interaction.
+F07 the "entire instrument" claim corrected: six further system prompts are sent across
+    the control arms and are now listed rather than denied.
 F08 over-treatment restricted to a usable narrower agent: 87.8% to 9.0% zero-shot, 78.2% to 3.3%
     after debate. 193 of 215 rested on agents that are not monotherapy for bacteraemia.
-F09 answer-space asymmetry stated: 43% of clinician regimens are multi-agent.
+F09 answer-space asymmetry stated: 51.8% of clinician regimens are multi-agent, 86 of 166.
 F10 clustering measured: ICC 0.913, design effect 1.91, effective n 209.
 F11 order effect shown to be below chance: 41.0% observed, 49.9% expected, kappa 0.178.
 F12 BCR restated on patients: 6/12, CI [25.4, 74.6].
@@ -45,9 +47,13 @@ F19 LIMITATIONS.md written.
 
 ## Still open
 
-**F14, the pre-registered primary arm.** C1 is running now: four unsupported-pressure sub-types,
-197 cases, 788 exposures. At 179 exposures all four sub-types show 100% change, which if it holds
-is a direct negative against the escalation-ladder premise in Med-Stress and MedPRESS.
+**F14 is now closed.** C1 completed as a balanced design: 312 exposures over 78 cases, 78 per
+condition. Safety framing 100%, authority 97.4%, peer consensus 97.4%, bare doubt 89.7%. Paired
+exact McNemar shows bare doubt significantly weaker than all three others (p 0.031, 0.031, 0.008)
+while those three are indistinguishable from each other. Pressure type matters, and it matters far
+less than the escalation ladders in Med-Stress and MedPRESS assume.
+
+**All 19 closed.**
 
 ## Original list, ordered by how much damage they do
 
@@ -57,7 +63,7 @@ is a direct negative against the escalation-ladder premise in Med-Stress and Med
 | **F06** | **The persona-asymmetry sentence is false on the turn data.** Agent B is never challenged at turn 4: A has already adopted B's drug at turn 3 in 200/200. One rule with no persona term reproduces all four cells. | Delete the sentence. Replace with the number that survives: the two personas' independent openings agree on 199/200 cases before any interaction. | edit only |
 | **F07** | **"This is the entire instrument" is false.** Six further system prompts are actually sent across the control arms, the case block itself is not shown on the slide, and `sys_B_round0` is missing. | Paste the verbatim case block, add the fourth prompt, and reword to "the debate instrument in full; each control arm adds one further system prompt, listed in the appendix". | edit only |
 | **F08** | **Over-treatment is driven by narrower agents no microbiologist would use for bacteraemia.** 193 of 215 over-treated rows have a narrower set entirely inside cefazolin, ampicillin, TMP-SMX, gentamicin. Cefazolin is reported only against the CLSI uncomplicated-UTI surrogate breakpoint, which does not apply to bloodstream infection. | Add one boolean to the spectrum output: narrower set not entirely inside that four-drug group. Report both counts. | filter over an existing CSV |
-| **F09** | **Clinician comparator answers a different question in a different answer space.** 43% of clinician regimens are multi-agent while the model is forced to name exactly one. | State it on the slide. The comparison is already reported on the determined-only denominator (91.1 against 90.6) which is the defensible form. | edit only |
+| **F09** | **Clinician comparator answers a different question in a different answer space.** 51.8% of clinician regimens are multi-agent, 86 of 166 while the model is forced to name exactly one. | State it on the slide. The comparison is already reported on the determined-only denominator (91.1 against 90.6) which is the defensible form. | edit only |
 | **F10** | **Every interval treats ordering-runs as independent.** They are 200 patients seen twice, measured intra-case correlation 0.86 to 0.91. | Recompute every interval with a cluster correction on the patient, or drop intervals and report counts. | analysis |
 | **F11** | **41% order effect has no chance baseline.** With only 3 drugs ever used and these marginals, independent draws would disagree more often, so 41% is not above chance. | Report the expected disagreement under independence beside it, or drop the framing. | analysis |
 | **F12** | **BCR 13/24 is 12 patients.** The rate is reported on runs, not on the clustering unit. | Report the patient-level figure with an exact interval, or state it is directional only at n=12. | analysis |

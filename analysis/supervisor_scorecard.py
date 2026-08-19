@@ -3,12 +3,31 @@
 from __future__ import annotations
 import json, glob, csv, collections, os
 ADQ="ADEQUATE"
-def R(p): return [json.loads(l) for f in glob.glob(p) for l in open(f) if l.strip()]
+def R(p, kind=None):
+    """Read matching run files. `kind` filters, because a glob will otherwise pool a
+    superseded pilot into the arm it was superseded by."""
+    out=[]
+    for f in sorted(glob.glob(p)):
+        with open(f) as fh:
+            for l in fh:
+                if not l.strip(): continue
+                r=json.loads(l)
+                if kind is None or r.get("kind") in kind: out.append(r)
+    return out
 def has(p): return os.path.exists(p)
+# Run data lives outside the repository under the PhysioNet DUA. Resolve to the working
+# directory if the repo copy has no runs/, and say so rather than dividing by zero.
+if not glob.glob("runs/*.jsonl"):
+    alt=os.path.expanduser("~/brain_run")
+    if glob.glob(os.path.join(alt,"runs","*.jsonl")): os.chdir(alt)
+    else:
+        raise SystemExit("No run files found. This script needs the working directory that "
+                         "holds runs/, which is excluded from the repository under the "
+                         "PhysioNet data use agreement.")
 full=[r for r in R("runs/debate_20260818.jsonl") if r.get("kind")=="full"]
-rev=R("runs/canonical_reveal.jsonl"); cc2=R("runs/canonical_cleanc2.jsonl")
+rev=R("runs/canonical_reveal.jsonl", kind={"reveal","reveal_recovered"}); cc2=R("runs/canonical_cleanc2.jsonl")
 cn=R("runs/c0cn_*.jsonl"); conf=R("runs/confidence_*.jsonl")
-c1=[x for x in R("runs/c1_*.jsonl") if x.get("subtype")]
+c1=[x for x in R("runs/c1_20260819.jsonl") if x.get("subtype")]  # 20260818 is the superseded 3-case pilot
 sc=R("runs/selfcon_*.jsonl"); pl=R("runs/plausible_*.jsonl"); mt=R("runs/matched_*.jsonl")
 W=76
 print("="*W); print("  SUPERVISOR SCORECARD, computed live"); print("="*W)
@@ -39,10 +58,15 @@ if has("f08_overtreatment.json"):
          f"over-treated zero-shot {o['model_round0']['as_reported']} = {o['model_round0']['pct_reported']}%, "
          f"restricted to a usable narrower agent {o['model_round0']['restricted']} = {o['model_round0']['pct_restricted']}%",
          "f08_overtreatment.json")
-ri=[r for r in rev if r["final_A_outcome"]!=ADQ]; fx=sum(1 for r in ri if r["reveal_outcome"]==ADQ)
+# Split on INADEQUATE, not on "not adequate": folding INTERMEDIATE_ONLY and
+# UNDETERMINED into the repair denominator uses a different convention from the
+# four-cell table three items below.
+ri=[r for r in rev if r["final_A_outcome"]=="INADEQUATE"]; fx=sum(1 for r in ri if r["reveal_outcome"]==ADQ)
+rind=[r for r in rev if r["final_A_outcome"] not in (ADQ,"INADEQUATE")]
 ra=[r for r in rev if r["final_A_outcome"]==ADQ]; hd=sum(1 for r in ra if r["reveal_outcome"]==ADQ)
 line(5,"Escalation / de-escalation correctness once results arrive",
-     f"repaired {fx}/{len(ri)} = {100*fx/len(ri):.1f}%   held {hd}/{len(ra)} = {100*hd/len(ra):.1f}%   ({len(rev)}/400 runs)",
+     f"repaired {fx}/{len(ri)} = {100*fx/len(ri):.1f}% of INADEQUATE entrants   held {hd}/{len(ra)} = {100*hd/len(ra):.1f}%   "
+     f"({len(rind)} entrants were indeterminate and are excluded from both)   {len(rev)}/400 runs",
      "runs/canonical_reveal.jsonl")
 if has("secondary_endpoints.json"):
     s=json.load(open("secondary_endpoints.json"))

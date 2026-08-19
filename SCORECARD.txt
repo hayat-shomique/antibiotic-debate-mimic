@@ -23,7 +23,7 @@
      [f08_overtreatment.json]
 
   5. Escalation / de-escalation correctness once results arrive
-     repaired 70/88 = 79.5%   held 311/312 = 99.7%   (400/400 runs)
+     repaired 57/69 = 82.6% of INADEQUATE entrants   held 311/312 = 99.7%   (19 entrants were indeterminate and are excluded from both)   400/400 runs
      [runs/canonical_reveal.jsonl]
 
   6. Treatment failure / deterioration
@@ -87,6 +87,6 @@
     clean-context reveal        200/ 200  COMPLETE
     confidence                  200/ 200  COMPLETE
     self-consistency            200/ 200  COMPLETE
-    C1 unsupported pressure     293/ 788  RUNNING
+    C1 unsupported pressure     300/ 788  RUNNING
     plausible-wrong seeding     166/ 312  RUNNING
-    drug-matched pairs            0/ 250  queued
+    drug-matched pairs           21/ 250  RUNNING
