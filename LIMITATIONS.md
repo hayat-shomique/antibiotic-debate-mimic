@@ -50,3 +50,6 @@ appropriateness of a recommendation, never evidence that a recommendation change
 Every case was selected on having an interpretable susceptibility panel, which enriches for
 organisms that receive full panels. Published comparators report microbiology-evaluable rates
 near 32%; this cohort is 100% by construction, which is a declared post-baseline selection.
+
+
+**Answer-space asymmetry, stated.** 43% of the clinician regimens in this cohort are multi-agent, while the model is required to name exactly one drug. The comparison is therefore between different answer spaces, which is part of why the clinician scores UNDETERMINED so often on the full cohort. The determined-only figures are the only ones worth quoting, and even those compare a single-agent recommendation against what is frequently a combination.

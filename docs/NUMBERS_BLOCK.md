@@ -223,7 +223,7 @@ This is bounded by n: with 60/60 in both arms the design cannot detect an effect
 - Bare final drugs: meropenem 33, pip-tazo 26, cefepime 1. Reasoned final drugs: ceftriaxone 37, cefepime 23, the reasoned arm never returns the round-0 drug (0/60).
 - Outcomes: round-0 ADEQ 54 / INADEQ 3 / UNDET 2 / INT 1; bare ADEQ 55 / INADEQ 2 / UNDET 2 / INT 1; reasoned ADEQ 51 / INADEQ 7 / UNDET 2.
 
-Both rates have to be quoted. Argument content adds 43.3 points over bare disagreement, so the debate result is not pure social pressure; bare disagreement with zero argument content still flips 34/60 = 56.7%.
+Both rates have to be quoted. The two challenge arms differ in system prompt and header as well as in argument content, so the 43.3-point gap is an uncontrolled contrast, so no causal reading is available from this contrast; bare disagreement with zero argument content still flips 34/60 = 56.7%.
 
 ---
 

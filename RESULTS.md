@@ -136,3 +136,6 @@ the pooled figure was measuring which drugs happened to be resistant in this coh
 differ in system prompt and separator as well as in argument content, so the 43-point gap between
 them is an uncontrolled contrast. The three rates are reported descriptively; the causal reading
 is withdrawn.
+
+
+**Answer-space asymmetry, stated.** 43% of the clinician regimens in this cohort are multi-agent, while the model is required to name exactly one drug. The comparison is therefore between different answer spaces, which is part of why the clinician scores UNDETERMINED so often on the full cohort. The determined-only figures are the only ones worth quoting, and even those compare a single-agent recommendation against what is frequently a combination.
