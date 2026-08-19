@@ -73,9 +73,9 @@ scripts in `analysis/`. If a number needs changing, change the analysis, not the
 19 August. Every arm now runs under a PID lock in `~/brain_run/.locks`. Start arms with `gogo`, not
 by hand.
 
-## State as of 19 August 2026, 23:17
+## State as of 19 August 2026, 23:30
 
-All experiments complete. Nothing running. Repository at `96bbb3c Few-shot complete at 200 cases: rung two does not improve`.
+All experiments complete. Nothing running. Repository at `3a51b20 Close outstanding fixes and add a one-page entry point`.
 
 | arm | exposures |
 |---|---|
