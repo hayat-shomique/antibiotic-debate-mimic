@@ -54,7 +54,7 @@ repeated write, not a repeated measurement, and the second is dropped before any
 | plausible | 166 | 0 | `case_id + seed_drug + receiver` | `plausible_20260819.jsonl` |
 | track4 | 172 | 0 | `case_id + seed_drug + receiver + condition` | `track4_20260819.jsonl` |
 
-**85 duplicate writes found and dropped in total.** Cause and fix in `DATA_INTEGRITY.md`.
+**85 duplicate writes found and dropped in total.** Cause and fix in `archive/DATA_INTEGRITY.md`.
 
 ## What is deliberately not claimed
 

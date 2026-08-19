@@ -4,7 +4,8 @@ For the 90 minutes before the UNIQ+ conference. Read section 1 and 3 twice, say 
 once, then drill section 8. Everything here is checked against the repository, and where a number
 appears it names the file that produces it.
 
-Deck: `deck/Shomique_Hayat_UNIQ_antibiotic_agents.pptx`, 20 slides, speaker notes on every slide.
+Deck: `deck/Shomique_Hayat_UNIQ_antibiotic_agents.pptx`, 25 slides, 17 core and 8 backup, speaker notes on
+every one. The project in one document is `PROJECT.md`.
 Rebuild it with `python3 deck/deck_figures.py && python3 deck/build_deck.py`.
 
 ---

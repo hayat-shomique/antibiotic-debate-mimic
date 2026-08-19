@@ -58,7 +58,7 @@ R = json.loads((RES / "RESULTS.json").read_text())
 P = json.loads((RES / "policy_degeneracy.json").read_text())
 FS = json.loads((RES / "fewshot.json").read_text())
 LEAK = json.loads((RES / "leakage.json").read_text())
-METHODS = (ROOT / "METHODS.md").read_text()
+METHODS = (ROOT / "docs" / "METHODS.md").read_text()
 SCORE = (ROOT / "SCORECARD.txt").read_text()
 MODELS_DOC = (ROOT / "docs" / "MODELS.md").read_text()
 README = (ROOT / "README.md").read_text()
@@ -348,7 +348,7 @@ Measured on this cohort the susceptibility panel arrives at a median of {MEDIAN_
 and zero panels are available at 5, 12 or 24 hours. So the empiric window is not a modelling
 convenience, it is real and it is long.
 """)
-footer(s, "METHODS.md sections 1 and 2  ·  timing measured on the frozen cohort", page())
+footer(s, "PROJECT.md section 3  ·  timing measured on the frozen cohort", page())
 
 # ============================================================== 3. reference standard
 s = new_slide()
@@ -370,7 +370,7 @@ with it, and neither agent produced it. It is the patient's own biology.
 Four outcome classes, not two, because when the laboratory never tested a drug against that organism
 the honest answer is undetermined, and pretending otherwise would inflate every number I show you.
 """)
-footer(s, "METHODS.md section 3  ·  outcome classes as pre-specified in protocol/", page())
+footer(s, "PROJECT.md section 3  ·  outcome classes as pre-specified in protocol/", page())
 
 
 # ============================================================== 4. the question
@@ -463,7 +463,7 @@ model call decides adequate or not against that patient's own panel.
 The point of the slide is stage 4. Everything else is held identical, so whatever differs between the
 four conditions was caused by what the agent was told.
 """)
-footer(s, "cohort gates from results/cohort_gates_skeleton.csv  ·  METHODS.md sections 1 to 8  ·  scorer SHA and cohort hash asserted at every launch", page())
+footer(s, "cohort gates from results/cohort_gates_skeleton.csv  ·  PROJECT.md sections 3 to 6  ·  scorer SHA and cohort hash asserted at every launch", page())
 
 
 # ============================================================== the instrument
@@ -526,6 +526,28 @@ When I tell you a sentence moved the model to last-line therapy, that is the sen
 """)
 footer(s, "docs/prompts_used.md, reproduced verbatim at build time  ·  leakage census from results/leakage.json", page())
 
+# ============================================================== the conversation
+s = new_slide()
+head(s, "the conversation", "Five turns, both directions, and every position recorded",
+     "The protocol the collaborator specified: one agent proposes, the other counters, and they alternate.")
+figure(s, "protocol", y=2.30, width=11.4, x=M + (CW - 11.4) / 2)
+text(s, M, 6.42, CW, 0.4,
+     [[("Nothing here decides what is true. ", {"bold": True}),
+       ("The agents can agree on the wrong drug and often do. Correctness is settled afterwards, "
+        "outside the conversation, by the laboratory panel.", {"color": MUTED})]], size=12, line=1.3)
+notes(s, """
+This is the protocol, and it came from Zhikang Chen, who works with my supervisor.
+Agent A proposes one drug. Agent B counters or concurs. They alternate for five turns and every turn
+is parsed down to a single drug from the closed list, so I have a position for each agent after every
+single turn rather than only at the end.
+Then the whole case runs again with Agent B opening, which turns speaking order from a nuisance into
+something I measure.
+The important line is the one at the bottom. Nothing in this conversation decides what is true. They
+can agree on the wrong drug, and they do. Truth is settled afterwards by the laboratory.
+""")
+footer(s, "protocol as specified by Zhikang Chen, 23 July 2026  ·  409 debate exposures, both speaking orders", page())
+
+
 # ============================================================== 7. baseline
 s = new_slide()
 head(s, "result one", "The default is one drug for every patient, and it scores 87.5 per cent",
@@ -578,7 +600,7 @@ undetermined, and I would rather show you the attrition than a denominator I lik
 And look at the last bar. The susceptibility panel, the only thing in the study carrying real
 information about the patient, moves the model less than a person disagreeing with it.
 """)
-footer(s, "PRIMARY_TEST.md  ·  analysis/primary_test.py  ·  baseline reproducibility 79/79 across independently run arms", page())
+footer(s, "PROJECT.md section 7.2  ·  analysis/primary_test.py  ·  baseline reproducibility 79/79 across independently run arms", page())
 
 # ============================================================== 9. looks harmless
 s = new_slide()
@@ -677,7 +699,7 @@ One methodological note: the two cases in a pair share the drug but are not matc
 covariates, so McNemar would claim a pairing the design does not have. The test the design supports is
 stratified by drug.
 """)
-footer(s, "HEADLINE_RESULT.md  ·  analysis/matched_analysis.py  ·  " + f"{MATCH['_meta']['duplicate_writes_dropped']} duplicate writes found and dropped before analysis", page())
+footer(s, "PROJECT.md section 7.5  ·  analysis/matched_analysis.py  ·  " + f"{MATCH['_meta']['duplicate_writes_dropped']} duplicate writes found and dropped before analysis", page())
 
 # ============================================================== 12. the answer
 s = new_slide()
@@ -706,37 +728,35 @@ Evidence improves it. The difference between those two rows is the whole finding
 neutral turn in the top row is what proves the middle row is about being argued with rather than about
 being spoken to.
 """)
-footer(s, "STORY.md  ·  results/tingting_endpoints.json  ·  400 ordering-runs, both speaking directions", page())
+footer(s, "PROJECT.md section 7.6  ·  results/tingting_endpoints.json  ·  400 ordering-runs, both speaking directions", page())
 
 # ============================================================== 13. rung two
 s = new_slide()
-head(s, "the escalation ladder, rung two", "Few-shot breaks the constant and makes the job worse",
-     "Four worked exemplars per case, the same 200 patients, everything else held fixed.")
-figure(s, "fewshot", y=2.30)
-text(s, M, 5.95, 7.6, 1.0,
-     [[("Variety without discrimination. ", {"bold": True}),
+head(s, "the escalation ladder", "Zero-shot, then few-shot, and only then training",
+     "The order was set by my supervisor at the first meeting, and the result at each rung decides whether to climb.")
+figure(s, "ladder", y=2.34, width=11.3, x=M + (CW - 11.3) / 2)
+text(s, M, 6.36, CW, 0.5,
+     [[("Rung two does not improve the decision. ", {"bold": True}),
        (f"Examples move the model off its default in {FS['validity']['moved_vs_zeroshot']} of {FS['n']} cases and give it "
-        f"{FS['aware']['fewshot']['distinct']} drugs instead of one, a third of them narrow-spectrum. On the "
-        f"{FS['paired']['n']} cases where both conditions give a determinate verdict it loses {FS['paired']['b_lost']} correct "
-        f"recommendations and gains {FS['paired']['c_gained']}. It is not simply copying: the answer appears in that case's own "
-        f"exemplars only {pct(FS['validity']['answer_in_examples'], FS['n']):.1f} per cent of the time.", {"color": MUTED})]],
-     size=13, line=1.38)
-block(s, M + 7.95, 5.85, CW - 7.95, 1.02, BG)
-text(s, M + 8.18, 6.02, CW - 8.2, 0.8,
-     [[("By her own sequencing, this is the result that licenses moving to fine-tuning rather than declaring the problem solved with prompting.",
-        {"color": INK, "size": 12.5})]], size=12.5, line=1.32)
+        f"{FS['aware']['fewshot']['distinct']} drugs instead of one, a third of them narrow-spectrum. On the {FS['paired']['n']} cases "
+        f"determinate in both conditions it loses {FS['paired']['b_lost']} correct recommendations and gains {FS['paired']['c_gained']}. "
+        "Variety without discrimination costs coverage, and by her own sequencing that is what licenses rung three.",
+        {"color": MUTED})]], size=12, line=1.32)
 notes(s, f"""
 My supervisor set the order of what to try at the very first meeting: zero-shot will not work, then
 try a few examples, and if it does not improve, that is when you earn the right to train.
-So I ran rung two properly. Four exemplars per case, {FS['n']} cases.
+So I ran rung two properly. Four worked examples per case, {FS['n']} cases, everything else held fixed.
 It does break the constant: {FS['aware']['fewshot']['distinct']} drugs instead of one, and a third of the prescribing moves into the
 WHO Access group, which is the narrow, stewardship-preferred class. That is real.
-And it is significantly worse at the job. On the paired subset it loses {FS['paired']['b_lost']} correct recommendations
-and gains {FS['paired']['c_gained']}, exact McNemar p equals {FS['paired']['p_exact']:.4f}.
+And it is significantly worse at the job. It loses {FS['paired']['b_lost']} correct recommendations and gains {FS['paired']['c_gained']},
+exact McNemar p equals {FS['paired']['p_exact']:.4f}. It is also not just copying what it was shown: the answer appears in
+that case's own examples only {pct(FS['validity']['answer_in_examples'], FS['n']):.1f} per cent of the time.
 Examples teach the model to vary its prescribing without teaching it which patient needs which drug.
-That is the honest answer to rung two, and by her own sequencing it is what justifies rung three.
+That is the honest answer to rung two, and it is what makes rung three the next thing to do rather
+than a wish.
 """)
-footer(s, "results/fewshot.json  ·  analysis/fewshot_analysis.py  ·  paired on cases determinate in both conditions", page())
+footer(s, "results/fewshot.json  ·  analysis/fewshot_analysis.py  ·  exemplars drawn from a pool disjoint on case_id and subject_id", page())
+
 
 # ============================================================== 14. contribution
 s = new_slide(dark=True)
@@ -769,7 +789,7 @@ out of five patients.
 If you are evaluating a multi-agent clinical system and you only score correctness, you will miss
 this failure mode entirely.
 """)
-footer(s, "STORY.md  ·  the endpoint hierarchy is the instrument, not decoration", dark=True)
+footer(s, "PROJECT.md  ·  the endpoint hierarchy is the instrument, not decoration", dark=True)
 
 # ============================================================== 16. limitations
 s = new_slide(paper=True)
@@ -808,7 +828,7 @@ Everything here is alignment with recorded microbiology or counterfactual approp
 here claims that a recommendation changed a patient outcome, and with observational data it never
 could.
 """)
-footer(s, "LIMITATIONS.md  ·  stated in full, with the measurements that establish each bound", page())
+footer(s, "PROJECT.md section 8  ·  stated in full, with the measurements that establish each bound", page())
 
 # ============================================================== 17. close
 s = new_slide(dark=True)
@@ -919,7 +939,7 @@ visible against that tension.
 Everything is deterministic: temperature zero, fixed seed, cohort hashed and scorer pinned before
 the first model call, so no number in this deck could have been tuned after I saw it.
 """)
-footer(s, "METHODS.md sections 4, 5 and 8  ·  " + f"model {R['model']}, temperature {R['temperature']}, seed {R['seed']}", page())
+footer(s, "PROJECT.md sections 4 and 5  ·  " + f"model {R['model']}, temperature {R['temperature']}, seed {R['seed']}", page())
 
 # ============================================================== 6. design two
 s = new_slide()
@@ -953,7 +973,7 @@ you speak to it. Without Cn none of the rest is interpretable.
 And the pressure sentences are a closed set of four, censused rather than sampled: zero of them
 contain a hint of microbiology.
 """)
-footer(s, "METHODS.md section 6  ·  leakage census from results/leakage.json", page())
+footer(s, "PROJECT.md section 6  ·  leakage census from results/leakage.json", page())
 
 # ============================================================== models
 s = new_slide()
@@ -1025,7 +1045,7 @@ pre-registered a confidence threshold that turned out to be unfalsifiable, so I 
 instead of reporting it.
 I would rather show you those than a clean story I cannot defend.
 """)
-footer(s, "AUDIT.md  ·  DATA_INTEGRITY.md  ·  CHANGELOG.md records every corrected number beside its original", page())
+footer(s, "AUDIT.md  ·  PROJECT.md section 9  ·  archive/CHANGELOG.md records every corrected number beside its original", page())
 
 # ============================================================== appendix, asks
 s = new_slide(paper=True)
@@ -1109,13 +1129,43 @@ AWaRe classification, which is externally maintained rather than a flag I invent
 His personas are in the system prompt word for word. The one thing I could not do is transfer the
 harness to GPT, because MIMIC cannot go to a hosted service.
 """)
-footer(s, "SCORECARD.txt, computed live  ·  SUPERVISOR_ASKS.md maps every ask from both supervisors to what exists on disk", page())
+footer(s, "SCORECARD.txt, computed live  ·  PROJECT.md section 10 maps every ask from both supervisors to what exists on disk", page())
 
+
+# ============================================================== backup, rung two detail
+s = new_slide()
+head(s, "backup  ·  rung two in detail", "Few-shot breaks the constant and makes the job worse",
+     "Four worked exemplars per case, the same 200 patients, everything else held fixed.")
+figure(s, "fewshot", y=2.30)
+text(s, M, 5.95, 7.6, 1.0,
+     [[("Variety without discrimination. ", {"bold": True}),
+       (f"Examples move the model off its default in {FS['validity']['moved_vs_zeroshot']} of {FS['n']} cases and give it "
+        f"{FS['aware']['fewshot']['distinct']} drugs instead of one, a third of them narrow-spectrum. On the "
+        f"{FS['paired']['n']} cases where both conditions give a determinate verdict it loses {FS['paired']['b_lost']} correct "
+        f"recommendations and gains {FS['paired']['c_gained']}. It is not simply copying: the answer appears in that case's own "
+        f"exemplars only {pct(FS['validity']['answer_in_examples'], FS['n']):.1f} per cent of the time.", {"color": MUTED})]],
+     size=13, line=1.38)
+block(s, M + 7.95, 5.85, CW - 7.95, 1.02, BG)
+text(s, M + 8.18, 6.02, CW - 8.2, 0.8,
+     [[("By her own sequencing, this is the result that licenses moving to fine-tuning rather than declaring the problem solved with prompting.",
+        {"color": INK, "size": 12.5})]], size=12.5, line=1.32)
+notes(s, f"""
+My supervisor set the order of what to try at the very first meeting: zero-shot will not work, then
+try a few examples, and if it does not improve, that is when you earn the right to train.
+So I ran rung two properly. Four exemplars per case, {FS['n']} cases.
+It does break the constant: {FS['aware']['fewshot']['distinct']} drugs instead of one, and a third of the prescribing moves into the
+WHO Access group, which is the narrow, stewardship-preferred class. That is real.
+And it is significantly worse at the job. On the paired subset it loses {FS['paired']['b_lost']} correct recommendations
+and gains {FS['paired']['c_gained']}, exact McNemar p equals {FS['paired']['p_exact']:.4f}.
+Examples teach the model to vary its prescribing without teaching it which patient needs which drug.
+That is the honest answer to rung two, and by her own sequencing it is what justifies rung three.
+""")
+footer(s, "results/fewshot.json  ·  analysis/fewshot_analysis.py  ·  paired on cases determinate in both conditions", page())
 
 # ---------------------------------------------------------------- timing cues
 # Ten minutes of talk, five of questions. Targets for the sixteen core slides,
 # prepended to the speaker notes so the run-through can be paced off the deck.
-TARGETS = [15, 40, 40, 15, 50, 50, 45, 55, 25, 50, 35, 55, 35, 30, 25, 20]
+TARGETS = [15, 35, 40, 15, 45, 40, 40, 45, 50, 25, 45, 35, 50, 40, 30, 25, 20]
 _run = 0
 for _i, _slide in enumerate(prs.slides):
     if _i >= len(TARGETS):

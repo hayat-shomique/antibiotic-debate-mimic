@@ -134,11 +134,86 @@ def f_referee():
     return save(f, "referee")
 
 
+# --------------------------------------------------- 0b. how the agents talk
+def f_protocol():
+    """The five turns, and the position each agent holds after every one of them."""
+    W, H = 11.6, 4.3
+    f, ax = fig((W, H))
+    ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.axis("off")
+
+    lane_a, lane_b = 74, 30
+    ax.text(0, lane_a + 12, "AGENT A   infectious disease specialist", fontsize=11.5,
+            fontweight="bold", color=PRIMARY, va="center")
+    ax.text(0, lane_b - 12, "AGENT B   antimicrobial stewardship lead", fontsize=11.5,
+            fontweight="bold", color=PURPLE, va="center")
+    for y in (lane_a, lane_b):
+        ax.plot([0, 100], [y, y], color=GRID, lw=1.2, zorder=1)
+
+    turns = [(8, lane_a, "T1", "proposes one drug", PRIMARY),
+             (28, lane_b, "T2", "counters or concurs", PURPLE),
+             (48, lane_a, "T3", "answers the challenge", PRIMARY),
+             (68, lane_b, "T4", "restates or moves", PURPLE),
+             (88, lane_a, "T5", "final position", PRIMARY)]
+    for i, (x, y, t, label, col) in enumerate(turns):
+        ax.add_patch(plt.Rectangle((x - 7, y - 7), 15.5, 14, facecolor=WHITE,
+                                   edgecolor=col, lw=1.6, zorder=3))
+        ax.text(x + 0.75, y + 2.2, t, fontsize=12, fontweight="bold", color=col,
+                ha="center", va="center")
+        ax.text(x + 0.75, y - 3.4, label, fontsize=9.5, color=MUTED, ha="center", va="center")
+        if i:
+            px, py = turns[i - 1][0] + 8.5, turns[i - 1][1]
+            ax.annotate("", xy=(x - 7.4, y), xytext=(px, py),
+                        arrowprops=dict(arrowstyle="-|>", color=SOFT, lw=1.4, mutation_scale=13,
+                                        connectionstyle="arc3,rad=0.16"))
+
+    ax.text(50, 13, "every turn is parsed to one drug from the closed formulary and recorded",
+            fontsize=11.5, color=MUTED, ha="center", va="center")
+    ax.text(50, 3, "and the whole case is run again with Agent B opening, so speaking order is measured rather than averaged away",
+            fontsize=11.5, color=INK, ha="center", va="center")
+    f.subplots_adjust(left=0.015, right=0.985, top=0.99, bottom=0.01)
+    return save(f, "protocol")
+
+
+# ------------------------------------------------------------ 0c. the ladder
+def f_ladder():
+    """Three rungs, climbed in the supervisor's order, with what each one produced."""
+    prim, fs = T["primary_appropriateness"], FS
+    pr = fs["paired"]
+    W, H = 11.6, 4.0
+    f, ax = fig((W, H))
+    ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.axis("off")
+
+    rungs = [
+        (2, 6, "RUNG 1   zero-shot", "complete, %d cases" % prim["baseline_pre_culture"]["n"],
+         "One drug for every patient.\n%.1f per cent coverage." % prim["baseline_pre_culture"]["pct"], SOFT),
+        (35, 34, "RUNG 2   few-shot", "complete, %d cases" % fs["n"],
+         "%d drugs instead of one, but coverage\nfalls to %.1f per cent, p = %.4f."
+         % (fs["aware"]["fewshot"]["distinct"], 100.0 * pr["fewshot_correct"] / pr["n"], pr["p_exact"]), ACCENT),
+        (68, 62, "RUNG 3   fine-tuning", "designed, not run",
+         "The rung that rung two licenses.\nTrain on coverage penalised by spectrum.", PRIMARY),
+    ]
+    for x, y, title, status, body, col in rungs:
+        ax.add_patch(plt.Rectangle((x, y), 30, 30, facecolor=WHITE, edgecolor=GRID, lw=1.4, zorder=2))
+        ax.add_patch(plt.Rectangle((x, y + 27), 30, 3, facecolor=col, edgecolor="none", zorder=3))
+        ax.text(x + 2, y + 21.5, title, fontsize=12.5, fontweight="bold", color=INK, va="center")
+        ax.text(x + 2, y + 15.5, status, fontsize=10.5, color=col, va="center", fontweight="bold")
+        ax.text(x + 2, y + 7, body, fontsize=11, color=MUTED, va="center", linespacing=1.45)
+
+    for x0, y0, x1, y1 in [(32, 21, 35, 49), (65, 49, 68, 77)]:
+        ax.annotate("", xy=(x1, y1), xytext=(x0, y0),
+                    arrowprops=dict(arrowstyle="-|>", color=SOFT, lw=1.6, mutation_scale=14))
+    ax.text(2, 96, "“zero shot will not work ... give it a few shots and then see whether it improves. "
+                   "And if it doesn't, then you can move it to the next level, that is now your training”",
+            fontsize=11, color=MUTED, style="italic", va="center")
+    f.subplots_adjust(left=0.015, right=0.985, top=0.99, bottom=0.01)
+    return save(f, "ladder")
+
+
 # ---------------------------------------------------------------- 1. timeline
 def f_timeline():
     """The empiric window: the decision is made long before the answer exists."""
     import re
-    methods = (ROOT / "METHODS.md").read_text()
+    methods = (ROOT / "docs" / "METHODS.md").read_text()
     median_h = int(re.search(r"median of \*\*(\d+) hours\*\*", methods).group(1))
 
     f, ax = fig((11.6, 3.5))
@@ -430,6 +505,7 @@ def f_fewshot():
 
 if __name__ == "__main__":
     print("deck figures, drawn from results/")
-    f_referee(); f_timeline(); f_baseline(); f_primary(); f_stewardship()
+    f_referee(); f_protocol(); f_ladder(); f_timeline(); f_baseline()
+    f_primary(); f_stewardship()
     f_matched(); f_debate(); f_fewshot()
     print("done")

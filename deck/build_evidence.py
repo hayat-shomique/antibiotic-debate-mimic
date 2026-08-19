@@ -176,7 +176,7 @@ for arm, meta in R["_integrity"].items():
 total_dupes = sum(m["duplicate_writes_dropped"] for m in R["_integrity"].values())
 lines += [
     "",
-    f"**{total_dupes} duplicate writes found and dropped in total.** Cause and fix in `DATA_INTEGRITY.md`.",
+    f"**{total_dupes} duplicate writes found and dropped in total.** Cause and fix in `archive/DATA_INTEGRITY.md`.",
     "",
     "## What is deliberately not claimed",
     "",
