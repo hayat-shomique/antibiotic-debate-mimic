@@ -23,7 +23,7 @@ Everything else is complete: debate 400/400, neutral control 200/200, panel reve
 clean-context 200/200, self-consistency 200/200, confidence 200/200, C1 pressure 312 exposures,
 ablation 60, degraded 60, seeded 172, plausible-wrong 166, encoders 4 x 200, MedGemma 200.
 
-## Paste this into a fresh Claude Code session
+## Paste this into a fresh session
 
 > Resuming the UNIQ+ antibiotic-debate project. Working directory ~/brain_run holds the run data
 > and never leaves the machine under the PhysioNet DUA. The repository is

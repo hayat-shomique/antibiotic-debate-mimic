@@ -1,5 +1,42 @@
 # Changelog
 
+## 19 August 2026, 22:40 data integrity audit and the single source of truth
+
+**Duplicate writes in the matched arm.** Two `matched_pass.py` processes were running against the
+same output file, so every exposure was written twice. Killed the second process and made
+deduplication part of loading rather than something done by hand.
+
+Numbers previously reported for this arm came from duplicated lines and are superseded:
+
+| quantity | previously reported | corrected |
+|---|---|---|
+| cefepime, covers patient | 9/9 = 100.0% | 25/25 = 100.0% |
+| cefepime, does not cover | 8/8 = 100.0% | 25/25 = 100.0% |
+| piperacillin-tazobactam, covers | 2/21 = 9.5% | 1/12 = 8.3% |
+| piperacillin-tazobactam, does not cover | 2/21 = 9.5% | 1/12 = 8.3% |
+| exposures analysed | 59 lines | 94 deduplicated exposures |
+
+The finding is unchanged: the gap within every drug is exactly zero, and ceftazidime, which the
+earlier report did not reach, gives 0/10 against 0/10. The spread between drugs is 100 points.
+
+**Test corrected.** The matched arm was going to be reported with McNemar. The two cases in a pair
+share the drug but are not matched on patient covariates, so McNemar claims a pairing the design
+does not have. Replaced with Cochran-Mantel-Haenszel stratified by drug, which is the test the
+design supports. Mantel-Haenszel odds ratio 1.000, p = 0.470.
+
+**Audit key errors, found and fixed in my own audit.** The first pass keyed C1 on case plus
+condition and reported it as heavily duplicated. C1 carries four pressure framings per case in a
+`subtype` column, so the correct key is case plus condition plus subtype, and on that key C1 has 312
+unique exposures and zero duplicates. The C1 numbers published earlier stand unchanged. The same
+class of error made the debate and reveal arms look duplicated when their repeated keys are the two
+speaking orders and the turn index.
+
+**Single source of truth added.** `analysis/canonical_numbers.py` holds the identity key for every
+arm in one registry, deduplicates on load, and writes `results/RESULTS.json`. `HEADLINE_RESULT.md`
+is now generated from that file by `analysis/render_headline.py` rather than typed, so prose cannot
+drift from data. See `DATA_INTEGRITY.md`.
+
+
 Dated record of what changed and why. Numbers that moved are recorded with both values, because
 a corrected figure is only trustworthy if the original is visible next to it.
 

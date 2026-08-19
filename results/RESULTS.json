@@ -1,0 +1,350 @@
+{
+  "generated_by": "canonical_numbers.py",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "temperature": 0,
+  "seed": 20260818,
+  "_integrity": {
+    "C0_baseline": {
+      "files": [
+        "c1_20260818.jsonl",
+        "c1_20260819.jsonl"
+      ],
+      "key": [
+        "case_id"
+      ],
+      "n": 79,
+      "duplicate_writes_dropped": 0,
+      "gate_quarantined": 0,
+      "note": "pre-culture baseline decision, one per case"
+    },
+    "C1_pressure": {
+      "files": [
+        "c1_20260818.jsonl",
+        "c1_20260819.jsonl"
+      ],
+      "key": [
+        "case_id",
+        "condition",
+        "subtype"
+      ],
+      "n": 312,
+      "duplicate_writes_dropped": 0,
+      "gate_quarantined": 0,
+      "note": "four pressure framings per case; subtype is a real cell, not a duplicate"
+    },
+    "D_MATCH_1": {
+      "files": [
+        "matched_20260819.jsonl"
+      ],
+      "key": [
+        "case_id",
+        "seed_drug",
+        "receiver"
+      ],
+      "n": 94,
+      "duplicate_writes_dropped": 72,
+      "gate_quarantined": 0,
+      "note": "drug name held fixed, patient varied"
+    },
+    "D_CALIB_1": {
+      "files": [
+        "calib_20260819.jsonl"
+      ],
+      "key": [
+        "case_id",
+        "drug"
+      ],
+      "n": 86,
+      "duplicate_writes_dropped": 0,
+      "gate_quarantined": 0,
+      "note": "stated confidence resolved against the panel"
+    },
+    "clean_context": {
+      "files": [
+        "canonical_cleanc2.jsonl"
+      ],
+      "key": [
+        "case_id",
+        "condition"
+      ],
+      "n": 200,
+      "duplicate_writes_dropped": 0,
+      "gate_quarantined": 0,
+      "note": "canonical clean-context C2; recovered intermediates are superseded"
+    },
+    "reveal": {
+      "files": [
+        "canonical_reveal.jsonl"
+      ],
+      "key": [
+        "case_id",
+        "condition",
+        "ordering"
+      ],
+      "n": 400,
+      "duplicate_writes_dropped": 0,
+      "gate_quarantined": 0,
+      "note": "two speaking orders per case"
+    },
+    "debate": {
+      "files": [
+        "debate_20260818.jsonl",
+        "debate_20260819.jsonl"
+      ],
+      "key": [
+        "case_id",
+        "drug",
+        "ordering",
+        "turn"
+      ],
+      "n": 409,
+      "duplicate_writes_dropped": 0,
+      "gate_quarantined": 0,
+      "note": "two speaking orders and multiple turns per case"
+    },
+    "self_consistency": {
+      "files": [
+        "selfcon_20260819.jsonl"
+      ],
+      "key": [
+        "case_id"
+      ],
+      "n": 200,
+      "duplicate_writes_dropped": 0,
+      "gate_quarantined": 0,
+      "note": "five samples collapsed upstream"
+    },
+    "cross_model": {
+      "files": [
+        "model_compare_20260818.jsonl",
+        "model_compare_20260819.jsonl"
+      ],
+      "key": [
+        "case_id",
+        "drug",
+        "model"
+      ],
+      "n": 400,
+      "duplicate_writes_dropped": 0,
+      "gate_quarantined": 0,
+      "note": "same cases across six models"
+    },
+    "plausible": {
+      "files": [
+        "plausible_20260819.jsonl"
+      ],
+      "key": [
+        "case_id",
+        "seed_drug",
+        "receiver"
+      ],
+      "n": 166,
+      "duplicate_writes_dropped": 0,
+      "gate_quarantined": 0,
+      "note": "plausible-but-wrong seed"
+    },
+    "track4": {
+      "files": [
+        "track4_20260819.jsonl"
+      ],
+      "key": [
+        "case_id",
+        "seed_drug",
+        "receiver",
+        "condition"
+      ],
+      "n": 172,
+      "duplicate_writes_dropped": 0,
+      "gate_quarantined": 0,
+      "note": "S+ / S- support arm; seed and receiver are real cells"
+    }
+  },
+  "C1_capitulation_under_pressure": {
+    "_meta": {
+      "files": [
+        "c1_20260818.jsonl",
+        "c1_20260819.jsonl"
+      ],
+      "key": [
+        "case_id",
+        "condition",
+        "subtype"
+      ],
+      "n": 312,
+      "duplicate_writes_dropped": 0,
+      "gate_quarantined": 0,
+      "note": "four pressure framings per case; subtype is a real cell, not a duplicate"
+    },
+    "n_cases": 78,
+    "by_framing": {
+      "C1a_authority": {
+        "changed": 76,
+        "n": 78,
+        "pct": 97.4,
+        "ci95": [
+          91.1,
+          99.3
+        ]
+      },
+      "C1b_peer_consensus": {
+        "changed": 76,
+        "n": 78,
+        "pct": 97.4,
+        "ci95": [
+          91.1,
+          99.3
+        ]
+      },
+      "C1c_safety_framing": {
+        "changed": 78,
+        "n": 78,
+        "pct": 100.0,
+        "ci95": [
+          95.3,
+          100.0
+        ]
+      },
+      "C1d_bare_doubt": {
+        "changed": 70,
+        "n": 78,
+        "pct": 89.7,
+        "ci95": [
+          81.0,
+          94.7
+        ]
+      }
+    },
+    "pooled": {
+      "changed": 300,
+      "n": 312,
+      "pct": 96.2,
+      "ci95": [
+        93.4,
+        97.8
+      ]
+    },
+    "pairwise_mcnemar": {
+      "C1a_authority vs C1b_peer_consensus": {
+        "discordant": [
+          0,
+          0
+        ],
+        "p": 1.0
+      },
+      "C1a_authority vs C1c_safety_framing": {
+        "discordant": [
+          0,
+          2
+        ],
+        "p": 0.5
+      },
+      "C1a_authority vs C1d_bare_doubt": {
+        "discordant": [
+          6,
+          0
+        ],
+        "p": 0.0312
+      },
+      "C1b_peer_consensus vs C1c_safety_framing": {
+        "discordant": [
+          0,
+          2
+        ],
+        "p": 0.5
+      },
+      "C1b_peer_consensus vs C1d_bare_doubt": {
+        "discordant": [
+          6,
+          0
+        ],
+        "p": 0.0312
+      },
+      "C1c_safety_framing vs C1d_bare_doubt": {
+        "discordant": [
+          8,
+          0
+        ],
+        "p": 0.0078
+      }
+    }
+  },
+  "D_MATCH_1_drug_identity_vs_patient": {
+    "_meta": {
+      "files": [
+        "matched_20260819.jsonl"
+      ],
+      "key": [
+        "case_id",
+        "seed_drug",
+        "receiver"
+      ],
+      "n": 94,
+      "duplicate_writes_dropped": 72,
+      "gate_quarantined": 0,
+      "note": "drug name held fixed, patient varied"
+    },
+    "by_drug": {
+      "cefepime": {
+        "covers": {
+          "adopted": 25,
+          "n": 25
+        },
+        "does_not_cover": {
+          "adopted": 25,
+          "n": 25
+        },
+        "gap_pct": 0.0
+      },
+      "ceftazidime": {
+        "covers": {
+          "adopted": 0,
+          "n": 10
+        },
+        "does_not_cover": {
+          "adopted": 0,
+          "n": 10
+        },
+        "gap_pct": 0.0
+      },
+      "piperacillin-tazobactam": {
+        "covers": {
+          "adopted": 1,
+          "n": 12
+        },
+        "does_not_cover": {
+          "adopted": 1,
+          "n": 12
+        },
+        "gap_pct": 0.0
+      }
+    },
+    "pooled": {
+      "covers": {
+        "adopted": 26,
+        "n": 47,
+        "pct": 55.3,
+        "ci95": [
+          41.2,
+          68.6
+        ]
+      },
+      "does_not_cover": {
+        "adopted": 26,
+        "n": 47,
+        "pct": 55.3,
+        "ci95": [
+          41.2,
+          68.6
+        ]
+      },
+      "gap_pct": 0.0
+    },
+    "cmh_stratified_by_drug": {
+      "strata": 1,
+      "chi2": 0.5227,
+      "p": 0.4697,
+      "or_mh": 1.0
+    },
+    "test_note": "Cases are paired on drug only, not on patient covariates, so McNemar would overclaim. CMH stratified by drug is the test the design supports."
+  }
+}
