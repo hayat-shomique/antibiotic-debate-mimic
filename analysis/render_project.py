@@ -787,6 +787,52 @@ would be falsified by any of the following, and none of them is ruled out by thi
   example because of inducible resistance that the reported panel cannot show. That is a live
   limitation, not a hypothetical.
 
+## 8d. What to do next, ranked by what each one buys
+
+Every item here is an arm that can be run, not a direction. Each is named with the claim it would
+strengthen and what it would cost, because "further work" that cannot be costed is a wish.
+
+**1. The speaker-stripped arm.** Keep the counterpart's turns in the context and remove only the
+attribution, so the model sees the same text without being told a stewardship lead said it. This is
+the one control the pressure test has asked for since C6, and it is what separates being contradicted
+by a peer from being contradicted by any text asserting a rival position. It also fixes the sharpest
+limitation of the single-agent control, which changes the revision instruction as well as the
+counterpart. Same cohort, same scorer, roughly the cost of the control arm: a few hours locally.
+**This is the highest-value thing left in the project.**
+
+**2. A length-matched control.** Pad the single-agent transcript with the model's own text to the
+same token count the debate reaches, so context length is held constant. Cheap, mechanical, and it
+closes the second limitation on the control.
+
+**3. A turn-count sweep inside one protocol.** The duration result compares a one-turn re-ask against
+a five-turn debate, which varies the protocol as well as the length. Running the debate at one, two,
+three and five turns gives the clean version and turns a contrast into a dose-response.
+
+**4. A second checkpoint as the counterpart.** Both agents here are the same weights with two
+personas, so this is one model talking to itself. Putting MedGemma opposite Qwen tests whether the
+effect is agreement between identical weights or deference to a rival position.
+
+**5. Per-case clinician outcomes.** The clinician comparison is the weakest claim in the project
+because the two rates sit on different case sets. The comparator artefact carries aggregates only, so
+this is real work on credentialed prescribing records rather than a rerun, and it would turn the
+weakest claim into a paired test.
+
+**6. Rung three of the ladder.** Few-shot did not improve the decision, which by the supervisor's own
+sequencing is what licenses fine-tuning. The honest framing is that rung two failing is the
+precondition for rung three, not a reason to skip it.
+
+**7. Transfer, not the data.** Hosted models on synthetic non-MIMIC cases. Record-level data cannot
+leave this machine under the data use agreement, so what transfers is the harness and the scoring
+rule, never the cohort.
+
+**8. Organism-specific resistance rules.** Correcting the scorer for inducible AmpC needs clinical
+sign-off and organism-specific logic. It would tighten the adequacy labels; on the evidence in 8c it
+would not change the harm finding.
+
+Items 1 to 4 are runnable on this machine with the existing harness. Items 5 to 8 need something
+this project does not have: credentialed record access, more compute, a hosted endpoint, or a
+clinician.
+
 ## 9. What is inherited and what is new
 
 The harness, the provenance gate, the cohort assembly and the scorer are built on the group's

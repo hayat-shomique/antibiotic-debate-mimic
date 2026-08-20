@@ -887,7 +887,8 @@ text(s, M, 1.66, CW - 2.2, 1.6,
      size=34, color=WHITE, bold=True, line=1.16)
 rule(s, M, 3.62, 1.6, 0.040, PRIMARY)
 text(s, M, 3.98, CW - 3.9, 2.1,
-     [[("Rung three. ", {"bold": True, "color": WHITE}), "Few-shot did not improve the decision, which by the supervisor's own sequencing is what licenses fine-tuning on the task."],
+     [[("Strip the speaker. ", {"bold": True, "color": WHITE}), "The control shows a counterpart moves it where being asked again does not. Keeping the counterpart's text and removing only the attribution is what separates a peer from any rival position, and it is the one control this design has always been missing."],
+      [("Rung three. ", {"bold": True, "color": WHITE}), "Few-shot did not improve the decision, which by the supervisor's own sequencing is what licenses fine-tuning on the task."],
       [("Transfer the harness, not the data. ", {"bold": True, "color": WHITE}), "Hosted models on synthetic non-MIMIC cases, because record-level data cannot leave this machine under the data use agreement."],
       [("A live opposing agent ", {"bold": True, "color": WHITE}), "varying its argument with the case, and subsequent resistance from repeat cultures as an outcome rather than the index panel alone."],
       [("Consult the users. ", {"bold": True, "color": WHITE}), "No stewardship pharmacist has been asked what they would want from this, and stewardship endpoints belong beside accuracy as standard."]],
