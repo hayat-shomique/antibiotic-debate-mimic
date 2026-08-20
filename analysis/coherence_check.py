@@ -212,6 +212,55 @@ def _sentence_is_negated(text, m):
     return bool(NEGATED.search(_plain(before)) or NEGATED.search(_plain(after)))
 
 
+# Two values can each be canonical and still be wrong together. The panel arrives in this study
+# in two ways: in the clean-context arm it REPLACES the debate, measured from the round-0 position
+# over 200 runs; in the reveal arm it FOLLOWS the debate, measured from the post-debate position
+# over 400 runs. Six files paired a harmful revision rate from the first with a coverage change
+# from the second, in one row, describing an experiment nobody ran. Every number in those rows was
+# canonical, so the sweep above passed them all.
+#
+# Each entry is (pattern A, pattern B, how close is too close, why). A and B appearing within that
+# many characters of each other is the defect, because that is the width of a table row or a
+# sentence.
+PAIR_BANS = [
+    (r"\b2/174\b|\b1\.1\s*%", r"\b95\.2\s*%|\+?17\.2 points", 220,
+     "the clean-context arm's harmful revision rate beside the reveal arm's coverage change. "
+     "They are different arms on different denominators from different starting positions. Use "
+     "the reveal arm's own rate, 0 of 311, when the row is about the panel following the debate"),
+    (r"\b15\.2\s*%|\b52/341\b", r"\b1\.1 to 3\.5\s*%", 200,
+     "the five-turn debate rate beside the one-turn pressure band, with nothing saying the "
+     "number of turns differs. Name the turns on both sides or the comparison reads as a "
+     "framing effect"),
+]
+
+
+def sweep_pair_bans(files):
+    """Values that are each canonical and wrong when placed together."""
+    hits = []
+    for f in sorted(files):
+        rel = str(f.relative_to(ROOT))
+        if rel in ("analysis/coherence_check.py",) or rel.startswith(HISTORY_PATHS):
+            continue
+        text, _ = read_text(f)
+        if text is None:
+            continue
+        for pa, pb, span, why in PAIR_BANS:
+            for ma in re.finditer(pa, text, re.I):
+                lo, hi = max(0, ma.start() - span), ma.end() + span
+                mb = re.search(pb, text[lo:hi], re.I)
+                if not mb:
+                    continue
+                window = text[lo:hi]
+                # A row that names both arms is doing the right thing, not the wrong one.
+                if re.search(r"after the debate|replac|different arm|following it|reveal arm|"
+                             r"clean.context|five turns|one turn|per framing", window, re.I):
+                    continue
+                hits.append((rel, text[:ma.start()].count("\n") + 1,
+                             f"{ma.group(0).strip()} near {mb.group(0).strip()}", why))
+                break
+    return hits
+
+
 def sweep_banned_claims(files):
     """Read EVERY tracked file, history included, for claims the repo forbids."""
     hits = []
@@ -322,8 +371,16 @@ def main():
 
     banned = sweep_banned_claims(files)
     print(f"  banned-claim sweep       {len(files) - skipped} files, history included")
+    pairs = sweep_pair_bans(files)
+    print(f"  mismatched-pair sweep    {len(PAIR_BANS)} rules over the live files")
 
     print()
+    if pairs:
+        print("  MISMATCHED PAIRS (each value canonical, wrong together)")
+        for rel, line, hit, why in pairs:
+            print(f"    {rel}:{line}  {hit}")
+            print(f"      {why}")
+        print()
     if banned:
         print("  BANNED CLAIMS (never acceptable in any file)")
         for rel, line, hit, why in banned:
@@ -338,10 +395,16 @@ def main():
         print()
         print(f"  VERDICT: {contradictions} contradiction(s). NOT COHERENT.")
         return 1
-    if banned:
-        print(f"  VERDICT: {len(banned)} banned claim(s). NOT COHERENT.")
+    if banned or pairs:
+        bits = []
+        if banned:
+            bits.append(f"{len(banned)} banned claim(s)")
+        if pairs:
+            bits.append(f"{len(pairs)} mismatched pair(s)")
+        print(f"  VERDICT: {' and '.join(bits)}. NOT COHERENT.")
         return 1
-    print("  VERDICT: every live file is coherent, and no file states a banned claim.")
+    print("  VERDICT: every live file is coherent, no file states a banned claim, and no file "
+          "pairs two arms in one row.")
     return 0
 
 

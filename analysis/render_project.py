@@ -447,8 +447,9 @@ which is the null exactly. Within a drug, coverage makes no difference. Between 
 | what the agent hears | harmful revision rate | coverage of the organism |
 |---|---|---|
 | a scripted sentence with no content | {NEUT['HRR']['pct']:.1f}% ({NEUT['HRR']['k']}/{NEUT['HRR']['n']}) | unchanged, {DCOV['before_debate']['pct']}% |
-| **a second agent arguing a case** | **{DBT['HRR']['pct']}% ({DBT['HRR']['k']}/{DBT['HRR']['n']})** | **{DCOV['before_debate']['pct']}% to {DCOV['after_debate']['pct']}%, {DCOV['debate_change_pts']:+.1f} points** |
-| the susceptibility panel | {EVID['HRR']['pct']:.1f}% ({EVID['HRR']['k']}/{EVID['HRR']['n']}) | {DCOV['after_debate']['pct']}% to {DCOV['after_panel']['pct']}%, {DCOV['evidence_change_pts']:+.1f} points |
+| **a second agent arguing a case, five turns** | **{DBT['HRR']['pct']}% ({DBT['HRR']['k']}/{DBT['HRR']['n']})** | **{DCOV['before_debate']['pct']}% to {DCOV['after_debate']['pct']}%, {DCOV['debate_change_pts']:+.1f} points** |
+| the susceptibility panel, after the debate | {TRIG['after_the_debate_does_the_panel_repair_it']['harmful_revision_rate_pct']:.1f}% ({TRIG['after_the_debate_does_the_panel_repair_it']['harmful_revisions']}/{TRIG['after_the_debate_does_the_panel_repair_it']['entered_adequate']}) | {DCOV['after_debate']['pct']}% to {DCOV['after_panel']['pct']}%, {DCOV['evidence_change_pts']:+.1f} points |
+| the susceptibility panel, replacing the debate instead | {EVID['HRR']['pct']:.1f}% ({EVID['HRR']['k']}/{EVID['HRR']['n']}) | a different arm, measured from the round-0 position over 200 runs |
 
 **In this setup, agent-to-agent argument reduced coverage of the organism; supplying the susceptibility panel increased it.** Stated as alignment with the recorded microbiology and counterfactual
 appropriateness of the recommendation, never as a recommendation causing a patient outcome.

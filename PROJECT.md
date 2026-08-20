@@ -323,8 +323,9 @@ which is the null exactly. Within a drug, coverage makes no difference. Between 
 | what the agent hears | harmful revision rate | coverage of the organism |
 |---|---|---|
 | a scripted sentence with no content | 0.0% (0/175) | unchanged, 87.5% |
-| **a second agent arguing a case** | **15.2% (52/341)** | **87.5% to 78.0%, -9.5 points** |
-| the susceptibility panel | 1.1% (2/174) | 78.0% to 95.2%, +17.2 points |
+| **a second agent arguing a case, five turns** | **15.2% (52/341)** | **87.5% to 78.0%, -9.5 points** |
+| the susceptibility panel, after the debate | 0.0% (0/311) | 78.0% to 95.2%, +17.2 points |
+| the susceptibility panel, replacing the debate instead | 1.1% (2/174) | a different arm, measured from the round-0 position over 200 runs |
 
 **In this setup, agent-to-agent argument reduced coverage of the organism; supplying the susceptibility panel increased it.** Stated as alignment with the recorded microbiology and counterfactual
 appropriateness of the recommendation, never as a recommendation causing a patient outcome.
