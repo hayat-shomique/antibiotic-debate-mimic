@@ -37,6 +37,11 @@ HISTORY_PATHS = ("archive/", "docs/LITERATURE_PRESSURE_TEST.md", "docs/SYCOPHANC
                  "docs/FRAMING_FIXES.md", "docs/NUMBERS_BLOCK.md", "docs/EXPLAIN.md",
                  "docs/EXPLAINABILITY.md", "docs/HEADLINE.md", "docs/FIGURES_MANIFEST.md",
                  "docs/verification_log.csv", "docs/deviation_log", "figures/",
+                 # A ledger of corrections has to be able to name what was corrected.
+                 # Numbers are exempt here for the same reason they are exempt in the
+                 # other history files; the banned-claim sweep still reads it, because
+                 # a banned claim is never acceptable in any file.
+                 "docs/OVERNIGHT_LEDGER.md",
                  "analysis/coherence_check.py")
 # SCORECARD.txt and analysis/completion_state.py were exempt here while the harmful revision
 # denominator was still being reconciled. It is reconciled, both now print the canonical figure,

@@ -49,7 +49,7 @@ repeated write, not a repeated measurement, and the second is dropped before any
 | D_CALIB_1 | 201 | 13 | `case_id + drug` | `calib_20260819.jsonl` |
 | clean_context | 200 | 0 | `case_id + condition` | `canonical_cleanc2.jsonl` |
 | reveal | 400 | 0 | `case_id + condition + ordering` | `canonical_reveal.jsonl` |
-| debate | 401 | 0 | `case_id + drug + ordering + turn` | `debate_20260818.jsonl`, `debate_20260819.jsonl`, `debate_20260820.jsonl` |
+| debate | 400 | 0 | `case_id + ordering` | `debate_20260818.jsonl`, `debate_20260819.jsonl`, `debate_20260820.jsonl` |
 | self_consistency | 200 | 0 | `case_id` | `selfcon_20260819.jsonl` |
 | cross_model | 400 | 0 | `case_id + drug + model` | `model_compare_20260818.jsonl`, `model_compare_20260819.jsonl` |
 | plausible | 312 | 166 | `case_id + seed_drug + receiver` | `plausible_20260819.jsonl`, `plausible_20260820.jsonl` |
