@@ -84,9 +84,37 @@ def main():
         raise SystemExit("the reveal arm no longer carries the debate's finals on every run, so "
                          "the sequential-not-parallel warning in this file must be re-derived")
 
+    # The comparison only means anything if the arms start from the same position. Checked
+    # rather than assumed, and recomputed on every run.
+    deb_af = {r["case_id"]: r for r in deb if r["ordering"] == "A-first"}
+    drug_same = sum(1 for r in c1 if r["case_id"] in deb_af
+                    and r["c0_drug"] == deb_af[r["case_id"]]["round0_drug"])
+    out_same = sum(1 for r in c1 if r["case_id"] in deb_af
+                   and r["c0_outcome"] == deb_af[r["case_id"]]["round0_outcome"])
+    n_cmp = sum(1 for r in c1 if r["case_id"] in deb_af)
+    cc2_same = sum(1 for r in cc2 if r["case_id"] in deb_af
+                   and r["round0_outcome"] == deb_af[r["case_id"]]["round0_outcome"])
+
     out = {
         "_purpose": "what one reconsideration step costs, by what triggers it, computed only "
                     "between arms that share a protocol",
+        "_arms_start_from_the_same_position": {
+            "one_turn_exposures_compared": n_cmp,
+            "same_opening_drug": drug_same,
+            "same_opening_outcome_class": out_same,
+            "clean_context_runs_with_the_same_opening_outcome_class": cc2_same,
+            "of_clean_context_runs": len(cc2),
+            "reading": "the one-turn arm and the five-turn arm are elicited from the same "
+                       "round-0 prompt at temperature zero with a fixed seed. Where the opening "
+                       "drug differs it is decoding nondeterminism, and the outcome class, which "
+                       "is what every rate here is computed on, is identical throughout. The "
+                       "run files carry their own c0_matches_debate_round0 flag which reads "
+                       "False on one case across all four framings. That flag compares against "
+                       "whichever speaking order it read, and for that case it read the "
+                       "B-first run, where the stewardship lead opens on a different drug. "
+                       "Compared against the A-first run, which is the one where the same "
+                       "agent opens, the openings match on every exposure",
+        },
         "_pairing": {
             "cases_in_common_debate_and_clean_context":
                 len({r["case_id"] for r in deb} & {r["case_id"] for r in cc2}),

@@ -1,5 +1,13 @@
 {
   "_purpose": "what one reconsideration step costs, by what triggers it, computed only between arms that share a protocol",
+  "_arms_start_from_the_same_position": {
+    "one_turn_exposures_compared": 800,
+    "same_opening_drug": 800,
+    "same_opening_outcome_class": 800,
+    "clean_context_runs_with_the_same_opening_outcome_class": 200,
+    "of_clean_context_runs": 200,
+    "reading": "the one-turn arm and the five-turn arm are elicited from the same round-0 prompt at temperature zero with a fixed seed. Where the opening drug differs it is decoding nondeterminism, and the outcome class, which is what every rate here is computed on, is identical throughout. The run files carry their own c0_matches_debate_round0 flag which reads False on one case across all four framings. That flag compares against whichever speaking order it read, and for that case it read the B-first run, where the stewardship lead opens on a different drug. Compared against the A-first run, which is the one where the same agent opens, the openings match on every exposure"
+  },
   "_pairing": {
     "cases_in_common_debate_and_clean_context": 200,
     "debate_runs": 400,
