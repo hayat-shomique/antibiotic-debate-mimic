@@ -460,8 +460,11 @@ Each of these was checked and cut for a reason.
 
 ## 12. The 90 minutes
 
+Start with the overnight ledger, because there is material in this deck you have not seen yet.
+
 | minutes | do this |
 |---|---|
+| before you start | read the first page of `docs/OVERNIGHT_LEDGER.md`, two minutes. It says what changed and what is new, including the control and the trigger table, both of which are backup slides you have not rehearsed |
 | 0 to 15 | read sections 1, 3, 5, 10. Out loud, not skimmed |
 | 15 to 35 | open the deck, read the speaker notes on slides 9 to 16, say each one in your own words |
 | 35 to 55 | full run through, standing, timed. Aim for your slot minus two minutes |
