@@ -282,3 +282,19 @@ had been harmed seven times and the debate none. That is the exact reverse of th
 internally consistent, and the p value was identical either way. It was caught by reading the
 printed sentence against the table above it, which disagreed with it. The counts are now named for
 what they are rather than called b and c.
+
+## 16. Three headline numbers recomputed from the raw run files, independently of the pipeline
+
+The pipeline is coherent with itself, which is not the same as being right. So three of the numbers
+that reach a slide were recomputed straight from the run files, by a separate short script that
+shares no code with the analysis chain.
+
+| claim on the slide | recomputed independently | agrees |
+|---|---|---|
+| baseline coverage 87.5% | 175 of the 200 opening recommendations cover the organism | yes |
+| carbapenem use, 0 to 87.2% under pressure | 0 of 800 at baseline, 698 of 800 under pressure | yes |
+| few-shot p = 0.0004, loses 18 and gains 2 | 175 paired determinate cases, 18 lost, 2 gained, exact McNemar 0.0004025 | yes |
+
+Not a proof that the pipeline is right everywhere. It is evidence that the three numbers most
+likely to be challenged are what the raw data says, and it took one short script to check, which is
+the point of keeping the run files.
