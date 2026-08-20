@@ -54,6 +54,7 @@ ASKS = (DOCS / "SUPERVISOR_ASKS.md").read_text()
 SCORE = (ROOT / "SCORECARD.txt").read_text()
 CLIN = json.loads((RES / "clinician_comparison.json").read_text())
 CONF = json.loads((RES / "confidence_axis.json").read_text())
+CC = json.loads((RES / "cohort_composition.json").read_text())
 
 
 def prose(pattern, source=METHODS):
@@ -478,6 +479,58 @@ pressure conditions.
 {section(LIMITS, "Statistical")}
 
 {section(LIMITS, "Scope")}
+
+## 8b. What actually grew, and what the panel could not answer
+
+Three facts a clinician asks for first and a reviewer asks for second. All three are computed by
+`analysis/cohort_composition.py`.
+
+**The evaluated cohort is entirely Gram negative.** All {CC['coverage_ceiling']['n']} cases, across
+{CC['organisms']['distinct']} distinct organisms, dominated by
+{CC['organisms']['top'][0]['organism'].title()} in {CC['organisms']['top'][0]['cases']} of
+{CC['coverage_ceiling']['n']} cases, then {CC['organisms']['top'][1]['organism'].title()} in
+{CC['organisms']['top'][1]['cases']}. This is a property of the frame, not an accident of sampling,
+and it has a consequence worth stating: {len(CC['gram_positive_agents_in_the_formulary']['agents'])}
+of the seventeen formulary agents are Gram-positive agents that can never be adequate here. It is
+also why an encoder that answers vancomycin for every patient scores zero adequate rather than
+scoring wrong.
+
+**Intermediate is its own class, not a rounding.** The panel returns S, I and R.
+{CC['panel_interpretations']['I']} of {CC['panel_interpretations']['rows']} verdict rows are
+Intermediate, {CC['panel_interpretations']['intermediate_pct_of_rows']}%. Intermediate is neither
+covering nor failing: a case whose best available verdict on some isolate is Intermediate scores
+INTERMEDIATE_ONLY, and is excluded from adequacy numerators and from the paired primary test rather
+than being folded either way.
+
+**Two fifths of case-drug pairs cannot be scored at all.**
+{CC['case_drug_pairs']['undetermined']} of {CC['case_drug_pairs']['pairs']} case-drug pairs, which is
+{CC['case_drug_pairs']['undetermined_pct']}%, are UNDETERMINED because the laboratory never tested
+that agent against at least one isolate on that patient. That is the single largest constraint on
+this design and it is a property of clinical practice rather than of the model.
+
+**The ceiling, so the baseline can be read against something.** On this cohort, a policy with perfect
+per-patient choice from the formulary could reach
+{CC['coverage_ceiling']['cases_with_at_least_one_fully_susceptible_formulary_agent']} of
+{CC['coverage_ceiling']['n']} = **{CC['coverage_ceiling']['pct']}%**. The zero-shot baseline of
+{PRIM['baseline_pre_culture']['pct']}% is therefore not near a ceiling: roughly twelve points of
+headroom existed and were not taken.
+
+## 8c. What would falsify this
+
+The finding is that a live counterpart reduces coverage while the laboratory panel increases it. It
+would be falsified by any of the following, and none of them is ruled out by this design.
+
+- A heterogeneous pair, or a counterpart that varies its argument with the case, producing beneficial
+  corrections at a rate that outruns harmful ones. The break-even is arithmetic rather than a matter
+  of opinion, and at this base rate it is unattainable, so a different base rate would change the sign.
+- A larger or differently trained checkpoint that conditions its opening on the patient. The whole
+  effect here sits on top of a degenerate opening policy; a model with a real prior over patients
+  would need the whole analysis rerun.
+- A cohort with a different organism mix. This one is entirely Gram negative, and the drugs the
+  conversation converges on are two cephalosporins whose failure rate is a property of that mix.
+- Any demonstration that the susceptibility panel is not a valid arbiter of the empiric decision, for
+  example because of inducible resistance that the reported panel cannot show. That is a live
+  limitation, not a hypothetical.
 
 ## 9. What is inherited and what is new
 

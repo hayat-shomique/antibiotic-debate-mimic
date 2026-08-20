@@ -61,6 +61,7 @@ LEAK = json.loads((RES / "leakage.json").read_text())
 MT = json.loads((RES / "model_tiers.json").read_text())
 CLIN = json.loads((RES / "clinician_comparison.json").read_text())
 CONF = json.loads((RES / "confidence_axis.json").read_text())
+CC = json.loads((RES / "cohort_composition.json").read_text())
 ENC = MT["_encoder_baseline"]["models"]
 BEST_ENC = max(ENC.items(), key=lambda kv: kv[1]["adequate"])
 MG = MT["medgemma:4b-it-q4_K_M"]
@@ -664,7 +665,7 @@ footer(s, "the four-cell classification, harmful revision rate and beneficial co
 # ============================================================== 10. stewardship
 s = new_slide()
 head(s, "result four  ·  her spectrum-appropriateness endpoint",
-     "A sentence carrying no clinical evidence drives carbapenem use from 0 to 84 per cent",
+     f"A sentence carrying no clinical evidence drives carbapenem use from {SPEC['baseline']['carbapenem_pct']:.0f} to {SPEC['under_pressure']['carbapenem_pct']:.0f} per cent",
      "“a model recommending extremely broad therapy to everyone could achieve high coverage while still making poor antimicrobial-stewardship decisions”   Prof. Tingting Zhu, specifying this endpoint before the runs")
 figure(s, "stewardship", y=2.32)
 text(s, M, 5.95, 7.4, 0.9,
@@ -830,6 +831,8 @@ right = [
      "Fixed challenge sentences buy internal validity and give up realism. A real second agent would vary its argument with the case."),
     ("One superseded arm is still short",
      f"The plausible-wrong seeding arm holds {R['_integrity']['plausible']['n']} of a planned 312 exposures. It is superseded by the drug-matched design, carries no result in this deck, and is completing now."),
+    (f"Every case is Gram negative",
+     f"All {CC['coverage_ceiling']['n']} cases, {CC['organisms']['distinct']} organisms, {CC['organisms']['top'][0]['cases']} of them {CC['organisms']['top'][0]['organism'].title()}. Five of the seventeen formulary agents are Gram-positive drugs that can never be adequate here, and the Gram-positive half of bacteraemia is untested."),
     ("One 4B checkpoint, run locally",
      "MIMIC-IV is credentialed, so no record-level data may reach a hosted service. Findings are scoped to these checkpoints, not to language models generally."),
     ("No clinician has reviewed this design",
@@ -839,10 +842,10 @@ for col, items in enumerate([left, right]):
     x = M + col * (CW / 2 + 0.20)
     cwid = CW / 2 - 0.20
     for i, (hd, body) in enumerate(items):
-        y = 2.16 + i * 1.16
-        rule(s, x, y, cwid, 0.016, PRIMARY if col == 0 else MUTED)
-        text(s, x, y + 0.15, cwid, 0.36, hd, size=13.5, color=INK, bold=True, line=1.12)
-        text(s, x, y + 0.50, cwid, 0.8, body, size=10.5, color=MUTED, line=1.3)
+        y = 2.10 + i * 0.95
+        rule(s, x, y, cwid, 0.014, PRIMARY if col == 0 else MUTED)
+        text(s, x, y + 0.12, cwid, 0.3, hd, size=12.5, color=INK, bold=True, line=1.1)
+        text(s, x, y + 0.42, cwid, 0.7, body, size=9.5, color=MUTED, line=1.25)
 notes(s, f"""
 The limitations, stated as design properties rather than as apology, because most of them were
 choices.
@@ -1304,6 +1307,53 @@ The honest bound is the cell size: {CONF['by_transition_cell']['harmful_deferenc
 at any n, and I do not quote it as an effect size.
 """)
 footer(s, "results/confidence_axis.json  ·  analysis/confidence_axis.py  ·  specification written before the pressure arm was extended, and re-run unchanged", page())
+
+
+# ============================================================== backup, what grew
+s = new_slide(paper=True)
+head(s, "backup slide", "What actually grew, and what the panel could not answer",
+     "The first three questions a clinician asks, computed by analysis/cohort_composition.py.")
+table(s, ["organism", "cases", "gram"],
+      [[o["organism"].title(), str(o["cases"]), o["gram"]] for o in CC["organisms"]["top"][:6]],
+      x=M, y=2.60, w=CW * 0.50, col_w=[0.56, 0.18, 0.26], row_h=0.38, size=12, head_size=10)
+text(s, M, 5.42, CW * 0.50, 0.6,
+     f"{CC['organisms']['distinct']} distinct organisms across {CC['coverage_ceiling']['n']} cases. "
+     f"Every case is Gram negative, which is a property of the frame rather than of the sample.",
+     size=11.5, color=MUTED, line=1.3)
+
+RX2 = M + CW * 0.54
+for i, (title, body) in enumerate([
+    ("Intermediate is its own class",
+     f"The panel returns S, I and R. {CC['panel_interpretations']['I']} of {CC['panel_interpretations']['rows']} verdict rows are "
+     f"Intermediate, {CC['panel_interpretations']['intermediate_pct_of_rows']}%. It is neither covering nor failing: the case scores "
+     "INTERMEDIATE_ONLY and leaves the adequacy numerator and the paired test rather than being folded either way."),
+    ("Two fifths of pairs cannot be scored",
+     f"{CC['case_drug_pairs']['undetermined']} of {CC['case_drug_pairs']['pairs']} case-drug pairs are UNDETERMINED because the "
+     f"laboratory never tested that agent against at least one isolate, {CC['case_drug_pairs']['undetermined_pct']}%. That is what "
+     "the laboratory chose to test, not a property of the model, and it is the largest constraint on this design."),
+    ("The ceiling, so the baseline reads against something",
+     f"Perfect per-patient choice from the formulary reaches {CC['coverage_ceiling']['cases_with_at_least_one_fully_susceptible_formulary_agent']} of "
+     f"{CC['coverage_ceiling']['n']} = {CC['coverage_ceiling']['pct']}%. The {PRIM['baseline_pre_culture']['pct']}% baseline is not near a ceiling: "
+     "about twelve points of headroom existed and were not taken."),
+]):
+    y = 2.60 + i * 1.42
+    rule(s, RX2, y, CW * 0.46, 0.018, PRIMARY)
+    text(s, RX2, y + 0.16, CW * 0.46, 0.35, title, size=13.5, color=INK, bold=True, line=1.15)
+    text(s, RX2, y + 0.52, CW * 0.46, 0.9, body, size=11, color=MUTED, line=1.3)
+notes(s, f"""
+Backup slide, and it answers the three questions a clinician asks first.
+Which bugs: {CC['organisms']['distinct']} organisms, {CC['organisms']['top'][0]['cases']} of {CC['coverage_ceiling']['n']} are {CC['organisms']['top'][0]['organism'].title()}, and every case is Gram negative.
+That is a property of the frame, and it means five of my seventeen agents are Gram-positive drugs
+that could never be right here.
+Intermediate: {CC['panel_interpretations']['intermediate_pct_of_rows']} per cent of verdict rows. I do not fold it into either bucket. The case gets
+its own class and leaves the numerator, because calling Intermediate a success or a failure would be
+a decision I am not entitled to make.
+Undetermined: {CC['case_drug_pairs']['undetermined_pct']} per cent of case-drug pairs, because the lab never tested that drug against that
+patient's organism. That is the biggest constraint in the whole design.
+And the ceiling is {CC['coverage_ceiling']['pct']} per cent, so my {PRIM['baseline_pre_culture']['pct']} baseline was not bumping against a limit. There were about
+twelve points on the table and the model did not take them.
+""")
+footer(s, "results/cohort_composition.json  ·  analysis/cohort_composition.py  ·  aggregates only, no case-level rows leave the machine", page())
 
 
 # ---------------------------------------------------------------- timing cues

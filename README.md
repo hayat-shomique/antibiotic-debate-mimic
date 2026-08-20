@@ -33,7 +33,7 @@ Longer source documents are in [docs/](docs/). Superseded documents are kept in
 
 In this setup, agent-to-agent argument reduced coverage of the organism; supplying the susceptibility panel increased it. And the harm is invisible on the
 accuracy endpoint: the same unsupported pressure moves carbapenem prescribing from
-0 to 84 per cent while barely touching whether the answer was right.
+0 to 87.2 per cent while barely touching whether the answer was right.
 
 Those numbers are reproduced from the run data by the commands below, not typed.
 

@@ -481,6 +481,58 @@ near 32%; this cohort is 100% by construction, which is a declared post-baseline
 
 **Answer-space asymmetry, stated.** 51.8% of the clinician regimens in this cohort are multi-agent (86 of the 166 cases that have a regimen at all; 43.0% if you divide by all 200 cases, which understates it), while the model is required to name exactly one drug. The comparison is therefore between different answer spaces, which is part of why the clinician scores UNDETERMINED so often on the full cohort. The determined-only figures are the only ones worth quoting, and even those compare a single-agent recommendation against what is frequently a combination.
 
+## 8b. What actually grew, and what the panel could not answer
+
+Three facts a clinician asks for first and a reviewer asks for second. All three are computed by
+`analysis/cohort_composition.py`.
+
+**The evaluated cohort is entirely Gram negative.** All 200 cases, across
+20 distinct organisms, dominated by
+Escherichia Coli in 126 of
+200 cases, then Klebsiella Pneumoniae in
+29. This is a property of the frame, not an accident of sampling,
+and it has a consequence worth stating: 5
+of the seventeen formulary agents are Gram-positive agents that can never be adequate here. It is
+also why an encoder that answers vancomycin for every patient scores zero adequate rather than
+scoring wrong.
+
+**Intermediate is its own class, not a rounding.** The panel returns S, I and R.
+73 of 2472 verdict rows are
+Intermediate, 3.0%. Intermediate is neither
+covering nor failing: a case whose best available verdict on some isolate is Intermediate scores
+INTERMEDIATE_ONLY, and is excluded from adequacy numerators and from the paired primary test rather
+than being folded either way.
+
+**Two fifths of case-drug pairs cannot be scored at all.**
+1380 of 3400 case-drug pairs, which is
+40.6%, are UNDETERMINED because the laboratory never tested
+that agent against at least one isolate on that patient. That is the single largest constraint on
+this design and it is a property of clinical practice rather than of the model.
+
+**The ceiling, so the baseline can be read against something.** On this cohort, a policy with perfect
+per-patient choice from the formulary could reach
+199 of
+200 = **99.5%**. The zero-shot baseline of
+87.5% is therefore not near a ceiling: roughly twelve points of
+headroom existed and were not taken.
+
+## 8c. What would falsify this
+
+The finding is that a live counterpart reduces coverage while the laboratory panel increases it. It
+would be falsified by any of the following, and none of them is ruled out by this design.
+
+- A heterogeneous pair, or a counterpart that varies its argument with the case, producing beneficial
+  corrections at a rate that outruns harmful ones. The break-even is arithmetic rather than a matter
+  of opinion, and at this base rate it is unattainable, so a different base rate would change the sign.
+- A larger or differently trained checkpoint that conditions its opening on the patient. The whole
+  effect here sits on top of a degenerate opening policy; a model with a real prior over patients
+  would need the whole analysis rerun.
+- A cohort with a different organism mix. This one is entirely Gram negative, and the drugs the
+  conversation converges on are two cephalosporins whose failure rate is a property of that mix.
+- Any demonstration that the susceptibility panel is not a valid arbiter of the empiric decision, for
+  example because of inducible resistance that the reported panel cannot show. That is a live
+  limitation, not a hypothetical.
+
 ## 9. What is inherited and what is new
 
 The harness, the provenance gate, the cohort assembly and the scorer are built on the group's
@@ -565,7 +617,7 @@ deviation log. **deferred** means it is not done and the reason is on the closin
 | 23 Jul | *"inject different prior information into the prompts, for instance, assign Agent A the identity of an 'infectious disease specialist' and Agent B the role of 'antimicrobial stewardship lead', so that each has a clear, potentially conflicting incentive."* | Those two personas, in those words, are the system prompts. The tension is real: one wants coverage, the other restraint. | **built** slide 6, verbatim |
 | 23 Jul | *"you can feed real de-identified case summaries (including microbiology cultures and susceptibility results) as the discussion input."* | Case summaries yes. The susceptibility results are deliberately **not** in the empiric input, because that would destroy the pre-culture decision point Tingting specified. They enter as their own condition, C2, which is what makes the evidence comparison possible at all. | **built, with a stated deviation** slide 5, conditions C0 to C2 |
 | 23 Jul | *"evaluate which agent's final recommendation aligns better with actual clinical outcomes (e.g. subsequent resistance)"* | The per-agent half is done: Agent A and Agent B both reach 312/400 = 78.0 per cent. Subsequent resistance is not done. | **partly built, rest deferred** |
-| 23 Jul | *"Because your time is limited, you need to complete the first step to satisfy your pre, and then, if you have time left, we could push the whole project forward."* | The first step is complete and the project went past it: twelve arms, 2,963 deduplicated exposures. | **built** `AUDIT.md` section 2 |
+| 23 Jul | *"Because your time is limited, you need to complete the first step to satisfy your pre, and then, if you have time left, we could push the whole project forward."* | The first step is complete and the project went past it: 13 arms, 3,910 deduplicated exposures. | **built** `AUDIT.md` section 2 |
 
 ---
 

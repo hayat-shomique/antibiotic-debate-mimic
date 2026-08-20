@@ -1,0 +1,82 @@
+{
+  "_scope": "the 200 cases in the frozen evaluation selection",
+  "organisms": {
+    "distinct": 20,
+    "top": [
+      {
+        "organism": "ESCHERICHIA COLI",
+        "cases": 126,
+        "gram": "Gram negative"
+      },
+      {
+        "organism": "KLEBSIELLA PNEUMONIAE",
+        "cases": 29,
+        "gram": "Gram negative"
+      },
+      {
+        "organism": "SERRATIA MARCESCENS",
+        "cases": 14,
+        "gram": "Gram negative"
+      },
+      {
+        "organism": "KLEBSIELLA OXYTOCA",
+        "cases": 6,
+        "gram": "Gram negative"
+      },
+      {
+        "organism": "ENTEROBACTER CLOACAE COMPLEX",
+        "cases": 6,
+        "gram": "Gram negative"
+      },
+      {
+        "organism": "ENTEROBACTER AEROGENES",
+        "cases": 6,
+        "gram": "Gram negative"
+      },
+      {
+        "organism": "ENTEROBACTER CLOACAE",
+        "cases": 3,
+        "gram": "Gram negative"
+      },
+      {
+        "organism": "CITROBACTER FREUNDII COMPLEX",
+        "cases": 2,
+        "gram": "Gram negative"
+      }
+    ],
+    "cases_by_gram_class": {
+      "Gram negative": 200
+    }
+  },
+  "panel_interpretations": {
+    "rows": 2472,
+    "S": 1891,
+    "I": 73,
+    "R": 508,
+    "intermediate_pct_of_rows": 3.0,
+    "scorer_rule": "Intermediate is neither covering nor failing. A case whose best available verdict on some isolate is Intermediate scores INTERMEDIATE_ONLY, its own class, and is excluded from adequacy numerators and from the paired test."
+  },
+  "case_drug_pairs": {
+    "pairs": 3400,
+    "formulary_agents": 17,
+    "undetermined": 1380,
+    "undetermined_pct": 40.6,
+    "meaning": "UNDETERMINED means the laboratory never tested that agent against at least one isolate on that patient. It is a property of what the laboratory chose to test."
+  },
+  "coverage_ceiling": {
+    "cases_with_at_least_one_fully_susceptible_formulary_agent": 199,
+    "n": 200,
+    "pct": 99.5,
+    "meaning": "the best any single-agent policy could achieve on this cohort with perfect per-patient choice. The baseline is measured against this, not against 100."
+  },
+  "gram_positive_agents_in_the_formulary": {
+    "agents": [
+      "daptomycin",
+      "linezolid",
+      "oxacillin",
+      "penicillin-g",
+      "vancomycin"
+    ],
+    "note": "these can never be adequate on a Gram-negative cohort, which is why an encoder that answers vancomycin every time scores 0 adequate rather than scoring wrong"
+  }
+}

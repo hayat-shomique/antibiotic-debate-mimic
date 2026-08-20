@@ -50,7 +50,7 @@ backup slide 21 is the strongest answer to what you learned.
 >
 > The part I did not expect is that on a standard accuracy endpoint this failure is invisible.
 > Score whether the answer was right and the debate looks harmless. Score what kind of answer it
-> was and a sentence containing no clinical evidence at all pushes carbapenem use from 0 to 84 per
+> was and a sentence containing no clinical evidence at all pushes carbapenem use from 0 to 87.2 per
 > cent. The contribution is not that models are agreeable, that is known. It is that the usual way
 > of measuring the harm cannot see this one.
 
@@ -78,7 +78,7 @@ Use these five beats, in this order. No jargon until you have earned it.
    that drug against the patient's lab result. And critically, I run three other versions of the same
    case: one where nobody disagrees, one where somebody disagrees but says nothing of substance, and
    one where the model is simply handed the lab result.
-5. **What happened.** Being disagreed with by an empty sentence moved the model in 90 to 100 per cent
+5. **What happened.** Being disagreed with by an empty sentence moved the model in 93.5 to 100 per cent
    of cases. Being handed the actual laboratory result moved it in 54 per cent. It responds more to a
    person pushing back than to the evidence. And when a real second agent argues, the final answer is
    worse than the one it started with.
@@ -229,7 +229,7 @@ Read the question, answer out loud, then check. The bold sentence is the one to 
 **It is small, and it is paired.** Every case is its own control: the same patient is put to the same
 model in four conditions with a fixed seed, so I am not comparing 200 patients against another 200
 patients, I am comparing each patient against himself. That is what gets p on the order of 1e-52 out
-of 70 evaluable cases. The cohort is small because everything runs locally under the data agreement,
+of 180 to 185 evaluable cases. The cohort is small because everything runs locally under the data agreement,
 and I would rather have 200 cases in four conditions than 2,000 in one.
 
 **Q. Your model recommends the same drug for everyone. Is the whole study not just measuring a broken model?**
@@ -344,7 +344,7 @@ nothing to compare.
 
 **Q. What is the single most useful thing you did?**
 **The neutral control.** Without a condition where the prompt grows and nothing else changes, "it
-folds under pressure" could just mean "it wobbles when spoken to". Zero of 70 is what turns the rest
+folds under pressure" could just mean "it wobbles when spoken to". Zero of 180 to 185 is what turns the rest
 of the deck from a description into an inference. It cost nothing and it is the cheapest thing anyone
 evaluating a multi-agent system could copy.
 
@@ -368,7 +368,7 @@ Use this shape, in this order, and never bluff a number.
 Worked examples.
 
 - *"What happens with three agents?"* I have not run it. The nearest thing I have is the four
-  pressure framings, where a single unsupported challenge already moves it 90 to 100 per cent, so I
+  pressure framings, where a single unsupported challenge already moves it 93.5 to 100 per cent, so I
   would expect a majority condition to saturate rather than reveal anything new. The published range
   suggests unanimity matters more than count, and that is the experiment I would run.
 - *"Does this hold for Gram-positive infections?"* Not tested. My cohort selects on having an
@@ -409,7 +409,7 @@ Each of these was checked and cut for a reason.
 
 - "The doctor is not the reference. The bacteria are."
 - "It is moved more by a person disagreeing with it than by the laboratory result."
-- "Zero of 70 under a neutral turn is what makes the rest of this deck an inference rather than a
+- "Zero of 180 to 185 under a neutral turn is what makes the rest of this deck an inference rather than a
   description."
 - "A sentence carrying no clinical evidence pushed it to last-line therapy for four out of five
   patients, and bought nothing."
