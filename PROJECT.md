@@ -332,7 +332,50 @@ which is the null exactly. Within a drug, coverage makes no difference. Between 
 **In this setup, agent-to-agent argument reduced coverage of the organism; supplying the susceptibility panel increased it.** Stated as alignment with the recorded microbiology and counterfactual
 appropriateness of the recommendation, never as a recommendation causing a patient outcome.
 
-### 7.7 The escalation ladder
+### 7.7 The model against the clinician, her second comparison
+
+> You can also compare LLM with clinician see if they agree or LLM is worse or better?
+>
+> Prof. Tingting Zhu, 30 July 2026
+
+Both sides are scored by the identical rule, fixed in the protocol before this was computed: a
+regimen covers if any agent in it covers, and a polymicrobial case is adequate only if every
+pathogenic isolate is covered.
+
+| scored against the same panels | all cases | cases where both can be scored |
+|---|---|---|
+| the clinician's actual empiric prescription | 125/200 = 62.5% | **125/138 = 90.6%** |
+| the model, zero-shot, before any conversation | 175/200 = 87.5% | **175/192 = 91.1%** |
+
+The margin on the full cohort is a **denominator artefact** and is reported as one: the clinician
+scores UNDETERMINED in 62 of 200
+cases, largely because real prescriptions fall outside the closed formulary or were never tested
+against the isolate. On the cases where both can be scored the two are indistinguishable. The answer
+to her question is that neither is better.
+
+### 7.8 The remaining endpoints in her hierarchy
+
+| her endpoint | value |
+|---|---|
+| time to appropriate therapy | observed median 8.6 h in 185/200 cases |
+| escalation and de-escalation correctness once results arrive | repaired 57/69 = 82.6% of INADEQUATE entrants   held 311/312 = 99.7%   (19 entrants were indeterminate and are excluded from both)   400/400 runs |
+| decision-quality delta, compared across the two speaking directions | Doctor to Pharmacist -0.120, Pharmacist to Doctor -0.094 |
+| confidence before and after | **withdrawn.** She asked for it, and the concerning state she named is correct and confident becoming wrong and confident. Every one of 200 observations came back 85, 90 or 95, so the pre-specified threshold could not fail. Reporting it as a null would be worse than removing it |
+
+### 7.9 Where the hierarchy meets the sycophancy question
+
+She asked this directly on 18 August and it deserves a direct answer.
+
+> I assume the above has nothing to do with sycophancy yet. Since you are running multiple agents?
+
+The hierarchy measures decision **quality**; sycophancy is the **mechanism** that moves it. So the
+hierarchy is applied twice, once to each agent's answer before the interaction and once after, and
+the four-cell table in 7.3 is exactly the join: a harmful deference is a sycophancy event scored on
+her appropriateness endpoint. That is why the same 2x2 appears three times, for a neutral turn, for a
+live agent and for the panel. Without the hierarchy the sycophancy is invisible, because the agents
+agree either way. Without the sycophancy layer the hierarchy has nothing to compare.
+
+### 7.10 The escalation ladder
 
 The order was set by the supervisor at the first meeting: zero-shot, then few-shot, and training only
 if few-shot fails.
@@ -406,7 +449,16 @@ near 32%; this cohort is 100% by construction, which is a declared post-baseline
 
 **Answer-space asymmetry, stated.** 51.8% of the clinician regimens in this cohort are multi-agent (86 of the 166 cases that have a regimen at all; 43.0% if you divide by all 200 cases, which understates it), while the model is required to name exactly one drug. The comparison is therefore between different answer spaces, which is part of why the clinician scores UNDETERMINED so often on the full cohort. The determined-only figures are the only ones worth quoting, and even those compare a single-agent recommendation against what is frequently a combination.
 
-## 9. Data integrity
+## 9. What is inherited and what is new
+
+The harness, the provenance gate, the cohort assembly and the scorer are built on the group's
+existing local tooling in the run directory. What is new in this project is the design and
+everything downstream of it: the four-condition structure with the neutral control, the drug-matched
+arm that separates drug identity from patient fit, the four-cell transition analysis applied to a
+laboratory reference standard rather than a benchmark key, the escalation ladder run to its second
+rung, and every result file in `results/`.
+
+## 10. Data integrity
 
 An exposure is one model decision in one experimental cell. Two records sharing an identity key are a
 repeated write, not a repeated measurement, and the second is dropped before any number is computed.
@@ -430,7 +482,7 @@ Every arm now runs under a PID lock. Model `qwen3:4b-instruct-2507-q4_K_M`, temp
 20260818, run locally: MIMIC-IV is credentialed under a PhysioNet data use agreement and no
 record-level data is committed to this repository.
 
-## 10. What I was asked, and what I built
+## 11. What I was asked, and what I built
 
 Every instruction from Prof. Tingting Zhu and from Zhikang Chen, quoted from the Teams threads as
 they wrote it, against what exists on disk. Three items are deliberately not done and they are

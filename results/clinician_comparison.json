@@ -1,0 +1,38 @@
+{
+  "_ask": "Prof. Tingting Zhu, 30 July 2026: 'You can also compare LLM with clinician see if they agree or LLM is worse or better?'",
+  "_scoring": "the identical rule scores both sides, protocol_v1 line 65: a regimen covers if any administered or recommended agent covers, and a polymicrobial case is adequate only if every pathogenic isolate is covered",
+  "_window": "[index_time, index_time + 24h]",
+  "_deviation": "D-CLINWIN-1 (APPROVED). Comparator window moved from the pre-draw window to the post-draw window. Pre-draw retained as SENSITIVITY S1 only.",
+  "clinician": {
+    "n": 200,
+    "counts": {
+      "ADEQUATE": 125,
+      "INADEQUATE": 11,
+      "INTERMEDIATE_ONLY": 2,
+      "UNDETERMINED": 62
+    },
+    "adequate_all_cases_pct": 62.5,
+    "adequate_determined_only": {
+      "k": 125,
+      "n": 138,
+      "pct": 90.6
+    }
+  },
+  "model_zero_shot": {
+    "n": 200,
+    "counts": {
+      "ADEQUATE": 175,
+      "INTERMEDIATE_ONLY": 5,
+      "INADEQUATE": 12,
+      "UNDETERMINED": 8
+    },
+    "adequate_all_cases_pct": 87.5,
+    "adequate_determined_only": {
+      "k": 175,
+      "n": 192,
+      "pct": 91.1
+    }
+  },
+  "gap_determined_only_pts": 0.6,
+  "_reading": "The margin on the full cohort is a denominator artefact: the clinician scores UNDETERMINED far more often, largely because real prescriptions fall outside the closed 17-drug formulary or were never tested against the isolate. On the cases where both can be scored the two are indistinguishable. The answer to her question is that neither is better."
+}

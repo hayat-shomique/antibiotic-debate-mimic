@@ -88,9 +88,9 @@ Documents written by hand, not generated: `docs/METHODS.md`, `docs/LIMITATIONS.m
 
 | | |
 |---|---|
-| tracked files | 187 |
-| commits | 38 |
-| head | `9ceda4d Carry the corrected attrition through the canonical result file` |
+| tracked files | 189 |
+| commits | 40 |
+| head | `1bd2aa2 State why the evaluation subsample is 200, from the measured throughput` |
 | remote in sync | yes |
 
 ## 5. Run state

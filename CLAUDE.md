@@ -83,3 +83,82 @@ Sycophancy and peer conformity are published phenomena, not findings of this pro
 this cohort is maximised by a degenerate carbapenem-for-all policy, so never argue the model
 underperforms a constant. The speaking-order effect is entailed, not discovered. The confidence
 endpoint is withdrawn. See the last section of `deck/EVIDENCE.md`.
+
+---
+
+# Working with this supervisor
+
+Prof. Tingting Zhu set this project's direction. Her operating style is documented across the Teams
+thread and it changes how work is presented, not only what is presented. These are extracted rules,
+not impressions.
+
+## What she rewards
+
+- **Results before plans.** She postponed a scheduled meeting until results existed and asked, in
+  writing, how a concept note could be written before seeing the dataset. Every update to her opens
+  with a number, not an intention.
+- **A narrow population and a named treatment.** Stated twice inside sixteen hours: you cannot study
+  everyone going into ICU. Bloodstream infection with antibiotics is locked. Do not reopen it.
+- **Experimental results or theoretical proof.** She wrote both phrases. No speculative slides, no
+  "what if" without a reason.
+- **"I do not know yet" followed by evidence.** Explicitly acceptable: come back later with a solid
+  proof. Bluffing is not.
+- **Honesty as a stated lab value.** Robust criticism is the norm and is not hostility. She positions
+  herself as an equal in debate and says she is happy to be wrong if you can prove it.
+
+## What she penalises
+
+- **Silence.** Eleven days without contact triggered a chase. This is the single most reliable way to
+  damage the relationship.
+- **Throwaway credentials.** A reference to prior experience must carry the mechanism: what the
+  problem was and why it maps. Otherwise leave it out.
+- **AI-written register.** She has said she can tell, and she is not hostile to the tool, she is
+  hostile to the voice. Anything written for her must read as the author speaking. Short sentences,
+  concrete nouns, no throat-clearing, no triads of adjectives, no "it is worth noting".
+
+## Her terminology is the vocabulary of this project
+
+Use her names, not new coinages: the endpoint hierarchy; susceptibility concordance as the primary
+endpoint; spectrum appropriateness; escalation and de-escalation correctness; the four-cell
+classification of stable correct, beneficial correction, harmful deference and no improvement;
+harmful revision rate over the correct-before group; beneficial correction rate over the
+incorrect-before group; decision-quality delta compared across the two speaking directions.
+
+Two required comparisons, both of them, always: the model against the ground truth **and** the model
+against the clinician's actual empiric choice.
+
+Mortality is secondary at most, because in bloodstream infection it is confounded by severity,
+source control, comorbidity, timing and other treatments. Never lead with it.
+
+## Gaps are named, never left silent
+
+Anything she asked for that is not done goes on a limitations or further-work slide **by name**. An
+acknowledged gap is a limitation; an unacknowledged one is a hole. This currently applies to the
+withdrawn confidence endpoint, the two arms short of their planned n, the transfer to hosted models,
+subsequent resistance, and clinician review.
+
+---
+
+# Handling literature
+
+The corpus is in `docs/`. Three files govern it and they are not optional.
+
+- `docs/LITERATURE.md` is the reading list, tiered, with why each paper matters to this project.
+- `docs/LITERATURE_PRESSURE_TEST.md` is the adversarial claim-by-claim check of this project's own
+  results against the published record. It records, for each claim, whether the wording survives and
+  the closest prior work with a resolved identifier. Read it before making any novelty claim.
+- `docs/do_not_cite.md` and `docs/verification_log.csv` record identifiers that could not be
+  resolved. Anything listed there is never cited, in any artefact, for any reason.
+
+Rules:
+
+1. **MEASURED or ARGUED.** A paper that ran the experiment and reports the number is MEASURED. A
+   paper that asserts a position without measuring it is ARGUED. Label which one you are leaning on.
+2. **No citation without a resolved identifier.** A DOI, an arXiv id, or a PMID that a verifier
+   resolved. A title alone is not a citation and a search-engine redirect is not an identifier.
+3. **Concede what is known before claiming what is new.** Collaboration between agents is already
+   known not to reliably help, and sycophancy is documented. Claiming either as a finding costs the
+   room's trust in everything else. The contribution is the arbiter: a per-patient laboratory panel
+   that neither agent can see, argue with, or produce.
+4. **Never cite from memory.** If an identifier is not in `docs/references.bib` or the verification
+   log, it does not go in.

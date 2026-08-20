@@ -59,6 +59,7 @@ P = json.loads((RES / "policy_degeneracy.json").read_text())
 FS = json.loads((RES / "fewshot.json").read_text())
 LEAK = json.loads((RES / "leakage.json").read_text())
 MT = json.loads((RES / "model_tiers.json").read_text())
+CLIN = json.loads((RES / "clinician_comparison.json").read_text())
 ENC = MT["_encoder_baseline"]["models"]
 BEST_ENC = max(ENC.items(), key=lambda kv: kv[1]["adequate"])
 MG = MT["medgemma:4b-it-q4_K_M"]
@@ -809,14 +810,18 @@ head(s, "what this does not show", "The bounds, stated as properties of the desi
 left = [
     ("The baseline is a constant",
      "With one recommendation for every patient there is no variation to explain, so this cannot separate a model that reasons about patients from a model with one good default."),
-    ("The primary test runs on a third of the cohort",
-     f"{N_PRIMARY} of {PRIM['baseline_pre_culture']['n']} cases are evaluable in all four conditions. The attrition is a property of what the laboratory tested, and it is still attrition."),
+    ("The primary test runs on 70 cases",
+     f"The pressure arm ran {COVER['cases_the_pressure_arm_covered']} of {COVER['cases_in_the_frozen_selection']}, so {ATTR['dropped_arm_never_ran_the_case']} cases have no pressure row and {ATTR['dropped_indeterminate_outcome']} more are indeterminate. A contiguous prefix of a seeded selection, adequacy {COVER['baseline_adequacy_covered_subset_pct']}% against {COVER['baseline_adequacy_whole_selection_pct']}%."),
+    ("The confidence endpoint is withdrawn",
+     "She asked for confidence before and after, because correct and confident becoming wrong and confident is the concerning state. Every one of 200 observations came back 85, 90 or 95, so the pre-registered threshold could not fail."),
     ("Clustering, not independence",
      "400 ordering-runs are 200 patients seen twice. Measured ICC 0.913, design effect 1.91, effective n 209. Any interval computed as though they were independent is too narrow."),
 ]
 right = [
     ("The counterpart is scripted, not alive",
      "Fixed challenge sentences buy internal validity and give up realism. A real second agent would vary its argument with the case."),
+    ("Two arms are short of their planned n",
+     "The pressure arm ran 78 of 197 planned cases and the plausible-wrong arm 166 of 312. Both are prefixes of a seeded selection, and every paired test uses complete cases only."),
     ("One 4B checkpoint, run locally",
      "MIMIC-IV is credentialed, so no record-level data may reach a hosted service. Findings are scoped to these checkpoints, not to language models generally."),
     ("No clinician has reviewed this design",
@@ -826,10 +831,10 @@ for col, items in enumerate([left, right]):
     x = M + col * (CW / 2 + 0.20)
     cwid = CW / 2 - 0.20
     for i, (hd, body) in enumerate(items):
-        y = 2.30 + i * 1.42
-        rule(s, x, y, cwid, 0.016, ACCENT if col == 0 else MUTED)
-        text(s, x, y + 0.18, cwid, 0.4, hd, size=15, color=INK, bold=True, line=1.15)
-        text(s, x, y + 0.60, cwid, 0.9, body, size=12, color=MUTED, line=1.35)
+        y = 2.16 + i * 1.16
+        rule(s, x, y, cwid, 0.016, PRIMARY if col == 0 else MUTED)
+        text(s, x, y + 0.15, cwid, 0.36, hd, size=13.5, color=INK, bold=True, line=1.12)
+        text(s, x, y + 0.50, cwid, 0.8, body, size=10.5, color=MUTED, line=1.3)
 notes(s, f"""
 The limitations, stated as design properties rather than as apology, because most of them were
 choices.
@@ -1185,6 +1190,51 @@ Examples teach the model to vary its prescribing without teaching it which patie
 That is the honest answer to rung two, and by her own sequencing it is what justifies rung three.
 """)
 footer(s, "results/fewshot.json  ·  analysis/fewshot_analysis.py  ·  paired on cases determinate in both conditions", page())
+
+# ============================================================== backup, clinician
+s = new_slide(paper=True)
+head(s, "backup slide", "The model against the clinician, her second comparison",
+     "“You can also compare LLM with clinician see if they agree or LLM is worse or better?”   Prof. Tingting Zhu, 30 July 2026")
+table(s, ["scored against the same panels, by the same rule", "all cases", "cases where both can be scored"],
+      [["the clinician's actual empiric prescription",
+        f"{CLIN['clinician']['counts']['ADEQUATE']}/{CLIN['clinician']['n']} = {CLIN['clinician']['adequate_all_cases_pct']}%",
+        (f"{CLIN['clinician']['adequate_determined_only']['k']}/{CLIN['clinician']['adequate_determined_only']['n']} = "
+         f"{CLIN['clinician']['adequate_determined_only']['pct']}%", {"bold": True})],
+       ["the model, zero-shot, before any conversation",
+        f"{CLIN['model_zero_shot']['counts']['ADEQUATE']}/{CLIN['model_zero_shot']['n']} = {CLIN['model_zero_shot']['adequate_all_cases_pct']}%",
+        (f"{CLIN['model_zero_shot']['adequate_determined_only']['k']}/{CLIN['model_zero_shot']['adequate_determined_only']['n']} = "
+         f"{CLIN['model_zero_shot']['adequate_determined_only']['pct']}%", {"bold": True, "color": PRIMARY})]],
+      x=M, y=2.90, w=CW, col_w=[0.46, 0.27, 0.27], row_h=0.52, size=13, head_size=10)
+text(s, M, 4.42, CW, 1.2,
+     [[("The 25-point margin on the full cohort is a denominator artefact, and I report it as one. ",
+        {"bold": True}),
+       (f"The clinician scores UNDETERMINED in {CLIN['clinician']['counts']['UNDETERMINED']} of "
+        f"{CLIN['clinician']['n']} cases, largely because real prescriptions fall outside the closed "
+        "17-drug formulary or were never tested against the isolate, so that comparison penalises the "
+        "clinician for prescribing outside the model's answer space. On the cases where both can be "
+        f"scored the two are indistinguishable, {CLIN['model_zero_shot']['adequate_determined_only']['pct']}% against "
+        f"{CLIN['clinician']['adequate_determined_only']['pct']}%. The answer to her question is that neither is better.",
+        {"color": MUTED})]], size=13, line=1.36)
+block(s, M, 5.72, CW, 0.86, BG)
+text(s, M + 0.28, 5.90, CW - 0.6, 0.6,
+     [[("Both sides are scored by the identical rule, fixed in the protocol before this was computed: "
+        "a regimen covers if any agent in it covers, and a polymicrobial case is adequate only if every "
+        f"pathogenic isolate is covered. Comparator window {CLIN['_window']}, fixed rather than chosen after seeing which window scored best.",
+        {"color": INK, "size": 11.5})]], size=11.5, line=1.32)
+notes(s, """
+Backup slide, and it answers a question she asked me twice.
+The rule she set was two comparisons, not one: the model against the ground truth, and the model
+against what the clinician actually did. This is the second.
+On all 200 cases the model looks 25 points better. That is not a real margin and I do not present it
+as one. The clinician scores undetermined in 62 cases, mostly because real prescriptions fall outside
+my closed formulary or were never tested against the isolate, so that comparison penalises the
+clinician for prescribing outside my answer space.
+On the cases where both can be scored, it is 91.1 against 90.6. Indistinguishable. The honest answer
+to her question is that neither is better, and the interesting part is that a constant policy
+achieves that.
+""")
+footer(s, "results/clinician_comparison.json  ·  analysis/clinician_comparison.py  ·  identical scoring rule, protocol_v1 line 65", page())
+
 
 # ---------------------------------------------------------------- timing cues
 # Ten minutes of talk, five of questions. Targets for the sixteen core slides,
