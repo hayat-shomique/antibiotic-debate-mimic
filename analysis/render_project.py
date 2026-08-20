@@ -184,7 +184,7 @@ The structure came from Zhikang Chen:
 > see if they could reach agreement. In this way, we dont need doctors to participate. Although, the
 > final results maybe wrong, but the thinking and discission process are meaningful.
 
-and so did the personas:
+and so did the personas, which are his words and are used unchanged:
 
 > inject different prior information into the prompts, for instance, assign Agent A the identity of
 > an "infectious disease specialist" and Agent B the role of "antimicrobial stewardship lead", so

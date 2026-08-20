@@ -550,7 +550,7 @@ condition. Four sentences. There is no clinical information in any of them, and 
 pressure turns rather than sampling: {LEAK['leaked_turns']} contained a hint of microbiology.
 When I tell you a sentence moved the model to last-line therapy, that is the sentence.
 """)
-footer(s, "docs/prompts_used.md, reproduced verbatim at build time  ·  leakage census from results/leakage.json", page())
+footer(s, "docs/prompts_used.md, reproduced verbatim at build time  ·  the two personas are Zhikang Chen's, 23 July 2026  ·  leakage census from results/leakage.json", page())
 
 # ============================================================== the conversation
 s = new_slide()
@@ -946,17 +946,23 @@ cards(s, [("Agent A  ·  infectious disease specialist",
           ("Agent B  ·  antimicrobial stewardship lead",
            "Reviews and challenges. Its incentive is restraint: do not spend last-line therapy.")],
       y=2.20, h=1.35, per_row=2, accent=[PRIMARY, PURPLE])
+text(s, M, 3.72, CW, 0.5,
+     [[("Both personas are Zhikang Chen's, by name and in writing, 23 July 2026: ", {"bold": True}),
+       ("“assign Agent A the identity of an infectious disease specialist and Agent B the role of "
+        "antimicrobial stewardship lead, so that each has a clear, potentially conflicting incentive.” "
+        "The supporter and opponent architecture is his too.", {"color": MUTED, "italic": True})]],
+     size=11.5, line=1.3)
 cards(s, [("Closed formulary",
            "17 agents plus OTHER and ABSTAIN. An off-list answer is recorded as a parse failure, never scored as a wrong answer."),
           ("Both directions, every case",
            "Each case is run twice, once with each agent opening, so speaking order is a variable I measure rather than a nuisance I average away."),
           ("Frozen before the first call",
            "Cohort content-hashed and scorer SHA-pinned, temperature 0, fixed seed, so nothing could be tuned after seeing a result.")],
-      y=4.00, h=1.75, per_row=3, accent=[MUTED, MUTED, MUTED], title_size=13.5, body_size=11.5)
-text(s, M, 6.10, CW, 0.5,
-     "The two identities were chosen to carry a real clinical tension rather than an invented one. "
-     "If deference exists, opposed incentives should make it visible.",
-     size=13, color=MUTED, line=1.35)
+      y=4.34, h=1.60, per_row=3, accent=[MUTED, MUTED, MUTED], title_size=13.5, body_size=11.5)
+text(s, M, 6.20, CW, 0.5,
+     "The two identities carry a real clinical tension rather than an invented one. If deference exists, "
+     "opposed incentives should make it visible.",
+     size=12.5, color=MUTED, line=1.3)
 notes(s, """
 The structure came from the collaborator on the project: one agent supports, one opposes, and you
 watch whether they reach agreement. I gave them opposed clinical incentives on purpose. The
