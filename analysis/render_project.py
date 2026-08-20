@@ -52,6 +52,7 @@ LIMITS = (DOCS / "LIMITATIONS.md").read_text()
 AMPC = json.loads((RES / "ampc_exposure.json").read_text())
 TRIG = json.loads((RES / "trigger_comparison.json").read_text())
 SRC = json.loads((RES / "selfrevision_control.json").read_text()) if (RES / "selfrevision_control.json").exists() else None
+CONF = json.loads((RES / "claim_confidence.json").read_text()) if (RES / "claim_confidence.json").exists() else None
 
 def _trigger_table():
     """One row per reconsideration trigger, all on the same round-0 starting position."""
@@ -97,6 +98,20 @@ if SRC:
     SRC_C = str(_t["control_inadequate_and_debate_adequate"])
     SRC_P = f'{_t["exact_mcnemar_p"]:.3g}'
     SRC_PREFIX_HRR = f'{SRC["_is_the_prefix_representative"]["debate_harmful_revision_rate_on_this_prefix"]:g}'
+
+
+if CONF:
+    _rows = []
+    for _c in CONF["claims"]:
+        _tick = lambda b: "yes" if b else "no"
+        _rows.append("| {} | {} | {} | {} | {} | {} | **{}** |".format(
+            _c["claim"], _c["number"], _tick(_c["paired_within_patient"]),
+            _tick(_c["has_a_control_arm"]), _tick(_c["reproduced_independently"]),
+            _tick(_c["residual_uncertainty_stated_on_the_slide"]), _c["confidence"]))
+    CONF_ROWS = "\n".join(_rows)
+    CONF_TALLY = ", ".join(f"{v} {k}" for k, v in CONF["_tally"].items())
+    CONF_BREAK = "\n".join(f"- **{_c['claim']}** ({_c['confidence']}). {_c['what_would_break_it']}"
+                            for _c in CONF["claims"])
 
 TRIGGER = _trigger_table()
 TRIGGER_ROWS = TRIGGER["TRIGGER_ROWS"]
@@ -686,6 +701,31 @@ What it does close is the repetition explanation, which neither of those two nam
 addresses, and which was the live alternative to the reading in 7.12.
 
 [`results/selfrevision_control.json`, `analysis/selfrevision_control.py`, `selfrevise_run.py`]
+
+## 7b. How much weight each claim can carry
+
+Not every number here is equally strong and the difference is not how good the number looks, it is
+the design behind it. Each claim below is graded on four things that can be checked: whether the
+comparison is paired within patient, whether an arm exists that removes the leading alternative
+explanation, whether a second implementation or a recomputation from the raw run files reproduces
+it, and whether what could still be wrong is stated where the claim is made. Four of four is high,
+three is good, two is moderate, one is weak.
+
+{CONF_TALLY}.
+
+| claim | number | paired | controlled | reproduced | bounded | confidence |
+|---|---|---|---|---|---|---|
+{CONF_ROWS}
+
+**What would break each one**, which is the part worth reading:
+
+{CONF_BREAK}
+
+The grades are computed by `analysis/claim_confidence.py` from the result files rather than
+assigned. A claim whose supporting arm shrinks, or whose control is removed, loses its grade the
+next time the chain runs.
+
+[`results/claim_confidence.json`]
 
 ## 8. What this does not show
 

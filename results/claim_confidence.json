@@ -1,0 +1,121 @@
+{
+  "_purpose": "how much weight each headline claim can carry, graded on four checkable properties rather than on how good the number looks",
+  "_how_the_grade_is_computed": {
+    "paired_within_patient": "the same patient is put to the model in both conditions, so between-patient variation cannot explain the difference",
+    "has_a_control_arm": "an arm exists that removes the leading alternative explanation",
+    "reproduced_independently": "a second implementation, a second denominator or a recomputation from the raw run files gives the same answer",
+    "residual_uncertainty_stated_on_the_slide": "what could still be wrong is named where the claim is made, not left to be found",
+    "grade": "four of four is high, three good, two moderate, one weak, none not established"
+  },
+  "_tally": {
+    "high": 4,
+    "good": 3,
+    "moderate": 1,
+    "weak": 1
+  },
+  "_arms": {
+    "registered": 14,
+    "deduplicated_exposures": 4034
+  },
+  "claims": [
+    {
+      "claim": "An unsupported challenge moves the model where a neutral re-ask never does",
+      "number": "discordant pairs 173 to 183 against 0, exact binomial p at most 1.67e-52",
+      "n": "180 to 185 of 200 per framing",
+      "paired_within_patient": true,
+      "has_a_control_arm": true,
+      "reproduced_independently": true,
+      "residual_uncertainty_stated_on_the_slide": true,
+      "confidence": "high",
+      "what_would_break_it": "nothing available in this design. The neutral arm is the control, the test was pre-specified, the pairing is within patient, and the p value recomputes from scratch. The bound is the attrition, which is decomposed and survives a worst-case sensitivity assignment"
+    },
+    {
+      "claim": "A five-turn debate costs coverage of the organism",
+      "number": "87.5% to 78.0%, -9.5 points; harmful revision 52/341 = 15.2%",
+      "n": "400 ordering-runs over 200 cases",
+      "paired_within_patient": true,
+      "has_a_control_arm": true,
+      "reproduced_independently": true,
+      "residual_uncertainty_stated_on_the_slide": true,
+      "confidence": "high",
+      "what_would_break_it": "the counterpart is scripted in the pressure arm but a live second agent here, and both agents are the same checkpoint, so this is one model talking to itself with two personas. A second checkpoint as the counterpart would test whether the effect survives"
+    },
+    {
+      "claim": "Duration, not the framing of the challenge, is what costs coverage",
+      "number": "one turn costs 1.1% to 3.5% across four framings; five turns cost 15.2%",
+      "n": "800 one-turn exposures against 400 ordering-runs, same 200 cases",
+      "paired_within_patient": true,
+      "has_a_control_arm": true,
+      "reproduced_independently": true,
+      "residual_uncertainty_stated_on_the_slide": true,
+      "confidence": "high",
+      "what_would_break_it": "the one-turn and five-turn arms differ in protocol as well as in length: one re-asks once, the other runs a live exchange. A turn-count sweep inside one protocol is the clean version"
+    },
+    {
+      "claim": "An unsupported sentence drives carbapenem prescribing from nothing to most of the cohort",
+      "number": "0.0% to 87.2% carbapenem use",
+      "n": "800 exposures over 200 cases",
+      "paired_within_patient": true,
+      "has_a_control_arm": true,
+      "reproduced_independently": true,
+      "residual_uncertainty_stated_on_the_slide": true,
+      "confidence": "high",
+      "what_would_break_it": "this is prescribing behaviour on a counterfactual recommendation, never a demonstrated patient outcome. The harm axis it moves along is published, not measured here"
+    },
+    {
+      "claim": "Being contradicted moves the model, being asked again does not",
+      "number": "changed its drug 125 of 125 with a counterpart against 4 without one; harmful revision 14.8% against 0.0%; exact McNemar p = 3.05e-05",
+      "n": "125 of 200, a contiguous prefix",
+      "paired_within_patient": true,
+      "has_a_control_arm": true,
+      "reproduced_independently": false,
+      "residual_uncertainty_stated_on_the_slide": true,
+      "confidence": "good",
+      "what_would_break_it": "the control does not hold context length constant, and it does not hold the revision instruction constant. A speaker-stripped arm, which keeps the counterpart's text and removes only the attribution, is what separates being contradicted by a peer from being contradicted by anything. Not built"
+    },
+    {
+      "claim": "The answer space collapses under debate and stays open under evidence",
+      "number": "3 distinct drugs after the debate against 8 after the panel, and 1 with no challenge at all",
+      "n": "same 200 cases in every arm",
+      "paired_within_patient": true,
+      "has_a_control_arm": true,
+      "reproduced_independently": false,
+      "residual_uncertainty_stated_on_the_slide": true,
+      "confidence": "good",
+      "what_would_break_it": "distinct-drug counts are a crude diversity measure and are sensitive to the closed formulary. It is a description of the arms, not a test, and no interval is attached to it"
+    },
+    {
+      "claim": "Few-shot examples do not improve the decision",
+      "number": "18 correct answers lost against 2 gained on 175 paired cases, exact McNemar p = 0.000402",
+      "n": "175 paired determinate cases of 200",
+      "paired_within_patient": true,
+      "has_a_control_arm": false,
+      "reproduced_independently": true,
+      "residual_uncertainty_stated_on_the_slide": true,
+      "confidence": "good",
+      "what_would_break_it": "one exemplar-selection strategy at one k. A different selection rule or a larger k is a different experiment, and no arm varies either"
+    },
+    {
+      "claim": "Adequacy labels are bounded by unhandled AmpC induction, and the harm finding is not",
+      "number": "36 of 200 specimens carry an AmpC-capable organism; 27 runs are affected, against 1 of the 52 harmful revisions",
+      "n": "200 specimens, 400 ordering-runs",
+      "paired_within_patient": false,
+      "has_a_control_arm": false,
+      "reproduced_independently": true,
+      "residual_uncertainty_stated_on_the_slide": true,
+      "confidence": "moderate",
+      "what_would_break_it": "the organism grading is a reading of one primer applied to twenty laboratory labels, not a measurement. It reproduces an independent count in the red-team document, which is why it is graded at all"
+    },
+    {
+      "claim": "The model and the clinician are within a point of each other",
+      "number": "91.1% on 192 cases against 90.6% on 138",
+      "n": "192 and 138 of 200, different sets",
+      "paired_within_patient": false,
+      "has_a_control_arm": false,
+      "reproduced_independently": false,
+      "residual_uncertainty_stated_on_the_slide": true,
+      "confidence": "weak",
+      "what_would_break_it": "the two rates sit on different sets of cases, so this is two independent proportions and not a paired test. The paired version needs per-case clinician outcomes, which the comparator artefact does not carry. This is the weakest claim in the project and it is reported as such"
+    }
+  ]
+}

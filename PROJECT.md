@@ -568,6 +568,47 @@ addresses, and which was the live alternative to the reading in 7.12.
 
 [`results/selfrevision_control.json`, `analysis/selfrevision_control.py`, `selfrevise_run.py`]
 
+## 7b. How much weight each claim can carry
+
+Not every number here is equally strong and the difference is not how good the number looks, it is
+the design behind it. Each claim below is graded on four things that can be checked: whether the
+comparison is paired within patient, whether an arm exists that removes the leading alternative
+explanation, whether a second implementation or a recomputation from the raw run files reproduces
+it, and whether what could still be wrong is stated where the claim is made. Four of four is high,
+three is good, two is moderate, one is weak.
+
+4 high, 3 good, 1 moderate, 1 weak.
+
+| claim | number | paired | controlled | reproduced | bounded | confidence |
+|---|---|---|---|---|---|---|
+| An unsupported challenge moves the model where a neutral re-ask never does | discordant pairs 173 to 183 against 0, exact binomial p at most 1.67e-52 | yes | yes | yes | yes | **high** |
+| A five-turn debate costs coverage of the organism | 87.5% to 78.0%, -9.5 points; harmful revision 52/341 = 15.2% | yes | yes | yes | yes | **high** |
+| Duration, not the framing of the challenge, is what costs coverage | one turn costs 1.1% to 3.5% across four framings; five turns cost 15.2% | yes | yes | yes | yes | **high** |
+| An unsupported sentence drives carbapenem prescribing from nothing to most of the cohort | 0.0% to 87.2% carbapenem use | yes | yes | yes | yes | **high** |
+| Being contradicted moves the model, being asked again does not | changed its drug 125 of 125 with a counterpart against 4 without one; harmful revision 14.8% against 0.0%; exact McNemar p = 3.05e-05 | yes | yes | no | yes | **good** |
+| The answer space collapses under debate and stays open under evidence | 3 distinct drugs after the debate against 8 after the panel, and 1 with no challenge at all | yes | yes | no | yes | **good** |
+| Few-shot examples do not improve the decision | 18 correct answers lost against 2 gained on 175 paired cases, exact McNemar p = 0.000402 | yes | no | yes | yes | **good** |
+| Adequacy labels are bounded by unhandled AmpC induction, and the harm finding is not | 36 of 200 specimens carry an AmpC-capable organism; 27 runs are affected, against 1 of the 52 harmful revisions | no | no | yes | yes | **moderate** |
+| The model and the clinician are within a point of each other | 91.1% on 192 cases against 90.6% on 138 | no | no | no | yes | **weak** |
+
+**What would break each one**, which is the part worth reading:
+
+- **An unsupported challenge moves the model where a neutral re-ask never does** (high). nothing available in this design. The neutral arm is the control, the test was pre-specified, the pairing is within patient, and the p value recomputes from scratch. The bound is the attrition, which is decomposed and survives a worst-case sensitivity assignment
+- **A five-turn debate costs coverage of the organism** (high). the counterpart is scripted in the pressure arm but a live second agent here, and both agents are the same checkpoint, so this is one model talking to itself with two personas. A second checkpoint as the counterpart would test whether the effect survives
+- **Duration, not the framing of the challenge, is what costs coverage** (high). the one-turn and five-turn arms differ in protocol as well as in length: one re-asks once, the other runs a live exchange. A turn-count sweep inside one protocol is the clean version
+- **An unsupported sentence drives carbapenem prescribing from nothing to most of the cohort** (high). this is prescribing behaviour on a counterfactual recommendation, never a demonstrated patient outcome. The harm axis it moves along is published, not measured here
+- **Being contradicted moves the model, being asked again does not** (good). the control does not hold context length constant, and it does not hold the revision instruction constant. A speaker-stripped arm, which keeps the counterpart's text and removes only the attribution, is what separates being contradicted by a peer from being contradicted by anything. Not built
+- **The answer space collapses under debate and stays open under evidence** (good). distinct-drug counts are a crude diversity measure and are sensitive to the closed formulary. It is a description of the arms, not a test, and no interval is attached to it
+- **Few-shot examples do not improve the decision** (good). one exemplar-selection strategy at one k. A different selection rule or a larger k is a different experiment, and no arm varies either
+- **Adequacy labels are bounded by unhandled AmpC induction, and the harm finding is not** (moderate). the organism grading is a reading of one primer applied to twenty laboratory labels, not a measurement. It reproduces an independent count in the red-team document, which is why it is graded at all
+- **The model and the clinician are within a point of each other** (weak). the two rates sit on different sets of cases, so this is two independent proportions and not a paired test. The paired version needs per-case clinician outcomes, which the comparator artefact does not carry. This is the weakest claim in the project and it is reported as such
+
+The grades are computed by `analysis/claim_confidence.py` from the result files rather than
+assigned. A claim whose supporting arm shrinks, or whose control is removed, loses its grade the
+next time the chain runs.
+
+[`results/claim_confidence.json`]
+
 ## 8. What this does not show
 
 **Inducible AmpC is unhandled, and it bounds the adequacy labels rather than the harm finding.**
