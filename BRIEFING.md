@@ -229,13 +229,17 @@ you have on future work:
 Read the question, answer out loud, then check. The bold sentence is the one to lead with.
 
 **Q. Five turns of debate cost you 15 per cent. Is that the debate, or is it just being asked three times?**
-**That is the right question and I built the control for it.** One agent, the same specialist, the same
-frozen cases, the same round-0 prompt byte for byte, the same formulary, gate and scorer, speaking three
-times, which is exactly how many times the specialist speaks in the debate. Between turns it sees only
-its own previous text. Nothing disagrees with it. If coverage collapses there too, my finding is about
-repetition and "debate" is the wrong word for it. The arm is in `runs/selfrevise_20260820.jsonl` and the
-comparison is paired within patient in `results/selfrevision_control.json`. What it does not control is
-context length: the debate transcript is about twice as long by the final turn.
+**That is the right question, I built the control for it, and the answer is the counterpart.** One agent,
+the same specialist, the same frozen cases, the same round-0 prompt byte for byte, the same formulary,
+gate and scorer, speaking three times, which is exactly how many times the specialist speaks in the
+debate. Between turns it sees only its own previous text and nothing disagrees with it. With a
+counterpart it abandons its opening drug in every single run. Without one it almost never does, and its
+coverage is higher, and its harmful revision rate is zero. Paired within patient the debate ends on an
+inadequate drug where the control ends on an adequate one, never the other way round. **The numbers are
+on the control backup slide, and say the coverage out loud: it is a contiguous prefix of the cohort, not
+all 200, because I ran it against the clock.** What it does not control is context length: the debate
+transcript is about twice as long by the final turn, and a length-matched control is the next thing to
+run. That is the honest boundary of the claim.
 
 **Q. Why does your core figure say 17.0 per cent for Agent A when your headline says 15.2?**
 **Different units, and both are on the figure.** 15.2 per cent is pooled over all 400 ordering-runs,

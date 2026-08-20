@@ -470,6 +470,47 @@ are pushed off one.
 
 [`results/trigger_comparison.json`, `analysis/trigger_comparison.py`]
 
+### 7.13 The control: is it the counterpart, or just being asked again?
+
+Section 7.12 leaves one explanation standing that the debate arm cannot rule out. Five turns cost
+coverage where one turn costs almost none, but the debate arm varies the counterpart and the number
+of turns together. The model might abandon its position because something disagreed with it, or
+simply because it was asked three times.
+
+So the control runs the second explanation on its own. One agent, the same infectious disease
+specialist, the same frozen cases in the same frozen order, the same round-0 prompt byte for byte,
+the same closed formulary, the same leakage gate and the same scorer. It speaks three times,
+which is exactly how many times the specialist speaks in the five-turn debate, and between turns it
+sees only its own previous text. Nothing disagrees with it. The comparison is paired within patient
+against the runs where the specialist also opens, so the only thing that differs is whether anything
+argued back.
+
+The arm covers a contiguous 57 of the 200 cases. It was run against the clock and the prefix is
+contiguous rather than a sample of convenience. Every one of those 57 openings is the same drug
+in both arms.
+
+| | five turns, a counterpart arguing | three turns, only its own text |
+|---|---|---|
+| changed its opening drug | 57 of 57 | 4 of 57 |
+| final recommendation adequate | 78.9% | 89.5% |
+| harmful revision | 14.3% | 0% |
+| distinct drugs used | 2 | 2 |
+
+Paired within patient, the debate ends on an inadequate drug where the control ends on an adequate
+one in 7 pairs, and the reverse in 0. Exact McNemar p = 0.0156.
+
+The counterpart is what moves it. Asked repeatedly with nothing disagreeing, the model restates its
+position and keeps its coverage. This does not replace the duration result in 7.12, it locates it: a
+counterpart is what makes the model move at all, and once it is moving, the longer the conversation
+runs the more coverage the movement costs.
+
+What the control does not hold constant is context length. By the final turn the debate transcript
+carries the counterpart's turns as well as the agent's own and is roughly twice as long. A
+length-matched control, padding the transcript with the agent's own text to the same token count,
+is the next thing this needs.
+
+[`results/selfrevision_control.json`, `analysis/selfrevision_control.py`, `selfrevise_run.py`]
+
 ## 8. What this does not show
 
 **Inducible AmpC is unhandled, and it bounds the adequacy labels rather than the harm finding.**

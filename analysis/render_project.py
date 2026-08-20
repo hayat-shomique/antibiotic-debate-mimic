@@ -51,6 +51,7 @@ METHODS = (DOCS / "METHODS.md").read_text()
 LIMITS = (DOCS / "LIMITATIONS.md").read_text()
 AMPC = json.loads((RES / "ampc_exposure.json").read_text())
 TRIG = json.loads((RES / "trigger_comparison.json").read_text())
+SRC = json.loads((RES / "selfrevision_control.json").read_text()) if (RES / "selfrevision_control.json").exists() else None
 
 def _trigger_table():
     """One row per reconsideration trigger, all on the same round-0 starting position."""
@@ -80,6 +81,19 @@ def _trigger_table():
         "REVEAL_IN": str(rev["entered_inadequate"]),
         "REVEAL_FIX": str(rev["beneficial_corrections"]),
     }
+
+
+if SRC:
+    _d, _s, _t = SRC["debate_A_first"], SRC["self_revision"], SRC["paired_test"]
+    SRC_N = str(SRC["_coverage"]["cases_shared_with_the_A_first_debate_arm"])
+    SRC_TURNS = "three"
+    SRC_D_CH, SRC_S_CH = str(_d["changed_its_opening_drug"]), str(_s["changed_its_opening_drug"])
+    SRC_D_ADQ, SRC_S_ADQ = f'{_d["final_adequate_pct"]:g}', f'{_s["final_adequate_pct"]:g}'
+    SRC_D_HRR, SRC_S_HRR = f'{_d["harmful_revision_rate_pct"]:g}', f'{_s["harmful_revision_rate_pct"]:g}'
+    SRC_D_DRUGS, SRC_S_DRUGS = str(_d["distinct_final_drugs"]), str(_s["distinct_final_drugs"])
+    SRC_B = str(_t["debate_inadequate_and_control_adequate"])
+    SRC_C = str(_t["control_inadequate_and_debate_adequate"])
+    SRC_P = f'{_t["exact_mcnemar_p"]:.3g}'
 
 TRIGGER = _trigger_table()
 TRIGGER_ROWS = TRIGGER["TRIGGER_ROWS"]
@@ -571,6 +585,47 @@ inadequate drug, {REVEAL_FIX} are repaired, and none of the runs that reach it o
 are pushed off one.
 
 [`results/trigger_comparison.json`, `analysis/trigger_comparison.py`]
+
+### 7.13 The control: is it the counterpart, or just being asked again?
+
+Section 7.12 leaves one explanation standing that the debate arm cannot rule out. Five turns cost
+coverage where one turn costs almost none, but the debate arm varies the counterpart and the number
+of turns together. The model might abandon its position because something disagreed with it, or
+simply because it was asked three times.
+
+So the control runs the second explanation on its own. One agent, the same infectious disease
+specialist, the same frozen cases in the same frozen order, the same round-0 prompt byte for byte,
+the same closed formulary, the same leakage gate and the same scorer. It speaks {SRC_TURNS} times,
+which is exactly how many times the specialist speaks in the five-turn debate, and between turns it
+sees only its own previous text. Nothing disagrees with it. The comparison is paired within patient
+against the runs where the specialist also opens, so the only thing that differs is whether anything
+argued back.
+
+The arm covers a contiguous {SRC_N} of the 200 cases. It was run against the clock and the prefix is
+contiguous rather than a sample of convenience. Every one of those {SRC_N} openings is the same drug
+in both arms.
+
+| | five turns, a counterpart arguing | {SRC_TURNS} turns, only its own text |
+|---|---|---|
+| changed its opening drug | {SRC_D_CH} of {SRC_N} | {SRC_S_CH} of {SRC_N} |
+| final recommendation adequate | {SRC_D_ADQ}% | {SRC_S_ADQ}% |
+| harmful revision | {SRC_D_HRR}% | {SRC_S_HRR}% |
+| distinct drugs used | {SRC_D_DRUGS} | {SRC_S_DRUGS} |
+
+Paired within patient, the debate ends on an inadequate drug where the control ends on an adequate
+one in {SRC_B} pairs, and the reverse in {SRC_C}. Exact McNemar p = {SRC_P}.
+
+The counterpart is what moves it. Asked repeatedly with nothing disagreeing, the model restates its
+position and keeps its coverage. This does not replace the duration result in 7.12, it locates it: a
+counterpart is what makes the model move at all, and once it is moving, the longer the conversation
+runs the more coverage the movement costs.
+
+What the control does not hold constant is context length. By the final turn the debate transcript
+carries the counterpart's turns as well as the agent's own and is roughly twice as long. A
+length-matched control, padding the transcript with the agent's own text to the same token count,
+is the next thing this needs.
+
+[`results/selfrevision_control.json`, `analysis/selfrevision_control.py`, `selfrevise_run.py`]
 
 ## 8. What this does not show
 

@@ -56,6 +56,7 @@ RES = ROOT / "results"
 T = json.loads((RES / "tingting_endpoints.json").read_text())
 R = json.loads((RES / "RESULTS.json").read_text())
 TRIG = json.loads((RES / "trigger_comparison.json").read_text())
+SRC = json.loads((RES / "selfrevision_control.json").read_text()) if (RES / "selfrevision_control.json").exists() else None
 P = json.loads((RES / "policy_degeneracy.json").read_text())
 FS = json.loads((RES / "fewshot.json").read_text())
 LEAK = json.loads((RES / "leakage.json").read_text())
@@ -1407,6 +1408,53 @@ If someone asks whether that is the debate or just being asked repeatedly, say I
 one agent, same cases, same opening prompt, three speaking turns, nothing disagreeing with it.
 """)
 footer(s, "results/trigger_comparison.json  ·  analysis/trigger_comparison.py", page())
+
+
+# ================================================ backup. the single-agent control
+if SRC:
+    _d, _sr, _t = SRC["debate_A_first"], SRC["self_revision"], SRC["paired_test"]
+    _n = SRC["_coverage"]["cases_shared_with_the_A_first_debate_arm"]
+    s = new_slide()
+    head(s, "backup  ·  the control",
+         "Asked three times with nothing disagreeing, it keeps its answer.")
+    table(s, ["", "five turns, a counterpart arguing", "three turns, only its own text"],
+          [["changed its opening drug",
+            (f"{_d['changed_its_opening_drug']} of {_n}", {"bold": True, "color": ACCENT}),
+            (f"{_sr['changed_its_opening_drug']} of {_n}", {"bold": True, "color": PRIMARY})],
+           ["final recommendation adequate",
+            (f"{_d['final_adequate_pct']:g}%", {"color": ACCENT}),
+            (f"{_sr['final_adequate_pct']:g}%", {"color": PRIMARY})],
+           ["harmful revision",
+            (f"{_d['harmful_revision_rate_pct']:g}%", {"bold": True, "color": ACCENT}),
+            (f"{_sr['harmful_revision_rate_pct']:g}%", {"bold": True, "color": PRIMARY})]],
+          x=M, y=2.4, w=CW, col_w=[0.34, 0.33, 0.33], row_h=0.46, size=13.5, head_size=10.5)
+    text(s, M, 4.5, CW, 1.3,
+         f"Same agent, same {_n} cases, same opening prompt, same formulary, same gate, same scorer. "
+         f"Paired within patient, the debate ends on an inadequate drug where the control ends on an "
+         f"adequate one in {_t['debate_inadequate_and_control_adequate']} pairs and the reverse in "
+         f"{_t['control_inadequate_and_debate_adequate']}. Exact McNemar p = {_t['exact_mcnemar_p']:.3g}.",
+         size=12.5, color=INK, line=1.34)
+    text(s, M, 5.72, CW, 1.0,
+         "What it does not hold constant is context length: the debate transcript is about twice as "
+         "long by the final turn. A length-matched control is the next thing this needs.",
+         size=11.5, color=MUTED, line=1.3)
+    notes(s, f"""
+Backup slide, and it is the answer to the obvious objection.
+Someone will say: five turns cost you coverage, but is that the debate or is it just being asked
+three times? The debate arm cannot separate those, because it varies both at once.
+So I ran the control. One agent, the same specialist, the same {_n} frozen cases, the same round-0
+prompt byte for byte, the same formulary, the same leakage gate, the same scorer. It speaks three
+times, exactly as many times as the specialist speaks in the debate, and between turns it sees only
+its own previous text. Nothing disagrees with it.
+With a counterpart it changes its drug in every run. Without one, {_sr['changed_its_opening_drug']} of {_n}.
+Coverage is {_sr['final_adequate_pct']:g} per cent against {_d['final_adequate_pct']:g}, and harmful revision is {_sr['harmful_revision_rate_pct']:g} per cent against {_d['harmful_revision_rate_pct']:g}.
+Paired within patient, exact McNemar p = {_t['exact_mcnemar_p']:.3g}.
+So the counterpart is what moves it. Being asked again is not enough.
+Say the limitation out loud: it does not hold context length constant. The debate transcript is
+about twice as long by the final turn. That control is the next thing to run.
+Say the coverage out loud too: {_n} of 200 cases, a contiguous prefix, run against the clock.
+""")
+    footer(s, "results/selfrevision_control.json  ·  analysis/selfrevision_control.py  ·  selfrevise_run.py", page())
 
 
 # ---------------------------------------------------------------- timing cues
