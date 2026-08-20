@@ -45,6 +45,21 @@
     },
     "sources_agree_on_a_single_drug": true
   },
+  "_medbert": {
+    "her_ask": "Prof. Tingting Zhu, 29 July 2026, twice in one minute: 'compare with some medical bert models which previously trained on EHR data already. See how well they perform without fine-tuning' and 'Smith like Med Bert or ClinicalBert etc.'",
+    "clinicalbert": "run, see the encoder table",
+    "med_bert_original": {
+      "identifier_probed": "Rasmy/Med-BERT",
+      "probed_on": "20 August 2026",
+      "result": "not a valid model identifier on the HuggingFace Hub",
+      "why_it_would_not_apply_anyway": "the original Med-BERT of Rasmy et al. is pretrained on sequences of structured diagnosis codes, not free clinical text. Its vocabulary is codes, so a masked-token cloze over antibiotic names has nothing to predict into. Substituting it would require building a code-sequence representation of every case, which is a different study.",
+      "what_was_run_instead": [
+        "Charangan/MedBERT",
+        "medicalai/ClinicalBERT"
+      ],
+      "declared_before_the_numbers": "both substitutes were chosen and launched before their results were seen, to answer her ask rather than to improve a column, and are reported whatever they show"
+    }
+  },
   "_encoder_baseline": {
     "produced_by": "_t4c_step_a_cases.py -> _t4c_step_b_mlm.py (within-span) and _t4c_step_b2_allmask.py (all-masked) -> _t4c_step_c_score.py -> _t4c_step_d_report.py",
     "cohort_hash": "4a4f4f782eb17345e0e9eab1cc596aab9ebf6442890bd1c3b82761ae3c65d414",
@@ -106,6 +121,20 @@
           "INADEQUATE": 73,
           "INTERMEDIATE_ONLY": 2,
           "UNDETERMINED": 75
+        }
+      },
+      "Charangan/MedBERT": {
+        "n": 200,
+        "adequate": 72,
+        "adequate_pct_of_all": 36.0,
+        "distinct_predictions": 2,
+        "top_prediction": "vancomycin",
+        "top_prediction_n": 121,
+        "outcomes": {
+          "ADEQUATE": 72,
+          "INADEQUATE": 5,
+          "INTERMEDIATE_ONLY": 0,
+          "UNDETERMINED": 123
         }
       }
     }
