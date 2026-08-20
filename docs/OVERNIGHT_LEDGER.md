@@ -364,3 +364,23 @@ so and sits on its own row. `deck/brief.html` has been republished.
 The coherence harness could not have caught this. It compares values against canonical values, and
 every one of these values was canonical. What was wrong was putting two of them in the same row.
 That is worth knowing about the harness: it catches a stale number, not a mismatched pair.
+
+## 19. The acceptance suite was not re-run tonight, and why
+
+It was started at 06:06 and stopped at 06:13 without producing output. It and the control arm were
+both waiting on the same local model, which serves one request at a time, and between them neither
+was getting served: the control had advanced by one case in three minutes. The control is the only
+new evidence in the project tonight, so it got the machine and the acceptance suite was stopped.
+
+It was last green at 36 of 36. Nothing changed tonight touches what it tests: the scaffold hash,
+the leakage gate, the parser and the scorer are untouched, and the control arm carries its own
+scaffold with its own hash rather than modifying the frozen one. What changed tonight is how
+results are counted and reported.
+
+Re-run it before you present if you want it green on the day:
+
+```
+BRAIN_DIR=~/brain_run python3 tests/acceptance.py
+```
+
+Nothing else should be using the model when you do.
