@@ -227,6 +227,10 @@ PAIR_BANS = [
      "the clean-context arm's harmful revision rate beside the reveal arm's coverage change. "
      "They are different arms on different denominators from different starting positions. Use "
      "the reveal arm's own rate, 0 of 311, when the row is about the panel following the debate"),
+    (r"\b11/12\b|\b91\.7\s*%", r"\b57/65\b|\b87\.7\s*%", 220,
+     "the clean-context arm's beneficial correction rate beside the reveal arm's. Same trap as "
+     "the harm rates: one is measured from the round-0 position over 200 runs and the other from "
+     "the post-debate position over 400. Name the arm on each or use one of them"),
     (r"\b15\.2\s*%|\b52/341\b", r"\b1\.1 to 3\.5\s*%", 200,
      "the five-turn debate rate beside the one-turn pressure band, with nothing saying the "
      "number of turns differs. Name the turns on both sides or the comparison reads as a "
