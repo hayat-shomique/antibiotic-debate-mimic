@@ -70,3 +70,25 @@ survives being attacked.
 
 Check every 25 minutes whether anything needs more data, another arm, or a rerun, and say so in
 the ledger rather than assuming the answer is no.
+
+---
+
+## Where it stands at 06:20
+
+Everything on this list is ticked except two, and both are named rather than quietly dropped.
+
+**Not done: the design direction.** Three directions are published at
+`canvas2/choose-a-direction.html` and the choice is yours. The deck that exists is the Carbon one
+and it is complete, correct and paced to 9 minutes 55 seconds over 17 spine slides with 13 backup
+slides behind it. Nothing is blocked on the choice except the visual treatment.
+
+**Not done: a length-matched control.** The single-agent control shows the counterpart is what
+moves the model, but it does not hold context length constant. That is stated on the slide, in
+`PROJECT.md` 7.13 and in the drill, and it is the next arm to run rather than a hole to hide.
+
+## The one thing to decide first when you are back
+
+Whether the trigger table and the control belong in the ten minutes or stay as backup. They are the
+strongest new evidence in the project and they are currently backup slides, because putting either
+in the spine means cutting something from a talk already paced to 9:55. That is a call about your
+talk, not about the data, which is why it was left for you.
