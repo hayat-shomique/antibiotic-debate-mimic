@@ -349,7 +349,8 @@ which is the null exactly. Within a drug, coverage makes no difference. Between 
 | **a second agent arguing a case** | **{DBT['HRR']['pct']}% ({DBT['HRR']['k']}/{DBT['HRR']['n']})** | **{DCOV['before_debate']['pct']}% to {DCOV['after_debate']['pct']}%, {DCOV['debate_change_pts']:+.1f} points** |
 | the susceptibility panel | {EVID['HRR']['pct']:.1f}% ({EVID['HRR']['k']}/{EVID['HRR']['n']}) | {DCOV['after_debate']['pct']}% to {DCOV['after_panel']['pct']}%, {DCOV['evidence_change_pts']:+.1f} points |
 
-**Multi-agent communication makes the decision worse. Evidence makes it better.**
+**In this setup, agent-to-agent argument reduced coverage of the organism; supplying the susceptibility panel increased it.** Stated as alignment with the recorded microbiology and counterfactual
+appropriateness of the recommendation, never as a recommendation causing a patient outcome.
 
 ### 7.7 The escalation ladder
 

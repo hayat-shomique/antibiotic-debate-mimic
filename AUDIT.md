@@ -13,7 +13,7 @@ gemma4:12b                       4eb23ef187e2    7.6 GB    44 hours ago
 deepseek-llm:7b-chat-q4_K_M      72299d61ee1d    4.2 GB    44 hours ago    
 medgemma:4b-it-q4_K_M            9fe4e9a6c9bd    3.3 GB    44 hours ago    
 deepseek-r1:8b                   6995872bfe4c    5.2 GB    44 hours ago    
-qwen3:4b-instruct-2507-q4_K_M    0edcdef34593    2.5 GB    46 hours ago    
+qwen3:4b-instruct-2507-q4_K_M    0edcdef34593    2.5 GB    47 hours ago    
 qwen3:4b                         359d7dd4bcda    2.5 GB    2 days ago
 ```
 
@@ -88,9 +88,9 @@ Documents written by hand, not generated: `docs/METHODS.md`, `docs/LIMITATIONS.m
 
 | | |
 |---|---|
-| tracked files | 185 |
-| commits | 36 |
-| head | `9e0ad1b Match the brief page to the deck's visual system` |
+| tracked files | 187 |
+| commits | 38 |
+| head | `9ceda4d Carry the corrected attrition through the canonical result file` |
 | remote in sync | yes |
 
 ## 5. Run state

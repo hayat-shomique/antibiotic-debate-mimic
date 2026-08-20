@@ -471,7 +471,8 @@ model call decides adequate or not against that patient's own panel.
 The point of the slide is stage 4. Everything else is held identical, so whatever differs between the
 four conditions was caused by what the agent was told.
 """)
-footer(s, "cohort gates from results/cohort_gates_skeleton.csv  ·  PROJECT.md sections 3 to 6  ·  scorer SHA and cohort hash asserted at every launch", page())
+footer(s, f"cohort N = {int(_end):,} hash-frozen before the first model call, evaluation subsample n = {PRIM['baseline_pre_culture']['n']}  ·  "
+       f"{R['model']}, temperature {R['temperature']}, seed {R['seed']}, run locally", page())
 
 
 # ============================================================== the instrument
@@ -623,46 +624,36 @@ footer(s, "PROJECT.md section 7.2  ·  analysis/primary_test.py  ·  baseline re
 # ============================================================== 9. looks harmless
 s = new_slide()
 head(s, "result three", "Scored on accuracy alone, that pressure does almost no damage",
-     "Her transition table: what happened to recommendations that were correct before the challenge.")
-rows = []
-for f in FRAMINGS:
-    d = T["sycophancy_under_pressure"][f]
-    c = d["counts"]
-    rows.append([f"pressure, {NICE[f]}", str(c.get("stable_correct", 0)),
-                 str(c.get("beneficial_correction", 0)), str(c.get("harmful_deference", 0)),
-                 f"{d['HRR']['pct']:.1f}%"])
-rows.append([("the susceptibility panel", {"bold": True}),
-             str(EVID["counts"]["stable_correct"]), str(EVID["counts"]["beneficial_correction"]),
-             str(EVID["counts"]["harmful_deference"]), f"{EVID['HRR']['pct']:.1f}%"])
-rows.append([("neutral control", {"bold": True}), str(NEUT["counts"]["stable_correct"]),
-             str(NEUT["counts"].get("beneficial_correction", 0)),
-             str(NEUT["counts"].get("harmful_deference", 0)), f"{NEUT['HRR']['pct']:.1f}%"])
-table(s, ["what the model heard", "stable correct", "beneficial correction",
-          "harmful deference", "harmful revision rate"],
-      rows, x=M, y=2.28, w=CW, col_w=[0.34, 0.16, 0.19, 0.17, 0.14], row_h=0.44, size=13)
-text(s, M, 5.72, CW, 1.0,
-     [[("If the study stopped here it would conclude that the sycophancy is harmless.", {"bold": True, "color": ACCENT, "size": 16})],
-      [("The model abandons its drug under pressure in almost every case and lands on another drug that "
-        "also covers the organism. On the endpoint named as strongest, harmful revision runs between "
-        f"{min(HRR_PRESSURE):.1f} and {max(HRR_PRESSURE):.1f} per cent. That conclusion would be wrong, and my supervisor is the one who said where to look.",
-        {"color": MUTED, "size": 13.5})]],
-     size=13.5, line=1.38, space_after=8)
+     "Her four-cell classification, applied to each agent's answer before and after the interaction.")
+figure(s, "transitions", y=2.28, width=11.3, x=M + (CW - 11.3) / 2)
+text(s, M, 6.02, CW, 0.9,
+     [[("If the study stopped here it would conclude that the sycophancy is harmless. ",
+        {"bold": True, "color": ACCENT})],
+      [(f"Harmful revision rate and beneficial correction rate are her terms and her formulas: HRR over the "
+        f"correct-before group, BCR over the incorrect-before group. Under the four scripted pressure framings "
+        f"HRR runs {min(HRR_PRESSURE):.1f} to {max(HRR_PRESSURE):.1f} per cent, because the model abandons its drug and lands on another "
+        "drug that also covers. That conclusion would be wrong, and she is the one who said where to look.",
+        {"color": MUTED})]], size=12.5, line=1.34, space_after=6)
 notes(s, f"""
-This is the four-cell classification my supervisor specified. Correct means the recommendation covers
-the organism the laboratory identified.
-Read the harmful revision column: {min(HRR_PRESSURE):.1f} to {max(HRR_PRESSURE):.1f} per cent. The model folds constantly and
-almost never lands on something that fails the patient.
-If I had stopped here, my conclusion would have been that sycophancy in this setting is harmless.
-That would have been wrong, and the reason it would have been wrong is on the next slide, in a
-sentence my supervisor wrote before any of this ran: a model recommending extremely broad therapy to
-everyone could achieve high coverage while still making poor stewardship decisions.
+This is the classification my supervisor specified, in her terms: stable correct, beneficial
+correction, harmful deference, no improvement, with harmful revision rate over the correct-before
+group and beneficial correction rate over the incorrect-before group.
+Read the middle bar. A live second agent produces {DBT['counts']['harmful_deference']} harmful deferences. Read the top bar: a scripted
+neutral turn produces zero. Read the bottom: the panel produces {EVID['counts']['harmful_deference']}.
+And under the four scripted pressure framings, harmful revision is {min(HRR_PRESSURE):.1f} to {max(HRR_PRESSURE):.1f} per cent, because the
+model folds and lands on another drug that also covers.
+If I had stopped here my conclusion would have been that sycophancy in this setting is harmless.
+That would have been wrong, and the reason is on the next slide, in a sentence she wrote before any
+of this ran.
 """)
-footer(s, "results/tingting_endpoints.json  ·  analysis/tingting_endpoints.py  ·  denominator is the correct-before group", page())
+footer(s, "the four-cell classification, harmful revision rate and beneficial correction rate are Prof. Zhu's endpoint definitions  ·  results/tingting_endpoints.json", page())
+
 
 # ============================================================== 10. stewardship
 s = new_slide()
-head(s, "result four", "A sentence carrying no clinical evidence drives carbapenem use from 0 to 84 per cent",
-     "The same endpoint hierarchy asks what kind of answer was given, not only whether it was right.")
+head(s, "result four  ·  her spectrum-appropriateness endpoint",
+     "A sentence carrying no clinical evidence drives carbapenem use from 0 to 84 per cent",
+     "“a model recommending extremely broad therapy to everyone could achieve high coverage while still making poor antimicrobial-stewardship decisions”   Prof. Tingting Zhu, specifying this endpoint before the runs")
 figure(s, "stewardship", y=2.32)
 text(s, M, 5.95, 7.4, 0.9,
      [[("It buys nothing. ", {"bold": True}),
@@ -876,8 +867,9 @@ The design principle worth taking away is that the laboratory is the referee. In
 clinical language models the reference standard is a human decision, and that assumes the human was
 right. Here the reference standard is the patient's own microbiology, which is indifferent to
 everybody in the room.
-On that reference standard, in this cohort, with this model: debate makes the decision worse,
-evidence makes it better, and only one of those is visible if you score accuracy alone.
+On that reference standard, in this cohort, with this model: agent-to-agent argument reduced coverage
+of the organism, supplying the susceptibility panel increased it, and only one of those is visible if
+you score accuracy alone.
 Next steps are rung three, a live opposing agent instead of a scripted one, and reporting stewardship
 endpoints alongside accuracy as standard.
 Thank you to Prof. Tingting Zhu, whose objection produced this design and whose endpoint hierarchy is
@@ -1002,6 +994,12 @@ table(s, ["tier", "model", "the question it answers"],
        [("2  domain comparison", {"bold": True}), "medgemma:4b-it-q4_K_M", "does medical domain tuning change the behaviour"],
        [("3  encoder baseline", {"bold": True}), f"{len(ENC)} BERT encoders, 110M, no fine-tuning", "how well does a small domain encoder do with no dialogue at all"]],
       x=M, y=2.28, w=CW * 0.63, col_w=[0.30, 0.36, 0.34], row_h=0.56, size=12.5, head_size=10.5)
+table(s, ["tier 3, no fine-tuning", "distinct predictions", "covers the organism"],
+      [[k.split("/")[-1], f"{v['distinct_predictions']} across {v['n']} patients",
+        (f"{v['adequate']}/{v['n']} = {v['adequate_pct_of_all']}%",
+         {"color": PRIMARY if v["adequate_pct_of_all"] > 50 else MUTED, "bold": v["adequate_pct_of_all"] > 50})]
+       for k, v in sorted(ENC.items(), key=lambda kv: -kv[1]["adequate"])],
+      x=M, y=4.72, w=CW * 0.63, col_w=[0.46, 0.28, 0.26], row_h=0.38, size=11.5, head_size=9.5)
 block(s, M + CW * 0.66, 2.28, CW * 0.34, 2.35, BG)
 text(s, M + CW * 0.66 + 0.30, 2.50, CW * 0.34 - 0.6, 2.0,
      [[("Two results worth the room's attention", {"bold": True, "size": 13.5})],
@@ -1014,7 +1012,7 @@ text(s, M + CW * 0.66 + 0.30, 2.50, CW * 0.34 - 0.6, 2.0,
         f"{int(MG['top_drug_share_pct'] * MG['n'] / 100)} of {MG['n']} cases, {MG['adequate_pct']} per cent adequate. "
         "Same prompt, two checkpoints, two different constants, which puts the choice of drug in the weights.",
         {"color": MUTED, "size": 11.5})]], size=12, line=1.30, space_after=7)
-text(s, M, 5.00, CW * 0.63, 1.3,
+text(s, M, 6.28, CW * 0.63, 0.6,
      [[("Why both generative tiers are 4B and both 4-bit. ", {"bold": True}),
        ("That matching is the point. If one were 12B, any difference would confound domain tuning with scale and the comparison would answer neither question. A 12B run is the right experiment for a scale question, which is a different experiment.",
         {"color": MUTED})]], size=13, line=1.36)
@@ -1022,7 +1020,7 @@ text(s, M + CW * 0.66, 4.90, CW * 0.34, 1.5,
      [[("Held fixed across every model", {"bold": True, "size": 12.5})],
       [(f"Temperature {R['temperature']}, seed {R['seed']}, context 8192, 512 predicted tokens, thinking disabled, digest recorded and asserted before use.",
         {"color": MUTED, "size": 11.5})]], size=11.5, line=1.32, space_after=6)
-text(s, M, 6.30, CW * 0.63, 0.5,
+text(s, M + CW * 0.66, 6.28, CW * 0.34, 0.6,
      "Everything runs locally on this machine. MIMIC-IV is credentialed under a PhysioNet agreement, "
      "so no record-level data may reach a hosted service, which is also why the study model is a 4B "
      "open-weight checkpoint rather than a frontier model.",

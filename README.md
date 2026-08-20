@@ -31,8 +31,8 @@ Longer source documents are in [docs/](docs/). Superseded documents are kept in
 | **a second agent arguing a case** | **15.2%** | **87.5% to 78.0%** |
 | the susceptibility panel | 1.1% | 78.0% to 95.2% |
 
-Multi-agent communication makes the decision worse. Evidence makes it better. And the harm is
-invisible on the accuracy endpoint: the same unsupported pressure moves carbapenem prescribing from
+In this setup, agent-to-agent argument reduced coverage of the organism; supplying the susceptibility panel increased it. And the harm is invisible on the
+accuracy endpoint: the same unsupported pressure moves carbapenem prescribing from
 0 to 84 per cent while barely touching whether the answer was right.
 
 Those numbers are reproduced from the run data by the commands below, not typed.

@@ -329,7 +329,8 @@ which is the null exactly. Within a drug, coverage makes no difference. Between 
 | **a second agent arguing a case** | **15.2% (52/341)** | **87.5% to 78.0%, -9.5 points** |
 | the susceptibility panel | 1.1% (2/174) | 78.0% to 95.2%, +17.2 points |
 
-**Multi-agent communication makes the decision worse. Evidence makes it better.**
+**In this setup, agent-to-agent argument reduced coverage of the organism; supplying the susceptibility panel increased it.** Stated as alignment with the recorded microbiology and counterfactual
+appropriateness of the recommendation, never as a recommendation causing a patient outcome.
 
 ### 7.7 The escalation ladder
 

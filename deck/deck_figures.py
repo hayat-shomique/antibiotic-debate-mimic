@@ -61,7 +61,7 @@ def style():
     })
 
 
-def fig(size=CANVAS, nrows=1, ncols=1, **kw):
+def fig_(size=CANVAS, nrows=1, ncols=1, **kw):
     style()
     f, ax = plt.subplots(nrows, ncols, figsize=size, **kw)
     return f, ax
@@ -87,7 +87,7 @@ def save(f, name):
 def f_referee():
     """Two agents argue. A third thing that neither can see decides who was right."""
     W, H = 11.6, 4.15
-    f, ax = fig((W, H))
+    f, ax = fig_((W, H))
     ax.set_xlim(0, 100); ax.set_ylim(-4, 100); ax.axis("off")
     # a true circle in a non-square axes: x and y units are different physical sizes
     kx, ky = 100.0 / W, 104.0 / H
@@ -138,7 +138,7 @@ def f_referee():
 def f_protocol():
     """The five turns, and the position each agent holds after every one of them."""
     W, H = 11.6, 4.3
-    f, ax = fig((W, H))
+    f, ax = fig_((W, H))
     ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.axis("off")
 
     lane_a, lane_b = 74, 30
@@ -180,7 +180,7 @@ def f_ladder():
     prim, fs = T["primary_appropriateness"], FS
     pr = fs["paired"]
     W, H = 11.6, 4.0
-    f, ax = fig((W, H))
+    f, ax = fig_((W, H))
     ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.axis("off")
 
     rungs = [
@@ -209,6 +209,48 @@ def f_ladder():
     return save(f, "ladder")
 
 
+# ------------------------------------- 0d. her core endpoint, the 2x2 by condition
+def f_transitions():
+    """Her four-cell classification, applied before and after each interaction."""
+    conds = [("a scripted neutral turn", T["change_under_neutral_control"]),
+             ("a second agent arguing a case", T["debate_with_live_agent"]),
+             ("the susceptibility panel", T["revision_under_evidence"])]
+    cells = [("stable correct", "stable_correct", SOFT),
+             ("beneficial correction", "beneficial_correction", PRIMARY),
+             ("harmful deference", "harmful_deference", ACCENT),
+             ("no improvement", "no_improvement", "#C6C6C6")]
+
+    f, ax = fig_((11.6, 4.05))
+    ys = [2, 1, 0]
+    for y, (label, d) in zip(ys, conds):
+        counts = d["counts"]
+        total = sum(counts.get(k, 0) for _, k, _ in cells) or 1
+        left = 0.0
+        for name, key, col in cells:
+            v = counts.get(key, 0)
+            if not v:
+                continue
+            w = 100.0 * v / total
+            ax.barh(y, w, left=left, color=col, height=0.44, zorder=3)
+            if w > 6:
+                ax.text(left + w / 2, y, str(v), ha="center", va="center",
+                        fontsize=12, fontweight="bold",
+                        color=WHITE if col in (PRIMARY, ACCENT) else INK, zorder=4)
+            left += w
+        ax.text(-2.0, y, label, ha="right", va="center", fontsize=12.5, color=INK)
+        ax.text(102.5, y, f"HRR {d['HRR']['pct']:.1f}%\nBCR {d['BCR']['pct']:.1f}%",
+                ha="left", va="center", fontsize=11.5, color=MUTED, linespacing=1.5)
+    ax.set_yticks([]); ax.set_xticks([0, 25, 50, 75, 100])
+    ax.set_xlim(0, 100); ax.set_ylim(-0.6, 2.75)
+    ax.set_xlabel("share of the cases classified, per cent")
+    x_only(ax)
+    for i, (name, _, col) in enumerate(cells):
+        ax.add_patch(plt.Rectangle((i * 26, 2.52), 3.0, 0.14, color=col, clip_on=False))
+        ax.text(i * 26 + 4, 2.59, name, fontsize=11.5, color=MUTED, va="center")
+    f.subplots_adjust(left=0.255, right=0.80, top=0.97, bottom=0.16)
+    return save(f, "transitions")
+
+
 # ---------------------------------------------------------------- 1. timeline
 def f_timeline():
     """The empiric window: the decision is made long before the answer exists."""
@@ -216,7 +258,7 @@ def f_timeline():
     methods = (ROOT / "docs" / "METHODS.md").read_text()
     median_h = int(re.search(r"median of \*\*(\d+) hours\*\*", methods).group(1))
 
-    f, ax = fig((11.6, 3.5))
+    f, ax = fig_((11.6, 3.5))
     ax.set_xlim(-4, median_h + 4)
     ax.set_ylim(0, 1)
     ax.axis("off")
@@ -251,7 +293,7 @@ def f_baseline():
              ("Neutral re-ask\nno disagreement", "neutral_control", "Cn neutral control"),
              ("Susceptibility\npanel revealed", "with_panel_revealed", "C2 with the panel revealed")]
 
-    f, axes = fig(CANVAS, 1, 2, gridspec_kw=dict(width_ratios=[1.15, 1]))
+    f, axes = fig_(CANVAS, 1, 2, gridspec_kw=dict(width_ratios=[1.15, 1]))
     a, b = axes
 
     xs = range(len(conds))
@@ -293,7 +335,7 @@ def f_primary():
     nice = {"C1a_authority": "authority", "C1b_peer_consensus": "peer consensus",
             "C1c_safety_framing": "safety framing", "C1d_bare_doubt": "bare doubt"}
 
-    f, ax = fig(CANVAS)
+    f, ax = fig_(CANVAS)
     labels, vals, cols = [], [], []
     labels.append("neutral control\nno disagreement")
     cn = bf[order[0]]["flip_rates"]["Cn"]
@@ -328,7 +370,7 @@ def f_stewardship():
     rows = [("Baseline", "baseline"), ("Neutral\nre-ask", "neutral_control"),
             ("Unsupported\npressure", "under_pressure"), ("Panel\nrevealed", "panel_revealed")]
 
-    f, axes = fig(CANVAS, 1, 2, gridspec_kw=dict(width_ratios=[1.1, 1]))
+    f, axes = fig_(CANVAS, 1, 2, gridspec_kw=dict(width_ratios=[1.1, 1]))
     a, b = axes
     xs = list(range(len(rows)))
     vals = [sp[k]["carbapenem_pct"] for _, k in rows]
@@ -372,7 +414,7 @@ def f_matched():
               + ", ".join(dropped))
     drugs = sorted(drugs, key=lambda d: -by[d]["covers"]["adopted"] / by[d]["covers"]["n"])
 
-    f, ax = fig(CANVAS)
+    f, ax = fig_(CANVAS)
     ys = list(range(len(drugs)))[::-1]
     for y, d in zip(ys, drugs):
         cov = 100.0 * by[d]["covers"]["adopted"] / by[d]["covers"]["n"]
@@ -408,7 +450,7 @@ def f_debate():
     dc = T["debate_coverage"]
     live, ev, neut = T["debate_with_live_agent"], T["revision_under_evidence"], T["change_under_neutral_control"]
 
-    f, axes = fig(CANVAS, 1, 2, gridspec_kw=dict(width_ratios=[1.25, 1]))
+    f, axes = fig_(CANVAS, 1, 2, gridspec_kw=dict(width_ratios=[1.25, 1]))
     a, b = axes
 
     stages = [("Before\nthey speak", "before_debate", SOFT),
@@ -459,7 +501,7 @@ def f_fewshot():
     """Examples break the constant and cost coverage."""
     aw, pr = FS["aware"], FS["paired"]
 
-    f, axes = fig(CANVAS, 1, 3, gridspec_kw=dict(width_ratios=[1, 1, 1.15]))
+    f, axes = fig_(CANVAS, 1, 3, gridspec_kw=dict(width_ratios=[1, 1, 1.15]))
     a, b, c = axes
     labs = ["zero-shot", "few-shot"]
 
@@ -505,7 +547,7 @@ def f_fewshot():
 
 if __name__ == "__main__":
     print("deck figures, drawn from results/")
-    f_referee(); f_protocol(); f_ladder(); f_timeline(); f_baseline()
+    f_referee(); f_protocol(); f_transitions(); f_ladder(); f_timeline(); f_baseline()
     f_primary(); f_stewardship()
     f_matched(); f_debate(); f_fewshot()
     print("done")

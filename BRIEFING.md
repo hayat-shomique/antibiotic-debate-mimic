@@ -45,7 +45,8 @@ backup slide 21 is the strongest answer to what you learned.
 > When a second agent argues a case, the first abandons a correct recommendation 15.2 per cent of
 > the time and coverage of the organism falls 9.5 points. Give the same system the laboratory panel
 > instead and harmful revision is 1.1 per cent and coverage rises 17.2 points. So communication
-> makes the decision worse and evidence makes it better.
+> agent-to-agent argument reduced coverage of the organism, and supplying the susceptibility panel
+> increased it.
 >
 > The part I did not expect is that on a standard accuracy endpoint this failure is invisible.
 > Score whether the answer was right and the debate looks harmless. Score what kind of answer it
@@ -334,6 +335,14 @@ harmful ones, the net effect would flip and I would say so. The arithmetic is st
 at this base rate the break-even correction rate is unattainable, so the sign of the net effect is
 forced by the base rates rather than discovered. That is a caveat I raise myself rather than wait for.
 
+**Q. Where does the endpoint hierarchy actually meet the sycophancy question?** (she asked this on 18 August and it is unanswered)
+**The hierarchy measures decision quality; sycophancy is the mechanism that moves it.** So I apply her
+hierarchy twice, once to each agent's answer before the interaction and once after, and the four-cell
+table is exactly the join: a harmful deference is a sycophancy event scored on her appropriateness
+endpoint. That is why the same 2x2 appears for a neutral turn, for a live agent, and for the panel.
+Without the hierarchy the sycophancy is invisible; without the sycophancy layer the hierarchy has
+nothing to compare.
+
 **Q. What is the single most useful thing you did?**
 **The neutral control.** Without a condition where the prompt grows and nothing else changes, "it
 folds under pressure" could just mean "it wobbles when spoken to". Zero of 70 is what turns the rest
@@ -422,3 +431,32 @@ Each of these was checked and cut for a reason.
 | 55 to 75 | section 8, cover the answers, say them cold. Any you fumble, say twice more |
 | 75 to 85 | fix only what the run-through exposed. Do not add slides |
 | 85 to 90 | section 11, then stop. Water, and open on slide 1 |
+
+---
+
+## 13. The covering note, when you send the deck
+
+Send to Tingting **and** Zhikang, and open with the acknowledgement rather than the attachment.
+
+> Dear Prof. Zhu, Zhikang,
+>
+> Thank you for the endpoint hierarchy of 18 August. I built the evaluation on it and the deck
+> reports two of your endpoints directly: susceptibility concordance of the final recommendation,
+> and spectrum appropriateness. The four-cell classification, the harmful revision rate and the
+> beneficial correction rate are reported under your definitions.
+>
+> Headline: with a live counterpart the harmful revision rate is 15.2 per cent and coverage of the
+> organism falls 9.5 points; with the susceptibility panel it is 1.1 per cent and coverage rises
+> 17.2 points. On the spectrum endpoint, an unsupported challenge moves carbapenem prescribing from
+> 0 to 84 per cent, which is the failure your sentence about broad therapy predicted.
+>
+> Zhikang, your three indicators are computed and reported under your framing, and the two personas
+> with conflicting incentives are the system prompts verbatim.
+>
+> Everything regenerates from the run data. What is not done, and why, is on the closing slide:
+> the transfer to hosted models, subsequent resistance, and clinician review.
+>
+> Shomique
+
+Do not send the deck without that first paragraph. It is the highest-value sentence you will write
+this week.
