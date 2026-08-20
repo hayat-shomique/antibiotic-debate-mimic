@@ -65,9 +65,26 @@ the harness directory: `BRAIN_DIR=~/brain_run python3 tests/acceptance.py`, curr
 ## Verifying before you commit
 
 1. Re-run the analysis chain and check `git diff results/` is empty, or that the only change is one
-   you intended.
-2. Rebuild the deck and scan for shapes off the canvas and for dashes.
-3. Never leave a generated document stale relative to the result file it reads.
+   you intended. The chain is idempotent; a diff you did not intend is a defect, not noise.
+2. Run `python3 analysis/coherence_check.py`. It must end with the three-clause verdict. It runs
+   three sweeps and they catch three different things:
+   - **superseded values**, compared against the canonical values read from `results/` at that
+     moment. History files are exempt because recording how a number changed is their purpose.
+   - **banned claims**, over every tracked file including the history ones, because a banned claim
+     is never acceptable anywhere. The negation guard is the sentence the match sits in, not a
+     window of surrounding text: a wider window let one "does not" earlier in a paragraph switch
+     off every ban after it.
+   - **mismatched pairs**, values that are each canonical and wrong together. This exists because
+     the panel arrives in this study in two ways, replacing the debate and following it, and six
+     files paired a rate from one arm with a coverage change from the other in a single row. No
+     value in those rows was stale. Adding a rule here is cheap; if you find yourself explaining
+     why two numbers must not sit together, write it down as a rule instead.
+3. Rebuild the deck and scan for shapes off the canvas and for dashes.
+4. Never leave a generated document stale relative to the result file it reads. Figures are written
+   into the run directory and copied into the repository, so check both.
+5. When you change a convention, grep for every other place that uses the old one before you commit.
+   Unifying the transition convention on the core figure left the escalation row inconsistent with
+   it, in a published page, at three separate places.
 
 ## Design system
 
