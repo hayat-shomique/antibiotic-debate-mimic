@@ -94,9 +94,9 @@
     track4                172/ 172  COMPLETE  dupes dropped   0
     fewshot               200/ 200  COMPLETE  dupes dropped   0
     confidence            200/ 200  COMPLETE  dupes dropped   0
-    self_revision         125/ 200  SHORT     dupes dropped   0
+    self_revision         200/ 200  COMPLETE  dupes dropped   0
 
-    ARMS SHORT OF DESIGN: self_revision
+    ALL ARMS COMPLETE
     Counts are deduplicated exposures on the identity key recorded in results/RESULTS.json.
     D_MATCH_1 and track4 are bounded by cohort eligibility, not by the plan; see the
     reasons registered in analysis/supervisor_scorecard.py DESIGN.

@@ -82,9 +82,10 @@ Everything on this list is ticked except two, and both are named rather than qui
 and it is complete, correct and paced to 9 minutes 55 seconds over 17 spine slides with 13 backup
 slides behind it. Nothing is blocked on the choice except the visual treatment.
 
-**Not done: a length-matched control.** The single-agent control shows the counterpart is what
-moves the model, but it does not hold context length constant. That is stated on the slide, in
-`PROJECT.md` 7.13 and in the drill, and it is the next arm to run rather than a hole to hide.
+**Not done: a length-matched control, and a speaker-stripped one.** The single-agent control ran to
+its full 200 and shows the counterpart is what moves the model, but it holds neither context length
+nor the revision instruction constant. Both are stated on the slide, in `PROJECT.md` 7.13 and in the
+drill, and both are named as the next arms rather than hidden.
 
 ## The one thing to decide first when you are back
 

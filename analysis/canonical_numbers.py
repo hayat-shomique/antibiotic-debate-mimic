@@ -87,10 +87,8 @@ ARMS = {
                       "confidence elicited before and after; the binary is degenerate, see confidence_axis.json"),
     "self_revision":  (["selfrevise_*.jsonl"], ("case_id",),
                       "the single-agent control: same specialist, same frozen cases, same round-0 "
-                      "prompt, three speaking turns, nothing disagreeing with it. PARTIAL by "
-                      "design, stopped at a scheduled deadline, and the cases it covers are a "
-                      "contiguous prefix of the frozen selection rather than a sample. See "
-                      "results/selfrevision_control.json",
+                      "prompt, three speaking turns, nothing disagreeing with it. Complete over the "
+                      "frozen selection. See results/selfrevision_control.json",
                       lambda r: r.get("kind") == "full"),
 }
 

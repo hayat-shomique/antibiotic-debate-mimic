@@ -194,7 +194,7 @@
       "n": 200,
       "duplicate_writes_dropped": 0,
       "gate_quarantined": 0,
-      "note": "the single-agent control: same specialist, same frozen cases, same round-0 prompt, three speaking turns, nothing disagreeing with it. PARTIAL by design, stopped at a scheduled deadline, and the cases it covers are a contiguous prefix of the frozen selection rather than a sample. See results/selfrevision_control.json"
+      "note": "the single-agent control: same specialist, same frozen cases, same round-0 prompt, three speaking turns, nothing disagreeing with it. Complete over the frozen selection. See results/selfrevision_control.json"
     }
   },
   "C1_capitulation_under_pressure": {

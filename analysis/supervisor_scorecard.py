@@ -194,9 +194,8 @@ DESIGN = {
     "track4":           (172, "supporter and opponent cells that exist in the cohort"),
     "fewshot":          (200, "rung two of the ladder, one row per case"),
     "confidence":       (200, "confidence elicited before and after, one row per case"),
-    "self_revision":    (200, "the single-agent control, one row per case. PARTIAL by design: it "
-                              "was stopped at a scheduled deadline and covers a contiguous prefix "
-                              "of the frozen selection, which is reported rather than hidden"),
+    "self_revision":    (200, "the single-agent control, one row per case, complete over the "
+                              "frozen selection"),
 }
 short = []
 for nm, m in INTEG.items():
