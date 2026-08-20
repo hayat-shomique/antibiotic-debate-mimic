@@ -118,6 +118,25 @@ def main():
             "note": "the control runs the frozen selection in its frozen order, so a partial arm "
                     "is a contiguous prefix of the cohort and not a sample of it",
         },
+        "_instrument_is_the_same": {
+            "one_scaffold_hash_across_every_control_run":
+                len({r.get("scaffold_sha") for r in ctrl}) == 1,
+            "one_cohort_hash_across_every_control_run":
+                len({r.get("cohort_hash") for r in ctrl}) == 1,
+            "control_runs_quarantined_by_the_leakage_gate":
+                sum(1 for r in ctrl if r.get("quarantined")),
+            "round0_outcome_agrees_between_the_arms":
+                f"{sum(1 for d, s in pair if d['round0_outcome'] == s['round0_outcome'])}/{len(pair)}",
+            "cases_where_both_arms_end_on_the_same_drug":
+                sum(1 for d, s in pair if d["final_A"] == s["final_A"]),
+            "of_those_the_scorer_agrees":
+                sum(1 for d, s in pair
+                    if d["final_A"] == s["final_A"]
+                    and d["final_A_outcome"] == s["final_A_outcome"]),
+            "reading": "the two arms must be scored by the same instrument or the comparison is "
+                       "between scorers rather than between conditions. Where they land on the "
+                       "same drug the scorer must agree, and it does",
+        },
         "_round0_is_the_same_measurement": {
             "cases_where_the_opening_drug_is_identical": same_opening,
             "of": len(pair),
