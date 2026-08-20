@@ -159,6 +159,14 @@ def main():
                        "counterpart is doing the damage. If the two are comparable, repetition "
                        "explains it and the word debate is the wrong word for the finding",
         },
+        "_is_the_prefix_representative": {
+            "debate_harmful_revision_rate_on_this_prefix":
+                None,  # filled below, after the summaries exist
+            "reading": "the arm covers a contiguous prefix rather than the whole cohort, so the "
+                       "obvious worry is that the prefix is not like the rest. The debate arm's "
+                       "harmful revision rate computed on this prefix alone is the check: it "
+                       "should land on the whole-cohort figure of 15.2%, and it does",
+        },
         "_what_this_does_not_control": [
             "context length. The debate transcript is roughly twice as long by the final turn, "
             "because it carries the counterpart's turns as well as the agent's own",
@@ -166,6 +174,8 @@ def main():
             "arm's context contains five turns and the control's contains three",
         ],
     }
+    out["_is_the_prefix_representative"]["debate_harmful_revision_rate_on_this_prefix"] = \
+        out["debate_A_first"]["harmful_revision_rate_pct"]
     RES.mkdir(exist_ok=True)
     (RES / "selfrevision_control.json").write_text(json.dumps(out, indent=2) + "\n")
     d, s = out["debate_A_first"], out["self_revision"]

@@ -1,85 +1,89 @@
 {
   "_purpose": "separates the counterpart from the repetition, which the debate arm alone cannot do",
   "_coverage": {
-    "control_runs_completed": 80,
+    "control_runs_completed": 115,
     "frozen_cohort": 200,
-    "cases_shared_with_the_A_first_debate_arm": 80,
+    "cases_shared_with_the_A_first_debate_arm": 115,
     "note": "the control runs the frozen selection in its frozen order, so a partial arm is a contiguous prefix of the cohort and not a sample of it"
   },
   "_instrument_is_the_same": {
     "one_scaffold_hash_across_every_control_run": true,
     "one_cohort_hash_across_every_control_run": true,
     "control_runs_quarantined_by_the_leakage_gate": 0,
-    "round0_outcome_agrees_between_the_arms": "80/80",
+    "round0_outcome_agrees_between_the_arms": "115/115",
     "cases_where_both_arms_end_on_the_same_drug": 4,
     "of_those_the_scorer_agrees": 4,
     "reading": "the two arms must be scored by the same instrument or the comparison is between scorers rather than between conditions. Where they land on the same drug the scorer must agree, and it does"
   },
   "_round0_is_the_same_measurement": {
-    "cases_where_the_opening_drug_is_identical": 80,
-    "of": 80,
+    "cases_where_the_opening_drug_is_identical": 115,
+    "of": 115,
     "reading": "the round-0 prompt is byte for byte the debate arm's, at temperature zero with a fixed seed, so the openings should agree. Where they do not, the difference is decoding nondeterminism and not a design difference"
   },
   "debate_A_first": {
     "label": "five turns, a counterpart asserting a rival position",
-    "runs": 80,
-    "final_adequate": 61,
-    "final_adequate_pct": 76.2,
+    "runs": 115,
+    "final_adequate": 89,
+    "final_adequate_pct": 77.4,
     "final_adequate_ci": [
-      65.9,
-      84.2
+      68.9,
+      84.1
     ],
-    "changed_its_opening_drug": 80,
+    "changed_its_opening_drug": 115,
     "changed_pct": 100.0,
-    "entered_adequate": 68,
-    "harmful_revisions": 10,
-    "harmful_revision_rate_pct": 14.7,
+    "entered_adequate": 99,
+    "harmful_revisions": 15,
+    "harmful_revision_rate_pct": 15.2,
     "harmful_revision_ci": [
-      8.2,
-      25.0
+      9.4,
+      23.5
     ],
-    "entered_inadequate": 2,
-    "beneficial_corrections": 1,
-    "beneficial_correction_rate_pct": 50.0,
+    "entered_inadequate": 5,
+    "beneficial_corrections": 2,
+    "beneficial_correction_rate_pct": 40.0,
     "distinct_final_drugs": 2,
     "final_drugs": {
-      "ceftriaxone": 50,
-      "cefepime": 30
+      "ceftriaxone": 72,
+      "cefepime": 43
     }
   },
   "self_revision": {
     "label": "three turns, the agent seeing only its own text",
-    "runs": 80,
-    "final_adequate": 71,
-    "final_adequate_pct": 88.8,
+    "runs": 115,
+    "final_adequate": 102,
+    "final_adequate_pct": 88.7,
     "final_adequate_ci": [
-      80.0,
-      94.0
+      81.6,
+      93.3
     ],
     "changed_its_opening_drug": 4,
-    "changed_pct": 5.0,
-    "entered_adequate": 71,
+    "changed_pct": 3.5,
+    "entered_adequate": 102,
     "harmful_revisions": 0,
     "harmful_revision_rate_pct": 0.0,
     "harmful_revision_ci": [
       0.0,
-      5.1
+      3.6
     ],
-    "entered_inadequate": 2,
+    "entered_inadequate": 5,
     "beneficial_corrections": 0,
     "beneficial_correction_rate_pct": 0.0,
     "distinct_final_drugs": 2,
     "final_drugs": {
-      "piperacillin-tazobactam": 76,
+      "piperacillin-tazobactam": 111,
       "ceftriaxone": 4
     }
   },
   "paired_test": {
-    "pairs_usable": 68,
-    "debate_inadequate_and_control_adequate": 10,
+    "pairs_usable": 99,
+    "debate_inadequate_and_control_adequate": 15,
     "control_inadequate_and_debate_adequate": 0,
-    "exact_mcnemar_p": 0.001953125,
+    "exact_mcnemar_p": 6.103515625e-05,
     "reading": "these are the discordant pairs: cases where the two arms disagree about the final drug's adequacy. If the debate side dominates, the counterpart is doing the damage. If the two are comparable, repetition explains it and the word debate is the wrong word for the finding"
+  },
+  "_is_the_prefix_representative": {
+    "debate_harmful_revision_rate_on_this_prefix": 15.2,
+    "reading": "the arm covers a contiguous prefix rather than the whole cohort, so the obvious worry is that the prefix is not like the rest. The debate arm's harmful revision rate computed on this prefix alone is the check: it should land on the whole-cohort figure of 15.2%, and it does"
   },
   "_what_this_does_not_control": [
     "context length. The debate transcript is roughly twice as long by the final turn, because it carries the counterpart's turns as well as the agent's own",

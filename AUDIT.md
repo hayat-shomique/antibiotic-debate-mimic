@@ -91,9 +91,9 @@ Documents written by hand, not generated: `docs/METHODS.md`, `docs/LIMITATIONS.m
 | | |
 |---|---|
 | tracked files | 256 |
-| commits | 74 |
-| head | `8a7a2a3 One error class in six places: two arms presented as one row` |
-| remote in sync | yes |
+| commits | 80 |
+| head | `4e0fef7 State plainly that the acceptance suite was not re-run tonight, and why` |
+| remote in sync | check |
 
 ## 5. Run state
 

@@ -96,6 +96,7 @@ if SRC:
     SRC_B = str(_t["debate_inadequate_and_control_adequate"])
     SRC_C = str(_t["control_inadequate_and_debate_adequate"])
     SRC_P = f'{_t["exact_mcnemar_p"]:.3g}'
+    SRC_PREFIX_HRR = f'{SRC["_is_the_prefix_representative"]["debate_harmful_revision_rate_on_this_prefix"]:g}'
 
 TRIGGER = _trigger_table()
 TRIGGER_ROWS = TRIGGER["TRIGGER_ROWS"]
@@ -610,9 +611,11 @@ sees only its own previous text. Nothing disagrees with it. The comparison is pa
 against the runs where the specialist also opens, so the only thing that differs is whether anything
 argued back.
 
-The arm covers a contiguous {SRC_N} of the 200 cases. It was run against the clock and the prefix is
-contiguous rather than a sample of convenience. Every one of those {SRC_N} openings is the same drug
-in both arms.
+The arm covers a contiguous {SRC_N} of the 200 cases, because it was run against the clock. The
+prefix is contiguous rather than a sample of convenience, and every one of those {SRC_N} openings is
+the same drug in both arms. The obvious worry about a prefix is that it might not be like the rest
+of the cohort, so here is the check: the debate arm's harmful revision rate computed on this prefix
+alone is {SRC_PREFIX_HRR}%, against {DEBATE_HRR}% on the whole cohort.
 
 | | five turns, a counterpart arguing | {SRC_TURNS} turns, only its own text |
 |---|---|---|

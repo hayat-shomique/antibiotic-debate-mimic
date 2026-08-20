@@ -492,19 +492,21 @@ sees only its own previous text. Nothing disagrees with it. The comparison is pa
 against the runs where the specialist also opens, so the only thing that differs is whether anything
 argued back.
 
-The arm covers a contiguous 80 of the 200 cases. It was run against the clock and the prefix is
-contiguous rather than a sample of convenience. Every one of those 80 openings is the same drug
-in both arms.
+The arm covers a contiguous 115 of the 200 cases, because it was run against the clock. The
+prefix is contiguous rather than a sample of convenience, and every one of those 115 openings is
+the same drug in both arms. The obvious worry about a prefix is that it might not be like the rest
+of the cohort, so here is the check: the debate arm's harmful revision rate computed on this prefix
+alone is 15.2%, against 15.2% on the whole cohort.
 
 | | five turns, a counterpart arguing | three turns, only its own text |
 |---|---|---|
-| changed its opening drug | 80 of 80 | 4 of 80 |
-| final recommendation adequate | 76.2% | 88.8% |
-| harmful revision | 14.7% | 0% |
+| changed its opening drug | 115 of 115 | 4 of 115 |
+| final recommendation adequate | 77.4% | 88.7% |
+| harmful revision | 15.2% | 0% |
 | distinct drugs used | 2 | 2 |
 
 Paired within patient, the debate ends on an inadequate drug where the control ends on an adequate
-one in 10 pairs, and the reverse in 0. Exact McNemar p = 0.00195.
+one in 15 pairs, and the reverse in 0. Exact McNemar p = 6.1e-05.
 
 The counterpart is what moves it. Asked repeatedly with nothing disagreeing, the model restates its
 position and keeps its coverage. This does not replace the duration result in 7.12, it locates it: a
