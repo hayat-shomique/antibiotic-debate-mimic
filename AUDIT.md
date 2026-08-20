@@ -90,9 +90,9 @@ Documents written by hand, not generated: `docs/METHODS.md`, `docs/LIMITATIONS.m
 
 | | |
 |---|---|
-| tracked files | 196 |
-| commits | 49 |
-| head | `d8e464a Credit the collaborator's personas and supporter-opponent architecture on the slides that use them` |
+| tracked files | 199 |
+| commits | 51 |
+| head | `04f6983 Coherence harness over every tracked file, and the four contradictions it found` |
 | remote in sync | yes |
 
 ## 5. Run state
