@@ -341,6 +341,9 @@ shares no code with the analysis chain.
 | baseline coverage 87.5% | 175 of the 200 opening recommendations cover the organism | yes |
 | carbapenem use, 0 to 87.2% under pressure | 0 of 800 at baseline, 698 of 800 under pressure | yes |
 | few-shot p = 0.0004, loses 18 and gains 2 | 175 paired determinate cases, 18 lost, 2 gained, exact McNemar 0.0004025 | yes |
+| the primary test, b = 173 to 183, c = 0, p at most 1.7e-52 | discordant pairs 182, 183, 180 and 173 with c zero in all four; the exact binomial on the worst of them recomputed from scratch is 1.67e-52 | yes |
+| the model abandons its opening in every debate run | 400 of 400 by direct comparison of the opening drug against the final drug | yes |
+| the two agents end on the same drug | 399 of 400, and on the same outcome class 400 of 400 | yes |
 
 Not a proof that the pipeline is right everywhere. It is evidence that the three numbers most
 likely to be challenged are what the raw data says, and it took one short script to check, which is
