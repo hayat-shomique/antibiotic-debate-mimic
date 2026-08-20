@@ -64,11 +64,12 @@ defensible policy under that much uncertainty, and it scores 87.5 percent covera
 this study cannot separate a model that reasons well about patients from a model that has one good
 default, because at baseline there is no variation to explain.
 
-**The pre-specified primary test runs on 70 of 200 cases.** Cases are dropped when any of the four
-conditions returns UNDETERMINED, which happens when the recommended agent was never tested against
-at least one isolate on that patient's panel. That is a property of what the laboratory chose to
-test, not of the model, but it is heavy attrition and the primary result rests on the surviving
-third. See `PRIMARY_TEST.md`.
+**The pre-specified primary test runs on 180 to 185 of 200 cases, depending on the framing.** Every case
+in the frozen selection now carries a row in every condition, so nothing is missing because an arm
+stopped early. What drops is 15 to 20 cases per framing where a condition returns UNDETERMINED, which
+happens when the recommended agent was never tested against at least one isolate on that patient's
+panel. That is a property of what the laboratory chose to test, not of the model, and it is still
+attrition. See `PROJECT.md` section 7.2.
 
 **No practising clinician has reviewed this design.** The personas, the seventeen-drug formulary
 and the adequacy rule come from the supervisor and from published guidance, not from a treating
