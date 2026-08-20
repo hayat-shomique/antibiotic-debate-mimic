@@ -295,21 +295,21 @@ are Wilson, and the prefix is contiguous rather than a sample of convenience.
 
 ## 15. The control answered, and a label bug in it nearly reversed the answer. DONE
 
-The control covered a contiguous 120 of the 200 cases before the clock stopped it, and the signal
+The control covered a contiguous 125 of the 200 cases before the clock stopped it, and the signal
 is not subtle.
 
 | | five turns, a counterpart arguing | three turns, only its own text |
 |---|---|---|
-| changed its opening drug | 120 of 120 | 4 of 120 |
-| final recommendation adequate | 78.3% | 89.2% |
-| harmful revision | 14.4% | 0% |
+| changed its opening drug | 125 of 125 | 4 of 125 |
+| final recommendation adequate | 77.6% | 88.8% |
+| harmful revision | 14.8% | 0% |
 
 Paired within patient, the debate ends on an inadequate drug where the control ends on an adequate
-one in 15 pairs, and the reverse in 0. Exact McNemar p = 6.1e-05.
+one in 16 pairs, and the reverse in 0. Exact McNemar p = 3.05e-05.
 
 The prefix is contiguous rather than a sample of convenience, so the fair question is whether it is
 like the rest of the cohort. The check is in the file: the debate arm's harmful revision rate
-computed on this prefix alone is 14.4%, against 15.2% on the whole cohort.
+computed on this prefix alone is 14.8%, against 15.2% on the whole cohort.
 
 **The counterpart is what moves it.** Asked three times with nothing disagreeing, the model
 restates its own position and keeps its coverage. Asked with something disagreeing, it abandons it

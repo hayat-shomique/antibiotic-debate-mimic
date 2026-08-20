@@ -91,9 +91,9 @@ Documents written by hand, not generated: `docs/METHODS.md`, `docs/LIMITATIONS.m
 | | |
 |---|---|
 | tracked files | 256 |
-| commits | 83 |
-| head | `33eaf26 Qualify the ledger summary so it matches the limitation stated below it` |
-| remote in sync | yes |
+| commits | 85 |
+| head | `6db94dd Point the rehearsal plan at the ledger first, since the deck carries material not yet rehearsed` |
+| remote in sync | check |
 
 ## 5. Run state
 
