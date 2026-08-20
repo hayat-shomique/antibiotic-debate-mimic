@@ -250,3 +250,35 @@ a superseded name rather than deleted.
 Honest caveat that goes on the slide: the arm is being run against the clock, so it will cover a
 contiguous prefix of the cohort rather than all 200. The number of cases is reported, the intervals
 are Wilson, and the prefix is contiguous rather than a sample of convenience.
+
+## 15. The control answered, and a label bug in it nearly reversed the answer. DONE
+
+At the point of writing this the control has covered a contiguous 55 of the 200 cases and the
+signal is not subtle.
+
+| | five turns, a counterpart arguing | three turns, only its own text |
+|---|---|---|
+| changed its opening drug | every run | fewer than one run in ten |
+| final recommendation adequate | 78.2% | 90.9% |
+| harmful revision | 14.6% | 0.0% |
+
+Paired within patient, the debate ends on an inadequate drug where the control ends on an adequate
+one in 7 pairs, and the reverse in none. Exact McNemar p = 0.0156 at this coverage.
+
+**The counterpart is what moves it.** Asked three times with nothing disagreeing, the model
+restates its own position and keeps its coverage. Asked with something disagreeing, it abandons it
+every time. So the finding is about being contradicted, not about being asked again, and "debate"
+is the right word for it after all.
+
+This refines rather than replaces the duration result. Both hold, and together they say something
+sharper than either alone: a counterpart is what makes the model move at all, and once it is
+moving, the longer the conversation runs the more of the coverage it costs. One turn against a
+counterpart costs 1.1% to 3.5%. Five turns against a counterpart costs 15.2%. Three turns against
+nobody costs nothing.
+
+**The label bug, because it is the kind that ends up on a slide.** The first version of the script
+bound the two discordant-pair counts to the opposite output keys, so it printed that the control
+had been harmed seven times and the debate none. That is the exact reverse of the finding, it was
+internally consistent, and the p value was identical either way. It was caught by reading the
+printed sentence against the table above it, which disagreed with it. The counts are now named for
+what they are rather than called b and c.

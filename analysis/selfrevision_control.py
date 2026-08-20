@@ -99,8 +99,13 @@ def main():
     pair_det = [(d, s) for d, s in pair
                 if d["round0_outcome"] == ADQ and d["final_A_outcome"] in DET
                 and s["final_A_outcome"] in DET]
-    b = sum(1 for d, s in pair_det if d["final_A_outcome"] == INA and s["final_A_outcome"] == ADQ)
-    c = sum(1 for d, s in pair_det if d["final_A_outcome"] == ADQ and s["final_A_outcome"] == INA)
+    # Named for what they are. An earlier version bound these to the output keys the other way
+    # round, which reversed the conclusion: it printed that the control was harmed seven times
+    # and the debate none. Discordant-pair labels are worth spelling out rather than abbreviating.
+    debate_harmed_only = sum(1 for d, s in pair_det
+                             if d["final_A_outcome"] == INA and s["final_A_outcome"] == ADQ)
+    control_harmed_only = sum(1 for d, s in pair_det
+                              if d["final_A_outcome"] == ADQ and s["final_A_outcome"] == INA)
     same_opening = sum(1 for d, s in pair if d["round0_drug"] == s["round0_drug"])
 
     out = {
@@ -127,11 +132,12 @@ def main():
                                    "three turns, the agent seeing only its own text"),
         "paired_test": {
             "pairs_usable": len(pair_det),
-            "debate_harmful_and_control_not": c,
-            "control_harmful_and_debate_not": b,
-            "exact_mcnemar_p": mcnemar_exact(b, c),
-            "reading": "b and c are the discordant pairs. A large c with a small b means the "
-                       "counterpart is doing the damage. A comparable b and c means repetition "
+            "debate_inadequate_and_control_adequate": debate_harmed_only,
+            "control_inadequate_and_debate_adequate": control_harmed_only,
+            "exact_mcnemar_p": mcnemar_exact(debate_harmed_only, control_harmed_only),
+            "reading": "these are the discordant pairs: cases where the two arms disagree "
+                       "about the final drug's adequacy. If the debate side dominates, the "
+                       "counterpart is doing the damage. If the two are comparable, repetition "
                        "explains it and the word debate is the wrong word for the finding",
         },
         "_what_this_does_not_control": [
@@ -155,9 +161,9 @@ def main():
               f"{v['harmful_revision_rate_pct']}%  CI {v['harmful_revision_ci']}")
         print(f"    distinct final drugs    {v['distinct_final_drugs']}")
     t = out["paired_test"]
-    print(f"\n  paired, {t['pairs_usable']} usable: debate harmed and control did not = "
-          f"{t['debate_harmful_and_control_not']}; the reverse = {t['control_harmful_and_debate_not']}; "
-          f"exact McNemar p = {t['exact_mcnemar_p']:.3g}")
+    print(f"\n  paired, {t['pairs_usable']} usable: the debate ends inadequate where the control "
+          f"ends adequate in {t['debate_inadequate_and_control_adequate']} pairs; the reverse in "
+          f"{t['control_inadequate_and_debate_adequate']}; exact McNemar p = {t['exact_mcnemar_p']:.3g}")
 
 
 if __name__ == "__main__":
