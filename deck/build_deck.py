@@ -756,7 +756,10 @@ nobody off an adequate drug, and coverage rises {DCOV['evidence_change_pts']} po
 If someone asks about the panel replacing the debate rather than following it, that is a different
 arm and its harmful revision rate is {EVID['HRR']['pct']:.1f} per cent, on the closing slide.
 So: multi-agent communication does not improve clinical decision quality here. It degrades it.
-Evidence improves it. The difference between those two rows is the whole finding, and the scripted
+Evidence improves it.
+If you have the time, add the control in one sentence: I ran the same agent three times with nothing
+disagreeing with it, and it kept its answer and its coverage, so it is being contradicted that moves
+it and not being asked again. There is a backup slide with the numbers. The difference between those two rows is the whole finding, and the scripted
 neutral turn in the top row is what proves the middle row is about being argued with rather than about
 being spoken to.
 """)
