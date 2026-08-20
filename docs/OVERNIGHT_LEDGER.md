@@ -8,6 +8,40 @@ Status key: DONE means changed and verified. HELD means deliberately not changed
 
 ---
 
+## Read this first, if you read nothing else
+
+**One new result, and it is the strongest thing in the project.** Every reconsideration condition
+now sits in one table on the same cases from the same opening position, and a null arm sits at the
+top of it. Asked to reconsider with nothing to react to, the model moves in no case and leaves one
+drug in play. Challenged once with a sentence carrying no evidence, it moves almost always but
+harms rarely. Argued with for five turns, it harms in 15.2% of the cases where it had a correct
+answer and the answer space collapses to two cephalosporins. Handed the actual susceptibility
+panel, it corrects nearly every error and keeps eight drugs in play.
+
+**And the control that the result needed exists now.** The obvious objection to the above is that
+five turns is three chances to change its mind, so maybe repetition explains it. One agent, same
+cases, same opening prompt, three speaking turns, nothing disagreeing with it: it keeps its answer
+and its coverage, and its harmful revision rate is zero. Paired within patient, the debate ends on
+an inadequate drug where the control ends on an adequate one, and never the reverse. Being
+contradicted is what moves it. Being asked again is not.
+
+**Nine defects were found in what you already had, and none of them changed a result.** That is
+worth saying plainly. The scorecard called a finished arm RUNNING. The exposure counter skipped
+every record the endpoints are computed on. The document rendered two different totals. Her core
+figure was built before her specification reached disk, used a convention no other file used, and
+its headline bars were entailed rather than measured. Seven figures were stale. The status file
+said four of her endpoints were NOT RUN when they had been run for a day. The answer slide put two
+different arms in one row. And the harness that is supposed to catch all of this was itself broken:
+it caught one of three planted breaches, and now catches six of six.
+
+**What to say if she asks how you know it is right.** Three of the headline numbers were recomputed
+straight from the run files by a script that shares no code with the analysis chain, and all three
+agree. The arms are asserted to share one scaffold hash, one cohort hash, one scorer and one
+opening position, and every one of those checks is recomputed on every run rather than asserted
+once. Everything below is the evidence.
+
+---
+
 ## 1. The scorecard reported a finished arm as still running. DONE
 
 `SCORECARD.txt` carried a block that recounted the run files itself, with date-scoped globs and
