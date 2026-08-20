@@ -15,7 +15,7 @@ now sits in one table on the same cases from the same opening position, and a nu
 top of it. Asked to reconsider with nothing to react to, the model moves in no case and leaves one
 drug in play. Challenged once with a sentence carrying no evidence, it moves almost always but
 harms rarely. Argued with for five turns, it harms in 15.2% of the cases where it had a correct
-answer and the answer space collapses to two cephalosporins. Handed the actual susceptibility
+answer, and the answer space collapses onto two cephalosporins, which between them carry 362 of the 363 determinate runs. Handed the actual susceptibility
 panel, it corrects nearly every error and keeps eight drugs in play.
 
 **And the control that the result needed exists now.** The obvious objection to the above is that
