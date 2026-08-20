@@ -628,7 +628,18 @@ Paired within patient, the debate ends on an inadequate drug where the control e
 one in {SRC_B} pairs, and the reverse in {SRC_C}. Exact McNemar p = {SRC_P}.
 
 The counterpart is what moves it. Asked repeatedly with nothing disagreeing, the model restates its
-position and keeps its coverage. This does not replace the duration result in 7.12, it locates it: a
+position and keeps its coverage.
+
+The {SRC_S_CH} runs where it did change say the same thing more sharply. All {SRC_S_CH} are the same
+move, piperacillin-tazobactam to ceftriaxone, and all {SRC_S_CH} stay adequate. The debate leaves
+piperacillin-tazobactam for a cephalosporin in every run, ceftriaxone or cefepime, and that move
+costs coverage in {SRC_B} of the paired cases. Same destination drug, opposite safety profile, and what differs is
+what triggered it. De-escalating a broad-spectrum beta-lactam to a narrower agent is trial-supported
+when susceptibility guides it: the SIMPLIFY trial found it non-inferior in Enterobacterales
+bacteraemia, clinical cure 148 of 164 against 148 of 167, risk difference 1.6 percentage points, 95%
+CI minus 5.0 to 8.2 (Lopez-Cortes et al., *Lancet Infect Dis* 2024;24(4):375-385,
+doi:10.1016/S1473-3099(23)00686-2, PMID 38215770). What this study measures is the same move made
+for a reason that is not susceptibility. This does not replace the duration result in 7.12, it locates it: a
 counterpart is what makes the model move at all, and once it is moving, the longer the conversation
 runs the more coverage the movement costs.
 

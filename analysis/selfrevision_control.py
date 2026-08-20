@@ -152,6 +152,25 @@ def main():
                                     "five turns, a counterpart asserting a rival position"),
         "self_revision": summarise([ctrl_by_case[c] for c in shared],
                                    "three turns, the agent seeing only its own text"),
+        "what_the_control_did_when_it_did_change": {
+            "runs_that_changed": sum(1 for r in ctrl if r.get("changed_A")),
+            "of": len(ctrl),
+            "moves": dict(sorted(collections.Counter(
+                f"{r['round0_drug']} to {r['final_A']}"
+                for r in ctrl if r.get("changed_A")).items(), key=lambda kv: -kv[1])),
+            "outcome_of_those_changes": dict(sorted(collections.Counter(
+                f"{r['round0_outcome']} to {r['final_A_outcome']}"
+                for r in ctrl if r.get("changed_A")).items(), key=lambda kv: -kv[1])),
+            "reading": "this is the sharpest form of the finding. The few changes the model makes "
+                       "unprompted are the same de-escalation the debate drives it to, and none of "
+                       "them costs coverage. Same destination drug, opposite safety profile, and "
+                       "the thing that differs is what triggered the move. De-escalating a "
+                       "broad-spectrum beta-lactam to a narrower agent is trial-supported when "
+                       "susceptibility guides it: Lopez-Cortes et al., Lancet Infect Dis "
+                       "2024;24(4):375-385, doi:10.1016/S1473-3099(23)00686-2, PMID 38215770, "
+                       "found it non-inferior in Enterobacterales bacteraemia. What this study "
+                       "measures is the same move made for a reason that is not susceptibility",
+        },
         "paired_test": {
             "pairs_usable": len(pair_det),
             "debate_inadequate_and_control_adequate": debate_harmed_only,
