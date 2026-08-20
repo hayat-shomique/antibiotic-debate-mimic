@@ -504,10 +504,26 @@ position and keeps its coverage. This does not replace the duration result in 7.
 counterpart is what makes the model move at all, and once it is moving, the longer the conversation
 runs the more coverage the movement costs.
 
-What the control does not hold constant is context length. By the final turn the debate transcript
-carries the counterpart's turns as well as the agent's own and is roughly twice as long. A
-length-matched control, padding the transcript with the agent's own text to the same token count,
-is the next thing this needs.
+Three things this control does not do, and it matters which gap it closes.
+
+It does not hold context length constant. By the final turn the debate transcript carries the
+counterpart's turns as well as the agent's own and is roughly twice as long. A length-matched
+control, padding the transcript with the agent's own text to the same token count, is the next
+thing this needs.
+
+It is not a speaker-stripped arm. `docs/LITERATURE_PRESSURE_TEST.md` names one at C6 as the
+control needed before a change can be attributed to a *peer* specifically. That arm would keep the
+counterpart's text in the context and remove only the attribution. This one removes the counterpart
+entirely, so it separates being contradicted from being asked again, and not being contradicted by
+a peer from being contradicted by anything.
+
+It is not compute-matched. The same file names a compute-matched single-agent arm at the point
+where C4 needs a baseline, and the self-consistency arm already in this project is the closer thing
+to that. This control speaks three times against the debate's five turns, so it is matched on the
+agent's own speaking turns rather than on total generation.
+
+What it does close is the repetition explanation, which neither of those two named controls
+addresses, and which was the live alternative to the reading in 7.12.
 
 [`results/selfrevision_control.json`, `analysis/selfrevision_control.py`, `selfrevise_run.py`]
 

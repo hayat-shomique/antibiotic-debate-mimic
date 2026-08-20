@@ -39,6 +39,32 @@ Reading rule for this document: MEASURED means the paper ran the experiment and 
 ### What is NOT novel, said plainly
 
 - **Position abandonment under peer challenge.** Published repeatedly, including for 4B-class open-weight models in medicine. The 44-98% range is the literature figure quoted by arXiv:2605.12991; 400/400 is the ceiling of a distribution others already mapped, and at n=400 on one checkpoint it is weaker evidence than a rate measured across 9-16 models.
+### Update, 20 August 2026: the repetition control now exists
+
+C6's verdict says the attribution to a peer is unsupported without a speaker-stripped arm. That is
+still true and the speaker-stripped arm is still not built. What was built on 20 August is a
+different control that removes a different alternative explanation.
+
+`selfrevise_run.py` runs one agent, the same infectious disease specialist, on the frozen cases,
+from the same round-0 prompt byte for byte, speaking as many times as the specialist speaks in the
+five-turn debate, seeing only its own previous text between turns. It answers the question "is the
+model abandoning its position because something disagreed with it, or because it was asked again",
+and the answer is the former: with a counterpart it changes its drug in every run, without one it
+almost never does. `results/selfrevision_control.json` carries the paired test.
+
+Three arms are now distinguishable and only two of them are built:
+
+| control | what it removes | status |
+|---|---|---|
+| repetition control | the counterpart entirely | **built**, `runs/selfrevise_20260820.jsonl` |
+| self-consistency | the second agent, sampling the same checkpoint instead | **built**, 200 cases |
+| speaker-stripped | only the attribution, keeping the counterpart's text | **not built** |
+
+So the claim this project can make is that being contradicted moves the model where being asked
+again does not. The claim it still cannot make is that the contradiction has to come from a peer
+rather than from any text asserting a rival position. Say the first, and name the second as the
+next control, which is what C6 has always said.
+
 - **Correctness-blind peer adoption.** The core result of BenchForm (arXiv:2501.13381), quantified bidirectionally in arXiv:2606.01637, classified flip-by-flip in arXiv:2606.00820.
 - **The three-rung pressure ladder.** arXiv:2606.00820 runs it as parallel counterfactuals on identical agent-question pairs and adds a form-versus-content rung this study does not have.
 - **The deference-clause ablation.** arXiv:2607.27304 ran it in medicine one month earlier with a measured noise floor; arXiv:2605.12991 ran the harder base-versus-Instruct version.
