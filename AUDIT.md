@@ -91,9 +91,9 @@ Documents written by hand, not generated: `docs/METHODS.md`, `docs/LIMITATIONS.m
 | | |
 |---|---|
 | tracked files | 256 |
-| commits | 80 |
-| head | `4e0fef7 State plainly that the acceptance suite was not re-run tonight, and why` |
-| remote in sync | check |
+| commits | 83 |
+| head | `33eaf26 Qualify the ledger summary so it matches the limitation stated below it` |
+| remote in sync | yes |
 
 ## 5. Run state
 

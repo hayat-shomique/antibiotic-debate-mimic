@@ -492,17 +492,17 @@ sees only its own previous text. Nothing disagrees with it. The comparison is pa
 against the runs where the specialist also opens, so the only thing that differs is whether anything
 argued back.
 
-The arm covers a contiguous 115 of the 200 cases, because it was run against the clock. The
-prefix is contiguous rather than a sample of convenience, and every one of those 115 openings is
+The arm covers a contiguous 120 of the 200 cases, because it was run against the clock. The
+prefix is contiguous rather than a sample of convenience, and every one of those 120 openings is
 the same drug in both arms. The obvious worry about a prefix is that it might not be like the rest
 of the cohort, so here is the check: the debate arm's harmful revision rate computed on this prefix
-alone is 15.2%, against 15.2% on the whole cohort.
+alone is 14.4%, against 15.2% on the whole cohort.
 
 | | five turns, a counterpart arguing | three turns, only its own text |
 |---|---|---|
-| changed its opening drug | 115 of 115 | 4 of 115 |
-| final recommendation adequate | 77.4% | 88.7% |
-| harmful revision | 15.2% | 0% |
+| changed its opening drug | 120 of 120 | 4 of 120 |
+| final recommendation adequate | 78.3% | 89.2% |
+| harmful revision | 14.4% | 0% |
 | distinct drugs used | 2 | 2 |
 
 Paired within patient, the debate ends on an inadequate drug where the control ends on an adequate

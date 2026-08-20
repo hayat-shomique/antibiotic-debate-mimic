@@ -42,7 +42,10 @@ def wilson(k, n, z=1.96):
     d = 1 + z * z / n
     c = p + z * z / (2 * n)
     h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n))
-    return round((c - h) / d * 100, 1), round((c + h) / d * 100, 1)
+    # Clamped. Floating point put the lower bound a hair below zero when k is zero, and a
+    # confidence interval that prints a negative percentage undermines the number beside it.
+    lo, hi = (c - h) / d * 100, (c + h) / d * 100
+    return round(max(0.0, lo), 1), round(min(100.0, hi), 1)
 
 
 def mcnemar_exact(b, c):
