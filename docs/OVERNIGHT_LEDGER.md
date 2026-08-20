@@ -25,6 +25,14 @@ and its coverage, and its harmful revision rate is zero. Paired within patient, 
 an inadequate drug where the control ends on an adequate one, and never the reverse. Being
 contradicted is what moves it. Being asked again is not.
 
+Two boundaries on that, both written on the slide rather than left for someone to find. The control
+does not hold context length constant, and it does not hold the revision instruction constant: the
+debate tells the specialist to consider a stewardship lead's comments and the control tells it to
+review its own answer, because naming a stewardship lead would put a counterpart back into a control
+built to remove one. So the strict claim is that the instruction and the content together move it
+where reviewing your own answer does not. The arm that separates those two is named as the next one
+to run, and it is the same arm the pressure test has been asking for since C6.
+
 **Nine defects were found in what you already had, and none of them changed a result.** That is
 worth saying plainly. The scorecard called a finished arm RUNNING. The exposure counter skipped
 every record the endpoints are computed on. The document rendered two different totals. Her core
