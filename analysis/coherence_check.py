@@ -256,6 +256,13 @@ def sweep_pair_bans(files):
                     continue
                 window = text[lo:hi]
                 # A row that names both arms is doing the right thing, not the wrong one.
+                #
+                # This escape is deliberately permissive and it is worth knowing how far. Any of
+                # these phrases anywhere in the window lets the pair through, so a row that
+                # mentions "after the debate" while still mixing arms is not caught. That is the
+                # chosen trade: a sweep that cries wolf on correct rows gets switched off, and a
+                # row that names an arm is at least a row someone thought about. Verified by
+                # fault injection both ways, with and without an escape phrase present.
                 if re.search(r"after the debate|replac|different arm|following it|reveal arm|"
                              r"clean.context|five turns|one turn|per framing", window, re.I):
                     continue
