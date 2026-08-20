@@ -13,18 +13,18 @@ Model `qwen3:4b-instruct-2507-q4_K_M`, temperature 0, seed 20260818. Generated b
 | slide | claim | the number, as it stands | result file | produced by |
 |---|---|---|---|---|
 | 5 | the pipeline | 200 cases evaluated, 400 ordering-runs | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
-| 6 | the instrument, pressure sentences carry no clinical content | 0 of 312 pressure turns contain organism or susceptibility phrasing, 4 distinct sentences, census not sample | `results/leakage.json` | `analysis/leakage_check.py` |
+| 6 | the instrument, pressure sentences carry no clinical content | 0 of 800 pressure turns contain organism or susceptibility phrasing, 4 distinct sentences, census not sample | `results/leakage.json` | `analysis/leakage_check.py` |
 | 7 | the baseline is one drug for every patient | 1 distinct drug across 200 decisions, piperacillin-tazobactam at 100.0% | `results/policy_degeneracy.json` | `analysis/policy_degeneracy.py` |
 | 7 | and that constant covers the organism | 175/200 = 87.5%, 95% CI [82.2, 91.4] | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
 | 7 | given the panel, coverage rises | 191/200 = 95.5%, gain 8.0 points, 10 distinct drugs | `results/tingting_endpoints.json + policy_degeneracy.json` | `analysis/tingting_endpoints.py, analysis/policy_degeneracy.py` |
-| 8 | the neutral control never moves it | c = 0 under every framing, computed across all four, n = 70 | `results/primary_test.json` | `analysis/primary_test.py` |
-| 8 | unsupported pressure almost always moves it | b = 63 to 70 of 70, flip rate 90.0% to 100.0%, exact binomial p at worst 2.17e-19 | `results/primary_test.json` | `analysis/primary_test.py` |
-| 8 | the panel moves it less than a person does | 38/70 = 54.3% | `results/primary_test.json` | `analysis/primary_test.py` |
-| 8 | attrition, split by cause rather than pooled | 122 cases have no pressure row because the arm ran 78 of 200; 8 more are indeterminate; primary set 70 | `results/primary_test.json` | `analysis/primary_test.py` |
-| 8 | and the covered subset is not biased | contiguous prefix of the seeded selection: True; baseline adequacy 88.5% covered against 87.5% overall | `results/primary_test.json` | `analysis/primary_test.py` |
-| 8 | the baseline is reproducible across independently run arms | 79/79 agreement | `results/primary_test.json` | `analysis/primary_test.py` |
-| 9 | harmful revision under scripted pressure is near zero | 0.0% to 1.5% across the four framings, denominator is the correct-before group | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
-| 10 | an empty sentence drives carbapenem use | 0/200 = 0.0% at baseline to 261/312 = 83.7% under pressure | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
+| 8 | the neutral control never moves it | c = 0 under every framing, computed across all four, n = 180 to 185 | `results/primary_test.json` | `analysis/primary_test.py` |
+| 8 | unsupported pressure almost always moves it | b = 173 to 183 of 180 to 185, flip rate 93.5% to 100.0%, exact binomial p at worst 1.67e-52 | `results/primary_test.json` | `analysis/primary_test.py` |
+| 8 | the panel moves it less than a person does | 103 to 107 of 180 to 185 cases, 57.2% to 57.8% | `results/primary_test.json` | `analysis/primary_test.py` |
+| 8 | attrition, split by cause rather than pooled | the arm now covers 200 of 200, so 0 cases lack a pressure row; 15 to 20 are dropped for an indeterminate outcome; primary set 180 to 185 | `results/primary_test.json` | `analysis/primary_test.py` |
+| 8 | and the arm covers the whole frozen selection | 200 of 200 cases, so the attrition is entirely indeterminate outcomes and no case is missing because an arm stopped early | `results/primary_test.json` | `analysis/primary_test.py` |
+| 8 | the baseline is reproducible across independently run arms | 200/200 agreement | `results/primary_test.json` | `analysis/primary_test.py` |
+| 9 | harmful revision under scripted pressure is near zero | 1.1% to 3.5% across the four framings, denominator is the correct-before group | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
+| 10 | an empty sentence drives carbapenem use | 0/200 = 0.0% at baseline to 698/800 = 87.2% under pressure | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
 | 10 | given the real panel the broadening is far smaller | 42/200 = 21.0% across 10 distinct drugs | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
 | 11 | same drug, different patient, adoption is identical | 43.8% when it covers against 43.8% when it does not, 224 exposures | `results/RESULTS.json` | `analysis/canonical_numbers.py` |
 | 11 | and the stratified test is the null exactly | Cochran-Mantel-Haenszel OR 1.0, p = 0.7151, 3 strata | `results/RESULTS.json` | `analysis/canonical_numbers.py` |

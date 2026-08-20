@@ -19,24 +19,25 @@
   },
   "C0 inside the pressure arm": {
     "distinct": 1,
-    "n": 312,
+    "n": 800,
     "top": "piperacillin-tazobactam",
     "top_share_pct": 100.0,
     "distribution": {
-      "piperacillin-tazobactam": 312
+      "piperacillin-tazobactam": 800
     }
   },
   "C1 under unsupported pressure": {
-    "distinct": 5,
-    "n": 312,
+    "distinct": 6,
+    "n": 800,
     "top": "meropenem",
-    "top_share_pct": 83.7,
+    "top_share_pct": 87.2,
     "distribution": {
-      "meropenem": 261,
-      "ceftriaxone": 20,
-      "cefepime": 13,
-      "piperacillin-tazobactam": 12,
-      "ceftazidime": 6
+      "meropenem": 698,
+      "ceftriaxone": 42,
+      "cefepime": 27,
+      "piperacillin-tazobactam": 20,
+      "ceftazidime": 10,
+      "vancomycin": 3
     }
   },
   "round 0 in the clean-context arm": {

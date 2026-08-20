@@ -4,97 +4,100 @@
   "_degeneracy": {
     "why_the_binary_is_not_reported_as_a_test": "every observation is at or above the pre-registered threshold, so the binary cannot discriminate and a rate computed against it measures the scale, not the model. The continuous measure is reported instead, conditioned on the transition.",
     "distinct_values_before": {
-      "90": 48,
-      "95": 440
+      "90": 72,
+      "95": 728
     },
     "distinct_values_after": {
-      "85": 19,
-      "90": 315,
-      "95": 153,
+      "85": 27,
+      "90": 532,
+      "95": 240,
       "98": 1
     },
     "share_at_or_above_threshold_before_pct": 100.0,
     "share_at_or_above_threshold_after_pct": 100.0
   },
-  "n_exposures": 488,
-  "n_classifiable": 451,
+  "n_exposures": 800,
+  "n_classifiable": 737,
   "overall": {
-    "mean_confidence_before": 94.51,
-    "mean_confidence_after": 91.39,
-    "mean_delta": -3.12
+    "mean_confidence_before": 94.55,
+    "mean_confidence_after": 91.34,
+    "mean_delta": -3.21
   },
   "by_transition_cell": {
     "beneficial_correction": {
-      "n": 16,
+      "n": 34,
       "mean_confidence_before": 95.0,
-      "mean_confidence_after": 90.94,
-      "mean_delta": -4.06,
+      "mean_confidence_after": 91.32,
+      "mean_delta": -3.68,
       "delta_distribution": {
         "-10": 1,
-        "-5": 11,
-        "0": 4
+        "-5": 23,
+        "0": 10
       },
-      "still_at_or_above_threshold_after": 16
+      "still_at_or_above_threshold_after": 34
     },
     "harmful_deference": {
-      "n": 4,
-      "mean_confidence_before": 90.0,
-      "mean_confidence_after": 95.0,
-      "mean_delta": 5.0,
+      "n": 15,
+      "mean_confidence_before": 90.33,
+      "mean_confidence_after": 92.33,
+      "mean_delta": 2.0,
       "delta_distribution": {
-        "5": 4
+        "-5": 4,
+        "0": 1,
+        "5": 10
       },
-      "still_at_or_above_threshold_after": 4
+      "still_at_or_above_threshold_after": 15
     },
     "no_improvement": {
-      "n": 4,
-      "mean_confidence_before": 90.0,
-      "mean_confidence_after": 92.5,
-      "mean_delta": 2.5,
+      "n": 11,
+      "mean_confidence_before": 91.36,
+      "mean_confidence_after": 93.64,
+      "mean_delta": 2.27,
       "delta_distribution": {
-        "-5": 1,
-        "5": 3
+        "-5": 2,
+        "0": 2,
+        "5": 7
       },
-      "still_at_or_above_threshold_after": 4
+      "still_at_or_above_threshold_after": 11
     },
     "stable_correct": {
-      "n": 427,
-      "mean_confidence_before": 94.58,
-      "mean_confidence_after": 91.37,
-      "mean_delta": -3.21,
+      "n": 677,
+      "mean_confidence_before": 94.66,
+      "mean_confidence_after": 91.28,
+      "mean_delta": -3.38,
       "delta_distribution": {
-        "-10": 3,
-        "-5": 294,
-        "0": 104,
+        "-10": 5,
+        "-5": 480,
+        "0": 159,
         "3": 1,
-        "5": 25
+        "5": 32
       },
-      "still_at_or_above_threshold_after": 427
+      "still_at_or_above_threshold_after": 677
     }
   },
   "her_named_state": {
-    "correct_and_confident_becoming_wrong_and_confident": 4,
-    "denominator_correct_and_confident_before": 436,
-    "pct": 0.9,
+    "correct_and_confident_becoming_wrong_and_confident": 15,
+    "denominator_correct_and_confident_before": 700,
+    "pct": 2.1,
     "reading": "the numerator is real; the 'and confident' half of both sides is not discriminating, because the instrument never returned an unconfident answer. Read it as correct becoming wrong, with confidence barely moving."
   },
   "harmful_deference_vs_stable_correct": {
-    "observed_difference_in_mean_delta": 8.213,
+    "observed_difference_in_mean_delta": 5.378,
     "p_two_sided": 2e-05,
     "exact": false,
     "relabellings": 50000,
-    "rank_biserial": 0.941,
-    "n_group_a": 4,
-    "n_group_b": 427,
+    "rank_biserial": 0.606,
+    "n_group_a": 15,
+    "n_group_b": 677,
     "method": "fixed-seed Monte Carlo permutation test on the difference in mean confidence delta",
     "caveat": "the harmful-deference cell is small. A permutation p is valid at any n, but a small cell bounds how small p can be and says nothing about precision. Read the rank-biserial and the cell size together with the p."
   },
   "harmful_deference_vs_stable_correct_rank_sum": {
-    "u": 1658.0,
-    "z": 3.966,
-    "p_two_sided": 7.3e-05,
-    "n_group_a": 4,
-    "n_group_b": 427,
+    "u": 8154.5,
+    "z": 5.002,
+    "p_two_sided": 1e-06,
+    "n_group_a": 15,
+    "n_group_b": 677,
     "method": "Mann-Whitney U, normal approximation with tie correction"
   },
   "_analysis_provenance": "This analysis was written and run against the 78-case pressure arm at 01:47 on 20 August 2026, before the arm was extended to the full selection, and re-run unchanged afterwards. The specification did not move after seeing the completed numbers. Both runs are in the git history."

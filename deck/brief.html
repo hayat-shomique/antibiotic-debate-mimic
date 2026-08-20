@@ -369,18 +369,18 @@ footer{
             <tbody>
               <tr><td class="figure">87.5%</td><td>baseline coverage, 175 of 200 opening recommendations cover the organism that grew</td><td class="caution">Not skill. It is one drug given to everybody, and a constant meropenem policy would score 96.0 per cent.</td></tr>
               <tr><td class="figure">1 drug</td><td>piperacillin-tazobactam for 200 of 200 patients before any conversation</td><td class="caution">Not a broken prompt. Nothing in the case block predicts the organism.</td></tr>
-              <tr><td class="figure">0 of 70</td><td>cases that changed under the neutral re-ask, in every framing</td><td class="caution">Not a result about pressure. It is the control that makes the pressure number mean something.</td></tr>
-              <tr><td class="figure">90 to 100%</td><td>cases that changed under an empty challenge sentence, four framings</td><td class="caution">Not instability. Cn is zero, so the movement is specific to being contradicted.</td></tr>
-              <tr><td class="figure">54.3%</td><td>cases that changed when handed the actual susceptibility panel</td><td class="caution">Not a failure to read the panel. Given the panel it repairs 82.6 per cent of runs that entered inadequate.</td></tr>
-              <tr><td class="figure">0.0 to 1.5%</td><td>harmful revision under scripted pressure</td><td class="caution">Not reassurance. This is exactly why accuracy alone hides the problem.</td></tr>
-              <tr><td class="figure">0 to 83.7%</td><td>carbapenem use, baseline to under pressure</td><td class="caution">Prescribing behaviour, not demonstrated patient harm. Overuse drives resistance at population level.</td></tr>
+              <tr><td class="figure">0 of 180 to 185</td><td>cases that changed under the neutral re-ask, in every framing</td><td class="caution">Not a result about pressure. It is the control that makes the pressure number mean something.</td></tr>
+              <tr><td class="figure">93.5 to 100%</td><td>cases that changed under an empty challenge sentence, four framings</td><td class="caution">Not instability. Cn is zero, so the movement is specific to being contradicted.</td></tr>
+              <tr><td class="figure">57.2 to 57.8%</td><td>cases that changed when handed the actual susceptibility panel</td><td class="caution">Not a failure to read the panel. Given the panel it repairs 82.6 per cent of runs that entered inadequate.</td></tr>
+              <tr><td class="figure">1.1 to 3.5%</td><td>harmful revision under scripted pressure</td><td class="caution">Not reassurance. This is exactly why accuracy alone hides the problem.</td></tr>
+              <tr><td class="figure">0 to 87.2%</td><td>carbapenem use, baseline to under pressure</td><td class="caution">Prescribing behaviour, not demonstrated patient harm. Overuse drives resistance at population level.</td></tr>
               <tr><td class="figure">15.2%</td><td>harmful revision when a live second agent argues, 52 of 341</td><td class="caution">The debate arm, not the scripted-pressure arm. Different stimulus, different number, both real.</td></tr>
               <tr><td class="figure">OR 1.0</td><td>same drug proposed, patient varied, adoption identical, p = 0.7151</td><td class="caution">It is a null, and the null is the finding. Within a drug, coverage makes no difference.</td></tr>
               <tr><td class="figure">p = 0.0004</td><td>few-shot loses 18 correct answers and gains 2, exact McNemar on 175 paired cases</td><td class="caution">Few-shot did change the behaviour. It moved off the constant, and changed it for the worse.</td></tr>
             </tbody>
           </table>
         </div>
-        <p>Two more worth carrying: <b>70 of 200</b> cases enter the pre-specified primary test, and <b>ICC 0.913</b>, which makes 400 ordering-runs behave like an effective 209.</p>
+        <p>Two more worth carrying: <b>180 to 185 of 200</b> cases enter the pre-specified primary test, and <b>ICC 0.913</b>, which makes 400 ordering-runs behave like an effective 209.</p>
       </div>
     </section>
 
@@ -399,9 +399,9 @@ footer{
               <tr><td class="step">5</td><td class="caution">the pipeline</td><td class="figure">50s</td><td>Six stages, and only stage 4 ever changes</td><td class="caution">“And this is what the model actually sees.”</td></tr>
               <tr><td class="step">6</td><td class="caution">the instrument</td><td class="figure">50s</td><td>The prompt verbatim, six patient fields, four pressure sentences</td><td class="caution">“So what does it do before anyone speaks to it.”</td></tr>
               <tr><td class="step">7</td><td class="caution">result one</td><td class="figure">45s</td><td>The default is a constant, and it scores 87.5</td><td class="caution">“Does it move when somebody speaks to it.”</td></tr>
-              <tr><td class="step">8</td><td class="caution">result two</td><td class="figure">55s</td><td>c is zero, b is 63 to 70, p on the order of 1e-21</td><td class="caution">“It moves. Does the movement hurt anybody.”</td></tr>
+              <tr><td class="step">8</td><td class="caution">result two</td><td class="figure">55s</td><td>c is zero, b is 173 to 183, p on the order of 1e-52</td><td class="caution">“It moves. Does the movement hurt anybody.”</td></tr>
               <tr><td class="step">9</td><td class="caution">result three</td><td class="figure">25s</td><td>On accuracy, almost no damage</td><td class="caution">“If I stopped here I would be wrong, and she told me where to look.”</td></tr>
-              <tr><td class="step">10</td><td class="caution">result four</td><td class="figure">50s</td><td>An empty sentence, 0 to 84 per cent carbapenem</td><td class="caution">“One more control before the answer.”</td></tr>
+              <tr><td class="step">10</td><td class="caution">result four</td><td class="figure">50s</td><td>An empty sentence, 0 to 87 per cent carbapenem</td><td class="caution">“One more control before the answer.”</td></tr>
               <tr><td class="step">11</td><td class="caution">result five</td><td class="figure">35s</td><td>Same drug, different patient, gap zero</td><td class="caution">“Now the arm that answers the question.”</td></tr>
               <tr><td class="step">12</td><td class="caution">the answer</td><td class="figure">55s</td><td>Live agent minus 9.5 points, panel plus 17.2</td><td class="caution">“So can prompting fix it.”</td></tr>
               <tr><td class="step">13</td><td class="caution">rung two</td><td class="figure">35s</td><td>Few-shot breaks the constant and costs coverage</td><td class="caution">“Which is what licenses the next rung.”</td></tr>
@@ -479,7 +479,7 @@ footer{
         <div class="drill">
 
           <details><summary>Is 200 cases not very small?</summary><div class="answer">
-            <p><span class="lead-in">It is small, and it is paired.</span> Every case is its own control: the same patient is put to the same model in four conditions with a fixed seed, so I am not comparing 200 patients against another 200, I am comparing each patient against himself. That is what gets p on the order of 1e-21 out of 70 evaluable cases. The cohort is small because everything runs locally under the data agreement, and I would rather have 200 cases in four conditions than 2,000 in one.</p>
+            <p><span class="lead-in">It is small, and it is paired.</span> Every case is its own control: the same patient is put to the same model in four conditions with a fixed seed, so I am not comparing 200 patients against another 200, I am comparing each patient against himself. That is what gets p on the order of 1e-52 out of 180 to 185 evaluable cases. The cohort is small because everything runs locally under the data agreement, and I would rather have 200 cases in four conditions than 2,000 in one.</p>
           </div></details>
 
           <details><summary>Your model recommends the same drug for everyone. Is this not just a broken model?</summary><div class="answer">
@@ -503,9 +503,9 @@ footer{
             <p><span class="lead-in">Both, and the difference is the point.</span> They are different stimuli. The pressure conditions are four fixed sentences with no content, and the model usually swaps to another drug that also covers. The debate arm is a second model constructing a case for a specific drug, and there it lands on something that fails the patient in 52 of 341 opportunities. A scripted challenge and a reasoned challenge are not the same intervention, which is itself a finding.</p>
           </div></details>
 
-          <details><summary>Only 70 of your 200 cases enter the primary test. Is that not fatal?</summary><div class="answer">
-            <p><span class="lead-in">No, and I separate the two reasons rather than pooling them.</span> 122 of those cases have no pressure row at all, because the pressure arm ran 78 of the 200 in my frozen selection. Only 8 are dropped for an indeterminate outcome. Those are different things and I report them separately.</p>
-            <p>The missing 122 are benign, and I measured that rather than assuming it: the 78 are a contiguous prefix of a seeded random selection, so which cases are missing is a property of how far the arm got and not of the case, and baseline adequacy inside the covered subset is 88.5 per cent against 87.5 across all 200. Nothing that was never run can change b or c, which are counted on complete cases only, and c is zero in every framing.</p>
+          <details><summary>Why do 180 to 185 of your 200 cases enter the primary test, not all 200?</summary><div class="answer">
+            <p><span class="lead-in">Because a paired test needs all four conditions determinate on the same case.</span> Every one of the 200 now carries a row in every condition, so nothing is missing because an arm stopped early. What drops is 15 to 20 cases per framing where a condition returns UNDETERMINED, which happens when the laboratory never tested the recommended drug against that patient's organism.</p>
+            <p>That is a property of what the lab chose to test, not of the model. It is still attrition and I report it. And it does not touch the direction: c is zero in every framing, b is 173 to 183, and the exact p is at worst 1.7e-52.</p>
           </div></details>
 
           <details><summary>What is McNemar and why is it the right test?</summary><div class="answer">

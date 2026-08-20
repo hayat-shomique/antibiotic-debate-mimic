@@ -371,117 +371,117 @@
   },
   "pre_specified_primary_test": {
     "baseline_agreement": {
-      "agree": 79,
-      "n": 79
+      "agree": 200,
+      "n": 200
     },
     "by_framing": {
       "C1a_authority": {
-        "n_primary": 70,
+        "n_primary": 184,
         "attrition": {
           "cases_appearing_in_any_condition": 200,
-          "cases_with_a_row_in_every_condition": 78,
-          "dropped_arm_never_ran_the_case": 122,
-          "dropped_indeterminate_outcome": 8,
-          "primary_set": 70,
+          "cases_with_a_row_in_every_condition": 200,
+          "dropped_arm_never_ran_the_case": 0,
+          "dropped_indeterminate_outcome": 16,
+          "primary_set": 184,
           "missing_rows_by_condition": {
             "C0": 0,
             "Cn": 0,
-            "C1": 122,
+            "C1": 0,
             "C2": 0
           },
           "note": "a case is dropped either because an arm never ran it, which is absent data, or because a condition returned UNDETERMINED or INTERMEDIATE_ONLY, which is an indeterminate outcome. Reporting them as one number misdescribes the design."
         },
         "baseline_adequacy": {
-          "k": 68,
-          "n": 70,
+          "k": 173,
+          "n": 184,
           "ci": [
-            0.9016755648760819,
-            0.9921295531061937
+            0.8961345817937323,
+            0.9662941879782456
           ]
         },
         "flip_rates": {
           "Cn": {
             "k": 0,
-            "n": 70,
+            "n": 184,
             "ci": [
-              0.0,
-              0.05202487486728348
+              -1.6992461711342563e-18,
+              0.020451273839234757
             ]
           },
           "C1": {
-            "k": 69,
-            "n": 70,
+            "k": 182,
+            "n": 184,
             "ci": [
-              0.9234163029607309,
-              0.9974738185967649
+              0.9612400316909088,
+              0.9970141569446224
             ]
           },
           "C2": {
-            "k": 38,
-            "n": 70,
+            "k": 106,
+            "n": 184,
             "ci": [
-              0.4269805339664774,
-              0.6542744767591839
+              0.5038425314851805,
+              0.6452192311914576
             ]
           }
         },
         "discordant": {
-          "b_pressure_only": 69,
+          "b_pressure_only": 182,
           "c_control_only": 0,
-          "d": 69,
-          "p_exact": 3.3881317890172014e-21
+          "d": 182,
+          "p_exact": 3.2626522339992623e-55
         },
         "stratified": {
           "round0_adequate": {
-            "n": 68,
+            "n": 173,
             "Cn": {
               "k": 0,
-              "n": 68,
+              "n": 173,
               "ci": [
-                0.0,
-                0.05347319658804926
+                -1.697039391998193e-18,
+                0.021723395400177335
               ]
             },
             "C1": {
-              "k": 67,
-              "n": 68,
+              "k": 171,
+              "n": 173,
               "ci": [
-                0.9212883963845385,
-                0.9973993833976493
+                0.9588335314507056,
+                0.9968239609040346
               ]
             },
             "C2": {
-              "k": 36,
-              "n": 68,
+              "k": 95,
+              "n": 173,
               "ci": [
-                0.41240715813747064,
-                0.6432708891220559
+                0.4747202199055158,
+                0.6214110071360853
               ]
             }
           },
           "round0_inadequate": {
-            "n": 2,
+            "n": 11,
             "Cn": {
               "k": 0,
-              "n": 2,
+              "n": 11,
               "ci": [
-                0.0,
-                0.6576280471103807
+                2.057132194452876e-17,
+                0.2588400172488141
               ]
             },
             "C1": {
-              "k": 2,
-              "n": 2,
+              "k": 11,
+              "n": 11,
               "ci": [
-                0.3423719528896193,
+                0.7411599827511859,
                 1.0
               ]
             },
             "C2": {
-              "k": 2,
-              "n": 2,
+              "k": 11,
+              "n": 11,
               "ci": [
-                0.3423719528896193,
+                0.7411599827511859,
                 1.0
               ]
             }
@@ -489,140 +489,140 @@
         },
         "edi": {
           "revision_when_wrong": {
-            "k": 2,
-            "n": 2,
+            "k": 11,
+            "n": 11,
             "ci": [
-              0.3423719528896193,
+              0.7411599827511859,
               1.0
             ]
           },
           "collapse_when_right": {
-            "k": 67,
-            "n": 68,
+            "k": 171,
+            "n": 173,
             "ci": [
-              0.9212883963845385,
-              0.9973993833976493
+              0.9588335314507056,
+              0.9968239609040346
             ]
           },
-          "edi": 0.014705882352941124,
+          "edi": 0.011560693641618491,
           "note": "appendix only: a difference of two proportions is wider than either term"
         },
         "coverage_check": {
           "cases_in_the_frozen_selection": 200,
-          "cases_the_pressure_arm_covered": 78,
+          "cases_the_pressure_arm_covered": 200,
           "covered_set_is_a_contiguous_prefix": true,
           "baseline_adequacy_whole_selection_pct": 87.5,
-          "baseline_adequacy_covered_subset_pct": 88.5,
+          "baseline_adequacy_covered_subset_pct": 87.5,
           "note": "the arm runs the first n of a seeded random selection, so absence is a property of how far the arm got and not of the case. The two adequacy figures are the check on that, not a claim about it."
         }
       },
       "C1b_peer_consensus": {
-        "n_primary": 70,
+        "n_primary": 184,
         "attrition": {
           "cases_appearing_in_any_condition": 200,
-          "cases_with_a_row_in_every_condition": 78,
-          "dropped_arm_never_ran_the_case": 122,
-          "dropped_indeterminate_outcome": 8,
-          "primary_set": 70,
+          "cases_with_a_row_in_every_condition": 200,
+          "dropped_arm_never_ran_the_case": 0,
+          "dropped_indeterminate_outcome": 16,
+          "primary_set": 184,
           "missing_rows_by_condition": {
             "C0": 0,
             "Cn": 0,
-            "C1": 122,
+            "C1": 0,
             "C2": 0
           },
           "note": "a case is dropped either because an arm never ran it, which is absent data, or because a condition returned UNDETERMINED or INTERMEDIATE_ONLY, which is an indeterminate outcome. Reporting them as one number misdescribes the design."
         },
         "baseline_adequacy": {
-          "k": 68,
-          "n": 70,
+          "k": 173,
+          "n": 184,
           "ci": [
-            0.9016755648760819,
-            0.9921295531061937
+            0.8961345817937323,
+            0.9662941879782456
           ]
         },
         "flip_rates": {
           "Cn": {
             "k": 0,
-            "n": 70,
+            "n": 184,
             "ci": [
-              0.0,
-              0.05202487486728348
+              -1.6992461711342563e-18,
+              0.020451273839234757
             ]
           },
           "C1": {
-            "k": 69,
-            "n": 70,
+            "k": 183,
+            "n": 184,
             "ci": [
-              0.9234163029607309,
-              0.9974738185967649
+              0.9698614503605403,
+              0.9990400070376078
             ]
           },
           "C2": {
-            "k": 38,
-            "n": 70,
+            "k": 106,
+            "n": 184,
             "ci": [
-              0.4269805339664774,
-              0.6542744767591839
+              0.5038425314851805,
+              0.6452192311914576
             ]
           }
         },
         "discordant": {
-          "b_pressure_only": 69,
+          "b_pressure_only": 183,
           "c_control_only": 0,
-          "d": 69,
-          "p_exact": 3.3881317890172014e-21
+          "d": 183,
+          "p_exact": 1.6313261169996311e-55
         },
         "stratified": {
           "round0_adequate": {
-            "n": 68,
+            "n": 173,
             "Cn": {
               "k": 0,
-              "n": 68,
+              "n": 173,
               "ci": [
-                0.0,
-                0.05347319658804926
+                -1.697039391998193e-18,
+                0.021723395400177335
               ]
             },
             "C1": {
-              "k": 67,
-              "n": 68,
+              "k": 172,
+              "n": 173,
               "ci": [
-                0.9212883963845385,
-                0.9973993833976493
+                0.9679881251412725,
+                0.9989789233360091
               ]
             },
             "C2": {
-              "k": 36,
-              "n": 68,
+              "k": 95,
+              "n": 173,
               "ci": [
-                0.41240715813747064,
-                0.6432708891220559
+                0.4747202199055158,
+                0.6214110071360853
               ]
             }
           },
           "round0_inadequate": {
-            "n": 2,
+            "n": 11,
             "Cn": {
               "k": 0,
-              "n": 2,
+              "n": 11,
               "ci": [
-                0.0,
-                0.6576280471103807
+                2.057132194452876e-17,
+                0.2588400172488141
               ]
             },
             "C1": {
-              "k": 2,
-              "n": 2,
+              "k": 11,
+              "n": 11,
               "ci": [
-                0.3423719528896193,
+                0.7411599827511859,
                 1.0
               ]
             },
             "C2": {
-              "k": 2,
-              "n": 2,
+              "k": 11,
+              "n": 11,
               "ci": [
-                0.3423719528896193,
+                0.7411599827511859,
                 1.0
               ]
             }
@@ -630,140 +630,140 @@
         },
         "edi": {
           "revision_when_wrong": {
-            "k": 2,
-            "n": 2,
+            "k": 11,
+            "n": 11,
             "ci": [
-              0.3423719528896193,
+              0.7411599827511859,
               1.0
             ]
           },
           "collapse_when_right": {
-            "k": 67,
-            "n": 68,
+            "k": 172,
+            "n": 173,
             "ci": [
-              0.9212883963845385,
-              0.9973993833976493
+              0.9679881251412725,
+              0.9989789233360091
             ]
           },
-          "edi": 0.014705882352941124,
+          "edi": 0.005780346820809301,
           "note": "appendix only: a difference of two proportions is wider than either term"
         },
         "coverage_check": {
           "cases_in_the_frozen_selection": 200,
-          "cases_the_pressure_arm_covered": 78,
+          "cases_the_pressure_arm_covered": 200,
           "covered_set_is_a_contiguous_prefix": true,
           "baseline_adequacy_whole_selection_pct": 87.5,
-          "baseline_adequacy_covered_subset_pct": 88.5,
+          "baseline_adequacy_covered_subset_pct": 87.5,
           "note": "the arm runs the first n of a seeded random selection, so absence is a property of how far the arm got and not of the case. The two adequacy figures are the check on that, not a claim about it."
         }
       },
       "C1c_safety_framing": {
-        "n_primary": 70,
+        "n_primary": 180,
         "attrition": {
           "cases_appearing_in_any_condition": 200,
-          "cases_with_a_row_in_every_condition": 78,
-          "dropped_arm_never_ran_the_case": 122,
-          "dropped_indeterminate_outcome": 8,
-          "primary_set": 70,
+          "cases_with_a_row_in_every_condition": 200,
+          "dropped_arm_never_ran_the_case": 0,
+          "dropped_indeterminate_outcome": 20,
+          "primary_set": 180,
           "missing_rows_by_condition": {
             "C0": 0,
             "Cn": 0,
-            "C1": 122,
+            "C1": 0,
             "C2": 0
           },
           "note": "a case is dropped either because an arm never ran it, which is absent data, or because a condition returned UNDETERMINED or INTERMEDIATE_ONLY, which is an indeterminate outcome. Reporting them as one number misdescribes the design."
         },
         "baseline_adequacy": {
-          "k": 68,
-          "n": 70,
+          "k": 169,
+          "n": 180,
           "ci": [
-            0.9016755648760819,
-            0.9921295531061937
+            0.8938978709273627,
+            0.965537643123864
           ]
         },
         "flip_rates": {
           "Cn": {
             "k": 0,
-            "n": 70,
+            "n": 180,
             "ci": [
               0.0,
-              0.05202487486728348
+              0.02089624981505818
             ]
           },
           "C1": {
-            "k": 70,
-            "n": 70,
+            "k": 180,
+            "n": 180,
             "ci": [
-              0.9479751251327164,
-              0.9999999999999998
+              0.9791037501849419,
+              1.0
             ]
           },
           "C2": {
-            "k": 38,
-            "n": 70,
+            "k": 103,
+            "n": 180,
             "ci": [
-              0.4269805339664774,
-              0.6542744767591839
+              0.49917743380385027,
+              0.6422486634450857
             ]
           }
         },
         "discordant": {
-          "b_pressure_only": 70,
+          "b_pressure_only": 180,
           "c_control_only": 0,
-          "d": 70,
-          "p_exact": 1.6940658945086007e-21
+          "d": 180,
+          "p_exact": 1.305060893599705e-54
         },
         "stratified": {
           "round0_adequate": {
-            "n": 68,
+            "n": 169,
             "Cn": {
               "k": 0,
-              "n": 68,
+              "n": 169,
               "ci": [
                 0.0,
-                0.05347319658804926
+                0.022226130746301812
               ]
             },
             "C1": {
-              "k": 68,
-              "n": 68,
+              "k": 169,
+              "n": 169,
               "ci": [
-                0.9465268034119507,
-                1.0000000000000002
-              ]
-            },
-            "C2": {
-              "k": 36,
-              "n": 68,
-              "ci": [
-                0.41240715813747064,
-                0.6432708891220559
-              ]
-            }
-          },
-          "round0_inadequate": {
-            "n": 2,
-            "Cn": {
-              "k": 0,
-              "n": 2,
-              "ci": [
-                0.0,
-                0.6576280471103807
-              ]
-            },
-            "C1": {
-              "k": 2,
-              "n": 2,
-              "ci": [
-                0.3423719528896193,
+                0.9777738692536981,
                 1.0
               ]
             },
             "C2": {
-              "k": 2,
-              "n": 2,
+              "k": 92,
+              "n": 169,
               "ci": [
-                0.3423719528896193,
+                0.4691378236419414,
+                0.6176468393095702
+              ]
+            }
+          },
+          "round0_inadequate": {
+            "n": 11,
+            "Cn": {
+              "k": 0,
+              "n": 11,
+              "ci": [
+                2.057132194452876e-17,
+                0.2588400172488141
+              ]
+            },
+            "C1": {
+              "k": 11,
+              "n": 11,
+              "ci": [
+                0.7411599827511859,
+                1.0
+              ]
+            },
+            "C2": {
+              "k": 11,
+              "n": 11,
+              "ci": [
+                0.7411599827511859,
                 1.0
               ]
             }
@@ -771,19 +771,19 @@
         },
         "edi": {
           "revision_when_wrong": {
-            "k": 2,
-            "n": 2,
+            "k": 11,
+            "n": 11,
             "ci": [
-              0.3423719528896193,
+              0.7411599827511859,
               1.0
             ]
           },
           "collapse_when_right": {
-            "k": 68,
-            "n": 68,
+            "k": 169,
+            "n": 169,
             "ci": [
-              0.9465268034119507,
-              1.0000000000000002
+              0.9777738692536981,
+              1.0
             ]
           },
           "edi": 0.0,
@@ -791,151 +791,151 @@
         },
         "coverage_check": {
           "cases_in_the_frozen_selection": 200,
-          "cases_the_pressure_arm_covered": 78,
+          "cases_the_pressure_arm_covered": 200,
           "covered_set_is_a_contiguous_prefix": true,
           "baseline_adequacy_whole_selection_pct": 87.5,
-          "baseline_adequacy_covered_subset_pct": 88.5,
+          "baseline_adequacy_covered_subset_pct": 87.5,
           "note": "the arm runs the first n of a seeded random selection, so absence is a property of how far the arm got and not of the case. The two adequacy figures are the check on that, not a claim about it."
         }
       },
       "C1d_bare_doubt": {
-        "n_primary": 70,
+        "n_primary": 185,
         "attrition": {
           "cases_appearing_in_any_condition": 200,
-          "cases_with_a_row_in_every_condition": 78,
-          "dropped_arm_never_ran_the_case": 122,
-          "dropped_indeterminate_outcome": 8,
-          "primary_set": 70,
+          "cases_with_a_row_in_every_condition": 200,
+          "dropped_arm_never_ran_the_case": 0,
+          "dropped_indeterminate_outcome": 15,
+          "primary_set": 185,
           "missing_rows_by_condition": {
             "C0": 0,
             "Cn": 0,
-            "C1": 122,
+            "C1": 0,
             "C2": 0
           },
           "note": "a case is dropped either because an arm never ran it, which is absent data, or because a condition returned UNDETERMINED or INTERMEDIATE_ONLY, which is an indeterminate outcome. Reporting them as one number misdescribes the design."
         },
         "baseline_adequacy": {
-          "k": 68,
-          "n": 70,
+          "k": 173,
+          "n": 185,
           "ci": [
-            0.9016755648760819,
-            0.9921295531061937
+            0.8900573836777741,
+            0.9625090000003985
           ]
         },
         "flip_rates": {
           "Cn": {
             "k": 0,
-            "n": 70,
+            "n": 185,
             "ci": [
               0.0,
-              0.05202487486728348
+              0.02034297527663396
             ]
           },
           "C1": {
-            "k": 63,
-            "n": 70,
+            "k": 173,
+            "n": 185,
             "ci": [
-              0.8076687752123195,
-              0.9507113248938538
+              0.8900573836777741,
+              0.9625090000003985
             ]
           },
           "C2": {
-            "k": 38,
-            "n": 70,
+            "k": 107,
+            "n": 185,
             "ci": [
-              0.4269805339664774,
-              0.6542744767591839
+              0.5063331253593901,
+              0.6472347325702186
             ]
           }
         },
         "discordant": {
-          "b_pressure_only": 63,
+          "b_pressure_only": 173,
           "c_control_only": 0,
-          "d": 63,
-          "p_exact": 2.168404344971009e-19
+          "d": 173,
+          "p_exact": 1.6704779438076223e-52
         },
         "stratified": {
           "round0_adequate": {
-            "n": 68,
+            "n": 173,
             "Cn": {
               "k": 0,
-              "n": 68,
+              "n": 173,
               "ci": [
-                0.0,
-                0.05347319658804926
+                -1.697039391998193e-18,
+                0.021723395400177335
               ]
             },
             "C1": {
-              "k": 61,
-              "n": 68,
+              "k": 163,
+              "n": 173,
               "ci": [
-                0.8024187647817828,
-                0.9492348732218252
+                0.8968780598913775,
+                0.9683029834830323
               ]
             },
             "C2": {
-              "k": 36,
-              "n": 68,
+              "k": 95,
+              "n": 173,
               "ci": [
-                0.41240715813747064,
-                0.6432708891220559
+                0.4747202199055158,
+                0.6214110071360853
               ]
             }
           },
           "round0_inadequate": {
-            "n": 2,
+            "n": 12,
             "Cn": {
               "k": 0,
-              "n": 2,
+              "n": 12,
               "ci": [
                 0.0,
-                0.6576280471103807
+                0.2425007574992425
               ]
             },
             "C1": {
-              "k": 2,
-              "n": 2,
+              "k": 10,
+              "n": 12,
               "ci": [
-                0.3423719528896193,
-                1.0
+                0.5519636426153274,
+                0.9530358523851776
               ]
             },
             "C2": {
-              "k": 2,
-              "n": 2,
+              "k": 12,
+              "n": 12,
               "ci": [
-                0.3423719528896193,
-                1.0
+                0.7574992425007574,
+                0.9999999999999998
               ]
             }
           }
         },
         "edi": {
           "revision_when_wrong": {
-            "k": 2,
-            "n": 2,
+            "k": 12,
+            "n": 12,
             "ci": [
-              0.3423719528896193,
-              1.0
+              0.7574992425007574,
+              0.9999999999999998
             ]
           },
           "collapse_when_right": {
-            "k": 61,
-            "n": 68,
+            "k": 163,
+            "n": 173,
             "ci": [
-              0.8024187647817828,
-              0.9492348732218252
+              0.8968780598913775,
+              0.9683029834830323
             ]
           },
-          "edi": 0.1029411764705882,
+          "edi": 0.05780346820809246,
           "note": "appendix only: a difference of two proportions is wider than either term"
         },
         "coverage_check": {
           "cases_in_the_frozen_selection": 200,
-          "cases_the_pressure_arm_covered": 78,
+          "cases_the_pressure_arm_covered": 200,
           "covered_set_is_a_contiguous_prefix": true,
           "baseline_adequacy_whole_selection_pct": 87.5,
-          "baseline_adequacy_covered_subset_pct": 88.5,
+          "baseline_adequacy_covered_subset_pct": 87.5,
           "note": "the arm runs the first n of a seeded random selection, so absence is a property of how far the arm got and not of the case. The two adequacy figures are the check on that, not a claim about it."
         }
       }

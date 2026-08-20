@@ -74,6 +74,18 @@ PTEST = json.loads((RES / "primary_test.json").read_text())
 PT = PTEST["by_framing"]
 ATTR = PT["C1a_authority"]["attrition"]
 COVER = PT["C1a_authority"]["coverage_check"]
+
+
+def span(*path, fmt="{} to {}"):
+    """A quantity that differs across the four framings is never collapsed to one number."""
+    vals = []
+    for f in FRAMINGS:
+        node = PT[f]
+        for key in path:
+            node = node[key]
+        vals.append(node)
+    lo, hi = min(vals), max(vals)
+    return str(lo) if lo == hi else fmt.format(lo, hi)
 FRAMINGS = ["C1a_authority", "C1b_peer_consensus", "C1c_safety_framing", "C1d_bare_doubt"]
 NICE = {"C1a_authority": "authority", "C1b_peer_consensus": "peer consensus",
         "C1c_safety_framing": "safety framing", "C1d_bare_doubt": "bare doubt"}
@@ -597,18 +609,14 @@ C_SUFFIX = "in every framing" if len(C_VALUES) == 1 else "range across the four 
 stat_strip(s, [(f"b = {B_RANGE[0]} to {B_RANGE[1]}", "changed under pressure only"),
                (C_LABEL, f"changed under the neutral control only, {C_SUFFIX}"),
                (f"p ≤ {WORST_P:.1e}", "exact binomial, worst of the four framings"),
-               (f"{N_PRIMARY} of {COVER['cases_the_pressure_arm_covered']}", "cases the pressure arm ran that are evaluable in all four conditions")],
+               (f"{span('n_primary')} of {PRIM['baseline_pre_culture']['n']}", "cases evaluable in all four conditions, per framing")],
            y=5.55, value_size=21, label_size=11)
 text(s, M, 6.50, CW, 0.5,
      [[("Stated before the result. ", {"bold": True}),
-       (f"The pressure arm ran {COVER['cases_the_pressure_arm_covered']} of the "
-        f"{COVER['cases_in_the_frozen_selection']} cases in the frozen selection, so "
-        f"{ATTR['dropped_arm_never_ran_the_case']} cases have no pressure row at all and "
-        f"{ATTR['dropped_indeterminate_outcome']} more are dropped for an indeterminate outcome. Those "
-        f"{COVER['cases_the_pressure_arm_covered']} are a contiguous prefix of a seeded random selection, and baseline adequacy inside "
-        f"them is {COVER['baseline_adequacy_covered_subset_pct']}% against "
-        f"{COVER['baseline_adequacy_whole_selection_pct']}% across all "
-        f"{COVER['cases_in_the_frozen_selection']}, which is what an unbiased subsample looks like.",
+       (f"The pressure arm covers all {COVER['cases_the_pressure_arm_covered']} cases in the frozen selection, so nothing is "
+        f"missing because an arm stopped early. {span('attrition', 'dropped_indeterminate_outcome')} cases per framing are dropped "
+        "because a condition returned UNDETERMINED or INTERMEDIATE_ONLY, which is a property of what the "
+        f"laboratory chose to test rather than of the model. The primary set is {span('n_primary')}.",
         {"color": MUTED})]], size=11.5, line=1.3)
 notes(s, f"""
 This is the test the protocol pre-specified before any model ran: an exact binomial on the cases
@@ -616,11 +624,10 @@ that change under exactly one of the neutral control and the pressure condition.
 c is zero. Not once in {N_PRIMARY} cases did the model change its recommendation because a neutral
 interlocutor spoke to it. Under unsupported pressure it changed in {B_RANGE[0]} to {B_RANGE[1]} of the same cases.
 p is on the order of ten to the minus twenty-one.
-The honest part: this runs on {N_PRIMARY} cases. Two different things reduce it, and I keep them
-separate. The pressure arm ran {COVER['cases_the_pressure_arm_covered']} of the {COVER['cases_in_the_frozen_selection']} cases in my selection, so {ATTR['dropped_arm_never_ran_the_case']} cases have no
-pressure row at all, and {ATTR['dropped_indeterminate_outcome']} more drop because a condition came back indeterminate. Those {COVER['cases_the_pressure_arm_covered']} are the
-first {COVER['cases_the_pressure_arm_covered']} of a seeded random selection rather than a chosen subset, and baseline adequacy inside them
-is {COVER['baseline_adequacy_covered_subset_pct']} per cent against {COVER['baseline_adequacy_whole_selection_pct']} across all {COVER['cases_in_the_frozen_selection']}, which is what an unbiased subsample looks like.
+The honest part: this runs on {span('n_primary')} of {PRIM['baseline_pre_culture']['n']} cases. Every case in the frozen selection now has a row in
+every condition, so nothing is missing because an arm stopped early. What drops is {span('attrition', 'dropped_indeterminate_outcome')} cases per
+framing where a condition came back UNDETERMINED, which happens when the laboratory never tested that
+drug against that patient's organism. That is a property of what the lab chose to test, not of the model.
 And look at the last bar. The susceptibility panel, the only thing in the study carrying real
 information about the patient, moves the model less than a person disagreeing with it.
 """)
@@ -811,8 +818,8 @@ head(s, "what this does not show", "The bounds, stated as properties of the desi
 left = [
     ("The baseline is a constant",
      "With one recommendation for every patient there is no variation to explain, so this cannot separate a model that reasons about patients from a model with one good default."),
-    ("The primary test runs on 70 cases",
-     f"The pressure arm ran {COVER['cases_the_pressure_arm_covered']} of {COVER['cases_in_the_frozen_selection']}, so {ATTR['dropped_arm_never_ran_the_case']} cases have no pressure row and {ATTR['dropped_indeterminate_outcome']} more are indeterminate. A contiguous prefix of a seeded selection, adequacy {COVER['baseline_adequacy_covered_subset_pct']}% against {COVER['baseline_adequacy_whole_selection_pct']}%."),
+    (f"The primary test runs on {span('n_primary')} of {PRIM['baseline_pre_culture']['n']}",
+     f"Every case now carries a row in every condition. {span('attrition', 'dropped_indeterminate_outcome')} per framing drop because a condition returns UNDETERMINED, which is a property of what the laboratory chose to test. It is still attrition."),
     ("The confidence binary cannot fail",
      "Every observation sits above the pre-registered threshold of 80, so the binary is degenerate and is not reported as a test. The continuous measure is reported instead, and the harmful-deference cell it rests on is small."),
     ("Clustering, not independence",
@@ -821,8 +828,8 @@ left = [
 right = [
     ("The counterpart is scripted, not alive",
      "Fixed challenge sentences buy internal validity and give up realism. A real second agent would vary its argument with the case."),
-    ("Two arms are short of their planned n",
-     "The pressure arm ran 78 of 197 planned cases and the plausible-wrong arm 166 of 312. Both are prefixes of a seeded selection, and every paired test uses complete cases only."),
+    ("One superseded arm is still short",
+     f"The plausible-wrong seeding arm holds {R['_integrity']['plausible']['n']} of a planned 312 exposures. It is superseded by the drug-matched design, carries no result in this deck, and is completing now."),
     ("One 4B checkpoint, run locally",
      "MIMIC-IV is credentialed, so no record-level data may reach a hosted service. Findings are scoped to these checkpoints, not to language models generally."),
     ("No clinician has reviewed this design",

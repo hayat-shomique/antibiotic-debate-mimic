@@ -55,8 +55,14 @@ def one(path):
     distinct = set(across(path, tuple))
     if len(distinct) != 1:
         raise ValueError(f"{path} differs across framings ({sorted(distinct)}), so no row may "
-                         "state it as a single number. Report the range instead.")
+                         "state it as a single number. Use span() instead.")
     return distinct.pop()
+
+
+def span(path, fmt="{} to {}"):
+    """A value that legitimately differs across framings. Never collapsed to one number."""
+    vals = sorted(set(across(path, tuple)))
+    return str(vals[0]) if len(vals) == 1 else fmt.format(vals[0], vals[-1])
 
 
 b_lo = min(PT[f]["discordant"]["b_pressure_only"] for f in FRAMINGS)
@@ -86,22 +92,25 @@ ROWS = [
      f"{P['C2 with the panel revealed']['distinct']} distinct drugs", f"{TE} + {PD}", f"{S_TE}, {S_PD}"),
     ("8", "the neutral control never moves it",
      f"c = {one(('discordant', 'c_control_only'))} under every framing, computed across all four, "
-     f"n = {one(('n_primary',))}", PTJ, S_PT),
+     f"n = {span(('n_primary',))}", PTJ, S_PT),
     ("8", "unsupported pressure almost always moves it",
-     f"b = {b_lo} to {b_hi} of {one(('n_primary',))}, flip rate {flip_lo:.1f}% to {flip_hi:.1f}%, "
+     f"b = {b_lo} to {b_hi} of {span(('n_primary',))}, flip rate {flip_lo:.1f}% to {flip_hi:.1f}%, "
      f"exact binomial p at worst {p_worst:.2e}", PTJ, S_PT),
     ("8", "the panel moves it less than a person does",
-     f"{one(('flip_rates', 'C2', 'k'))}/{one(('flip_rates', 'C2', 'n'))} = "
-     f"{100.0 * one(('flip_rates', 'C2', 'k')) / one(('flip_rates', 'C2', 'n')):.1f}%", PTJ, S_PT),
-    ("8", "attrition, split by cause rather than pooled",
-     f"{ATTR['dropped_arm_never_ran_the_case']} cases have no pressure row because the arm ran "
-     f"{COVER['cases_the_pressure_arm_covered']} of {COVER['cases_in_the_frozen_selection']}; "
-     f"{ATTR['dropped_indeterminate_outcome']} more are indeterminate; primary set {ATTR['primary_set']}",
+     f"{span(('flip_rates', 'C2', 'k'))} of {span(('flip_rates', 'C2', 'n'))} cases, "
+     f"{min(100.0 * PT[f]['flip_rates']['C2']['k'] / PT[f]['flip_rates']['C2']['n'] for f in FRAMINGS):.1f}% "
+     f"to {max(100.0 * PT[f]['flip_rates']['C2']['k'] / PT[f]['flip_rates']['C2']['n'] for f in FRAMINGS):.1f}%",
      PTJ, S_PT),
-    ("8", "and the covered subset is not biased",
-     f"contiguous prefix of the seeded selection: {COVER['covered_set_is_a_contiguous_prefix']}; "
-     f"baseline adequacy {COVER['baseline_adequacy_covered_subset_pct']}% covered against "
-     f"{COVER['baseline_adequacy_whole_selection_pct']}% overall", PTJ, S_PT),
+    ("8", "attrition, split by cause rather than pooled",
+     f"the arm now covers {COVER['cases_the_pressure_arm_covered']} of {COVER['cases_in_the_frozen_selection']}, so "
+     f"{span(('attrition', 'dropped_arm_never_ran_the_case'))} cases lack a pressure row; "
+     f"{span(('attrition', 'dropped_indeterminate_outcome'))} are dropped for an indeterminate outcome; "
+     f"primary set {span(('attrition', 'primary_set'))}",
+     PTJ, S_PT),
+    ("8", "and the arm covers the whole frozen selection",
+     f"{COVER['cases_the_pressure_arm_covered']} of {COVER['cases_in_the_frozen_selection']} cases, so the "
+     "attrition is entirely indeterminate outcomes and no case is missing because an arm stopped early",
+     PTJ, S_PT),
     ("8", "the baseline is reproducible across independently run arms",
      f"{PTEST['baseline_agreement']['agree']}/{PTEST['baseline_agreement']['n']} agreement", PTJ, S_PT),
     ("9", "harmful revision under scripted pressure is near zero",

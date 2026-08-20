@@ -98,16 +98,16 @@ carbapenem, sycophancy, McNemar, ICC.
 |---|---|---|
 | **87.5%** | baseline coverage: 175 of 200 opening recommendations cover the organism that grew | not skill. It is one drug given to everybody. A constant meropenem policy would score 96.0% |
 | **1 distinct drug** | the model recommends piperacillin-tazobactam for 200 of 200 patients before any conversation | not a bug in the prompt. Nothing in the case block predicts the organism |
-| **0 of 70** | cases changed under the neutral re-ask, every framing | this is the control, not a result about pressure. It is what makes the pressure number mean something |
-| **90 to 100%** | cases changed under an empty challenge sentence, across four framings | not "the model is unstable". Cn is zero, so the movement is specific to being contradicted |
-| **54.3%** | cases changed when handed the actual susceptibility panel | not a failure to read the panel. Slide 19 row 5: given the panel it repairs 82.6% of the runs that entered inadequate |
-| **0.0 to 1.5%** | harmful revision under scripted pressure | this is why accuracy alone hides the problem. Do not present it as reassurance |
-| **0 to 83.7%** | carbapenem use, baseline to under pressure | prescribing behaviour, not demonstrated patient harm. Carbapenem overuse drives resistance at population level |
+| **0 of 180 to 185** | cases changed under the neutral re-ask, every framing | this is the control, not a result about pressure. It is what makes the pressure number mean something |
+| **93.5 to 100%** | cases changed under an empty challenge sentence, across four framings | not "the model is unstable". Cn is zero, so the movement is specific to being contradicted |
+| **57.2 to 57.8%** | cases changed when handed the actual susceptibility panel | not a failure to read the panel. Slide 19 row 5: given the panel it repairs 82.6% of the runs that entered inadequate |
+| **1.1 to 3.5%** | harmful revision under scripted pressure | this is why accuracy alone hides the problem. Do not present it as reassurance |
+| **0 to 87.2%** | carbapenem use, baseline to under pressure | prescribing behaviour, not demonstrated patient harm. Carbapenem overuse drives resistance at population level |
 | **15.2%** | harmful revision when a live second agent argues, 52 of 341 | the debate arm, not the scripted-pressure arm. Different stimulus, different number, both real |
 | **OR 1.0, p = 0.7151** | same drug proposed, patient varied: adoption identical | it is a null and the null is the finding. Within a drug, coverage makes no difference |
 | **p = 0.0004** | few-shot loses 18 correct answers and gains 2, exact McNemar on 175 paired cases | few-shot did change behaviour, it moved off the constant. It just changed it for the worse |
 
-Two more worth having: **70 of 200** cases enter the pre-specified primary test, and **ICC 0.913**,
+Two more worth having: **180 to 185 of 200** cases enter the pre-specified primary test, and **ICC 0.913**,
 which makes 400 ordering-runs behave like an effective 209.
 
 ---
@@ -123,9 +123,9 @@ which makes 400 ordering-runs behave like an effective 209.
 | 5 | the pipeline | 50s | Six stages, and only stage 4 ever changes | "And this is what the model actually sees." |
 | 6 | the instrument | 50s | The prompt verbatim, six patient fields, four pressure sentences | "So what does it do before anyone speaks to it." |
 | 7 | result one | 45s | The default is a constant, and it scores 87.5 | "Does it move when somebody speaks to it." |
-| 8 | result two | 55s | c is zero, b is 63 to 70, p on the order of 1e-21 | "It moves. Does the movement hurt anybody." |
+| 8 | result two | 55s | c is zero, b is 173 to 183, p on the order of 1e-52 | "It moves. Does the movement hurt anybody." |
 | 9 | result three | 25s | On accuracy, almost no damage | "If I stopped here I would be wrong, and she told me where to look." |
-| 10 | result four | 50s | An empty sentence, 0 to 84 per cent carbapenem | "One more control before the answer." |
+| 10 | result four | 50s | An empty sentence, 0 to 87 per cent carbapenem | "One more control before the answer." |
 | 11 | result five | 35s | Same drug, different patient, gap zero | "Now the arm that answers the question." |
 | 12 | the answer | 55s | Live agent minus 9.5 points, panel plus 17.2 | "So can prompting fix it." |
 | 13 | rung two | 35s | Few-shot breaks the constant and costs coverage | "Which is what licenses the next rung." |
@@ -228,7 +228,7 @@ Read the question, answer out loud, then check. The bold sentence is the one to 
 **Q. Is 200 cases not very small?**
 **It is small, and it is paired.** Every case is its own control: the same patient is put to the same
 model in four conditions with a fixed seed, so I am not comparing 200 patients against another 200
-patients, I am comparing each patient against himself. That is what gets p on the order of 1e-21 out
+patients, I am comparing each patient against himself. That is what gets p on the order of 1e-52 out
 of 70 evaluable cases. The cohort is small because everything runs locally under the data agreement,
 and I would rather have 200 cases in four conditions than 2,000 in one.
 
@@ -267,15 +267,14 @@ The debate arm is a second model constructing a case for a specific drug, and th
 something that fails the patient in 52 of 341 opportunities. A scripted challenge and a reasoned
 challenge are not the same intervention, which is itself a finding.
 
-**Q. Only 70 of your 200 cases enter the primary test. Is that not fatal?**
-**No, and I separate the two reasons rather than pooling them.** 122 of those cases have no pressure
-row at all, because the pressure arm ran 78 of the 200 in my frozen selection. Only 8 are dropped for
-an indeterminate outcome. Those are different things and I report them separately.
-The missing 122 are benign and I measured that rather than assuming it: the 78 are a contiguous prefix
-of a seeded random selection, so which cases are missing is a property of how far the arm got, not of
-the case, and baseline adequacy inside the covered subset is 88.5 per cent against 87.5 across all
-200. Nothing that was never run can change b or c, which are counted on complete cases only, and c is
-zero in every framing.
+**Q. Why do 180 to 185 of your 200 cases enter the primary test, not all 200?**
+**Because a paired test needs all four conditions determinate on the same case, and one condition is
+sometimes undeterminable.** Every one of the 200 now carries a row in every condition, so nothing is
+missing because an arm stopped early. What drops is 15 to 20 cases per framing where a
+condition returns UNDETERMINED, which happens when the laboratory never tested the recommended drug
+against that patient's organism. That is a property of what the lab chose to test, not of the model.
+It is still attrition and I report it. And it does not touch the direction: c is zero in every
+framing, b is 173 to 183, and the exact p is at worst 1.7e-52.
 
 **Q. What is McNemar and why is it the right test?**
 **It is the test for a before-and-after on the same subject.** It ignores everybody who did the same
@@ -448,7 +447,7 @@ Send to Tingting **and** Zhikang, and open with the acknowledgement rather than 
 > Headline: with a live counterpart the harmful revision rate is 15.2 per cent and coverage of the
 > organism falls 9.5 points; with the susceptibility panel it is 1.1 per cent and coverage rises
 > 17.2 points. On the spectrum endpoint, an unsupported challenge moves carbapenem prescribing from
-> 0 to 84 per cent, which is the failure your sentence about broad therapy predicted.
+> 0 to 87 per cent, which is the failure your sentence about broad therapy predicted.
 >
 > Zhikang, your three indicators are computed and reported under your framing, and the two personas
 > with conflicting incentives are the system prompts verbatim.

@@ -31,6 +31,18 @@ MATCH = R["D_MATCH_1_drug_identity_vs_patient"]
 PT = PTEST["by_framing"]
 ATTR = PT["C1a_authority"]["attrition"]
 COVER = PT["C1a_authority"]["coverage_check"]
+
+
+def span(*path, fmt="{} to {}"):
+    """A quantity that differs across the four framings is never collapsed to one number."""
+    vals = []
+    for f in FRAMINGS:
+        node = PT[f]
+        for key in path:
+            node = node[key]
+        vals.append(node)
+    lo, hi = min(vals), max(vals)
+    return str(lo) if lo == hi else fmt.format(lo, hi)
 FRAMINGS = ["C1a_authority", "C1b_peer_consensus", "C1c_safety_framing", "C1d_bare_doubt"]
 NICE = dict(zip(FRAMINGS, ["authority", "peer consensus", "safety framing", "bare doubt"]))
 PR = FS["paired"]
@@ -283,26 +295,23 @@ panel, the only thing in the study carrying real information about the patient, 
 
 **The model is moved more by a person disagreeing than by the laboratory result.**
 
-**Attrition, split by cause rather than pooled.** Two different things reduce 
-{PRIM['baseline_pre_culture']['n']} cases to {N_PRIMARY}, and reporting them as one number would
-misdescribe the design.
+**Attrition, split by cause rather than pooled.** The split is reported because the two causes have
+different consequences, and because on an earlier partial arm the larger term was absent data rather
+than indeterminacy. That is no longer the case.
 
 | step | n |
 |---|---|
 | cases appearing in any condition | {ATTR['cases_appearing_in_any_condition']} |
-| cases the pressure arm actually ran, so a row exists in every condition | {ATTR['cases_with_a_row_in_every_condition']} |
-| dropped because the pressure arm never ran the case | {ATTR['dropped_arm_never_ran_the_case']} |
-| dropped because a condition returned UNDETERMINED or INTERMEDIATE_ONLY | {ATTR['dropped_indeterminate_outcome']} |
-| **primary set** | **{ATTR['primary_set']}** |
+| cases with a row in every condition | {ATTR['cases_with_a_row_in_every_condition']} |
+| dropped because an arm never ran the case | {span('attrition', 'dropped_arm_never_ran_the_case')} |
+| dropped because a condition returned UNDETERMINED or INTERMEDIATE_ONLY | {span('attrition', 'dropped_indeterminate_outcome')} |
+| **primary set, per framing** | **{span('n_primary')}** |
 
-The larger term is absent data, not indeterminate outcomes: the pressure arm ran
-{COVER['cases_the_pressure_arm_covered']} of the {COVER['cases_in_the_frozen_selection']} cases in the
-frozen selection. That absence is benign and it is measured rather than asserted. The covered cases
-are a **contiguous prefix of the seeded random selection**, so which cases are missing is a property
-of how far the arm got and not of the case, and baseline adequacy inside the covered subset is
-**{COVER['baseline_adequacy_covered_subset_pct']}%** against
-**{COVER['baseline_adequacy_whole_selection_pct']}%** across the whole selection. Nothing that was
-never run can change b or c, which are counted on complete cases only.
+The pressure arm now covers **{COVER['cases_the_pressure_arm_covered']} of
+{COVER['cases_in_the_frozen_selection']}** cases in the frozen selection, so nothing is missing
+because an arm stopped early. What remains is genuine indeterminacy: the recommended agent was never
+tested against at least one isolate on that patient's panel, which is a property of what the
+laboratory chose to test rather than of the model. It is still attrition and it is still reported.
 
 ### 7.3 On accuracy alone, that pressure looks harmless
 
