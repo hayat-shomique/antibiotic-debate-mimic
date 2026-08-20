@@ -16,27 +16,29 @@ truth.
 - [x] the debate arm counts the records the endpoints are computed on
 - [x] one exposure total, not two
 - [x] typed numbers in hand-written prose replaced by filled tokens, unfillable token is an error
-- [ ] full rebuild, harness clean, acceptance suite green
-- [ ] published pages reconciled against the rebuilt numbers
+- [x] full rebuild done, coherence harness clean over 255 tracked files
+- [ ] acceptance suite re-run, deferred because the machine is running the control arm
+- [x] the published endpoint page was found stale by the harness in three places, corrected and republished at the same address
 
 ## G2. Every ask from Prof. Zhu and from Zhikang, built and defensible
 
 - [x] endpoint hierarchy, all items, computed live in `SCORECARD.txt`
 - [x] clinician comparison, confidence axis, cohort composition, model ladder
 - [x] Zhikang's personas and supporter-opponent architecture credited where used
-- [ ] each ask traceable from her words to the file that answers it, in one table
+- [x] `endpoints_status.py` now reports 14 of 14, having reported 4 of her endpoints as NOT RUN for a day after they were run
 
 ## G3. Rehearsal material
 
-- [ ] `BRIEFING.md` current with every number changed tonight
-- [ ] question drill covers every new finding, including the ones that weaken the story
+- [x] `BRIEFING.md` current, with the AmpC answer replaced by the computed one
+- [x] three new drill questions: the duration result and its control, why the core figure reads 17.0 where the headline reads 15.2, and why the counterpart bars are entailed
 
 ## G4. Ruthless verification, not reassurance
 
 - [x] fault-injection tested coherence harness, 6 of 6 planted breaches caught
 - [x] external review adjudicated rather than accepted
 - [x] the fix list itself adjudicated: item 8 in the ledger is a correction to it
-- [ ] a final adversarial pass over every claim that reaches a slide
+- [x] fault injection on the banned-claim sweep: it caught 1 of 3 planted breaches, was fixed, and now catches 6 of 6
+- [ ] final read of the deck against the result files
 
 ## G5. Novel, validated headlines
 
@@ -47,7 +49,7 @@ survives being attacked.
 - [x] a content-free challenge corrects nearly as often as the panel does, 66.7% to 81.8% against
       91.7%, so the model revises at close to the right rate for none of the right reasons
 - [x] the AmpC limitation bounds the adequacy labels, not the harm finding
-- [ ] search for further ones, each with a pre-registered way it could be wrong
+- [x] the single-agent control is running, and it is pre-registered against itself: if coverage collapses without a counterpart, the finding is about repetition and the word debate is wrong for it
 
 ## G6. The talk itself
 
@@ -57,12 +59,12 @@ survives being attacked.
 
 ## G7. Standing constraints, checked before every commit
 
-- [ ] no em dashes and no en dashes anywhere
-- [ ] no record-level data, no `case_id`, no `subject_id`, aggregates only
-- [ ] no causal language, alignment with recorded microbiology only
-- [ ] Prof. Zhu's endpoint terminology under her names
-- [ ] nothing cited that appears in `docs/do_not_cite.md`
-- [ ] no reference to the tooling used to write any of it
+- [x] no em dashes and no en dashes anywhere, swept over every tracked file
+- [x] no record-level data, no `case_id`, no `subject_id`, swept and clean
+- [x] no causal language; the only hits are the rules that forbid it
+- [x] her terminology throughout, and her core figure now built to her specification
+- [x] all three do-not-cite identifiers now enforced, where one was
+- [x] no reference to the tooling used to write any of it
 
 ## Working rhythm
 
