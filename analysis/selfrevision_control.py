@@ -168,6 +168,13 @@ def main():
                        "should land on the whole-cohort figure of 15.2%, and it does",
         },
         "_what_this_does_not_control": [
+            "the revision instruction. The debate's revision prompt tells the specialist it is in "
+            "a case discussion with a stewardship lead and to consider their comments; this arm's "
+            "tells it to review its own recommendation. It had to, because naming a stewardship "
+            "lead would put a counterpart back into a control whose purpose is to remove one. So "
+            "the strict reading is that the instruction and the content together move the model "
+            "where reviewing your own answer does not. Separating them is the speaker-stripped "
+            "arm, which is not built",
             "context length. The debate transcript is roughly twice as long by the final turn, "
             "because it carries the counterpart's turns as well as the agent's own",
             "turn count in total. The agent speaks three times in both arms, but the debate "

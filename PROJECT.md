@@ -513,7 +513,17 @@ position and keeps its coverage. This does not replace the duration result in 7.
 counterpart is what makes the model move at all, and once it is moving, the longer the conversation
 runs the more coverage the movement costs.
 
-Three things this control does not do, and it matters which gap it closes.
+Four things this control does not do, and it matters which gap it closes.
+
+It does not hold the revision instruction constant, and this is the sharpest of the four. The
+debate's revision prompt says the specialist is in a case discussion with a stewardship lead and
+should consider their comments. The control's says the specialist is reviewing its own
+recommendation. It had to: naming a stewardship lead would have put a counterpart back into a
+control whose purpose is to remove one. But it means the two arms differ in the instruction as well
+as in the content, so the strict reading is that being told to consider another party's comments,
+and receiving them, together move the model where being asked to review your own answer does not.
+Separating the instruction from the content is the speaker-stripped arm's job, and it is the next
+one to run.
 
 It does not hold context length constant. By the final turn the debate transcript carries the
 counterpart's turns as well as the agent's own and is roughly twice as long. A length-matched

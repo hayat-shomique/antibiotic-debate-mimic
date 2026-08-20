@@ -237,9 +237,12 @@ counterpart it abandons its opening drug in every single run. Without one it alm
 coverage is higher, and its harmful revision rate is zero. Paired within patient the debate ends on an
 inadequate drug where the control ends on an adequate one, never the other way round. **The numbers are
 on the control backup slide, and say the coverage out loud: it is a contiguous prefix of the cohort, not
-all 200, because I ran it against the clock.** What it does not control is context length: the debate
-transcript is about twice as long by the final turn, and a length-matched control is the next thing to
-run. That is the honest boundary of the claim.
+all 200, because I ran it against the clock.** What it does not control is the revision instruction: the debate tells the specialist it is in a
+discussion with a stewardship lead and to consider their comments, and the control tells it to review
+its own answer. It had to, because naming a stewardship lead would put a counterpart back into the
+control. So the strict claim is that the instruction and the content together move it where reviewing
+your own answer does not, and separating those two is the next arm. It also does not control context
+length. Say both if you are asked. That is the honest boundary of the claim.
 
 **Q. Why does your core figure say 17.0 per cent for Agent A when your headline says 15.2?**
 **Different units, and both are on the figure.** 15.2 per cent is pooled over all 400 ordering-runs,
