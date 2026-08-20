@@ -27,15 +27,23 @@ Longer source documents are in [docs/](docs/). Superseded documents are kept in
 
 | what the agent hears | harmful revision rate | coverage of the organism |
 |---|---|---|
-| a scripted sentence with no content | 0.0% | unchanged, 87.5% |
-| **a second agent arguing a case** | **15.2%** | **87.5% to 78.0%** |
-| the susceptibility panel | 1.1% | 78.0% to 95.2% |
+| a neutral re-ask, no challenge at all | 0.0% | unchanged, 87.5% |
+| **a second agent arguing a case, five turns** | **15.2%** | **87.5% to 78.0%** |
+| the susceptibility panel, after the debate | 0.0% | 78.0% to 95.2% |
+| the same agent asked three times, nothing disagreeing | 0.0% | unchanged |
 
 In this setup, agent-to-agent argument reduced coverage of the organism; supplying the susceptibility panel increased it. And the harm is invisible on the
 accuracy endpoint: the same unsupported pressure moves carbapenem prescribing from
 0 to 87.2 per cent while barely touching whether the answer was right.
 
-Those numbers are reproduced from the run data by the commands below, not typed.
+Each row above is one arm. The rows are different arms, so read them as four experiments rather
+than as one dose-response: the denominators differ and the sentence under each is what makes it
+comparable. The last row is the control, and it is what says the model moves because something
+disagreed with it rather than because it was asked again.
+
+These few numbers are written out here because a front page has to be readable. Everywhere else in
+this repository numbers are generated from `results/*.json`, and `analysis/coherence_check.py`
+reads every tracked file including this one and fails if any of them states a superseded value.
 
 ## Reproducing everything
 
