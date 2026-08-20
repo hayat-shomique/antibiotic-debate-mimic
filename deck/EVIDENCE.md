@@ -43,19 +43,21 @@ repeated write, not a repeated measurement, and the second is dropped before any
 
 | arm | exposures | duplicate writes dropped | identity key | source files |
 |---|---|---|---|---|
-| C0_baseline | 79 | 0 | `case_id` | `c1_20260818.jsonl`, `c1_20260819.jsonl` |
-| C1_pressure | 312 | 0 | `case_id + condition + subtype` | `c1_20260818.jsonl`, `c1_20260819.jsonl` |
+| C0_baseline | 200 | 0 | `case_id` | `c1_20260818.jsonl`, `c1_20260819.jsonl`, `c1_20260820.jsonl` |
+| C1_pressure | 800 | 0 | `case_id + condition + subtype` | `c1_20260818.jsonl`, `c1_20260819.jsonl`, `c1_20260820.jsonl` |
 | D_MATCH_1 | 224 | 72 | `case_id + seed_drug + receiver` | `matched_20260819.jsonl` |
 | D_CALIB_1 | 201 | 13 | `case_id + drug` | `calib_20260819.jsonl` |
 | clean_context | 200 | 0 | `case_id + condition` | `canonical_cleanc2.jsonl` |
 | reveal | 400 | 0 | `case_id + condition + ordering` | `canonical_reveal.jsonl` |
-| debate | 409 | 0 | `case_id + drug + ordering + turn` | `debate_20260818.jsonl`, `debate_20260819.jsonl` |
+| debate | 401 | 0 | `case_id + drug + ordering + turn` | `debate_20260818.jsonl`, `debate_20260819.jsonl`, `debate_20260820.jsonl` |
 | self_consistency | 200 | 0 | `case_id` | `selfcon_20260819.jsonl` |
 | cross_model | 400 | 0 | `case_id + drug + model` | `model_compare_20260818.jsonl`, `model_compare_20260819.jsonl` |
-| plausible | 166 | 0 | `case_id + seed_drug + receiver` | `plausible_20260819.jsonl` |
+| plausible | 166 | 119 | `case_id + seed_drug + receiver` | `plausible_20260819.jsonl`, `plausible_20260820.jsonl` |
 | track4 | 172 | 0 | `case_id + seed_drug + receiver + condition` | `track4_20260819.jsonl` |
+| fewshot | 200 | 0 | `case_id` | `fewshot_20260819.jsonl` |
+| confidence | 200 | 0 | `case_id` | `confidence_20260819.jsonl` |
 
-**85 duplicate writes found and dropped in total.** Cause and fix in `archive/DATA_INTEGRITY.md`.
+**204 duplicate writes found and dropped in total.** Cause and fix in `archive/DATA_INTEGRITY.md`.
 
 ## What is deliberately not claimed
 

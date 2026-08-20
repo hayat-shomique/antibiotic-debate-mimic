@@ -35,6 +35,11 @@ FLIP = [100.0 * PT[f]["flip_rates"]["C1"]["k"] / PT[f]["flip_rates"]["C1"]["n"] 
 HRR_P = [T["sycophancy_under_pressure"][f]["HRR"]["pct"] for f in F]
 PR = FS["paired"]
 N = PRIM["baseline_pre_culture"]["n"]
+NP = sorted({PT[f]["n_primary"] for f in F})
+NP_SPAN = str(NP[0]) if len(NP) == 1 else f"{NP[0]} to {NP[-1]}"
+IND = sorted({PT[f]["attrition"]["dropped_indeterminate_outcome"] for f in F})
+IND_SPAN = str(IND[0]) if len(IND) == 1 else f"{IND[0]} to {IND[-1]}"
+P_WORST = max(PT[f]["discordant"]["p_exact"] for f in F)
 
 SLIDES = [
     (1, "Title", 15, "Two agents, one antibiotic, and a laboratory that decides who was right.",
@@ -61,7 +66,7 @@ SLIDES = [
      f"{P['C0 baseline']['distinct']} drug for {P['C0 baseline']['n']} patients, and it scores {PRIM['baseline_pre_culture']['pct']}%.",
      "Does it move when somebody speaks to it."),
     (9, "Result two, the primary test", 50,
-     f"c = 0 in every framing. b = {min(B)} to {max(B)}. The panel moves it less than a person does.",
+     f"c = 0 in every framing. b = {min(B)} to {max(B)} of {NP_SPAN}. The panel moves it less than a person does.",
      "It moves. Does the movement hurt anybody."),
     (10, "Result three, the 2x2", 25,
      f"Her four cells. Harmful revision {min(HRR_P):.1f} to {max(HRR_P):.1f}% under scripted pressure.",
@@ -92,11 +97,12 @@ TOTAL = sum(s[2] for s in SLIDES)
 QA = [
     ("Is 200 not small?",
      "It is small and it is paired. Each patient is his own control across four conditions at "
-     "temperature 0. That is where p of 1e-21 comes from."),
-    ("Why only 70 cases in the primary test?",
-     f"Two reasons, kept separate. {ATTR['dropped_arm_never_ran_the_case']} have no pressure row because the arm ran "
-     f"{COVER['cases_the_pressure_arm_covered']} of {COVER['cases_in_the_frozen_selection']}; {ATTR['dropped_indeterminate_outcome']} are indeterminate. The covered set is a "
-     f"seeded prefix, adequacy {COVER['baseline_adequacy_covered_subset_pct']}% against {COVER['baseline_adequacy_whole_selection_pct']}%."),
+     f"temperature 0. That is where p of {P_WORST:.0e} comes from."),
+    (f"Why {NP_SPAN} cases in the primary test, not all {N}?",
+     f"Every case now carries a row in every condition, so nothing is missing because an arm stopped "
+     f"early. {IND_SPAN} per framing drop because a condition returns UNDETERMINED, which happens when the "
+     "laboratory never tested that drug against that organism. That is what the lab chose to test, not "
+     "a property of the model."),
     ("Carbapenem for all maximises coverage. Is it not right to escalate?",
      "Yes if coverage is your only endpoint, which is exactly why it cannot be. It escalates for a "
      "sentence with no information, and coverage was already high."),

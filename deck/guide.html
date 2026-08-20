@@ -1,0 +1,247 @@
+<title>Ten Minute Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#161616; --panel:#262626; --panel2:#393939; --line:#393939;
+  --ink:#F4F4F4; --mute:#A8A8A8; --blue:#78A9FF; --pink:#FF7EB6; --teal:#3DDBD9;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,system-ui,sans-serif;
+  font-size:17px;line-height:1.45;-webkit-text-size-adjust:100%}
+.wrap{max-width:820px;margin:0 auto;padding:0 16px 120px}
+
+header{padding:22px 0 14px}
+.kick{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--blue);font-weight:600;margin:0 0 8px}
+h1{margin:0;font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.sub{color:var(--mute);margin:8px 0 0;font-size:15px}
+
+/* the clock, always in reach */
+.clock{position:sticky;top:0;z-index:10;background:var(--bg);
+  border-bottom:1px solid var(--line);padding:12px 0;display:flex;gap:12px;align-items:center}
+.time{font-family:"IBM Plex Mono",monospace;font-size:34px;font-weight:600;
+  font-variant-numeric:tabular-nums;min-width:118px}
+.time.over{color:var(--pink)}
+.bar{flex:1;height:10px;background:var(--panel2);position:relative;overflow:hidden}
+.fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--blue);transition:width .5s linear}
+.fill.over{background:var(--pink)}
+button.ctl{font-family:"IBM Plex Sans";font-size:16px;font-weight:600;color:var(--bg);
+  background:var(--blue);border:0;padding:12px 18px;min-width:92px;cursor:pointer}
+button.ctl.reset{background:var(--panel2);color:var(--ink)}
+
+.slide{display:grid;grid-template-columns:38px 1fr 52px;gap:14px;width:100%;text-align:left;
+  background:var(--panel);border:0;border-left:3px solid transparent;
+  border-bottom:1px solid var(--bg);padding:16px 14px;color:var(--ink);cursor:pointer;font:inherit}
+.slide.on{border-left-color:var(--blue);background:var(--panel2)}
+.slide.done{opacity:.45}
+.num{font-family:"IBM Plex Mono",monospace;font-size:15px;color:var(--mute);padding-top:3px}
+.ttl{display:block;font-weight:600;font-size:17px;margin-bottom:3px}
+.say{display:block;font-size:16px;color:var(--ink)}
+.move{display:block;font-size:14.5px;color:var(--blue);margin-top:6px;font-style:italic}
+.secs{font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--mute);text-align:right;padding-top:3px}
+
+h2{font-size:13px;font-family:"IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+details{background:var(--panel);border-bottom:1px solid var(--bg)}
+summary{padding:16px 14px;font-weight:600;font-size:16.5px;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";color:var(--blue);font-family:"IBM Plex Mono",monospace;
+  font-weight:600;margin-right:10px}
+details[open] summary::before{content:"\2212"}
+details p{margin:0;padding:0 14px 16px 36px;color:var(--mute);font-size:16px}
+
+.never{background:var(--panel);border-left:3px solid var(--pink);padding:14px;margin-top:10px}
+.never li{margin:0 0 8px;font-size:15.5px}
+.never ul{margin:0;padding-left:18px}
+footer{color:var(--mute);font-family:"IBM Plex Mono",monospace;font-size:12px;
+  margin-top:30px;padding-top:14px;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="kick">UNIQ+ · Kloppenburg room · 12:15</p>
+  <h1>Ten minute guide</h1>
+  <p class="sub">Tap a row to mark where you are. The clock turns pink when you pass 9:55.</p>
+</header>
+
+<div class="clock">
+  <span class="time" id="t">0:00</span>
+  <div class="bar"><div class="fill" id="fill"></div></div>
+  <button class="ctl" id="go">Start</button>
+  <button class="ctl reset" id="rs">Reset</button>
+</div>
+
+  <button class="slide" data-start="0" data-end="15">
+    <span class="num">1</span>
+    <span class="body"><span class="ttl">Title</span><span class="say">Two agents, one antibiotic, and a laboratory that decides who was right.</span>
+      <span class="move">The question is not mine, it is my supervisor's.</span></span>
+    <span class="secs">15s</span>
+  </button>
+  <button class="slide" data-start="15" data-end="50">
+    <span class="num">2</span>
+    <span class="body"><span class="ttl">The clinical decision</span><span class="say">Bacteria in the blood kills in days. The drug is chosen now; the lab answers a median of 134 hours later.</span>
+      <span class="move">So there is a real answer, and it arrives later.</span></span>
+    <span class="secs">35s</span>
+  </button>
+  <button class="slide" data-start="50" data-end="90">
+    <span class="num">3</span>
+    <span class="body"><span class="ttl">The referee</span><span class="say">The doctor is not the reference, the bacteria are. Neither agent can see the panel, argue with it, or produce it.</span>
+      <span class="move">With a referee you can ask a question you could not ask before.</span></span>
+    <span class="secs">40s</span>
+  </button>
+  <button class="slide" data-start="90" data-end="105">
+    <span class="num">4</span>
+    <span class="body"><span class="ttl">The question</span><span class="say">Does multi-agent communication improve clinical decision quality, or does it merely make the models agree?</span>
+      <span class="move">Here is how one patient becomes one measurement.</span></span>
+    <span class="secs">15s</span>
+  </button>
+  <button class="slide" data-start="105" data-end="150">
+    <span class="num">5</span>
+    <span class="body"><span class="ttl">The pipeline</span><span class="say">9,236 cultures gated to 7,796, hash-frozen. A seeded 200 evaluated. Stage 4 is the only thing that changes.</span>
+      <span class="move">And this is what the model actually sees.</span></span>
+    <span class="secs">45s</span>
+  </button>
+  <button class="slide" data-start="150" data-end="190">
+    <span class="num">6</span>
+    <span class="body"><span class="ttl">The instrument</span><span class="say">The prompt verbatim, six patient fields, and the four pressure sentences. 0 of 800 turns contain any microbiology.</span>
+      <span class="move">So what does it do before anyone speaks to it.</span></span>
+    <span class="secs">40s</span>
+  </button>
+  <button class="slide" data-start="190" data-end="230">
+    <span class="num">7</span>
+    <span class="body"><span class="ttl">The conversation</span><span class="say">Five turns, both directions, every position recorded. Nothing here decides what is true.</span>
+      <span class="move">Start with what happens before anyone speaks.</span></span>
+    <span class="secs">40s</span>
+  </button>
+  <button class="slide" data-start="230" data-end="275">
+    <span class="num">8</span>
+    <span class="body"><span class="ttl">Result one, the constant</span><span class="say">1 drug for 200 patients, and it scores 87.5%.</span>
+      <span class="move">Does it move when somebody speaks to it.</span></span>
+    <span class="secs">45s</span>
+  </button>
+  <button class="slide" data-start="275" data-end="325">
+    <span class="num">9</span>
+    <span class="body"><span class="ttl">Result two, the primary test</span><span class="say">c = 0 in every framing. b = 173 to 183 of 180 to 185. The panel moves it less than a person does.</span>
+      <span class="move">It moves. Does the movement hurt anybody.</span></span>
+    <span class="secs">50s</span>
+  </button>
+  <button class="slide" data-start="325" data-end="350">
+    <span class="num">10</span>
+    <span class="body"><span class="ttl">Result three, the 2x2</span><span class="say">Her four cells. Harmful revision 1.1 to 3.5% under scripted pressure.</span>
+      <span class="move">If I stopped here I would be wrong, and she told me where to look.</span></span>
+    <span class="secs">25s</span>
+  </button>
+  <button class="slide" data-start="350" data-end="395">
+    <span class="num">11</span>
+    <span class="body"><span class="ttl">Result four, stewardship</span><span class="say">An empty sentence moves carbapenem use 0 to 87.2%.</span>
+      <span class="move">One more control before the answer.</span></span>
+    <span class="secs">45s</span>
+  </button>
+  <button class="slide" data-start="395" data-end="430">
+    <span class="num">12</span>
+    <span class="body"><span class="ttl">Result five, same drug</span><span class="say">Gap zero in every stratum. Mantel-Haenszel OR 1.0, p = 0.7151.</span>
+      <span class="move">Now the arm that answers the question.</span></span>
+    <span class="secs">35s</span>
+  </button>
+  <button class="slide" data-start="430" data-end="480">
+    <span class="num">13</span>
+    <span class="body"><span class="ttl">The answer</span><span class="say">Live agent: HRR 15.2%, coverage -9.5. Panel: 1.1%, +17.2.</span>
+      <span class="move">So can prompting fix it.</span></span>
+    <span class="secs">50s</span>
+  </button>
+  <button class="slide" data-start="480" data-end="520">
+    <span class="num">14</span>
+    <span class="body"><span class="ttl">The ladder</span><span class="say">Few-shot breaks the constant, 6 drugs, and costs coverage. p = 0.0004.</span>
+      <span class="move">Which is what licenses the next rung.</span></span>
+    <span class="secs">40s</span>
+  </button>
+  <button class="slide" data-start="520" data-end="550">
+    <span class="num">15</span>
+    <span class="body"><span class="ttl">The contribution</span><span class="say">Invisible on accuracy, severe on stewardship. The measurement is the finding.</span>
+      <span class="move">What it does not show.</span></span>
+    <span class="secs">30s</span>
+  </button>
+  <button class="slide" data-start="550" data-end="575">
+    <span class="num">16</span>
+    <span class="body"><span class="ttl">Limitations</span><span class="say">The constant baseline, the arm coverage, the scripted counterpart, one checkpoint, no clinician.</span>
+      <span class="move">Where this goes.</span></span>
+    <span class="secs">25s</span>
+  </button>
+  <button class="slide" data-start="575" data-end="595">
+    <span class="num">17</span>
+    <span class="body"><span class="ttl">Close</span><span class="say">The laboratory is the referee, and the measurement is the contribution.</span>
+      </span>
+    <span class="secs">20s</span>
+  </button>
+
+<h2>If asked</h2>
+  <details><summary>Is 200 not small?</summary><p>It is small and it is paired. Each patient is his own control across four conditions at temperature 0. That is where p of 2e-52 comes from.</p></details>
+  <details><summary>Why 180 to 185 cases in the primary test, not all 200?</summary><p>Every case now carries a row in every condition, so nothing is missing because an arm stopped early. 15 to 20 per framing drop because a condition returns UNDETERMINED, which happens when the laboratory never tested that drug against that organism. That is what the lab chose to test, not a property of the model.</p></details>
+  <details><summary>Carbapenem for all maximises coverage. Is it not right to escalate?</summary><p>Yes if coverage is your only endpoint, which is exactly why it cannot be. It escalates for a sentence with no information, and coverage was already high.</p></details>
+  <details><summary>Isn't sycophancy already known?</summary><p>Yes, and I do not claim it. What is missing in the literature is the arbiter: a per-patient laboratory panel neither agent can see.</p></details>
+  <details><summary>Model versus clinician?</summary><p>On cases where both can be scored, 91.1% against 90.6%. Indistinguishable. The full-cohort margin is a denominator artefact.</p></details>
+  <details><summary>Did you measure confidence, as she asked?</summary><p>Yes. The binary is degenerate and I say so. On the continuous measure, holding a correct answer costs confidence and abandoning one gains it, +5.4 points, permutation p = 2e-05, on 15 exposures.</p></details>
+  <details><summary>Have you shown patient harm?</summary><p>No. Observational data. Alignment with recorded microbiology and counterfactual appropriateness, never a recommendation causing an outcome.</p></details>
+  <details><summary>What would change your mind?</summary><p>A live opposing agent that varies its argument, or a heterogeneous pair. If beneficial corrections outran harmful ones the sign would flip and I would say so.</p></details>
+
+<h2>Never say</h2>
+<div class="never"><ul>
+<li>That sycophancy or peer conformity is a new finding. Both are published.</li>
+<li>That the model underperforms a constant policy. Carbapenem-for-all maximises coverage here.</li>
+<li>That the speaking-order effect is a discovery. It is entailed. Kappa 0.178.</li>
+<li>That the model is unstable. The neutral control moves it in zero cases.</li>
+<li>Anything causal. Alignment with recorded microbiology, or counterfactual appropriateness.</li>
+<li>A number that is not on this page. Say "there is a slide on that" and go to the backup.</li>
+</ul></div>
+
+<h2>Open on</h2>
+<div class="never" style="border-left-color:var(--teal)">
+<p style="margin:0;font-size:16px">Thank her for the endpoint hierarchy, and say which two of her
+endpoints the deck reports: susceptibility concordance, and spectrum appropriateness.</p>
+</div>
+
+<footer>Generated from results/*.json by deck/build_guide.py · targets total 9:55 of 10:00</footer>
+</div>
+
+<script>
+(function(){
+  var TOTAL=595, t0=null, tick=null, el=document.getElementById('t'),
+      fill=document.getElementById('fill'), go=document.getElementById('go'),
+      rows=[].slice.call(document.querySelectorAll('.slide'));
+  function fmt(s){var m=Math.floor(s/60);var r=Math.floor(s%60);return m+':'+(r<10?'0':'')+r;}
+  function paint(){
+    var s=(Date.now()-t0)/1000;
+    el.textContent=fmt(s);
+    var over=s>TOTAL;
+    el.classList.toggle('over',over);
+    fill.classList.toggle('over',over);
+    fill.style.width=Math.min(100,s/TOTAL*100)+'%';
+    rows.forEach(function(r){
+      var a=+r.dataset.start,b=+r.dataset.end;
+      r.classList.toggle('on',s>=a&&s<b);
+      r.classList.toggle('done',s>=b);
+    });
+  }
+  go.addEventListener('click',function(){
+    if(tick){clearInterval(tick);tick=null;go.textContent='Resume';return;}
+    if(!t0)t0=Date.now();
+    else t0=Date.now()-( (el.textContent.split(':')[0]*60 + +el.textContent.split(':')[1])*1000 );
+    tick=setInterval(paint,500);paint();go.textContent='Pause';
+  });
+  document.getElementById('rs').addEventListener('click',function(){
+    if(tick)clearInterval(tick);tick=null;t0=null;el.textContent='0:00';
+    el.classList.remove('over');fill.classList.remove('over');fill.style.width='0';
+    rows.forEach(function(r){r.classList.remove('on','done');});go.textContent='Start';
+  });
+  rows.forEach(function(r){
+    r.addEventListener('click',function(){
+      rows.forEach(function(x){x.classList.remove('on');});
+      r.classList.add('on');
+    });
+  });
+})();
+</script>

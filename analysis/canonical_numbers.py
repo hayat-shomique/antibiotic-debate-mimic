@@ -46,10 +46,10 @@ OUT_DIR = os.environ.get("BRAIN_OUT") or HERE
 
 # arm -> (glob patterns, identity key columns, human note)
 ARMS = {
-    "C0_baseline":   (["c1_2026081*.jsonl", "c1_2026091*.jsonl"], ("case_id",),
-                      "pre-culture baseline INSIDE THE PRESSURE ARM, 79 cases. Not the same population as the 200-case baseline in the neutral-control arm; see tingting_endpoints.json",
+    "C0_baseline":   (["c1_*.jsonl"], ("case_id",),
+                      "pre-culture baseline INSIDE THE PRESSURE ARM. Not the same population as the baseline in the neutral-control arm; see tingting_endpoints.json",
                       lambda r: r.get("condition") == "C0_pre_culture_baseline"),
-    "C1_pressure":   (["c1_2026081*.jsonl"], ("case_id", "condition", "subtype"),
+    "C1_pressure":   (["c1_*.jsonl"], ("case_id", "condition", "subtype"),
                       "four pressure framings per case; subtype is a real cell, not a duplicate"),
     "D_MATCH_1":     (["matched_*.jsonl"], ("case_id", "seed_drug", "receiver"),
                       "drug name held fixed, patient varied"),
@@ -59,9 +59,10 @@ ARMS = {
                       "canonical clean-context C2; recovered intermediates are superseded"),
     "reveal":        (["canonical_reveal.jsonl"], ("case_id", "condition", "ordering"),
                       "two speaking orders per case"),
-    "debate":        (["debate_2026081*.jsonl", "debate_2026091*.jsonl"],
+    "debate":        (["debate_*.jsonl"],
                       ("case_id", "drug", "ordering", "turn"),
-                      "two speaking orders and multiple turns per case"),
+                      "two speaking orders and multiple turns per case; gated to the frozen selection because the acceptance suite writes test cases into the same file",
+                      lambda r: r.get("case_id") in CANONICAL),
     "self_consistency": (["selfcon_*.jsonl"], ("case_id",), "five samples collapsed upstream"),
     "cross_model":   (["model_compare_*.jsonl"], ("case_id", "drug", "model"),
                       "same cases across six models"),
@@ -69,7 +70,54 @@ ARMS = {
                       "plausible-but-wrong seed"),
     "track4":        (["track4_*.jsonl"], ("case_id", "seed_drug", "receiver", "condition"),
                       "S+ / S- support arm; seed and receiver are real cells"),
+    "fewshot":       (["fewshot_*.jsonl"], ("case_id",),
+                      "rung two of the escalation ladder, four worked exemplars per case"),
+    "confidence":    (["confidence_*.jsonl"], ("case_id",),
+                      "confidence elicited before and after; the binary is degenerate, see confidence_axis.json"),
 }
+
+
+def canonical_cases():
+    """The frozen 200-case selection, read from the canonical reveal arm.
+
+    The acceptance suite writes into the same run files as the real arms, on test cases
+    that are deliberately outside the frozen selection. Those rows must never enter an
+    exposure count, so arms that share a file with the suite are gated on this set.
+    """
+    cases = set()
+    for pat in ("canonical_reveal.jsonl", "canonical_cleanc2.jsonl"):
+        for f in glob.glob(os.path.join(RUNS, pat)):
+            for line in open(f):
+                line = line.strip()
+                if line:
+                    cid = json.loads(line).get("case_id")
+                    if cid:
+                        cases.add(cid)
+    if not cases:
+        raise SystemExit("cannot establish the canonical case set from the reveal arm")
+    return cases
+
+
+CANONICAL = None
+
+
+def assert_no_orphan_files():
+    """A file that belongs to an arm but matches no arm pattern is invisible to every
+    number below. That happened once: a date-prefixed glob could not match a file written
+    the following day, and 609 rows disappeared from the integrity block while the
+    endpoint scripts, which glob differently, still saw them. Fail loudly instead."""
+    claimed = set()
+    for spec in ARMS.values():
+        for pat in spec[0]:
+            claimed.update(glob.glob(os.path.join(RUNS, pat)))
+    prefixes = {"c1_", "matched_", "calib_", "debate_", "selfcon_", "model_compare_",
+                "plausible_", "track4_", "canonical_", "fewshot_", "confidence_"}
+    orphans = [p for p in glob.glob(os.path.join(RUNS, "*.jsonl"))
+               if p not in claimed
+               and any(os.path.basename(p).startswith(x) for x in prefixes)]
+    if orphans:
+        raise SystemExit("run files match an arm prefix but no arm pattern, so they would be "
+                         "silently excluded:\n  " + "\n  ".join(sorted(orphans)))
 
 
 def truthy(v):
@@ -255,6 +303,9 @@ def merge_primary(res):
 
 
 def main():
+    global CANONICAL
+    CANONICAL = canonical_cases()
+    assert_no_orphan_files()
     res = {"generated_by": "canonical_numbers.py",
            "model": "qwen3:4b-instruct-2507-q4_K_M", "temperature": 0, "seed": 20260818}
     integrity(res)

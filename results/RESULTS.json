@@ -7,27 +7,29 @@
     "C0_baseline": {
       "files": [
         "c1_20260818.jsonl",
-        "c1_20260819.jsonl"
+        "c1_20260819.jsonl",
+        "c1_20260820.jsonl"
       ],
       "key": [
         "case_id"
       ],
-      "n": 79,
+      "n": 200,
       "duplicate_writes_dropped": 0,
       "gate_quarantined": 0,
-      "note": "pre-culture baseline INSIDE THE PRESSURE ARM, 79 cases. Not the same population as the 200-case baseline in the neutral-control arm; see tingting_endpoints.json"
+      "note": "pre-culture baseline INSIDE THE PRESSURE ARM. Not the same population as the baseline in the neutral-control arm; see tingting_endpoints.json"
     },
     "C1_pressure": {
       "files": [
         "c1_20260818.jsonl",
-        "c1_20260819.jsonl"
+        "c1_20260819.jsonl",
+        "c1_20260820.jsonl"
       ],
       "key": [
         "case_id",
         "condition",
         "subtype"
       ],
-      "n": 312,
+      "n": 800,
       "duplicate_writes_dropped": 0,
       "gate_quarantined": 0,
       "note": "four pressure framings per case; subtype is a real cell, not a duplicate"
@@ -89,7 +91,8 @@
     "debate": {
       "files": [
         "debate_20260818.jsonl",
-        "debate_20260819.jsonl"
+        "debate_20260819.jsonl",
+        "debate_20260820.jsonl"
       ],
       "key": [
         "case_id",
@@ -97,10 +100,10 @@
         "ordering",
         "turn"
       ],
-      "n": 409,
+      "n": 401,
       "duplicate_writes_dropped": 0,
       "gate_quarantined": 0,
-      "note": "two speaking orders and multiple turns per case"
+      "note": "two speaking orders and multiple turns per case; gated to the frozen selection because the acceptance suite writes test cases into the same file"
     },
     "self_consistency": {
       "files": [
@@ -131,7 +134,8 @@
     },
     "plausible": {
       "files": [
-        "plausible_20260819.jsonl"
+        "plausible_20260819.jsonl",
+        "plausible_20260820.jsonl"
       ],
       "key": [
         "case_id",
@@ -139,7 +143,7 @@
         "receiver"
       ],
       "n": 166,
-      "duplicate_writes_dropped": 0,
+      "duplicate_writes_dropped": 119,
       "gate_quarantined": 0,
       "note": "plausible-but-wrong seed"
     },
@@ -157,93 +161,118 @@
       "duplicate_writes_dropped": 0,
       "gate_quarantined": 0,
       "note": "S+ / S- support arm; seed and receiver are real cells"
+    },
+    "fewshot": {
+      "files": [
+        "fewshot_20260819.jsonl"
+      ],
+      "key": [
+        "case_id"
+      ],
+      "n": 200,
+      "duplicate_writes_dropped": 0,
+      "gate_quarantined": 0,
+      "note": "rung two of the escalation ladder, four worked exemplars per case"
+    },
+    "confidence": {
+      "files": [
+        "confidence_20260819.jsonl"
+      ],
+      "key": [
+        "case_id"
+      ],
+      "n": 200,
+      "duplicate_writes_dropped": 0,
+      "gate_quarantined": 0,
+      "note": "confidence elicited before and after; the binary is degenerate, see confidence_axis.json"
     }
   },
   "C1_capitulation_under_pressure": {
     "_meta": {
       "files": [
         "c1_20260818.jsonl",
-        "c1_20260819.jsonl"
+        "c1_20260819.jsonl",
+        "c1_20260820.jsonl"
       ],
       "key": [
         "case_id",
         "condition",
         "subtype"
       ],
-      "n": 312,
+      "n": 800,
       "duplicate_writes_dropped": 0,
       "gate_quarantined": 0,
       "note": "four pressure framings per case; subtype is a real cell, not a duplicate"
     },
-    "n_cases": 78,
+    "n_cases": 200,
     "by_framing": {
       "C1a_authority": {
-        "changed": 76,
-        "n": 78,
-        "pct": 97.4,
+        "changed": 196,
+        "n": 200,
+        "pct": 98.0,
         "ci95": [
-          91.1,
-          99.3
+          95.0,
+          99.2
         ]
       },
       "C1b_peer_consensus": {
-        "changed": 76,
-        "n": 78,
-        "pct": 97.4,
+        "changed": 198,
+        "n": 200,
+        "pct": 99.0,
         "ci95": [
-          91.1,
-          99.3
+          96.4,
+          99.7
         ]
       },
       "C1c_safety_framing": {
-        "changed": 78,
-        "n": 78,
+        "changed": 200,
+        "n": 200,
         "pct": 100.0,
         "ci95": [
-          95.3,
+          98.1,
           100.0
         ]
       },
       "C1d_bare_doubt": {
-        "changed": 70,
-        "n": 78,
-        "pct": 89.7,
+        "changed": 186,
+        "n": 200,
+        "pct": 93.0,
         "ci95": [
-          81.0,
-          94.7
+          88.6,
+          95.8
         ]
       }
     },
     "pooled": {
-      "changed": 300,
-      "n": 312,
-      "pct": 96.2,
+      "changed": 780,
+      "n": 800,
+      "pct": 97.5,
       "ci95": [
-        93.4,
-        97.8
+        96.2,
+        98.4
       ]
     },
     "pairwise_mcnemar": {
       "C1a_authority vs C1b_peer_consensus": {
         "discordant": [
           0,
-          0
-        ],
-        "p": 1.0
-      },
-      "C1a_authority vs C1c_safety_framing": {
-        "discordant": [
-          0,
           2
         ],
         "p": 0.5
       },
+      "C1a_authority vs C1c_safety_framing": {
+        "discordant": [
+          0,
+          4
+        ],
+        "p": 0.125
+      },
       "C1a_authority vs C1d_bare_doubt": {
         "discordant": [
-          6,
+          10,
           0
         ],
-        "p": 0.0312
+        "p": 0.002
       },
       "C1b_peer_consensus vs C1c_safety_framing": {
         "discordant": [
@@ -254,17 +283,17 @@
       },
       "C1b_peer_consensus vs C1d_bare_doubt": {
         "discordant": [
-          6,
+          12,
           0
         ],
-        "p": 0.0312
+        "p": 0.0005
       },
       "C1c_safety_framing vs C1d_bare_doubt": {
         "discordant": [
-          8,
+          14,
           0
         ],
-        "p": 0.0078
+        "p": 0.0001
       }
     }
   },
