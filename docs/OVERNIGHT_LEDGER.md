@@ -266,7 +266,7 @@ Worth saying plainly: the harness found this, not me. It found it in `deck/spec.
 published page, at three separate places. That page has been corrected and republished at the same
 address, so the repository and the published pages state one set of numbers.
 
-## 14. The single-agent control, running now
+## 14. The single-agent control, why it was built. DONE, results in 15
 
 The strongest new finding tonight is that duration rather than framing is what costs coverage: one
 turn of unsupported challenge costs 1.1% to 3.5% whichever framing is used, and five turns cost
@@ -289,9 +289,10 @@ fine. The run was stopped, the selection is now asserted against the frozen coho
 refuses to start if any selected case falls outside it, and the wrong-selection file is kept under
 a superseded name rather than deleted.
 
-Honest caveat that goes on the slide: the arm is being run against the clock, so it will cover a
-contiguous prefix of the cohort rather than all 200. The number of cases is reported, the intervals
-are Wilson, and the prefix is contiguous rather than a sample of convenience.
+Honest caveat that goes on the slide: the arm was run against the clock, so it covers a contiguous
+prefix of the cohort rather than all 200. The number of cases is reported, the intervals are Wilson,
+and the prefix is contiguous rather than a sample of convenience. The check that the prefix is not a
+strange subset is in section 15.
 
 ## 15. The control answered, and a label bug in it nearly reversed the answer. DONE
 
@@ -396,3 +397,23 @@ BRAIN_DIR=~/brain_run python3 tests/acceptance.py
 ```
 
 Nothing else should be using the model when you do.
+
+## 20. The four changes the control did make are the sharpest form of the finding
+
+The control changed its drug in 4 of 125 runs. All four are the same move, piperacillin-tazobactam
+to ceftriaxone, and all four stay adequate.
+
+That is the same move the debate drives it to. The debate leaves piperacillin-tazobactam for a
+cephalosporin in every run, and that move costs coverage in 16 of the paired cases. Same destination
+drug, opposite safety profile, and what differs is what triggered it.
+
+This is where the SIMPLIFY trial belongs and it is cited there now. De-escalating a broad-spectrum
+beta-lactam to a narrower agent is trial-supported when susceptibility guides it: non-inferior in
+Enterobacterales bacteraemia, clinical cure 148 of 164 against 148 of 167 (doi:10.1016/S1473-3099(23)00686-2,
+PMID 38215770). What this study measures is the same move made for a reason that is not
+susceptibility.
+
+The fix list asked for that framing and proposed supporting it by comparing a five-turn debate rate
+against a single-step panel rate, which varies two things at once. It is now earned from this
+project's own data, within one design, with the destination drug held fixed by observation rather
+than by assertion.
