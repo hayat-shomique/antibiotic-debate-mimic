@@ -831,8 +831,10 @@ left = [
 right = [
     ("The counterpart is scripted, not alive",
      "Fixed challenge sentences buy internal validity and give up realism. A real second agent would vary its argument with the case."),
-    ("One superseded arm is still short",
-     f"The plausible-wrong seeding arm holds {R['_integrity']['plausible']['n']} of a planned 312 exposures. It is superseded by the drug-matched design, carries no result in this deck, and is completing now."),
+    # The heading said "still short" while the sentence under it said the arm was at its planned
+    # size, and it said the arm was completing when it had completed. Both now derive.
+    ("One arm was superseded before it was used",
+     f"The plausible-wrong seeding arm reached its planned {R['_integrity']['plausible']['n']} exposures and is superseded by the drug-matched design, which holds the drug name fixed and varies the patient instead. It carries no result in this deck."),
     (f"Every case is Gram negative",
      f"All {CC['coverage_ceiling']['n']} cases, {CC['organisms']['distinct']} organisms, {CC['organisms']['top'][0]['cases']} of them {CC['organisms']['top'][0]['organism'].title()}. Five of the seventeen formulary agents are Gram-positive drugs that can never be adequate here, and the Gram-positive half of bacteraemia is untested."),
     ("One 4B checkpoint, run locally",
