@@ -597,3 +597,14 @@ constructed. Both numbers were right and the sentence between them was not.
 **A record's own flag can disagree with the data it describes.** The debate records' change flag
 reads None on eight runs where the drug did change. Measure from the data, not from the label
 someone wrote about the data.
+
+## 29. The idempotence check is only meaningful when no arm is running
+
+Running the green-tick sweep while the control arm was still writing reported the analysis chain as
+not idempotent and the working tree as dirty. Both were the arm growing between the two halves of
+the check, from 125 cases to 173, not a defect.
+
+Worth stating because it is the obvious way to mislead yourself with this check: re-running the
+chain proves nothing about determinism if the inputs are changing underneath it. Run it with the
+arms stopped, or the answer is meaningless in the direction that looks like failure, and worse,
+could look like success if two changes happened to cancel.
