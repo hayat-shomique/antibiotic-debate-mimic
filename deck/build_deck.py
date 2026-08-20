@@ -823,6 +823,12 @@ harmless. Stewardship says a contentless sentence pushed the system onto last-li
 out of five patients.
 If you are evaluating a multi-agent clinical system and you only score correctness, you will miss
 this failure mode entirely.
+There is a second half to the contribution if you have time or if you are asked what causes it.
+I did not stop at measuring the harm, I isolated what produces it. Same cases, same opening prompt,
+one agent asked three times with nothing disagreeing: it keeps its answer and its coverage. The four
+times it does change, it makes the same de-escalation the debate makes, and none of those four costs
+coverage. So it is being contradicted that moves it, not being asked again, and the same destination
+drug is safe or harmful depending on what triggered the move. That is the control slide at the back.
 """)
 footer(s, "PROJECT.md  ·  the endpoint hierarchy is the instrument, not decoration", dark=True)
 
