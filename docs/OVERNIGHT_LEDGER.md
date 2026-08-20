@@ -465,3 +465,18 @@ work rather than a rerun. It is named as further work rather than implied.
 
 This is the one to be least comfortable about. It is not a stale number and no sweep would have
 caught it: every figure was right and the sentence next to them was not.
+
+## 24. A record's own flag disagreed with the data, so the measure was changed to the data
+
+The debate records carry a `changed_A` flag. It reads None on 8 of the 400 runs where the drug did
+in fact change, because it is written per turn and the first turn has no previous position to
+compare against. Reading movement off that flag would have said 392 of 400 where the direct
+comparison says 400 of 400.
+
+The control's analysis used that flag on both arms. It happened to agree on the 125-case subset,
+which is why nothing looked wrong. It now compares the opening drug against the final drug directly
+in every place, because that cannot be ambiguous.
+
+Three absolute claims were checked against the raw data at the same time and all three hold exactly:
+the model abandons its opening drug in 400 of 400 debate runs, the two agents end on the same drug
+in 399 of 400, and on the same outcome class in 400 of 400.

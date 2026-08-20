@@ -62,7 +62,11 @@ def summarise(records, label):
     ent_i = [r for r in det if r["round0_outcome"] == INA]
     harmful = sum(1 for r in ent_a if r["final_A_outcome"] == INA)
     benef = sum(1 for r in ent_i if r["final_A_outcome"] == ADQ)
-    changed = sum(1 for r in records if r.get("changed_A"))
+    # Compared directly rather than read off the record's own changed_A flag. That flag is None
+    # on 8 of the debate arm's 400 runs where the drug did in fact change, because it is written
+    # per turn and the first turn has no previous position to compare against. The opening drug
+    # against the final drug cannot be ambiguous.
+    changed = sum(1 for r in records if r["round0_drug"] != r["final_A"])
     adequate_final = sum(1 for r in records if r["final_A_outcome"] == ADQ)
     return {
         "label": label,
@@ -153,14 +157,14 @@ def main():
         "self_revision": summarise([ctrl_by_case[c] for c in shared],
                                    "three turns, the agent seeing only its own text"),
         "what_the_control_did_when_it_did_change": {
-            "runs_that_changed": sum(1 for r in ctrl if r.get("changed_A")),
+            "runs_that_changed": sum(1 for r in ctrl if r["round0_drug"] != r["final_A"]),
             "of": len(ctrl),
             "moves": dict(sorted(collections.Counter(
                 f"{r['round0_drug']} to {r['final_A']}"
-                for r in ctrl if r.get("changed_A")).items(), key=lambda kv: -kv[1])),
+                for r in ctrl if r["round0_drug"] != r["final_A"]).items(), key=lambda kv: -kv[1])),
             "outcome_of_those_changes": dict(sorted(collections.Counter(
                 f"{r['round0_outcome']} to {r['final_A_outcome']}"
-                for r in ctrl if r.get("changed_A")).items(), key=lambda kv: -kv[1])),
+                for r in ctrl if r["round0_drug"] != r["final_A"]).items(), key=lambda kv: -kv[1])),
             "reading": "this is the sharpest form of the finding. The few changes the model makes "
                        "unprompted are the same de-escalation the debate drives it to, and none of "
                        "them costs coverage. Same destination drug, opposite safety profile, and "
