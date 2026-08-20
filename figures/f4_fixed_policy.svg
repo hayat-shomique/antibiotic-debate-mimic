@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-08-19T21:34:55.721137</dc:date>
+    <dc:date>2026-08-20T01:08:42.281584</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -60,7 +60,7 @@ L 198.559532 169.572414
 L 198.559532 188.342069 
 L 40.032 188.342069 
 z
-" clip-path="url(#p32a5f46ff5)" style="fill: #c64b3e"/>
+" clip-path="url(#pf4c4e4eb04)" style="fill: #c64b3e"/>
    </g>
    <g id="text_1">
     <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="40.032" y="162.292655" transform="rotate(-0 40.032 162.292655)">piperacillin-tazobactam</text>
@@ -115,7 +115,7 @@ L 415.425195 169.572414
 L 415.425195 188.342069 
 L 258.482939 188.342069 
 z
-" clip-path="url(#p0c723af944)" style="fill: #1c7293"/>
+" clip-path="url(#pf340e95c57)" style="fill: #1c7293"/>
    </g>
    <g id="text_7">
     <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="258.482939" y="162.292655" transform="rotate(-0 258.482939 162.292655)">cefazolin</text>
@@ -126,7 +126,7 @@ L 260.068214 214.262069
 L 260.068214 233.031724 
 L 258.482939 233.031724 
 z
-" clip-path="url(#p0c723af944)" style="fill: #6b7c85"/>
+" clip-path="url(#pf340e95c57)" style="fill: #6b7c85"/>
    </g>
    <g id="text_8">
     <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="258.482939" y="206.98231" transform="rotate(-0 258.482939 206.98231)">ceftriaxone</text>
@@ -190,7 +190,7 @@ L 198.559532 339.393103
 L 198.559532 358.162759 
 L 40.032 358.162759 
 z
-" clip-path="url(#pcd1c0d17b9)" style="fill: #1c7293"/>
+" clip-path="url(#p617f424885)" style="fill: #1c7293"/>
    </g>
    <g id="text_17">
     <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="40.032" y="332.113345" transform="rotate(-0 40.032 332.113345)">vancomycin</text>
@@ -249,7 +249,7 @@ L 415.425195 339.393103
 L 415.425195 358.162759 
 L 258.482939 358.162759 
 z
-" clip-path="url(#p8622fdc41c)" style="fill: #1c7293"/>
+" clip-path="url(#pd5eb8c5579)" style="fill: #1c7293"/>
    </g>
    <g id="text_25">
     <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="258.482939" y="332.113345" transform="rotate(-0 258.482939 332.113345)">ampicillin</text>
@@ -260,7 +260,7 @@ L 260.068214 384.082759
 L 260.068214 402.852414 
 L 258.482939 402.852414 
 z
-" clip-path="url(#p8622fdc41c)" style="fill: #6b7c85"/>
+" clip-path="url(#pd5eb8c5579)" style="fill: #6b7c85"/>
    </g>
    <g id="text_26">
     <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="258.482939" y="376.803" transform="rotate(-0 258.482939 376.803)">linezolid</text>
@@ -322,7 +322,7 @@ L 617.230743 339.393103
 L 617.230743 358.162759 
 L 476.933878 358.162759 
 z
-" clip-path="url(#p0e9d22cf14)" style="fill: #1c7293"/>
+" clip-path="url(#p31bd54fe6a)" style="fill: #1c7293"/>
    </g>
    <g id="text_35">
     <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="476.933878" y="332.113345" transform="rotate(-0 476.933878 332.113345)">linezolid</text>
@@ -333,7 +333,7 @@ L 495.164544 384.082759
 L 495.164544 402.852414 
 L 476.933878 402.852414 
 z
-" clip-path="url(#p0e9d22cf14)" style="fill: #6b7c85"/>
+" clip-path="url(#p31bd54fe6a)" style="fill: #6b7c85"/>
    </g>
    <g id="text_36">
     <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="476.933878" y="376.803" transform="rotate(-0 476.933878 376.803)">meropenem</text>
@@ -395,7 +395,7 @@ L 821.414204 339.393103
 L 821.414204 358.162759 
 L 695.384816 358.162759 
 z
-" clip-path="url(#p56ef35096d)" style="fill: #1c7293"/>
+" clip-path="url(#p6f5ec66cb0)" style="fill: #1c7293"/>
    </g>
    <g id="text_45">
     <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="695.384816" y="332.113345" transform="rotate(-0 695.384816 332.113345)">ceftazidime</text>
@@ -406,7 +406,7 @@ L 727.88296 384.082759
 L 727.88296 402.852414 
 L 695.384816 402.852414 
 z
-" clip-path="url(#p56ef35096d)" style="fill: #6b7c85"/>
+" clip-path="url(#p6f5ec66cb0)" style="fill: #6b7c85"/>
    </g>
    <g id="text_46">
     <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #12303f" x="695.384816" y="376.803" transform="rotate(-0 695.384816 376.803)">meropenem</text>
@@ -443,26 +443,26 @@ z
    <text style="font-size: 11px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #6b7c85" x="20.16" y="80.312" transform="rotate(-0 20.16 80.312)">Round-0 recommendation across a 17-agent formulary. Encoders: all-masked PRIMARY variant, length-normalised mean over wordpieces.</text>
   </g>
   <g id="text_57">
-   <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #6b7c85" x="20.16" y="438.6642" transform="rotate(-0 20.16 438.6642)">F4 · generated 19 Aug 2026 21:34 from runs/model_compare_20260818.jsonl, encoder_baseline.csv, runs/debate_20260818.jsonl (cross-check)</text>
+   <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #6b7c85" x="20.16" y="438.6642" transform="rotate(-0 20.16 438.6642)">F4 · generated 20 Aug 2026 01:08 from runs/model_compare_20260818.jsonl, encoder_baseline.csv, runs/debate_20260818.jsonl (cross-check)</text>
   </g>
  </g>
  <defs>
-  <clipPath id="p32a5f46ff5">
+  <clipPath id="pf4c4e4eb04">
    <rect x="40.032" y="145.44" width="168.039184" height="89.37931"/>
   </clipPath>
-  <clipPath id="p0c723af944">
+  <clipPath id="pf340e95c57">
    <rect x="258.482939" y="145.44" width="168.039184" height="89.37931"/>
   </clipPath>
-  <clipPath id="pcd1c0d17b9">
+  <clipPath id="p617f424885">
    <rect x="40.032" y="315.26069" width="168.039184" height="89.37931"/>
   </clipPath>
-  <clipPath id="p8622fdc41c">
+  <clipPath id="pd5eb8c5579">
    <rect x="258.482939" y="315.26069" width="168.039184" height="89.37931"/>
   </clipPath>
-  <clipPath id="p0e9d22cf14">
+  <clipPath id="p31bd54fe6a">
    <rect x="476.933878" y="315.26069" width="168.039184" height="89.37931"/>
   </clipPath>
-  <clipPath id="p56ef35096d">
+  <clipPath id="p6f5ec66cb0">
    <rect x="695.384816" y="315.26069" width="168.039184" height="89.37931"/>
   </clipPath>
  </defs>

@@ -156,3 +156,55 @@ than the one proposed:
 ## 9. Two sections both numbered 7.9. DONE
 
 `PROJECT.md` had two section 7.9 headings. Renumbered, and the new trigger table is 7.12.
+
+## 10. Prof. Zhu's core figure was stale, and it used a different convention from everything else. DONE
+
+Her endpoint specification asks for one core figure: final antibiotic appropriateness stratified by
+agent, interaction condition and counterpart correctness, with the two transition rates underneath.
+That figure is `figures/f5_core_endpoint.png`. Three things were wrong with the copy in the
+repository.
+
+**It was built before her specification existed.** The PNG was written 289 seconds before
+`protocol/tingting_endpoint_spec.md` landed on disk, so it recorded that the specification was
+missing, carried a DRAFT watermark, and printed "endpoint spec pending" underneath. The watermark
+was applied unconditionally rather than only when the specification is absent, so it would never
+have cleared itself. Both are now conditional on the file, and the note says which specification
+it was built to.
+
+**Its transition rates used a convention no other endpoint in this project uses.** It counted
+correct to incorrect as "entered adequate, left not adequate", which folds INTERMEDIATE_ONLY and
+UNDETERMINED into the incorrect side. It reported 33 of 175 for Agent A. Every other file in the
+project reports 29 of the same runs, because an answer that cannot be scored is not evidence that
+the model got it wrong. Her own classification has four cells and none of them is undetermined.
+
+Fixed, and it now reconciles exactly: Agent A 29 of 171, Agent B 23 of 170, which sum to the 52
+harmful revisions in the pooled rate of 52 of 341. The panel condition reconciles too: 0 harmful
+and 57 of 65 repaired, which is what `results/trigger_comparison.json` computes independently. The
+superseded figures are locked out of the repository by the coherence harness.
+
+**Its headline bars are entailed and did not say so.** Under the debate, appropriateness is 312 of
+312 when the counterpart is correct and 0 of 88 when it is wrong. That looks like the strongest
+result in the study and it is not a result at all: the two agents end on the same outcome class in
+every run, so conditioning on the counterpart's correctness conditions on the agent's own. The
+figure now says that on its face. What the bars honestly show is how completely the position is
+shared, which is still the point of the figure.
+
+## 11. Seven figures in the repository were stale. DONE
+
+The figure sources write into the run directory and the repository carries copies. Seven of the
+fourteen files were older than their sources, some by eight hours, and were committed as if
+current. All fourteen are now identical to what the sources produce.
+
+## 12. The endpoint status file said NOT RUN about four endpoints that were run. DONE
+
+`analysis/endpoints_status.py` reported time to appropriate therapy, treatment failure, mortality
+and length of stay as NOT RUN. All four are computed, with the caveats she asked for, and
+`SCORECARD.txt` has been printing them. The status file simply could not see them, because
+`secondary_endpoints.json` was written into the run directory and never into the repository.
+
+Both halves fixed. The endpoints are now written to `results/secondary_endpoints.json` as well,
+which is safe because they are aggregates over 200 specimens with no case-level rows, and the
+status file reads them from there. It now reports **14 of 14 done, none outstanding**.
+
+This is the one to be pleased about: nothing new had to be computed. Four of her endpoints had
+been finished for a day and the project was telling itself they were missing.

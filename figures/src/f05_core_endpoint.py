@@ -82,15 +82,28 @@ def rate(k, n):
                 lo=max(0.0, 100.0 * lo), hi=min(100.0, 100.0 * hi))
 
 
+INA = "INADEQUATE"
+DET = (ADQ, INA)
+
+
 def transition(pairs):
     """pairs are (entering_outcome, leaving_outcome).
 
-    correct -> incorrect : entered adequate, left not adequate
-    incorrect -> correct : entered not adequate, left adequate
-    """
-    ent_ok = [(a, b) for a, b in pairs if a == ADQ]
-    ent_bad = [(a, b) for a, b in pairs if a != ADQ]
-    ci = rate(sum(1 for _, b in ent_ok if b != ADQ), len(ent_ok))
+    correct -> incorrect : entered adequate, left INADEQUATE
+    incorrect -> correct : entered INADEQUATE, left adequate
+
+    Both ends must be determinate. This figure previously split on "not adequate", which
+    folded INTERMEDIATE_ONLY and UNDETERMINED into the incorrect side and reported 33 of 175
+    harmful revisions for Agent A where the supervisor scorecard, the endpoint files and the
+    deck all report 29 of the same runs. The extra four are runs whose final answer cannot be
+    scored, and an unscoreable answer is not evidence that the model got it wrong any more
+    than it is evidence that it got it right. The supervisor's own classification has four
+    cells and no cell for undetermined, so those runs are excluded rather than assigned. This
+    is now the same convention the rest of the project uses, and the denominators shown on the
+    figure are the determinate ones."""
+    ent_ok = [(a, b) for a, b in pairs if a == ADQ and b in DET]
+    ent_bad = [(a, b) for a, b in pairs if a == INA and b in DET]
+    ci = rate(sum(1 for _, b in ent_ok if b == INA), len(ent_ok))
     ic = rate(sum(1 for _, b in ent_bad if b == ADQ), len(ent_bad))
     return ci, ic
 
@@ -341,12 +354,22 @@ def draw(up, low, meta):
         f"{meta['n_paired']} paired cases, {meta['n_full']} ordering-runs; "
         f"whiskers are 95% Wilson intervals.")
     fig.text(0.012, 0.838,
-             "INTERMEDIATE_ONLY and UNDETERMINED stay in the denominator.",
+             "Upper panel: adequate as a share of every run in the stratum, so "
+             "INTERMEDIATE_ONLY and UNDETERMINED stay in the denominator. Lower panel: a "
+             "four-cell transition, so both ends must be determinate and runs that cannot be "
+             "scored are excluded rather than counted as errors.",
+             color=S.MUTED, fontsize=9.5, va="top", ha="left")
+    fig.text(0.012, 0.812,
+             "The counterpart-correct and counterpart-wrong bars are entailed, not "
+             "independent: the two agents end on the same outcome class in every run, so "
+             "conditioning on the counterpart's correctness conditions on the agent's own. "
+             "The bars show how completely the position is shared, not a separate effect.",
              color=S.MUTED, fontsize=9.5, va="top", ha="left")
 
-    return S.save(fig, "F5", "core_endpoint", draft=True,
+    return S.save(fig, "F5", "core_endpoint", draft=not SPEC.exists(),
                   source="runs/{debate,c0cn,reveal}_20260818.jsonl + inputs/panel_rows.parquet",
-                  note="19 August 2026; endpoint spec pending")
+                  note=("built to protocol/tingting_endpoint_spec.md" if SPEC.exists()
+                        else "endpoint spec not on disk; built to the ORDERS_0 description"))
 
 
 # ---------------------------------------------------------------------------

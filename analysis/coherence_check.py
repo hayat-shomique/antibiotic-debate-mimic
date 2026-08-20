@@ -84,6 +84,13 @@ SUPERSEDED = [
      "same reason: the denominator grew with the completed arm"),
     (r"\b52/350\b|\b14\.9\s*%", "harmful revision, live agent",
      "older four-cell partition; canonical uses the indeterminate handling in tingting_endpoints"),
+    (r"\b33/175\b|\b18\.9\s*%|\b28/175\b|\b16\.0\s*%", "harmful revision, live agent",
+     "the core figure once split on 'not adequate', which folded INTERMEDIATE_ONLY and "
+     "UNDETERMINED into the incorrect side. The supervisor's classification has four cells and "
+     "no cell for undetermined, so those runs are excluded. Per agent the canonical figures are "
+     "29/171 for Agent A and 23/170 for Agent B, which sum to the pooled 52"),
+    (r"\b12/25\b|\b48\.0\s*%|\b11/25\b|\b44\.0\s*%", "beneficial correction",
+     "same convention change on the other direction of the transition"),
     (r"\bof 70\b|\b70 of 200\b|\bn = 70\b", "primary set",
      "the pressure arm ran 78 of 200 at the time; it now covers all 200"),
     (r"\b63 to 70\b", "b, pressure only", "same reason"),

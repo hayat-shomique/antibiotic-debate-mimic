@@ -19,10 +19,16 @@ Read-only against ~/Downloads/mimic-iv-3.1. Aggregates only.
 """
 from __future__ import annotations
 import json, glob
+import os
 from pathlib import Path
 import duckdb, pandas as pd
 
-ROOT = Path(__file__).resolve().parent
+# This script reads the run directory, so it is executed from a copy inside it. That made
+# __file__ an unreliable way to find the repository, which is why the repo copy of these
+# endpoints went missing. Both locations are resolved explicitly.
+ROOT = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parent)
+REPO = Path(os.environ.get("BRAIN_REPO")
+            or "/Users/shamzzzh/Desktop/antibiotic-debate-mimic")
 MIMIC = Path.home() / "Downloads" / "mimic-iv-3.1"
 HOSP, ICU = MIMIC / "hosp", MIMIC / "icu"
 con = duckdb.connect()
@@ -200,9 +206,17 @@ def main():
                                          "the agent never had. Reported as a cohort "
                                          "characteristic, never as an outcome of a recommendation.")}
 
-    Path(ROOT / "secondary_endpoints.json").write_text(json.dumps(OUT, indent=2, default=str))
+    blob = json.dumps(OUT, indent=2, default=str)
+    Path(ROOT / "secondary_endpoints.json").write_text(blob)
+    # Also into the repository. These are aggregates over 200 specimens with no case-level rows,
+    # so they carry nothing the data use agreement protects, and a supervisor should be able to
+    # check four of her own endpoints without the run directory. The status file said these were
+    # NOT RUN for a day after they were run, purely because it lived where the file did not.
+    repo = REPO / "results"
+    if repo.is_dir():
+        (repo / "secondary_endpoints.json").write_text(blob + "\n")
     print("\n" + "=" * 78)
-    print("  -> secondary_endpoints.json")
+    print("  -> secondary_endpoints.json, and results/secondary_endpoints.json")
     print("  All four computed. Each carries the reason it stays a secondary.")
 
 

@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-08-19T16:03:35.347661</dc:date>
+    <dc:date>2026-08-20T01:08:47.889203</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -32,7 +32,7 @@ z
    <g id="line2d_1">
     <path d="M 617.4216 336.72744 
 L 617.4216 126.2592 
-" clip-path="url(#p1d1b79cef9)" style="fill: none; stroke: #dce4e8; stroke-linecap: square"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: none; stroke: #dce4e8; stroke-linecap: square"/>
    </g>
    <g id="patch_2">
     <path d="M 192.4848 175.49856 
@@ -40,7 +40,7 @@ L 266.7456 175.49856
 L 266.7456 126.2592 
 L 192.4848 126.2592 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #6b7c85; opacity: 0.16"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #6b7c85; opacity: 0.16"/>
    </g>
    <g id="patch_3">
     <path d="M 357.5088 175.49856 
@@ -48,7 +48,7 @@ L 431.7696 175.49856
 L 431.7696 126.2592 
 L 357.5088 126.2592 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #c64b3e"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #c64b3e"/>
    </g>
    <g id="patch_4">
     <path d="M 439.19568 175.49856 
@@ -56,7 +56,7 @@ L 513.45648 175.49856
 L 513.45648 126.2592 
 L 439.19568 126.2592 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #1c7293; opacity: 0.363077"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #1c7293; opacity: 0.363077"/>
    </g>
    <g id="patch_5">
     <path d="M 520.88256 175.49856 
@@ -64,7 +64,7 @@ L 595.14336 175.49856
 L 595.14336 126.2592 
 L 520.88256 126.2592 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #f4f7f8"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #f4f7f8"/>
    </g>
    <g id="patch_6">
     <path d="M 192.4848 229.24152 
@@ -72,7 +72,7 @@ L 266.7456 229.24152
 L 266.7456 180.00216 
 L 192.4848 180.00216 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #1c7293; opacity: 0.48"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #1c7293; opacity: 0.48"/>
    </g>
    <g id="patch_7">
     <path d="M 357.5088 229.24152 
@@ -80,7 +80,7 @@ L 431.7696 229.24152
 L 431.7696 180.00216 
 L 357.5088 180.00216 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #6b7c85; opacity: 0.16"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #6b7c85; opacity: 0.16"/>
    </g>
    <g id="patch_8">
     <path d="M 439.19568 229.24152 
@@ -88,7 +88,7 @@ L 513.45648 229.24152
 L 513.45648 180.00216 
 L 439.19568 180.00216 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #1c7293; opacity: 0.129231"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #1c7293; opacity: 0.129231"/>
    </g>
    <g id="patch_9">
     <path d="M 520.88256 229.24152 
@@ -96,7 +96,7 @@ L 595.14336 229.24152
 L 595.14336 180.00216 
 L 520.88256 180.00216 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #1c7293; opacity: 0.129231"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #1c7293; opacity: 0.129231"/>
    </g>
    <g id="patch_10">
     <path d="M 192.4848 282.98448 
@@ -104,7 +104,7 @@ L 266.7456 282.98448
 L 266.7456 233.74512 
 L 192.4848 233.74512 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #1c7293; opacity: 0.158462"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #1c7293; opacity: 0.158462"/>
    </g>
    <g id="patch_11">
     <path d="M 357.5088 282.98448 
@@ -112,7 +112,7 @@ L 431.7696 282.98448
 L 431.7696 233.74512 
 L 357.5088 233.74512 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #1c7293; opacity: 0.333846"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #1c7293; opacity: 0.333846"/>
    </g>
    <g id="patch_12">
     <path d="M 439.19568 282.98448 
@@ -120,7 +120,7 @@ L 513.45648 282.98448
 L 513.45648 233.74512 
 L 439.19568 233.74512 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #6b7c85; opacity: 0.16"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #6b7c85; opacity: 0.16"/>
    </g>
    <g id="patch_13">
     <path d="M 520.88256 282.98448 
@@ -128,7 +128,7 @@ L 595.14336 282.98448
 L 595.14336 233.74512 
 L 520.88256 233.74512 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #f4f7f8"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #f4f7f8"/>
    </g>
    <g id="patch_14">
     <path d="M 192.4848 336.72744 
@@ -136,7 +136,7 @@ L 266.7456 336.72744
 L 266.7456 287.48808 
 L 192.4848 287.48808 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #1c7293; opacity: 0.333846"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #1c7293; opacity: 0.333846"/>
    </g>
    <g id="patch_15">
     <path d="M 357.5088 336.72744 
@@ -144,7 +144,7 @@ L 431.7696 336.72744
 L 431.7696 287.48808 
 L 357.5088 287.48808 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #f4f7f8"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #f4f7f8"/>
    </g>
    <g id="patch_16">
     <path d="M 439.19568 336.72744 
@@ -152,7 +152,7 @@ L 513.45648 336.72744
 L 513.45648 287.48808 
 L 439.19568 287.48808 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #f4f7f8"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #f4f7f8"/>
    </g>
    <g id="patch_17">
     <path d="M 520.88256 336.72744 
@@ -160,7 +160,7 @@ L 595.14336 336.72744
 L 595.14336 287.48808 
 L 520.88256 287.48808 
 z
-" clip-path="url(#p1d1b79cef9)" style="fill: #6b7c85; opacity: 0.16"/>
+" clip-path="url(#p5fc52c5be6)" style="fill: #6b7c85; opacity: 0.16"/>
    </g>
    <g id="text_1">
     <text style="font-size: 13.5px; font-family: 'Menlo'; text-anchor: middle; fill: #12303f" x="229.6152" y="154.385716" transform="rotate(-0 229.6152 154.385716)">289</text>
@@ -348,14 +348,14 @@ z
    <text style="font-size: 11px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; fill: #6b7c85" transform="translate(20.16 93.589)">400 ordering-runs over 200 paired cases; both positions scored against the same microbiology S/I/R panel. 19 August 2026.</text>
   </g>
   <g id="text_55">
-   <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #6b7c85" x="20.16" y="438.6642" transform="rotate(-0 20.16 438.6642)">F8 · generated 19 Aug 2026 16:03 from runs/debate_20260818.jsonl (kind=='full', n=400) · HRR/BCR definitions provisional pending ORDERS_2 · DRAFT, numbers not final</text>
+   <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #6b7c85" x="20.16" y="438.6642" transform="rotate(-0 20.16 438.6642)">F8 · generated 20 Aug 2026 01:08 from runs/debate_20260818.jsonl (kind=='full', n=400) · HRR/BCR definitions provisional pending ORDERS_2 · DRAFT, numbers not final</text>
   </g>
   <g id="text_56">
    <text style="font-weight: 700; font-size: 86px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; fill: #c64b3e; opacity: 0.1" transform="translate(329.834168 326.124024) rotate(-28)">DRAFT</text>
   </g>
  </g>
  <defs>
-  <clipPath id="p1d1b79cef9">
+  <clipPath id="p5fc52c5be6">
    <rect x="35.712" y="102.24" width="825.12" height="300.24"/>
   </clipPath>
  </defs>

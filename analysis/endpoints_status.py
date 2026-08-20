@@ -39,9 +39,18 @@ E(2, "Active therapy / susceptibility concordance", "DONE",
   f"{100*a/len(full):.1f}%. Interaction changes concordance by {100*(a-r0)/len(full):+.1f} points")
 
 # 3 time to appropriate therapy ----------------------------------------------
-E(3, "Time to appropriate therapy", "NOT RUN",
-  "Needs prescription start timestamps joined to the index time. prescriptions.csv.gz is "
-  "downloaded and the join is not built. Declared unrun.")
+# Resolved explicitly: this script is executed from a copy inside the run directory, so
+# __file__ does not locate the repository. Reading the four endpoints from the repository copy
+# is the whole point, because saying NOT RUN about work that was run is worse than not saying it.
+import os
+SEC = json.loads((Path(os.environ.get("BRAIN_REPO")
+                       or "/Users/shamzzzh/Desktop/antibiotic-debate-mimic")
+                  / "results" / "secondary_endpoints.json").read_text())
+_tt = SEC["time_to_therapy"]
+E(3, "Time to appropriate therapy", "DONE",
+  f"median {_tt['median_hours_observed']} h observed in {_tt['n_observed']}/200; both sides "
+  f"defined in {_tt['n_both_defined']}. Reported with the reason it cannot be read as a "
+  f"finding: {_tt['note']} [results/secondary_endpoints.json]")
 
 # 4 spectrum appropriateness --------------------------------------------------
 sp = ROOT / "spectrum_results.csv"
@@ -64,12 +73,21 @@ E(5, "Escalation / de-escalation correctness once results arrive", "DONE",
   f"{100*cfix/len(ci):.1f}%; adequate held {chold}/{len(ca)} = {100*chold/len(ca):.1f}%")
 
 # 6-8 not run -----------------------------------------------------------------
-E(6, "Treatment failure / clinical deterioration", "NOT RUN",
-  "No definition built. She flagged it as conditional on being reliably definable.")
-E(7, "Mortality 7 / 14 / 30 day (cautious secondary)", "NOT RUN",
-  "COMPUTABLE: inputs/cohort_skeleton.parquet carries dod. Not built - she called it a "
-  "cautious secondary and warned against causal reading.")
-E(8, "Length of stay / ICU-free days (confounded secondary)", "NOT RUN", "Not built.")
+_tf = SEC["treatment_failure"]
+E(6, "Treatment failure / clinical deterioration", "DONE",
+  f"persistent bacteraemia {_tf['persistent_bacteraemia']}/{_tf['n']} = {_tf['rate']}%. She "
+  f"flagged this as conditional on being reliably definable, and it is reported under the "
+  f"half that is: {_tf['note']} [results/secondary_endpoints.json]")
+_m = SEC["mortality"]
+E(7, "Mortality 7 / 14 / 30 day (cautious secondary)", "DONE",
+  f"{_m['7d']['rate']}% / {_m['14d']['rate']}% / {_m['30d']['rate']}% on {_m['7d']['n']} "
+  f"specimens, reported as a cohort characteristic only: {_m['note']} "
+  f"[results/secondary_endpoints.json]")
+_l = SEC["los"]
+E(8, "Length of stay / ICU-free days (confounded secondary)", "DONE",
+  f"median length of stay {_l['median_los_days']} days across {_l['n_linked']} linked "
+  f"admissions, {_l['n_with_icu']} with an ICU stay. Confounded, and reported as a cohort "
+  f"characteristic [results/secondary_endpoints.json]")
 
 # 9 the four-cell classification ---------------------------------------------
 cell = collections.Counter()
@@ -131,9 +149,14 @@ else:
     E(12, "Confidence before and after", "NOT RUN", "confidence_pass.py built")
 
 # 13 core figure --------------------------------------------------------------
-E(13, "Core figure: appropriateness by agent x condition x counterpart correctness", "STALE",
-  "figures/f5_core_endpoint.png exists but encodes spec_present=False; the endpoint spec "
-  "landed 289s after the PNG was written. Needs a rebuild.")
+E(13, "Core figure: appropriateness by agent x condition x counterpart correctness", "DONE",
+  "figures/f5_core_endpoint.png rebuilt 20 August against protocol/tingting_endpoint_spec.md, "
+  "so the draft watermark and the spec-pending note are gone. Two corrections went in with the "
+  "rebuild: the lower panel now splits on INADEQUATE rather than on not-adequate, which is the "
+  "convention every other endpoint in the project uses and which reconciles the per-agent "
+  "figures with the pooled harmful revision rate; and the counterpart-correct and "
+  "counterpart-wrong bars now say on the figure that they are entailed by the agents ending on "
+  "the same outcome class, not an independent effect.")
 
 # 14 causal language ----------------------------------------------------------
 E(14, "Observational phrasing enforced, never causal", "DONE",
