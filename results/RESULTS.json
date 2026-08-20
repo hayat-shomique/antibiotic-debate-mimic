@@ -96,14 +96,12 @@
       ],
       "key": [
         "case_id",
-        "drug",
-        "ordering",
-        "turn"
+        "ordering"
       ],
-      "n": 401,
+      "n": 400,
       "duplicate_writes_dropped": 0,
       "gate_quarantined": 0,
-      "note": "two speaking orders and multiple turns per case; gated to the frozen selection because the acceptance suite writes test cases into the same file"
+      "note": "one completed ordering-run per row, two speaking orders per case. The round-0 elicitation and the five debate turns belong to the same run and are not counted as separate exposures. Gated to the frozen selection because the acceptance suite writes test cases into the same file. This arm previously keyed on drug and turn, which the completed-run records do not carry, so every record the endpoints are computed on was skipped and the count was round-0 records instead; one of those was written twice with an identical answer and survived because turn is a nested record carrying wall-clock time"
     },
     "self_consistency": {
       "files": [
@@ -130,7 +128,7 @@
       "n": 400,
       "duplicate_writes_dropped": 0,
       "gate_quarantined": 0,
-      "note": "same cases across six models"
+      "note": "the same 200 cases under two open checkpoints, Qwen3-4B-instruct and MedGemma-4B. Checkpoint space is N=2, not six; the repository's own limitation on this arm is recorded at docs/LITERATURE_PRESSURE_TEST.md under C11"
     },
     "plausible": {
       "files": [

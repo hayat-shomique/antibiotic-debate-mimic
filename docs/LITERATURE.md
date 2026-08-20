@@ -170,6 +170,102 @@ than in a limitations paragraph. Do the same for susceptibility concordance in y
 
 ---
 
+## Clinical evidence, added 20 August 2026
+
+These are not machine-learning papers. They are the clinical literature the interpretation slide
+and the limitations section stand on. Every identifier was resolved against PubMed on 20 August
+2026 and every figure below was read from the retrieved abstract. They are in `references.bib`
+under the keys given.
+
+### [x] SIMPLIFY. Lopez-Cortes et al., Lancet Infect Dis 2024;24(4):375-385
+
+`lopezcortes2024simplify`, doi 10.1016/S1473-3099(23)00686-2, PMID 38215770.
+
+Open-label pragmatic randomised trial, 21 Spanish hospitals, Enterobacterales bacteraemia treated
+empirically with an antipseudomonal beta-lactam. Patients were randomised to de-escalate by a
+predefined susceptibility-ordered rule, with ceftriaxone among the options, or to continue.
+Clinical cure 148/164 (90%) against 148/167 (89%), risk difference 1.6 percentage points, 95% CI
+minus 5.0 to 8.2, non-inferior against a minus 10% margin.
+
+**Why it is the strongest addition available.** It separates the move from the reason for the
+move. De-escalating piperacillin-tazobactam to a narrower cephalosporin is trial-supported when
+susceptibility guides it. This study performs that same move for a reason that is not
+susceptibility, and the two have opposite safety profiles: harmful revision under a content-free
+argument against harmful revision when the panel triggers it. Same destination drug, opposite
+outcome, and the trigger is the variable. Cite it as the positive control for the move, never as
+support for what the debate does.
+
+### [x] Rhee et al., JAMA Netw Open 2020;3(4):e202899
+
+`rhee2020`, doi 10.1001/jamanetworkopen.2020.2899, PMID 32297949.
+
+17,430 adults, 104 US hospitals, culture-positive community-onset sepsis. Inadequate empiric
+therapy adjusted OR 1.19, 95% CI 1.03 to 1.37. Unnecessarily broad empiric therapy adjusted OR
+1.22, 95% CI 1.06 to 1.40.
+
+**Why it matters here.** It is what makes the spectrum endpoint more than bookkeeping: too broad
+carries an adjusted odds ratio slightly higher than too narrow, so the carbapenem shift moves
+along an axis with published outcome associations.
+
+**What must be written beside it.** Community-onset sepsis across all culture sites, urine 52.1%
+and blood 40.0%, not a bloodstream-only cohort. Cite for the existence and direction of the
+overtreatment harm axis, never for a prevalence number carried across to this cohort. ESBL
+prevalence there is 0.8%, so do not lean on ESBL as the mechanism.
+
+### [x] Tamma et al., Clin Infect Dis 2019;69(8):1446-1455
+
+`tamma2019ampc`, doi 10.1093/cid/ciz173, PMID 30838380.
+
+The AmpC primer. Avoid expanded-spectrum third-generation cephalosporins for the organisms at
+greatest risk of induction, best described for *Enterobacter cloacae*; the likelihood of induction
+by other Enterobacteriaceae is less clear.
+
+**Why it matters here.** This grading is implemented directly in `analysis/ampc_exposure.py`, which
+is why the limitation now separates the 9 *E. cloacae* specimens from the other 27 AmpC-capable
+ones instead of pooling all 36 behind one percentage.
+
+### [x] Saleh et al., Int J Infect Dis 2026;167:108563
+
+`saleh2026ampc`, doi 10.1016/j.ijid.2026.108563, PMID 41864271.
+
+17 studies, AmpC-producing Enterobacterales. No significant difference in 30-day mortality between
+carbapenems and noncarbapenems, OR 1.29, 95% CI 0.91 to 1.82. Carbapenems associated with more
+adverse drug reactions, OR 4.32, 95% CI 1.73 to 10.79. Supports guidance recommending cefepime at
+a minimum inhibitory concentration of 2 or below.
+
+**Why it matters here.** It does two jobs. It gives the carbapenem shift a documented harm axis,
+and it distinguishes the two destination drugs: cefepime is guideline-endorsed for AmpC producers,
+ceftriaxone is the one the primer warns against.
+
+### [x] Onorato et al., Infection 2024;53(3):1141-1153
+
+`onorato2024ampc`, doi 10.1007/s15010-024-02447-y, PMID 39630396.
+
+20 studies, 2,834 patients, bloodstream infections only, which is this cohort's site.
+Piperacillin-tazobactam against cefepime or a carbapenem: no mortality difference, RR 1.1, 95% CI
+0.76 to 1.58, but higher microbiological failure, RR 1.80, 95% CI 1.15 to 2.82, and higher clinical
+failure, RR 1.54, 95% CI 1.00 to 2.40. Cefepime against carbapenems: lower mortality, RR 0.74, 95%
+CI 0.59 to 0.94.
+
+**Why it matters here, and it cuts both ways.** This study's baseline drug is
+piperacillin-tazobactam and one of its two destinations is cefepime. For AmpC producers
+specifically, this meta-analysis says the baseline drug is the weaker choice and cefepime is the
+better one. So the AmpC concern does not simply make the debate look worse: on the 23 harmful
+revisions that land on cefepime it does not apply at all. Do not use this to argue the debate is
+doing something clinically sensible. It is not selecting cefepime because the organism is an AmpC
+producer; it selects the same two drugs regardless of organism, which is exactly the finding.
+
+### [x] Cheo et al., Open Forum Infect Dis 2025;12(7):ofaf413
+
+`cheo2025cefepime`, doi 10.1093/ofid/ofaf413, PMID 40718546.
+
+Seven bloodstream-infection studies, 1,099 patients, 479 cefepime and 620 carbapenem. No
+significant mortality difference, log OR 0.15, 95% CI minus 0.33 to 0.64. PROSPERO CRD42025634449.
+Corroborates Saleh on bloodstream infections specifically. Hold it in reserve; one meta-analysis on
+this point is enough for a ten-minute talk.
+
+---
+
 ## Rules for citing anything above
 
 - Nothing gets cited until it has been read. Tiers 2 items 8 and 9 are explicitly unverified.

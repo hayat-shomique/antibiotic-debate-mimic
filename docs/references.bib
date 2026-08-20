@@ -432,3 +432,84 @@
   archivePrefix= {arXiv},
   note        = {By the project's own collaborator and supervisor. General reasoning, not healthcare}
 }
+
+% Clinical evidence added 20 August 2026. Every identifier below was resolved against PubMed
+% on that date and the reported figures were read from the retrieved abstract, not from memory.
+% PMIDs are recorded so the resolution can be repeated.
+
+@article{lopezcortes2024simplify,
+  title   = {Efficacy and safety of a structured de-escalation from antipseudomonal beta-lactams in bloodstream infections due to Enterobacterales (SIMPLIFY): an open-label, multicentre, randomised trial},
+  author  = {L{\'o}pez-Cort{\'e}s LE and Delgado-Valverde M and Moreno-Mellado E and Goikoetxea Aguirre J and Guio Carri{\'o}n L and Blanco Vidal MJ and L{\'o}pez Soria LM and P{\'e}rez-Rodr{\'i}guez MT and Mart{\'i}nez Lamas L and Arnaiz de Las Revillas F and Retamar-Gentil P and Rodr{\'i}guez-Ba{\~n}o J},
+  journal = {The Lancet Infectious Diseases},
+  year    = {2024},
+  volume  = {24},
+  number  = {4},
+  pages   = {375--385},
+  doi     = {10.1016/S1473-3099(23)00686-2},
+  note    = {PMID 38215770. Open-label pragmatic randomised trial, 21 Spanish hospitals, Enterobacterales bacteraemia treated empirically with an antipseudomonal beta-lactam. De-escalation by a predefined susceptibility-ordered rule, ceftriaxone among the options. Clinical cure 148/164 (90 percent) against 148/167 (89 percent), risk difference 1.6 percentage points, 95 percent CI minus 5.0 to 8.2, non-inferior against a minus 10 percent margin. Separates the move from the reason for the move},
+  keywords = {tier 1, clinical, provenance-FIXLIST}
+}
+
+@article{rhee2020,
+  title   = {Prevalence of antibiotic-resistant pathogens in culture-proven sepsis and outcomes associated with inadequate and broad-spectrum empiric antibiotic use},
+  author  = {Rhee C and Kadri SS and Dekker JP and Danner RL and Chen HC and Fram D and Zhang F and Wang R and Klompas M},
+  journal = {JAMA Network Open},
+  year    = {2020},
+  volume  = {3},
+  number  = {4},
+  pages   = {e202899},
+  doi     = {10.1001/jamanetworkopen.2020.2899},
+  note    = {PMID 32297949. 17,430 adults, 104 US hospitals, culture-positive community-onset sepsis. Inadequate empiric therapy adjusted OR 1.19, 95 percent CI 1.03 to 1.37; unnecessarily broad empiric therapy adjusted OR 1.22, 95 percent CI 1.06 to 1.40. Cite for the existence and direction of an overtreatment harm axis, never for a prevalence number transferred to this cohort: the culture sites are urine 52.1 percent and blood 40.0 percent, and ESBL prevalence there is 0.8 percent},
+  keywords = {tier 1, clinical, provenance-FIXLIST}
+}
+
+@article{tamma2019ampc,
+  title   = {A primer on {AmpC} beta-lactamases: necessary knowledge for an increasingly multidrug-resistant world},
+  author  = {Tamma PD and Doi Y and Bonomo RA and Johnson JK and Simner PJ},
+  journal = {Clinical Infectious Diseases},
+  year    = {2019},
+  volume  = {69},
+  number  = {8},
+  pages   = {1446--1455},
+  doi     = {10.1093/cid/ciz173},
+  note    = {PMID 30838380. Grades induction risk by organism: avoid expanded-spectrum third-generation cephalosporins for the organisms at greatest risk, best described for Enterobacter cloacae; the likelihood of induction by other Enterobacteriaceae is less clear. This grading is what analysis/ampc_exposure.py implements},
+  keywords = {tier 2, clinical, provenance-FIXLIST}
+}
+
+@article{saleh2026ampc,
+  title   = {Comparative efficacy and safety of carbapenems vs noncarbapenem antibiotics in {AmpC}-producing Enterobacterales infections: a systematic review and meta-analysis},
+  author  = {Saleh KB and Alowais SA and Aldairem AO and Alyousef A and Alsaeed Y and Aljardan S and Alsowaida YS},
+  journal = {International Journal of Infectious Diseases},
+  year    = {2026},
+  volume  = {167},
+  pages   = {108563},
+  doi     = {10.1016/j.ijid.2026.108563},
+  note    = {PMID 41864271. 17 studies. No significant difference in 30-day mortality between carbapenems and noncarbapenems, OR 1.29, 95 percent CI 0.91 to 1.82. Carbapenems associated with more adverse drug reactions, OR 4.32, 95 percent CI 1.73 to 10.79. Supports guidance recommending cefepime at a minimum inhibitory concentration of 2 or below},
+  keywords = {tier 2, clinical, provenance-FIXLIST}
+}
+
+@article{onorato2024ampc,
+  title   = {Piperacillin/tazobactam vs. cefepime or carbapenems for the treatment of bloodstream infections due to bacteria producing chromosomal {AmpC} beta-lactamase: a systematic review and meta-analysis},
+  author  = {Onorato L and de Luca I and Salvati A and Monari C and Coppola N},
+  journal = {Infection},
+  year    = {2024},
+  volume  = {53},
+  number  = {3},
+  pages   = {1141--1153},
+  doi     = {10.1007/s15010-024-02447-y},
+  note    = {PMID 39630396. 20 studies, 2,834 patients, bloodstream infections only, which is this cohort's site. Piperacillin-tazobactam against cefepime or a carbapenem: no mortality difference, RR 1.1, 95 percent CI 0.76 to 1.58, but higher microbiological failure, RR 1.80, 95 percent CI 1.15 to 2.82, and higher clinical failure, RR 1.54, 95 percent CI 1.00 to 2.40. Cefepime against carbapenems: lower mortality, RR 0.74, 95 percent CI 0.59 to 0.94. Directly relevant because this study's baseline drug is piperacillin-tazobactam and one of its two destinations is cefepime},
+  keywords = {tier 2, clinical, provenance-OVERNIGHT}
+}
+
+@article{cheo2025cefepime,
+  title   = {Cefepime versus carbapenem therapy for the treatment of invasive infections with inducible chromosomal {AmpC}-producing Enterobacterales: a systematic review and meta-analysis},
+  author  = {Cheo HM and Ho DYK and Koh LP and Koh MCY and Ngiam JN and Lye DCB},
+  journal = {Open Forum Infectious Diseases},
+  year    = {2025},
+  volume  = {12},
+  number  = {7},
+  pages   = {ofaf413},
+  doi     = {10.1093/ofid/ofaf413},
+  note    = {PMID 40718546. Seven bloodstream-infection studies, 1,099 patients, 479 cefepime and 620 carbapenem. No significant mortality difference, log OR 0.15, 95 percent CI minus 0.33 to 0.64. Registered PROSPERO CRD42025634449. Supports the same conclusion as saleh2026ampc on bloodstream infections specifically},
+  keywords = {tier 3, clinical, provenance-OVERNIGHT}
+}

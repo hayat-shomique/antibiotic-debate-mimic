@@ -28,7 +28,7 @@ and one that looks fine and is not:
 
 Output
 ------
-Writes RESULTS.json next to this file. Every published document cites that file.
+Writes results/RESULTS.json at the repository root. Every published document cites that file.
 """
 import json, glob, math, os, sys
 from collections import defaultdict, Counter
@@ -42,7 +42,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RUNS = os.environ.get("BRAIN_RUNS") or os.path.join(HERE, "runs")
 if not os.path.isdir(RUNS):
     RUNS = os.path.expanduser("~/brain_run/runs")
-OUT_DIR = os.environ.get("BRAIN_OUT") or HERE
+# Every other generator writes into <repo>/results and every document reads from there.
+# This script used to default to its own directory, so the documented rebuild command
+# refreshed a copy nothing reads while the copy everything reads went stale in silence.
+OUT_DIR = os.environ.get("BRAIN_OUT") or os.path.join(os.path.dirname(HERE), "results")
 
 # arm -> (glob patterns, identity key columns, human note)
 ARMS = {
@@ -60,12 +63,20 @@ ARMS = {
     "reveal":        (["canonical_reveal.jsonl"], ("case_id", "condition", "ordering"),
                       "two speaking orders per case"),
     "debate":        (["debate_*.jsonl"],
-                      ("case_id", "drug", "ordering", "turn"),
-                      "two speaking orders and multiple turns per case; gated to the frozen selection because the acceptance suite writes test cases into the same file",
-                      lambda r: r.get("case_id") in CANONICAL),
+                      ("case_id", "ordering"),
+                      "one completed ordering-run per row, two speaking orders per case. The "
+                      "round-0 elicitation and the five debate turns belong to the same run and "
+                      "are not counted as separate exposures. Gated to the frozen selection "
+                      "because the acceptance suite writes test cases into the same file. This "
+                      "arm previously keyed on drug and turn, which the completed-run records do "
+                      "not carry, so every record the endpoints are computed on was skipped and "
+                      "the count was round-0 records instead; one of those was written twice with "
+                      "an identical answer and survived because turn is a nested record carrying "
+                      "wall-clock time",
+                      lambda r: r.get("case_id") in CANONICAL and r.get("kind") == "full"),
     "self_consistency": (["selfcon_*.jsonl"], ("case_id",), "five samples collapsed upstream"),
     "cross_model":   (["model_compare_*.jsonl"], ("case_id", "drug", "model"),
-                      "same cases across six models"),
+                      "the same 200 cases under two open checkpoints, Qwen3-4B-instruct and MedGemma-4B. Checkpoint space is N=2, not six; the repository's own limitation on this arm is recorded at docs/LITERATURE_PRESSURE_TEST.md under C11"),
     "plausible":     (["plausible_*.jsonl"], ("case_id", "seed_drug", "receiver"),
                       "plausible-but-wrong seed"),
     "track4":        (["track4_*.jsonl"], ("case_id", "seed_drug", "receiver", "condition"),

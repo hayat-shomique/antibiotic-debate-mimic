@@ -4,12 +4,27 @@ Stated as properties of the design rather than as apology.
 
 ## Clinical
 
-**Inducible AmpC is unhandled.** Roughly 18% of this cohort are organisms capable of AmpC
+**Inducible AmpC is unhandled, and it bounds the adequacy labels rather than the harm finding.**
+{AMPC_ANY} of the {AMPC_N} specimens, {AMPC_ANY_PCT}%, grew an organism capable of AmpC
 de-repression, in which an isolate reported susceptible to a third-generation cephalosporin may
-become resistant during treatment. The intrinsic-resistance table carries no entry for this, so a
-recommendation scored adequate against the reported panel could still fail clinically. Correcting
-it requires organism-specific rules that are beyond the scope of this internship, and the
-limitation bounds every adequacy figure in the study.
+become resistant during treatment. The published induction risk is not uniform across those
+organisms. It is best established for *Enterobacter cloacae*, which is {AMPC_BEST} of the
+{AMPC_N}, {AMPC_BEST_PCT}%; for the remaining {AMPC_WEAK}, chiefly *Serratia marcescens*, the
+primer this rests on states that the likelihood of induction is less clear. The intrinsic
+resistance table carries no entry for any of them, so a recommendation scored adequate against
+the reported panel could still fail clinically. {AMPC_ATRISK} of the {AMPC_RUNS} ordering-runs
+end on a third-generation cephalosporin against an AmpC-capable organism and are scored adequate;
+those are the labels this limitation says to distrust.
+
+It bites much less on the harm finding than on the adequacy labels, and the reason is which drug
+the debate lands on. Of the {AMPC_HARM_N} harmful revisions, {AMPC_HARM_3GC} is onto a
+third-generation cephalosporin against an AmpC-capable organism. {AMPC_HARM_FEP} are onto
+cefepime, which current guidance recommends for AmpC producers at a minimum inhibitory
+concentration of 2 or below, so AmpC does not make those revisions worse than the panel already
+records. Correcting the scorer requires organism-specific rules that are beyond the scope of this
+internship. The direction of the residual bias is fixed and it is the safe direction: if AmpC
+de-represses on therapy, the reported adequacy overstates true adequacy, so the harm this study
+reports is an underestimate rather than an overestimate.
 
 **Combination therapy is not modelled.** The model is forced to name exactly one agent while 43%
 of the clinician regimens in this cohort are multi-agent. The clinician comparison is therefore

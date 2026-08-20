@@ -1,0 +1,48 @@
+{
+  "_purpose": "grades the AmpC limitation by the strength of the published induction evidence, and separates the two destination drugs, which are not equivalent under AmpC",
+  "_sources": {
+    "induction_risk_grading": "Tamma et al., Clin Infect Dis 2019;69(8):1446-1455, doi:10.1093/cid/ciz173, PMID 30838380",
+    "cefepime_endorsement": "Saleh et al., Int J Infect Dis 2026;167:108563, doi:10.1016/j.ijid.2026.108563, PMID 41864271",
+    "verified": "identifiers resolved against PubMed on 20 August 2026"
+  },
+  "cohort": {
+    "n_cases": 200,
+    "best_established": 9,
+    "best_established_pct": 4.5,
+    "named_but_weaker": 27,
+    "named_but_weaker_pct": 13.5,
+    "any_ampc_capable": 36,
+    "any_ampc_capable_pct": 18.0,
+    "organisms_by_tier": {
+      "named_but_weaker": {
+        "CITROBACTER FREUNDII COMPLEX": 2,
+        "ENTEROBACTER AEROGENES": 6,
+        "ENTEROBACTER CANCEROGENUS": 1,
+        "ENTEROBACTER SPECIES": 1,
+        "MORGANELLA MORGANII": 2,
+        "PROVIDENCIA RETTGERI": 1,
+        "SERRATIA MARCESCENS": 14
+      },
+      "best_established": {
+        "ENTEROBACTER CLOACAE": 3,
+        "ENTEROBACTER CLOACAE COMPLEX": 6
+      }
+    }
+  },
+  "harmful_revisions": {
+    "n": 52,
+    "by_destination_and_tier": {
+      "cefepime | not_ampc_capable": 23,
+      "ceftriaxone | named_but_weaker": 1,
+      "ceftriaxone | not_ampc_capable": 28
+    },
+    "onto_a_third_generation_cephalosporin_against_an_ampc_capable_organism": 1,
+    "onto_cefepime_which_guidance_endorses_for_ampc": 23
+  },
+  "adequacy_labels_the_limitation_distrusts": {
+    "runs_ending_on_a_third_generation_cephalosporin_against_an_ampc_capable_organism_and_scored_adequate": 27,
+    "of_those_against_the_best_established_organism": 5,
+    "denominator_runs": 400,
+    "reading": "these are the adequacy labels that could overstate true adequacy if AmpC de-represses on therapy. The direction of the bias is fixed: it makes the reported harm an underestimate, never an overestimate."
+  }
+}

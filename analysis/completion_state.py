@@ -66,9 +66,24 @@ C("tingting","7. Mortality 7/14/30d (cautious secondary)", ex("secondary_endpoin
   "9.5 / 15.0 / 18.5%; adequate-recommendation stratum dies MORE (19.5 vs 15.2) - severity confounding, demonstrated")
 C("tingting","8. Length of stay / ICU-free days", ex("secondary_endpoints.json"),
   "median LOS 11.9 d (185 linked); 99 with an ICU stay, median ICU LOS 5.0 d")
-C("tingting","9. Four-cell before/after classification", True,
-  "289 stable / 13 beneficial / 52 harmful / 9 none / 37 indeterminate = 400")
-C("tingting","10. HRR and BCR", True, "HRR 52/350 = 14.9%; BCR 13/24 = 54.2%")
+# Computed, not typed. This line carried a superseded denominator for long enough that the
+# coherence harness had to exempt the whole file to stay quiet, which hid everything else in it.
+_DET = ("ADEQUATE", "INADEQUATE")
+_cb = [r for r in full if r["round0_outcome"] == "ADEQUATE" and r["final_A_outcome"] in _DET]
+_ib = [r for r in full if r["round0_outcome"] == "INADEQUATE" and r["final_A_outcome"] in _DET]
+_h = sum(1 for r in _cb if r["final_A_outcome"] == "INADEQUATE")
+_b = sum(1 for r in _ib if r["final_A_outcome"] == "ADEQUATE")
+_cell = collections.Counter()
+for r in full:
+    a, b = r["round0_outcome"], r["final_A_outcome"]
+    _cell["indeterminate" if (a not in _DET or b not in _DET) else
+          "stable" if a == b == "ADEQUATE" else
+          "harmful" if a == "ADEQUATE" else
+          "beneficial" if b == "ADEQUATE" else "none"] += 1
+C("tingting","9. Four-cell before/after classification", sum(_cell.values()) == len(full),
+  " / ".join(f"{v} {k}" for k, v in _cell.most_common()) + f" = {sum(_cell.values())}")
+C("tingting","10. HRR and BCR", True,
+  f"HRR {_h}/{len(_cb)} = {100*_h/len(_cb):.1f}%; BCR {_b}/{len(_ib)} = {100*_b/len(_ib):.1f}%")
 C("tingting","11. DeltaQ across both directions", ex("endpoints_status.json"),
   "doctor-first -0.120; pharmacist-first -0.094")
 C("tingting","12. Confidence before and after", len(conf)>=200,

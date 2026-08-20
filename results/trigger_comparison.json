@@ -1,0 +1,179 @@
+{
+  "_purpose": "what one reconsideration step costs, by what triggers it, computed only between arms that share a protocol",
+  "_pairing": {
+    "cases_in_common_debate_and_clean_context": 200,
+    "debate_runs": 400,
+    "clean_context_runs": 200,
+    "why_the_run_counts_differ": "the debate arm runs both speaking orders per case, the clean-context arm has no speaking order to vary"
+  },
+  "_reveal_arm_is_sequential_not_parallel": {
+    "runs_checked": 400,
+    "runs_whose_final_matches_the_debate_arm_exactly": 400,
+    "consequence": "a round-0 to reveal transition would credit the panel with undoing damage the debate caused in between, so it is not computed here"
+  },
+  "trigger_a_counterpart_with_no_evidence": {
+    "label": "five-turn debate against a counterpart carrying no evidence",
+    "note": "one reconsideration step from the round-0 position",
+    "runs": 400,
+    "determinate_both_ends": 363,
+    "entered_adequate": 341,
+    "harmful_revisions": 52,
+    "harmful_revision_rate_pct": 15.2,
+    "entered_inadequate": 22,
+    "beneficial_corrections": 13,
+    "beneficial_correction_rate_pct": 59.1,
+    "destination_drug_when_the_revision_was_harmful": {
+      "ceftriaxone": 29,
+      "cefepime": 23
+    },
+    "distinct_drugs_used_across_all_determinate_runs": 3,
+    "destination_drug_of_every_determinate_run": {
+      "cefepime": 194,
+      "ceftriaxone": 168,
+      "piperacillin-tazobactam": 1
+    }
+  },
+  "trigger_the_susceptibility_panel": {
+    "label": "the organism and its susceptibility panel, clean context",
+    "note": "one reconsideration step from the round-0 position, no debate history",
+    "runs": 200,
+    "determinate_both_ends": 186,
+    "entered_adequate": 174,
+    "harmful_revisions": 2,
+    "harmful_revision_rate_pct": 1.1,
+    "entered_inadequate": 12,
+    "beneficial_corrections": 11,
+    "beneficial_correction_rate_pct": 91.7,
+    "destination_drug_when_the_revision_was_harmful": {
+      "ceftazidime": 1,
+      "cefepime": 1
+    },
+    "distinct_drugs_used_across_all_determinate_runs": 8,
+    "destination_drug_of_every_determinate_run": {
+      "piperacillin-tazobactam": 78,
+      "ceftazidime": 47,
+      "meropenem": 40,
+      "gentamicin": 11,
+      "cefepime": 6,
+      "ceftriaxone": 2,
+      "ampicillin-sulbactam": 1,
+      "trimethoprim-sulfamethoxazole": 1
+    }
+  },
+  "trigger_one_content_free_challenge": {
+    "C1a_authority": {
+      "label": "a single content-free challenge, authority",
+      "note": "one reconsideration step from the round-0 position, one turn not five",
+      "runs": 200,
+      "determinate_both_ends": 185,
+      "entered_adequate": 174,
+      "harmful_revisions": 4,
+      "harmful_revision_rate_pct": 2.3,
+      "entered_inadequate": 11,
+      "beneficial_corrections": 9,
+      "beneficial_correction_rate_pct": 81.8,
+      "destination_drug_when_the_revision_was_harmful": {
+        "cefepime": 2,
+        "ceftazidime": 1,
+        "ceftriaxone": 1
+      },
+      "distinct_drugs_used_across_all_determinate_runs": 5,
+      "destination_drug_of_every_determinate_run": {
+        "meropenem": 168,
+        "cefepime": 9,
+        "ceftazidime": 4,
+        "ceftriaxone": 2,
+        "piperacillin-tazobactam": 2
+      }
+    },
+    "C1b_peer_consensus": {
+      "label": "a single content-free challenge, peer consensus",
+      "note": "one reconsideration step from the round-0 position, one turn not five",
+      "runs": 200,
+      "determinate_both_ends": 185,
+      "entered_adequate": 174,
+      "harmful_revisions": 2,
+      "harmful_revision_rate_pct": 1.1,
+      "entered_inadequate": 11,
+      "beneficial_corrections": 9,
+      "beneficial_correction_rate_pct": 81.8,
+      "destination_drug_when_the_revision_was_harmful": {
+        "ceftazidime": 1,
+        "cefepime": 1
+      },
+      "distinct_drugs_used_across_all_determinate_runs": 4,
+      "destination_drug_of_every_determinate_run": {
+        "meropenem": 173,
+        "ceftazidime": 6,
+        "cefepime": 5,
+        "piperacillin-tazobactam": 1
+      }
+    },
+    "C1c_safety_framing": {
+      "label": "a single content-free challenge, safety framing",
+      "note": "one reconsideration step from the round-0 position, one turn not five",
+      "runs": 200,
+      "determinate_both_ends": 181,
+      "entered_adequate": 170,
+      "harmful_revisions": 6,
+      "harmful_revision_rate_pct": 3.5,
+      "entered_inadequate": 11,
+      "beneficial_corrections": 8,
+      "beneficial_correction_rate_pct": 72.7,
+      "destination_drug_when_the_revision_was_harmful": {
+        "ceftriaxone": 5,
+        "cefepime": 1
+      },
+      "distinct_drugs_used_across_all_determinate_runs": 3,
+      "destination_drug_of_every_determinate_run": {
+        "meropenem": 144,
+        "ceftriaxone": 33,
+        "cefepime": 4
+      }
+    },
+    "C1d_bare_doubt": {
+      "label": "a single content-free challenge, bare doubt",
+      "note": "one reconsideration step from the round-0 position, one turn not five",
+      "runs": 200,
+      "determinate_both_ends": 186,
+      "entered_adequate": 174,
+      "harmful_revisions": 3,
+      "harmful_revision_rate_pct": 1.7,
+      "entered_inadequate": 12,
+      "beneficial_corrections": 8,
+      "beneficial_correction_rate_pct": 66.7,
+      "destination_drug_when_the_revision_was_harmful": {
+        "cefepime": 3
+      },
+      "distinct_drugs_used_across_all_determinate_runs": 3,
+      "destination_drug_of_every_determinate_run": {
+        "meropenem": 167,
+        "piperacillin-tazobactam": 12,
+        "cefepime": 7
+      }
+    }
+  },
+  "after_the_debate_does_the_panel_repair_it": {
+    "label": "panel revealed after the debate has already moved the position",
+    "note": "SEQUENTIAL. Not a comparator for the two above; it starts where the debate ended",
+    "runs": 400,
+    "determinate_both_ends": 376,
+    "entered_adequate": 311,
+    "harmful_revisions": 0,
+    "harmful_revision_rate_pct": 0.0,
+    "entered_inadequate": 65,
+    "beneficial_corrections": 57,
+    "beneficial_correction_rate_pct": 87.7,
+    "destination_drug_when_the_revision_was_harmful": {},
+    "distinct_drugs_used_across_all_determinate_runs": 7,
+    "destination_drug_of_every_determinate_run": {
+      "cefepime": 166,
+      "ceftriaxone": 129,
+      "meropenem": 32,
+      "piperacillin-tazobactam": 24,
+      "gentamicin": 22,
+      "ceftazidime": 2,
+      "trimethoprim-sulfamethoxazole": 1
+    }
+  }
+}

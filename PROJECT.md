@@ -394,7 +394,7 @@ normal approximation would be assuming a distribution the instrument cannot prod
 but a cell that small bounds precision, so this is directional evidence for the state she named and
 not an effect size anyone should quote. What it is not is absent, and it is no longer withdrawn.
 
-### 7.9 Where the hierarchy meets the sycophancy question
+### 7.10 Where the hierarchy meets the sycophancy question
 
 She asked this directly on 18 August and it deserves a direct answer.
 
@@ -407,7 +407,7 @@ her appropriateness endpoint. That is why the same 2x2 appears three times, for 
 live agent and for the panel. Without the hierarchy the sycophancy is invisible, because the agents
 agree either way. Without the sycophancy layer the hierarchy has nothing to compare.
 
-### 7.10 The escalation ladder
+### 7.11 The escalation ladder
 
 The order was set by the supervisor at the first meeting: zero-shot, then few-shot, and training only
 if few-shot fails.
@@ -433,14 +433,66 @@ meropenem policy scores 96.0% coverage. Success is pre-specified as beating the 
 on coverage **and** on spectrum simultaneously, on held-out patients, and holding it under the C1
 pressure conditions.
 
+### 7.12 One reconsideration step, five triggers, and what actually does the damage
+
+Every row below starts from the same round-0 position on the same frozen cohort and applies one
+reconsideration step. The only thing that differs is what triggers it. The last row differs in
+something else as well, and that is the point of the table.
+
+| what made the model reconsider | entered adequate | harmful revisions | harmful revision rate | entered inadequate | corrected | beneficial correction rate | distinct drugs used |
+|---|---|---|---|---|---|---|---|
+| a single content-free challenge, authority | 174 | 4 | 2.3% | 11 | 9 | 81.8% | 5 |
+| a single content-free challenge, peer consensus | 174 | 2 | 1.1% | 11 | 9 | 81.8% | 4 |
+| a single content-free challenge, safety framing | 170 | 6 | 3.5% | 11 | 8 | 72.7% | 3 |
+| a single content-free challenge, bare doubt | 174 | 3 | 1.7% | 12 | 8 | 66.7% | 3 |
+| the organism and its susceptibility panel, clean context | 174 | 2 | 1.1% | 12 | 11 | 91.7% | 8 |
+| five-turn debate against a counterpart carrying no evidence | 341 | 52 | 15.2% | 22 | 13 | 59.1% | 3 |
+
+Two things fall out of this table and neither was designed for.
+
+The first is that a challenge carrying no evidence at all corrects an inadequate opening almost
+as often as the susceptibility panel does, 66.7% to 81.8% against the
+panel's 91.7%. The model revises at close to the right rate for none of the right reasons.
+
+The second is that the framing of the challenge is not what costs the patient coverage. Duration
+is. One turn of unsupported challenge costs 1.1% to 3.5% harmful
+revision whichever of the four framings is used. Five turns of the same thing costs 15.2%. The
+answer space narrows with it: the panel leaves 8 drugs in play across the cohort and
+the debate leaves 3.
+
+One arm is deliberately absent from that table. The panel-reveal arm reveals the susceptibility
+result **after** the debate has already moved the position, and its records carry the debate's own
+finals on all 400 runs. Measuring it from round zero would credit the panel with
+undoing damage the debate caused in between. Measured from where it actually starts, it answers a
+different question and answers it well: of the 65 runs that reach the panel already on an
+inadequate drug, 57 are repaired, and none of the runs that reach it on an adequate drug
+are pushed off one.
+
+[`results/trigger_comparison.json`, `analysis/trigger_comparison.py`]
+
 ## 8. What this does not show
 
-**Inducible AmpC is unhandled.** Roughly 18% of this cohort are organisms capable of AmpC
+**Inducible AmpC is unhandled, and it bounds the adequacy labels rather than the harm finding.**
+36 of the 200 specimens, 18%, grew an organism capable of AmpC
 de-repression, in which an isolate reported susceptible to a third-generation cephalosporin may
-become resistant during treatment. The intrinsic-resistance table carries no entry for this, so a
-recommendation scored adequate against the reported panel could still fail clinically. Correcting
-it requires organism-specific rules that are beyond the scope of this internship, and the
-limitation bounds every adequacy figure in the study.
+become resistant during treatment. The published induction risk is not uniform across those
+organisms. It is best established for *Enterobacter cloacae*, which is 9 of the
+200, 4.5%; for the remaining 27, chiefly *Serratia marcescens*, the
+primer this rests on states that the likelihood of induction is less clear. The intrinsic
+resistance table carries no entry for any of them, so a recommendation scored adequate against
+the reported panel could still fail clinically. 27 of the 400 ordering-runs
+end on a third-generation cephalosporin against an AmpC-capable organism and are scored adequate;
+those are the labels this limitation says to distrust.
+
+It bites much less on the harm finding than on the adequacy labels, and the reason is which drug
+the debate lands on. Of the 52 harmful revisions, 1 is onto a
+third-generation cephalosporin against an AmpC-capable organism. 23 are onto
+cefepime, which current guidance recommends for AmpC producers at a minimum inhibitory
+concentration of 2 or below, so AmpC does not make those revisions worse than the panel already
+records. Correcting the scorer requires organism-specific rules that are beyond the scope of this
+internship. The direction of the residual bias is fixed and it is the safe direction: if AmpC
+de-represses on therapy, the reported adequacy overstates true adequacy, so the harm this study
+reports is an underestimate rather than an overestimate.
 
 **Combination therapy is not modelled.** The model is forced to name exactly one agent while 43%
 of the clinician regimens in this cohort are multi-agent. The clinician comparison is therefore
@@ -555,7 +607,7 @@ repeated write, not a repeated measurement, and the second is dropped before any
 | D_CALIB_1 | 201 | 13 | `case_id + drug` |
 | clean_context | 200 | 0 | `case_id + condition` |
 | reveal | 400 | 0 | `case_id + condition + ordering` |
-| debate | 401 | 0 | `case_id + drug + ordering + turn` |
+| debate | 400 | 0 | `case_id + ordering` |
 | self_consistency | 200 | 0 | `case_id` |
 | cross_model | 400 | 0 | `case_id + drug + model` |
 | plausible | 312 | 166 | `case_id + seed_drug + receiver` |
@@ -563,7 +615,7 @@ repeated write, not a repeated measurement, and the second is dropped before any
 | fewshot | 200 | 0 | `case_id` |
 | confidence | 200 | 0 | `case_id` |
 
-**251 duplicate writes found and dropped in total**, across 4110 exposures.
+**251 duplicate writes found and dropped in total**, across 3,909 exposures.
 Every arm now runs under a PID lock. Model `qwen3:4b-instruct-2507-q4_K_M`, temperature 0, seed
 20260818, run locally: MIMIC-IV is credentialed under a PhysioNet data use agreement and no
 record-level data is committed to this repository.
@@ -617,7 +669,7 @@ deviation log. **deferred** means it is not done and the reason is on the closin
 | 23 Jul | *"inject different prior information into the prompts, for instance, assign Agent A the identity of an 'infectious disease specialist' and Agent B the role of 'antimicrobial stewardship lead', so that each has a clear, potentially conflicting incentive."* | Those two personas, in those words, are the system prompts. The tension is real: one wants coverage, the other restraint. | **built** slide 6, verbatim |
 | 23 Jul | *"you can feed real de-identified case summaries (including microbiology cultures and susceptibility results) as the discussion input."* | Case summaries yes. The susceptibility results are deliberately **not** in the empiric input, because that would destroy the pre-culture decision point Tingting specified. They enter as their own condition, C2, which is what makes the evidence comparison possible at all. | **built, with a stated deviation** slide 5, conditions C0 to C2 |
 | 23 Jul | *"evaluate which agent's final recommendation aligns better with actual clinical outcomes (e.g. subsequent resistance)"* | The per-agent half is done: Agent A and Agent B both reach 312/400 = 78.0 per cent. Subsequent resistance is not done. | **partly built, rest deferred** |
-| 23 Jul | *"Because your time is limited, you need to complete the first step to satisfy your pre, and then, if you have time left, we could push the whole project forward."* | The first step is complete and the project went past it: 13 arms, 3,910 deduplicated exposures. | **built** `AUDIT.md` section 2 |
+| 23 Jul | *"Because your time is limited, you need to complete the first step to satisfy your pre, and then, if you have time left, we could push the whole project forward."* | The first step is complete and the project went past it: 13 arms, 3,909 deduplicated exposures. | **built** `AUDIT.md` section 2 |
 
 ---
 

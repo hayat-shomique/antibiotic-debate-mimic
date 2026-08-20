@@ -37,7 +37,12 @@ HISTORY_PATHS = ("archive/", "docs/LITERATURE_PRESSURE_TEST.md", "docs/SYCOPHANC
                  "docs/FRAMING_FIXES.md", "docs/NUMBERS_BLOCK.md", "docs/EXPLAIN.md",
                  "docs/EXPLAINABILITY.md", "docs/HEADLINE.md", "docs/FIGURES_MANIFEST.md",
                  "docs/verification_log.csv", "docs/deviation_log", "figures/",
-                 "analysis/completion_state.py", "SCORECARD.txt", "analysis/coherence_check.py")
+                 "analysis/coherence_check.py")
+# SCORECARD.txt and analysis/completion_state.py were exempt here while the harmful revision
+# denominator was still being reconciled. It is reconciled, both now print the canonical figure,
+# and a supervisor opens the scorecard, so they are guarded rather than exempt. Removing an
+# exemption is the only safe direction to move one: adding one silences a check for everything
+# that follows it into the file.
 
 T = json.loads((RES / "tingting_endpoints.json").read_text())
 R = json.loads((RES / "RESULTS.json").read_text())
@@ -99,6 +104,64 @@ JUSTIFIED = [
     ("src/case_assembly.py", "54.3",
      "a prior-exposure flag rate for a rejected cohort rule, not the C2 flip rate"),
 ]
+
+
+# Claims the repository forbids itself from making. Unlike a superseded number, a banned
+# claim is never acceptable anywhere: not in a history file, not in a working note, not in
+# a rebuttal script. Sourced from docs/SYCOPHANCY_CANON.md and docs/do_not_cite.md.
+BANNED_CLAIMS = [
+    (r"within 0\.[0-9] points of (?:this study|our)", 
+     "SYCOPHANCY_CANON.md:130 bans presenting our harmful revision rate as replicating "
+     "SycEval's regressive rate. Different quantities on different bases."),
+    (r"replicate[sd]? SycEval|SycEval'?s? .{0,30}replicat",
+     "same ban, phrased as replication"),
+    (r"the model underperform(?:s|ed) (?:meropenem|a constant)",
+     "coverage on this cohort is maximised by the degenerate carbapenem-for-all policy, "
+     "so this framing argues against the study's own stewardship point"),
+    (r"caused (?:a |an |better |worse )?(?:patient )?outcome|reduced mortality|shortened length of stay",
+     "MIMIC-IV is observational; claims are alignment or counterfactual appropriateness only"),
+    (r"Clinical-RLVR",
+     "docs/do_not_cite.md: identifier never resolved, DO NOT CITE",
+     ("docs/references.bib", "docs/LITERATURE.md", "PROJECT.md", "BRIEFING.md", "README.md",
+      "deck/", "CLAUDE.md")),
+]
+# entries are (pattern, why) for an everywhere-ban, or (pattern, why, scope_prefixes)
+
+
+# A banned claim quoted inside its own prohibition is not a violation. Every document that
+# states the rules necessarily contains the forbidden words, and a checker that cannot tell
+# a rule from a breach is a checker nobody will keep running.
+NEGATED = re.compile(
+    r"do(?:es)? not|don't|never|must not|cannot|can't|no longer|not claim|nothing here|"
+    r"excluded|exclusion|do not cite|banned|forbid|withdrawn|flagged-unresolved|link-only|"
+    r"unresolved|not comparable|is wrong|would be wrong|rather than|instead of|not to be|"
+    r"never say|do not say|verdict v-r|>R<|fastest way to lose|default: cite nothing|"
+    r"claiming them|argues against",
+    re.I)
+
+
+def sweep_banned_claims(files):
+    """Read EVERY tracked file, history included, for claims the repo forbids."""
+    hits = []
+    for f in sorted(files):
+        rel = str(f.relative_to(ROOT))
+        if rel in ("analysis/coherence_check.py", "docs/do_not_cite.md",
+                   "docs/SYCOPHANCY_CANON.md"):
+            continue                      # the files that DEFINE the bans
+        text, _ = read_text(f)
+        if text is None:
+            continue
+        for entry in BANNED_CLAIMS:
+            pattern, why = entry[0], entry[1]
+            scope = entry[2] if len(entry) > 2 else None
+            if scope is not None and not any(rel.startswith(x) for x in scope):
+                continue                  # this ban only bites where citing happens
+            for m in re.finditer(pattern, text, re.I):
+                window = text[max(0, m.start() - 200):m.end() + 90]
+                if NEGATED.search(window):
+                    continue              # the rule, or an exclusion register, not a breach
+                hits.append((rel, text[:m.start()].count("\n") + 1, m.group(0).strip(), why))
+    return hits
 
 
 def is_justified(rel, hit):
@@ -171,7 +234,16 @@ def main():
     print(f"  history, not checked     {len(files) - checked - skipped}")
     print(f"  binary, not checked      {skipped}")
 
+    banned = sweep_banned_claims(files)
+    print(f"  banned-claim sweep       {len(files) - skipped} files, history included")
+
     print()
+    if banned:
+        print("  BANNED CLAIMS (never acceptable in any file)")
+        for rel, line, hit, why in banned:
+            print(f"    {rel}:{line}  '{hit}'")
+            print(f"      {why}")
+        print()
     if failures:
         print("  CONTRADICTIONS")
         for rel, line, hit, canon, why in failures:
@@ -180,7 +252,10 @@ def main():
         print()
         print(f"  VERDICT: {contradictions} contradiction(s). NOT COHERENT.")
         return 1
-    print("  VERDICT: every live file is coherent with the canonical values.")
+    if banned:
+        print(f"  VERDICT: {len(banned)} banned claim(s). NOT COHERENT.")
+        return 1
+    print("  VERDICT: every live file is coherent, and no file states a banned claim.")
     return 0
 
 

@@ -43,7 +43,7 @@
      [runs/debate_20260818.jsonl]
 
   10. Harmful revision rate and beneficial correction rate
-     HRR 52/350 = 14.9%   BCR 13/24 = 54.2% (= 6/12 patients)
+     HRR 52/341 = 15.2%   BCR 13/22 = 59.1% (= 7/12 patients)   [denominator is runs determinate before AND after. The alternative, counting every run that opened determinate, would treat 9 runs with an unscoreable final answer as evidence that no harmful revision occurred]
      [runs/debate_20260818.jsonl]
 
   11. Decision-quality delta across both directions
@@ -81,12 +81,24 @@
 ----------------------------------------------------------------------------
   ARMS ON DISK RIGHT NOW
 ----------------------------------------------------------------------------
-    debate, both orders         400/ 400  COMPLETE
-    neutral control             200/ 200  COMPLETE
-    panel reveal                400/ 400  COMPLETE
-    clean-context reveal        200/ 200  COMPLETE
-    confidence                  200/ 200  COMPLETE
-    self-consistency            200/ 200  COMPLETE
-    C1 unsupported pressure     300/ 788  RUNNING
-    plausible-wrong seeding     166/ 312  RUNNING
-    drug-matched pairs           21/ 250  RUNNING
+    C0_baseline           200/ 200  COMPLETE  dupes dropped   0
+    C1_pressure           800/ 800  COMPLETE  dupes dropped   0
+    D_MATCH_1             224/ 224  COMPLETE  dupes dropped  72
+    D_CALIB_1             201/ 201  COMPLETE  dupes dropped  13
+    clean_context         200/ 200  COMPLETE  dupes dropped   0
+    reveal                400/ 400  COMPLETE  dupes dropped   0
+    debate                400/ 401  SHORT     dupes dropped   0
+    self_consistency      200/ 200  COMPLETE  dupes dropped   0
+    cross_model           400/ 400  COMPLETE  dupes dropped   0
+    plausible             312/ 312  COMPLETE  dupes dropped 166
+    track4                172/ 172  COMPLETE  dupes dropped   0
+    fewshot               200/ 200  COMPLETE  dupes dropped   0
+    confidence            200/ 200  COMPLETE  dupes dropped   0
+
+    ARMS SHORT OF DESIGN: debate
+    Counts are deduplicated exposures on the identity key recorded in results/RESULTS.json.
+    D_MATCH_1 and track4 are bounded by cohort eligibility, not by the plan; see the
+    reasons registered in analysis/supervisor_scorecard.py DESIGN.
+    The debate endpoints above are computed on the 400 complete ordering-runs
+    (200 cases x 2 speaking orders); the 400 figure here is turn-level rows.
+    [results/RESULTS.json _integrity, written by analysis/canonical_numbers.py]

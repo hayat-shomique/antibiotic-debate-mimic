@@ -49,8 +49,73 @@ PR = FS["paired"]
 
 METHODS = (DOCS / "METHODS.md").read_text()
 LIMITS = (DOCS / "LIMITATIONS.md").read_text()
+AMPC = json.loads((RES / "ampc_exposure.json").read_text())
+TRIG = json.loads((RES / "trigger_comparison.json").read_text())
+
+def _trigger_table():
+    """One row per reconsideration trigger, all on the same round-0 starting position."""
+    onestep = list(TRIG["trigger_one_content_free_challenge"].values())
+    panel = TRIG["trigger_the_susceptibility_panel"]
+    debate = TRIG["trigger_a_counterpart_with_no_evidence"]
+    rows = []
+    for v in onestep + [panel, debate]:
+        rows.append("| {} | {} | {} | {}% | {} | {} | {}% | {} |".format(
+            v["label"], v["entered_adequate"], v["harmful_revisions"],
+            v["harmful_revision_rate_pct"], v["entered_inadequate"],
+            v["beneficial_corrections"], v["beneficial_correction_rate_pct"],
+            v["distinct_drugs_used_across_all_determinate_runs"]))
+    hrr = [v["harmful_revision_rate_pct"] for v in onestep]
+    bcr = [v["beneficial_correction_rate_pct"] for v in onestep]
+    rev = TRIG["after_the_debate_does_the_panel_repair_it"]
+    return {
+        "TRIGGER_ROWS": "\n".join(rows),
+        "ONESTEP_HRR_LO": f"{min(hrr):g}", "ONESTEP_HRR_HI": f"{max(hrr):g}",
+        "ONESTEP_BCR_LO": f"{min(bcr):g}", "ONESTEP_BCR_HI": f"{max(bcr):g}",
+        "PANEL_BCR": f'{panel["beneficial_correction_rate_pct"]:g}',
+        "PANEL_DRUGS": str(panel["distinct_drugs_used_across_all_determinate_runs"]),
+        "DEBATE_HRR": f'{debate["harmful_revision_rate_pct"]:g}',
+        "DEBATE_DRUGS": str(debate["distinct_drugs_used_across_all_determinate_runs"]),
+        "DEBATE_TURNS_LABEL": "Five turns of the same thing",
+        "REVEAL_MATCHED": str(TRIG["_reveal_arm_is_sequential_not_parallel"]["runs_checked"]),
+        "REVEAL_IN": str(rev["entered_inadequate"]),
+        "REVEAL_FIX": str(rev["beneficial_corrections"]),
+    }
+
+TRIGGER = _trigger_table()
+TRIGGER_ROWS = TRIGGER["TRIGGER_ROWS"]
+ONESTEP_HRR_LO, ONESTEP_HRR_HI = TRIGGER["ONESTEP_HRR_LO"], TRIGGER["ONESTEP_HRR_HI"]
+ONESTEP_BCR_LO, ONESTEP_BCR_HI = TRIGGER["ONESTEP_BCR_LO"], TRIGGER["ONESTEP_BCR_HI"]
+PANEL_BCR, PANEL_DRUGS = TRIGGER["PANEL_BCR"], TRIGGER["PANEL_DRUGS"]
+DEBATE_HRR, DEBATE_DRUGS = TRIGGER["DEBATE_HRR"], TRIGGER["DEBATE_DRUGS"]
+DEBATE_TURNS_LABEL = TRIGGER["DEBATE_TURNS_LABEL"]
+REVEAL_MATCHED, REVEAL_IN, REVEAL_FIX = (TRIGGER["REVEAL_MATCHED"], TRIGGER["REVEAL_IN"],
+                                         TRIGGER["REVEAL_FIX"])
 PROMPTS = (DOCS / "prompts_used.md").read_text()
 ASKS = (DOCS / "SUPERVISOR_ASKS.md").read_text()
+def _fill(text):
+    """The hand-written prose files carry tokens rather than numbers, because a number typed
+    into prose is a number typed twice. They are filled here from the result files. A token
+    with no value is a hard error, never a silently unfilled brace."""
+    c, h, a = AMPC["cohort"], AMPC["harmful_revisions"], AMPC["adequacy_labels_the_limitation_distrusts"]
+    values = {"N_ARMS": str(len(R["_integrity"])),
+              "TOTAL_EXPOSURES": f"{TOTAL_EXPOSURES:,}",
+              "AMPC_N": str(c["n_cases"]),
+              "AMPC_ANY": str(c["any_ampc_capable"]),
+              "AMPC_ANY_PCT": f'{c["any_ampc_capable_pct"]:g}',
+              "AMPC_BEST": str(c["best_established"]),
+              "AMPC_BEST_PCT": f'{c["best_established_pct"]:g}',
+              "AMPC_WEAK": str(c["named_but_weaker"]),
+              "AMPC_HARM_N": str(h["n"]),
+              "AMPC_HARM_3GC": str(h["onto_a_third_generation_cephalosporin_against_an_ampc_capable_organism"]),
+              "AMPC_HARM_FEP": str(h["onto_cefepime_which_guidance_endorses_for_ampc"]),
+              "AMPC_ATRISK": str(a["runs_ending_on_a_third_generation_cephalosporin_against_an_ampc_capable_organism_and_scored_adequate"]),
+              "AMPC_RUNS": str(a["denominator_runs"])}
+    missing = [m for m in re.findall(r"\{([A-Z_]+)\}", text) if m not in values]
+    if missing:
+        raise SystemExit("a hand-written prose file carries tokens with no value: " + ", ".join(sorted(set(missing))))
+    for k, v in values.items():
+        text = text.replace("{" + k + "}", v)
+    return text
 SCORE = (ROOT / "SCORECARD.txt").read_text()
 CLIN = json.loads((RES / "clinician_comparison.json").read_text())
 CONF = json.loads((RES / "confidence_axis.json").read_text())
@@ -94,7 +159,10 @@ C2_FLIP = 100.0 * PT[FRAMINGS[0]]["flip_rates"]["C2"]["k"] / PT[FRAMINGS[0]]["fl
 if len(C) != 1:
     raise ValueError("c differs across framings; the sentence below must become a range")
 C_VAL = C.pop()
-TOTAL_EXPOSURES = sum(m["n"] for m in R["_integrity"].values()) + FS["n"]
+# The few-shot arm is already one of the arms in _integrity, so adding it again double
+# counted 200 exposures and put a second, larger total in the same document.
+TOTAL_EXPOSURES = sum(m["n"] for m in R["_integrity"].values())
+assert "fewshot" in R["_integrity"], "the few-shot arm must be registered in the integrity block"
 DUPES = sum(m["duplicate_writes_dropped"] for m in R["_integrity"].values())
 
 transition_rows = "\n".join(
@@ -433,7 +501,7 @@ normal approximation would be assuming a distribution the instrument cannot prod
 but a cell that small bounds precision, so this is directional evidence for the state she named and
 not an effect size anyone should quote. What it is not is absent, and it is no longer withdrawn.
 
-### 7.9 Where the hierarchy meets the sycophancy question
+### 7.10 Where the hierarchy meets the sycophancy question
 
 She asked this directly on 18 August and it deserves a direct answer.
 
@@ -446,7 +514,7 @@ her appropriateness endpoint. That is why the same 2x2 appears three times, for 
 live agent and for the panel. Without the hierarchy the sycophancy is invisible, because the agents
 agree either way. Without the sycophancy layer the hierarchy has nothing to compare.
 
-### 7.10 The escalation ladder
+### 7.11 The escalation ladder
 
 The order was set by the supervisor at the first meeting: zero-shot, then few-shot, and training only
 if few-shot fails.
@@ -472,13 +540,45 @@ meropenem policy scores 96.0% coverage. Success is pre-specified as beating the 
 on coverage **and** on spectrum simultaneously, on held-out patients, and holding it under the C1
 pressure conditions.
 
+### 7.12 One reconsideration step, five triggers, and what actually does the damage
+
+Every row below starts from the same round-0 position on the same frozen cohort and applies one
+reconsideration step. The only thing that differs is what triggers it. The last row differs in
+something else as well, and that is the point of the table.
+
+| what made the model reconsider | entered adequate | harmful revisions | harmful revision rate | entered inadequate | corrected | beneficial correction rate | distinct drugs used |
+|---|---|---|---|---|---|---|---|
+{TRIGGER_ROWS}
+
+Two things fall out of this table and neither was designed for.
+
+The first is that a challenge carrying no evidence at all corrects an inadequate opening almost
+as often as the susceptibility panel does, {ONESTEP_BCR_LO}% to {ONESTEP_BCR_HI}% against the
+panel's {PANEL_BCR}%. The model revises at close to the right rate for none of the right reasons.
+
+The second is that the framing of the challenge is not what costs the patient coverage. Duration
+is. One turn of unsupported challenge costs {ONESTEP_HRR_LO}% to {ONESTEP_HRR_HI}% harmful
+revision whichever of the four framings is used. {DEBATE_TURNS_LABEL} costs {DEBATE_HRR}%. The
+answer space narrows with it: the panel leaves {PANEL_DRUGS} drugs in play across the cohort and
+the debate leaves {DEBATE_DRUGS}.
+
+One arm is deliberately absent from that table. The panel-reveal arm reveals the susceptibility
+result **after** the debate has already moved the position, and its records carry the debate's own
+finals on all {REVEAL_MATCHED} runs. Measuring it from round zero would credit the panel with
+undoing damage the debate caused in between. Measured from where it actually starts, it answers a
+different question and answers it well: of the {REVEAL_IN} runs that reach the panel already on an
+inadequate drug, {REVEAL_FIX} are repaired, and none of the runs that reach it on an adequate drug
+are pushed off one.
+
+[`results/trigger_comparison.json`, `analysis/trigger_comparison.py`]
+
 ## 8. What this does not show
 
-{section(LIMITS, "Clinical")}
+{section(_fill(LIMITS), "Clinical")}
 
-{section(LIMITS, "Statistical")}
+{section(_fill(LIMITS), "Statistical")}
 
-{section(LIMITS, "Scope")}
+{section(_fill(LIMITS), "Scope")}
 
 ## 8b. What actually grew, and what the panel could not answer
 
@@ -550,14 +650,14 @@ repeated write, not a repeated measurement, and the second is dropped before any
 |---|---|---|---|
 {arm_rows}
 
-**{DUPES} duplicate writes found and dropped in total**, across {TOTAL_EXPOSURES} exposures.
+**{DUPES} duplicate writes found and dropped in total**, across {TOTAL_EXPOSURES:,} exposures.
 Every arm now runs under a PID lock. Model `{R['model']}`, temperature {R['temperature']}, seed
 {R['seed']}, run locally: MIMIC-IV is credentialed under a PhysioNet data use agreement and no
 record-level data is committed to this repository.
 
 ## 11. What I was asked, and what I built
 
-{re.sub(r'^## ', '### ', ASKS.split('# What I was asked, and what I built', 1)[1].strip(), flags=re.M)}
+{re.sub(r'^## ', '### ', _fill(ASKS).split('# What I was asked, and what I built', 1)[1].strip(), flags=re.M)}
 
 ---
 
