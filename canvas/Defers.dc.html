@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;450;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif; }
+    a { color: #0F62FE; } a:hover { color: #002D9C; }
+    .slide { width: 1280px; height: 720px; box-sizing: border-box; position: relative;
+             background: #FFFFFF; color: #161616; overflow: hidden; }
+    .dark { background: #161616; color: #F4F4F4; }
+    .kick { font-family: "IBM Plex Mono", monospace; font-size: 15px; letter-spacing: .18em;
+            text-transform: uppercase; color: #0F62FE; font-weight: 600; }
+    .h1 { font-size: 62px; font-weight: 600; letter-spacing: -.03em; line-height: 1.04; margin: 0; }
+    .h2 { font-size: 44px; font-weight: 600; letter-spacing: -.025em; line-height: 1.1; margin: 0; }
+    .lede { font-size: 22px; line-height: 1.45; color: #525252; margin: 0; }
+    .lede-d { font-size: 22px; line-height: 1.45; color: #A8A8A8; margin: 0; }
+    .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+    .foot { position: absolute; left: 72px; bottom: 40px; font-family: "IBM Plex Mono", monospace;
+            font-size: 13px; color: #6F6F6F; }
+    .pad { padding: 64px 72px; }
+  </style>
+</helmet>
+<div class="slide pad" style="display:flex;flex-direction:column;gap:22px">
+  <div class="kick">Result two</div>
+  <h2 class="h2">It does not wobble. It defers.</h2>
+  <div style="margin-top:30px">
+    <div style="display:flex;align-items:center;gap:22px;margin-bottom:18px">
+      <div style="flex:0 0 260px;font-size:19px;text-align:right">Somebody speaks, says nothing</div>
+      <div style="flex:1;height:44px;background:#F4F4F4;position:relative">
+        <div style="position:absolute;inset:0 auto 0 0;width:0.6%;background:#8D8D8D"></div>
+      </div>
+      <div style="flex:0 0 150px" class="mono"><span style="font-size:26px;font-weight:600">0%</span>
+      <span style="font-size:15px;color:#6F6F6F;display:block">0 of 180 to 185 cases</span></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:22px;margin-bottom:18px">
+      <div style="flex:0 0 260px;font-size:19px;text-align:right">Somebody disagrees, with no evidence</div>
+      <div style="flex:1;height:44px;background:#F4F4F4;position:relative">
+        <div style="position:absolute;inset:0 auto 0 0;width:96%;background:#D02670"></div>
+      </div>
+      <div style="flex:0 0 150px" class="mono"><span style="font-size:26px;font-weight:600">93 to 100%</span>
+      <span style="font-size:15px;color:#6F6F6F;display:block">across four framings</span></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:22px;margin-bottom:18px">
+      <div style="flex:0 0 260px;font-size:19px;text-align:right">The laboratory result arrives</div>
+      <div style="flex:1;height:44px;background:#F4F4F4;position:relative">
+        <div style="position:absolute;inset:0 auto 0 0;width:57.5%;background:#007D79"></div>
+      </div>
+      <div style="flex:0 0 150px" class="mono"><span style="font-size:26px;font-weight:600">57%</span>
+      <span style="font-size:15px;color:#6F6F6F;display:block">the only real information</span></div>
+    </div>
+  </div>
+  <div style="background:#161616;color:#F4F4F4;padding:26px 30px;margin-top:26px">
+    <p style="margin:0;font-size:23px;line-height:1.45"><strong>It is moved more by a person disagreeing with it
+    than by the laboratory result.</strong></p>
+  </div>
+  <div class="foot">The zero in the top row is what turns this from a description into an inference</div>
+</div></x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

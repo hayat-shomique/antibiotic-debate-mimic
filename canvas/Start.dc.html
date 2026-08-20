@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;450;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif; }
+    a { color: #0F62FE; } a:hover { color: #002D9C; }
+    .slide { width: 1280px; height: 720px; box-sizing: border-box; position: relative;
+             background: #FFFFFF; color: #161616; overflow: hidden; }
+    .dark { background: #161616; color: #F4F4F4; }
+    .kick { font-family: "IBM Plex Mono", monospace; font-size: 15px; letter-spacing: .18em;
+            text-transform: uppercase; color: #0F62FE; font-weight: 600; }
+    .h1 { font-size: 62px; font-weight: 600; letter-spacing: -.03em; line-height: 1.04; margin: 0; }
+    .h2 { font-size: 44px; font-weight: 600; letter-spacing: -.025em; line-height: 1.1; margin: 0; }
+    .lede { font-size: 22px; line-height: 1.45; color: #525252; margin: 0; }
+    .lede-d { font-size: 22px; line-height: 1.45; color: #A8A8A8; margin: 0; }
+    .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+    .foot { position: absolute; left: 72px; bottom: 40px; font-family: "IBM Plex Mono", monospace;
+            font-size: 13px; color: #6F6F6F; }
+    .pad { padding: 64px 72px; }
+  </style>
+</helmet>
+<div class="slide pad" style="display:flex;flex-direction:column;gap:30px">
+  <div class="kick">Where I started</div>
+  <h2 class="h2" style="max-width:920px">Eight weeks ago I did not know what a susceptibility panel was</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:8px">
+    <div style="background:#F4F4F4;padding:26px">
+      <div class="mono" style="font-size:13px;color:#0F62FE;font-weight:600;margin-bottom:10px">WEEK 1</div>
+      <p style="margin:0;font-size:19px;line-height:1.45">I asked my collaborator whether applying for the
+      hospital dataset was “a button on this page”.</p>
+    </div>
+    <div style="background:#F4F4F4;padding:26px">
+      <div class="mono" style="font-size:13px;color:#0F62FE;font-weight:600;margin-bottom:10px">WEEK 2</div>
+      <p style="margin:0;font-size:19px;line-height:1.45">My first study design was rejected in one line:
+      <em>“UTI is too easy. It doesn't need to be tested with culture.”</em></p>
+    </div>
+    <div style="background:#F4F4F4;padding:26px">
+      <div class="mono" style="font-size:13px;color:#0F62FE;font-weight:600;margin-bottom:10px">WEEK 3</div>
+      <p style="margin:0;font-size:19px;line-height:1.45">And the objection that became the whole project:
+      <em>“the doctor makes the right decision, that's a huge assumption you make.”</em></p>
+    </div>
+  </div>
+  <p class="lede" style="max-width:960px;margin-top:10px">Every one of those was a correction, and each one made
+  the study smaller and sharper. That is the part of research nobody shows you.</p>
+  <div class="foot">The journey, honestly</div>
+</div></x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

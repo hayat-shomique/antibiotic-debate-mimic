@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,800;1,400&family=Courier+Prime:wght@400;700&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #C1440E; } a:hover { color: #8A2F09; }
+    .slide { width: 1280px; height: 720px; box-sizing: border-box; position: relative; overflow: hidden; }
+    .a { background:#FBF7EF; color:#1E1B16; font-family:"Spectral",Georgia,serif;
+         background-image:linear-gradient(#EAE2D2 1px,transparent 1px);background-size:100% 34px; }
+    .a .tape { position:absolute; background:rgba(193,68,14,.14); border:1px solid rgba(193,68,14,.25);
+               transform:rotate(-1.6deg); }
+    .a .mono { font-family:"Courier Prime",monospace; }
+    .a .scrawl { font-family:"Courier Prime",monospace; color:#C1440E; }
+    .a h1 { font-size:70px; font-weight:800; line-height:1.02; letter-spacing:-.02em; margin:0; }
+    .a h2 { font-size:46px; font-weight:600; line-height:1.08; margin:0; }
+    .a p { font-size:21px; line-height:1.55; margin:0; }
+  </style>
+</helmet>
+
+<div class="slide a" style="padding:70px 78px;display:flex;flex-direction:column;justify-content:center;gap:26px">
+  <div class="mono" style="font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:#7A6B52">
+    Lab notebook &nbsp;·&nbsp; UNIQ+ 2026 &nbsp;·&nbsp; entry 41 of 41</div>
+  <h1 style="max-width:900px">Two agents argued<br>about an antibiotic.<br>
+    <span style="font-style:italic;color:#C1440E">The bacteria settled it.</span></h1>
+  <div style="display:flex;gap:14px;align-items:flex-start;margin-top:6px">
+    <div style="width:3px;background:#C1440E;align-self:stretch"></div>
+    <p style="max-width:700px">Eight weeks ago I did not know what a susceptibility panel was.
+    This is what I found out, and everything I got wrong on the way.</p>
+  </div>
+  <div class="mono" style="font-size:16px;color:#5B5344;margin-top:18px">
+    Shomique Hayat &nbsp;—&nbsp; supervised by Prof. Tingting Zhu, with Zhikang Chen</div>
+  <div style="position:absolute;right:70px;top:92px;width:430px;transform:rotate(1.4deg)">
+    <div class="tape" style="left:-14px;top:-16px;right:-14px;bottom:-16px"></div>
+    <img src="referee.png" style="width:100%;display:block;position:relative;mix-blend-mode:multiply">
+    <div class="scrawl" style="font-size:15px;margin-top:10px;position:relative">
+      &#8593; the whole idea, drawn on my third day</div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

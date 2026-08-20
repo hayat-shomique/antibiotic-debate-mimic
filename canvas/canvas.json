@@ -1,0 +1,120 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 720,
+      "title": "01 Main"
+    },
+    {
+      "file": "Start.dc.html",
+      "x": 1400,
+      "y": 0,
+      "w": 1280,
+      "h": 720,
+      "title": "02 Start"
+    },
+    {
+      "file": "Problem.dc.html",
+      "x": 2800,
+      "y": 0,
+      "w": 1280,
+      "h": 720,
+      "title": "03 Problem"
+    },
+    {
+      "file": "Referee.dc.html",
+      "x": 4200,
+      "y": 0,
+      "w": 1280,
+      "h": 720,
+      "title": "04 Referee"
+    },
+    {
+      "file": "Built.dc.html",
+      "x": 0,
+      "y": 860,
+      "w": 1280,
+      "h": 720,
+      "title": "05 Built"
+    },
+    {
+      "file": "Constant.dc.html",
+      "x": 1400,
+      "y": 860,
+      "w": 1280,
+      "h": 720,
+      "title": "06 Constant"
+    },
+    {
+      "file": "Defers.dc.html",
+      "x": 2800,
+      "y": 860,
+      "w": 1280,
+      "h": 720,
+      "title": "07 Defers"
+    },
+    {
+      "file": "Turn.dc.html",
+      "x": 4200,
+      "y": 860,
+      "w": 1280,
+      "h": 720,
+      "title": "08 Turn"
+    },
+    {
+      "file": "Answer.dc.html",
+      "x": 0,
+      "y": 1720,
+      "w": 1280,
+      "h": 720,
+      "title": "09 Answer"
+    },
+    {
+      "file": "Wrong.dc.html",
+      "x": 1400,
+      "y": 1720,
+      "w": 1280,
+      "h": 720,
+      "title": "10 Wrong"
+    },
+    {
+      "file": "Learned.dc.html",
+      "x": 2800,
+      "y": 1720,
+      "w": 1280,
+      "h": 720,
+      "title": "11 Learned"
+    },
+    {
+      "file": "Next.dc.html",
+      "x": 4200,
+      "y": 1720,
+      "w": 1280,
+      "h": 720,
+      "title": "12 Next"
+    },
+    {
+      "file": "Close.dc.html",
+      "x": 0,
+      "y": 2580,
+      "w": 1280,
+      "h": 720,
+      "title": "13 Close"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "pacing",
+      "x": 0,
+      "y": -150,
+      "w": 560,
+      "text": "Ten minutes, thirteen slides, about 45 seconds each.\\nSlides 2 and 10 are the journey. Slide 8 is the turn."
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}

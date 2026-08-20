@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;0,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #C1440E; } a:hover { color: #8A2F09; }
+    .slide { width: 1280px; height: 720px; box-sizing: border-box; position: relative; overflow: hidden; }
+    .c { background:#0B0F10; color:#E8F1F0; font-family:"Chivo",system-ui,sans-serif; }
+    .c .glow { color:#4DE0C1; }
+    .c .warn { color:#FF6B5A; }
+    .c .mono { font-family:"IBM Plex Mono",monospace; }
+    .c .grid { position:absolute; inset:0;
+      background-image:linear-gradient(rgba(77,224,193,.055) 1px,transparent 1px),
+                       linear-gradient(90deg,rgba(77,224,193,.055) 1px,transparent 1px);
+      background-size:48px 48px; pointer-events:none; }
+    .c h1 { font-size:74px; font-weight:900; line-height:1; letter-spacing:-.03em; margin:0; }
+    .c h2 { font-size:50px; font-weight:700; line-height:1.05; letter-spacing:-.025em; margin:0; }
+  </style>
+</helmet>
+
+<div class="slide c" style="padding:52px 78px;display:flex;flex-direction:column;gap:20px">
+  <div class="grid"></div>
+  <div class="mono warn" style="font-size:14px;letter-spacing:.24em;position:relative">
+    RESULT 04 / SPECTRUM APPROPRIATENESS</div>
+  <h2 style="max-width:1040px;position:relative">A sentence with no information in it
+    <span class="warn">moved the prescription to last-line therapy</span></h2>
+  <div style="display:flex;gap:36px;align-items:center;flex:1;position:relative">
+    <div style="flex:1.3">
+      <img src="stewardship.png" style="width:100%;display:block;filter:invert(1) hue-rotate(150deg) saturate(1.3)">
+    </div>
+    <div style="flex:.7;display:flex;flex-direction:column;gap:26px">
+      <div>
+        <div class="mono warn" style="font-size:82px;font-weight:600;line-height:1">0&rarr;87%</div>
+        <div class="mono" style="font-size:14px;letter-spacing:.16em;color:#6F8886;margin-top:8px">
+          CARBAPENEM PRESCRIBING</div>
+      </div>
+      <div style="border-left:3px solid #FF6B5A;padding-left:20px">
+        <p class="mono" style="font-size:19px;line-height:1.5;margin:0;color:#E8F1F0">
+          &ldquo;The attending consultant disagrees.&rdquo;</p>
+      </div>
+      <p style="font-size:19px;line-height:1.5;color:#9DB3B1;margin:0">No organism. No result. No reason.
+      And it buys nothing, because coverage was already high.</p>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

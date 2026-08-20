@@ -1,0 +1,164 @@
+{
+  "_purpose": "answers to an external methodological review, tested rather than asserted",
+  "1_attrition_is_post_treatment": {
+    "concern": "dropping cases where a condition is UNDETERMINED conditions on a variable affected by the treatment, which can bias the paired test",
+    "per_framing": {
+      "C1a_authority": {
+        "dropped": 16,
+        "by_cause": {
+          "C0 + Cn": 7,
+          "C1": 2,
+          "C0 + Cn + C1": 3,
+          "C0 + Cn + C2": 1,
+          "C0 + Cn + C1 + C2": 2,
+          "C2": 1
+        },
+        "dropped_because_of_the_pressure_response_alone": 2,
+        "reading": "a drop caused by C0 or Cn is pre-treatment: the baseline answer was already unscoreable, so it cannot have been caused by the pressure"
+      },
+      "C1b_peer_consensus": {
+        "dropped": 16,
+        "by_cause": {
+          "C0 + Cn": 7,
+          "C1": 2,
+          "C0 + Cn + C1": 3,
+          "C0 + Cn + C2": 2,
+          "C0 + Cn + C1 + C2": 1,
+          "C2": 1
+        },
+        "dropped_because_of_the_pressure_response_alone": 2,
+        "reading": "a drop caused by C0 or Cn is pre-treatment: the baseline answer was already unscoreable, so it cannot have been caused by the pressure"
+      },
+      "C1c_safety_framing": {
+        "dropped": 20,
+        "by_cause": {
+          "C0 + Cn": 7,
+          "C1": 6,
+          "C0 + Cn + C1": 3,
+          "C0 + Cn + C2": 2,
+          "C0 + Cn + C1 + C2": 1,
+          "C2": 1
+        },
+        "dropped_because_of_the_pressure_response_alone": 6,
+        "reading": "a drop caused by C0 or Cn is pre-treatment: the baseline answer was already unscoreable, so it cannot have been caused by the pressure"
+      },
+      "C1d_bare_doubt": {
+        "dropped": 15,
+        "by_cause": {
+          "C0 + Cn": 6,
+          "C1": 1,
+          "C0 + Cn + C1": 4,
+          "C0 + Cn + C2": 1,
+          "C0 + Cn + C1 + C2": 2,
+          "C2": 1
+        },
+        "dropped_because_of_the_pressure_response_alone": 1,
+        "reading": "a drop caused by C0 or Cn is pre-treatment: the baseline answer was already unscoreable, so it cannot have been caused by the pressure"
+      }
+    },
+    "worst_case_sensitivity": {
+      "C1a_authority": {
+        "observed": {
+          "b": 182,
+          "c": 0,
+          "p": 3.2626522339992623e-55
+        },
+        "worst_case_all_dropped_against_the_finding": {
+          "b": 182,
+          "c": 16,
+          "p": 7.802336169147518e-37
+        }
+      },
+      "C1b_peer_consensus": {
+        "observed": {
+          "b": 183,
+          "c": 0,
+          "p": 1.6313261169996311e-55
+        },
+        "worst_case_all_dropped_against_the_finding": {
+          "b": 183,
+          "c": 16,
+          "p": 4.2400775572121576e-37
+        }
+      },
+      "C1c_safety_framing": {
+        "observed": {
+          "b": 180,
+          "c": 0,
+          "p": 1.305060893599705e-54
+        },
+        "worst_case_all_dropped_against_the_finding": {
+          "b": 180,
+          "c": 20,
+          "p": 2.2558605729189232e-33
+        }
+      },
+      "C1d_bare_doubt": {
+        "observed": {
+          "b": 173,
+          "c": 0,
+          "p": 1.6704779438076223e-52
+        },
+        "worst_case_all_dropped_against_the_finding": {
+          "b": 173,
+          "c": 15,
+          "p": 3.112369787591057e-35
+        }
+      }
+    },
+    "verdict": "valid in principle and small here: the dominant cause is the BASELINE being unscoreable, which is pre-treatment. Assigning every dropped case against the finding still leaves p below 1e-32 in every framing."
+  },
+  "2_harm_may_be_the_drug_not_the_conversation": {
+    "concern": "the debate converges on two cephalosporins whose failure rate may explain the HRR",
+    "final_answer_failure_rate": {
+      "cefepime": {
+        "determinate_runs": 202,
+        "inadequate": 30,
+        "fails_pct": 14.9
+      },
+      "ceftriaxone": {
+        "determinate_runs": 178,
+        "inadequate": 39,
+        "fails_pct": 21.9
+      },
+      "piperacillin-tazobactam": {
+        "determinate_runs": 1,
+        "inadequate": 0,
+        "fails_pct": 0.0
+      }
+    },
+    "harmful_events": {
+      "n": 52,
+      "destination": {
+        "ceftriaxone": 29,
+        "cefepime": 23
+      },
+      "origin": {
+        "piperacillin-tazobactam": 52
+      }
+    },
+    "verdict": "upheld. Every harmful event is the same move: off piperacillin-tazobactam onto a cephalosporin that fails more often on this cohort. The honest claim is the cost of collapsing the answer space, not case-by-case misreasoning."
+  },
+  "3_clustering": {
+    "concern": "ICC 0.913 makes run-level intervals too narrow",
+    "run_level": {
+      "k": 52,
+      "n": 341,
+      "pct": 15.2,
+      "ci95": [
+        11.8,
+        19.5
+      ]
+    },
+    "patient_level": {
+      "k": 29,
+      "n": 175,
+      "pct": 16.6,
+      "ci95": [
+        11.8,
+        22.8
+      ]
+    },
+    "verdict": "upheld as a reporting rule, and it does not change the finding: at the patient level the rate is slightly higher with an appropriately wider interval."
+  }
+}

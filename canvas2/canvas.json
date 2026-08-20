@@ -1,0 +1,86 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": -910,
+      "w": 1280,
+      "h": 720,
+      "title": "Pick a direction"
+    },
+    {
+      "file": "A-Title.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 720,
+      "title": "A \u00b7 Lab notebook \u2014 opening"
+    },
+    {
+      "file": "A-Result.dc.html",
+      "x": 1390,
+      "y": 0,
+      "w": 1280,
+      "h": 720,
+      "title": "A \u00b7 Lab notebook \u2014 a result"
+    },
+    {
+      "file": "B-Title.dc.html",
+      "x": 0,
+      "y": 910,
+      "w": 1280,
+      "h": 720,
+      "title": "B \u00b7 Broadsheet \u2014 opening"
+    },
+    {
+      "file": "B-Result.dc.html",
+      "x": 1390,
+      "y": 910,
+      "w": 1280,
+      "h": 720,
+      "title": "B \u00b7 Broadsheet \u2014 a result"
+    },
+    {
+      "file": "C-Title.dc.html",
+      "x": 0,
+      "y": 1820,
+      "w": 1280,
+      "h": 720,
+      "title": "C \u00b7 Clinical dark \u2014 opening"
+    },
+    {
+      "file": "C-Result.dc.html",
+      "x": 1390,
+      "y": 1820,
+      "w": 1280,
+      "h": 720,
+      "title": "C \u00b7 Clinical dark \u2014 a result"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "dir-1",
+      "x": 2820,
+      "y": 40,
+      "w": 420,
+      "text": "A \u2014 LAB NOTEBOOK\nWarm paper, Spectral serif, typewriter annotations, figures taped in.\nMotivation: this is a journey talk and you were a beginner eight weeks ago. It makes that the point.\nTradeoff: least formal. Some supervisors read hand-drawn as under-baked."
+    },
+    {
+      "id": "dir-2",
+      "x": 2820,
+      "y": 950,
+      "w": 420,
+      "text": "B \u2014 BROADSHEET\nInstrument Serif at 100px, hard rules, one signal red, figures printed big.\nMotivation: reads across a room in three seconds and treats your finding as news.\nTradeoff: demands short copy. Anything wordy breaks it."
+    },
+    {
+      "id": "dir-3",
+      "x": 2820,
+      "y": 1860,
+      "w": 420,
+      "text": "C \u2014 CLINICAL DARK\nNear-black ground, luminous data, Chivo and Plex Mono, inverted figures.\nMotivation: looks like the machine's own point of view, and the charts glow.\nTradeoff: dark slides depend on the room's projector. Can read cold."
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}

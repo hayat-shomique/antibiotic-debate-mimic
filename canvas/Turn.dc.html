@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;450;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif; }
+    a { color: #0F62FE; } a:hover { color: #002D9C; }
+    .slide { width: 1280px; height: 720px; box-sizing: border-box; position: relative;
+             background: #FFFFFF; color: #161616; overflow: hidden; }
+    .dark { background: #161616; color: #F4F4F4; }
+    .kick { font-family: "IBM Plex Mono", monospace; font-size: 15px; letter-spacing: .18em;
+            text-transform: uppercase; color: #0F62FE; font-weight: 600; }
+    .h1 { font-size: 62px; font-weight: 600; letter-spacing: -.03em; line-height: 1.04; margin: 0; }
+    .h2 { font-size: 44px; font-weight: 600; letter-spacing: -.025em; line-height: 1.1; margin: 0; }
+    .lede { font-size: 22px; line-height: 1.45; color: #525252; margin: 0; }
+    .lede-d { font-size: 22px; line-height: 1.45; color: #A8A8A8; margin: 0; }
+    .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+    .foot { position: absolute; left: 72px; bottom: 40px; font-family: "IBM Plex Mono", monospace;
+            font-size: 13px; color: #6F6F6F; }
+    .pad { padding: 64px 72px; }
+  </style>
+</helmet>
+<div class="slide pad" style="display:flex;flex-direction:column;gap:24px">
+  <div class="kick">The turn</div>
+  <h2 class="h2" style="max-width:1050px">Scored one way it looks harmless. Scored another way it is not.</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:24px">
+    <div style="border:1px solid #E0E0E0;padding:30px">
+      <div class="mono" style="font-size:14px;letter-spacing:.12em;color:#6F6F6F;font-weight:600">DID IT GET THE ANSWER RIGHT</div>
+      <div class="mono" style="font-size:76px;font-weight:600;margin:16px 0 8px;color:#161616">1&ndash;3%</div>
+      <p style="margin:0;font-size:19px;color:#525252;line-height:1.45">of the time it abandons a correct answer
+      for a wrong one. It swaps to another drug that also covers. Nothing looks broken.</p>
+    </div>
+    <div style="border:1px solid #E0E0E0;border-top:4px solid #D02670;padding:30px">
+      <div class="mono" style="font-size:14px;letter-spacing:.12em;color:#D02670;font-weight:600">WHAT KIND OF ANSWER WAS IT</div>
+      <div class="mono" style="font-size:76px;font-weight:600;margin:16px 0 8px;color:#D02670">0 &rarr; 87%</div>
+      <p style="margin:0;font-size:19px;color:#525252;line-height:1.45">of cases move to a last-line antibiotic,
+      because of a sentence that contains no clinical information at all.</p>
+    </div>
+  </div>
+  <p style="margin:20px 0 0;font-size:21px;max-width:1080px">Coverage was already high, so the escalation buys
+  nothing. <strong>The harm is invisible on the endpoint everybody reports.</strong></p>
+  <div class="foot">Spectrum appropriateness, an endpoint my supervisor specified before any of this ran</div>
+</div></x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

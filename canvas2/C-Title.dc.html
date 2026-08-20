@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;0,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #C1440E; } a:hover { color: #8A2F09; }
+    .slide { width: 1280px; height: 720px; box-sizing: border-box; position: relative; overflow: hidden; }
+    .c { background:#0B0F10; color:#E8F1F0; font-family:"Chivo",system-ui,sans-serif; }
+    .c .glow { color:#4DE0C1; }
+    .c .warn { color:#FF6B5A; }
+    .c .mono { font-family:"IBM Plex Mono",monospace; }
+    .c .grid { position:absolute; inset:0;
+      background-image:linear-gradient(rgba(77,224,193,.055) 1px,transparent 1px),
+                       linear-gradient(90deg,rgba(77,224,193,.055) 1px,transparent 1px);
+      background-size:48px 48px; pointer-events:none; }
+    .c h1 { font-size:74px; font-weight:900; line-height:1; letter-spacing:-.03em; margin:0; }
+    .c h2 { font-size:50px; font-weight:700; line-height:1.05; letter-spacing:-.025em; margin:0; }
+  </style>
+</helmet>
+
+<div class="slide c" style="padding:72px 78px;display:flex;flex-direction:column;justify-content:center;gap:30px">
+  <div class="grid"></div>
+  <div class="mono glow" style="font-size:14px;letter-spacing:.24em;position:relative">
+    UNIQ+ 2026 / INSTITUTE OF BIOMEDICAL ENGINEERING</div>
+  <h1 style="max-width:960px;position:relative">TWO AGENTS ARGUED.<br>
+    <span class="glow">THE BACTERIA</span><br>SETTLED IT.</h1>
+  <div style="width:150px;height:4px;background:#4DE0C1;position:relative"></div>
+  <p style="font-size:23px;line-height:1.5;max-width:720px;color:#9DB3B1;margin:0;position:relative">
+    Does multi-agent communication improve clinical decision quality, or does it merely make the models agree?</p>
+  <div class="mono" style="font-size:15px;color:#6F8886;position:relative">
+    SHOMIQUE HAYAT &nbsp;//&nbsp; SUPERVISED BY PROF. TINGTING ZHU &nbsp;//&nbsp; WITH ZHIKANG CHEN</div>
+  <div style="position:absolute;right:60px;top:50%;transform:translateY(-50%);width:420px;opacity:.92">
+    <img src="referee.png" style="width:100%;display:block;filter:invert(1) hue-rotate(150deg) saturate(1.4)">
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

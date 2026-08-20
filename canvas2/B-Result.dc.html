@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Public+Sans:wght@400;600;800&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #C1440E; } a:hover { color: #8A2F09; }
+    .slide { width: 1280px; height: 720px; box-sizing: border-box; position: relative; overflow: hidden; }
+    .b { background:#FFFFFF; color:#0A0A0A; font-family:"Public Sans",system-ui,sans-serif; }
+    .b .disp { font-family:"Instrument Serif",Georgia,serif; font-weight:400; letter-spacing:-.02em; }
+    .b .rule { height:6px; background:#0A0A0A; }
+    .b .sig { color:#E4002B; }
+    .b .label { font-size:12px; letter-spacing:.24em; text-transform:uppercase; font-weight:800; }
+  </style>
+</helmet>
+
+<div class="slide b" style="display:flex;flex-direction:column">
+  <div style="padding:30px 64px 0" class="label">Result four &nbsp;/&nbsp; spectrum appropriateness</div>
+  <div class="rule" style="margin:12px 64px 0;height:3px"></div>
+  <div style="padding:26px 64px 0">
+    <div class="disp" style="font-size:66px;line-height:1.02;max-width:1050px">An empty sentence pushed it
+      to the <span class="sig">last-line drug</span> for four in five patients.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;flex:1;margin-top:22px">
+    <div style="padding:0 30px 0 64px">
+      <img src="stewardship.png" style="width:100%;display:block">
+    </div>
+    <div style="padding:0 64px 0 30px;border-left:2px solid #0A0A0A;display:flex;flex-direction:column;justify-content:center;gap:22px">
+      <div>
+        <div class="disp sig" style="font-size:96px;line-height:.9">0&thinsp;&rarr;&thinsp;87%</div>
+        <div class="label" style="margin-top:8px">carbapenem prescribing, under pressure</div>
+      </div>
+      <p style="font-size:20px;line-height:1.5;margin:0">It buys nothing. Coverage was already high, and the
+      sentence that caused it contains no clinical information at all.</p>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;450;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif; }
+    a { color: #0F62FE; } a:hover { color: #002D9C; }
+    .slide { width: 1280px; height: 720px; box-sizing: border-box; position: relative;
+             background: #FFFFFF; color: #161616; overflow: hidden; }
+    .dark { background: #161616; color: #F4F4F4; }
+    .kick { font-family: "IBM Plex Mono", monospace; font-size: 15px; letter-spacing: .18em;
+            text-transform: uppercase; color: #0F62FE; font-weight: 600; }
+    .h1 { font-size: 62px; font-weight: 600; letter-spacing: -.03em; line-height: 1.04; margin: 0; }
+    .h2 { font-size: 44px; font-weight: 600; letter-spacing: -.025em; line-height: 1.1; margin: 0; }
+    .lede { font-size: 22px; line-height: 1.45; color: #525252; margin: 0; }
+    .lede-d { font-size: 22px; line-height: 1.45; color: #A8A8A8; margin: 0; }
+    .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+    .foot { position: absolute; left: 72px; bottom: 40px; font-family: "IBM Plex Mono", monospace;
+            font-size: 13px; color: #6F6F6F; }
+    .pad { padding: 64px 72px; }
+  </style>
+</helmet>
+<div class="slide dark pad" style="display:flex;flex-direction:column;justify-content:center;gap:34px">
+  <div class="kick">UNIQ+ 2026 &nbsp;·&nbsp; Institute of Biomedical Engineering</div>
+  <h1 class="h1" style="max-width:1000px">Two agents argue about<br>an antibiotic. The bacteria<br>decide who was right.</h1>
+  <div style="width:120px;height:5px;background:#0F62FE"></div>
+  <p class="lede-d" style="max-width:760px">Does multi-agent communication improve clinical decision quality,
+  or does it merely make the models agree?</p>
+  <div style="display:flex;gap:44px;margin-top:14px;font-size:18px;color:#C6C6C6">
+    <span><strong style="color:#F4F4F4">Shomique Hayat</strong></span>
+    <span>supervised by Prof. Tingting Zhu</span>
+    <span>with Zhikang Chen</span>
+  </div>
+</div></x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

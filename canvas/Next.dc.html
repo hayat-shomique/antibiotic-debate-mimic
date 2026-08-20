@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;450;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif; }
+    a { color: #0F62FE; } a:hover { color: #002D9C; }
+    .slide { width: 1280px; height: 720px; box-sizing: border-box; position: relative;
+             background: #FFFFFF; color: #161616; overflow: hidden; }
+    .dark { background: #161616; color: #F4F4F4; }
+    .kick { font-family: "IBM Plex Mono", monospace; font-size: 15px; letter-spacing: .18em;
+            text-transform: uppercase; color: #0F62FE; font-weight: 600; }
+    .h1 { font-size: 62px; font-weight: 600; letter-spacing: -.03em; line-height: 1.04; margin: 0; }
+    .h2 { font-size: 44px; font-weight: 600; letter-spacing: -.025em; line-height: 1.1; margin: 0; }
+    .lede { font-size: 22px; line-height: 1.45; color: #525252; margin: 0; }
+    .lede-d { font-size: 22px; line-height: 1.45; color: #A8A8A8; margin: 0; }
+    .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+    .foot { position: absolute; left: 72px; bottom: 40px; font-family: "IBM Plex Mono", monospace;
+            font-size: 13px; color: #6F6F6F; }
+    .pad { padding: 64px 72px; }
+  </style>
+</helmet>
+<div class="slide pad" style="display:flex;flex-direction:column;gap:24px">
+  <div class="kick">Where this goes next</div>
+  <h2 class="h2">The result tells me which rung to climb</h2>
+  <div style="display:flex;gap:20px;align-items:flex-end;margin-top:30px;height:250px">
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:150px">
+      <div style="background:#F4F4F4;border-top:4px solid #8D8D8D;padding:20px;height:100%">
+        <div class="mono" style="font-size:14px;color:#6F6F6F;font-weight:600">RUNG 1 &nbsp; done</div>
+        <div style="font-size:21px;font-weight:600;margin:8px 0 6px">Ask it directly</div>
+        <p style="margin:0;font-size:17px;color:#525252;line-height:1.4">One drug for every patient.</p>
+      </div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:200px">
+      <div style="background:#F4F4F4;border-top:4px solid #D02670;padding:20px;height:100%">
+        <div class="mono" style="font-size:14px;color:#D02670;font-weight:600">RUNG 2 &nbsp; done</div>
+        <div style="font-size:21px;font-weight:600;margin:8px 0 6px">Show it examples</div>
+        <p style="margin:0;font-size:17px;color:#525252;line-height:1.4">Six drugs instead of one, and coverage got
+        worse, not better.</p>
+      </div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:250px">
+      <div style="background:#EDF5FF;border-top:4px solid #0F62FE;padding:20px;height:100%">
+        <div class="mono" style="font-size:14px;color:#0F62FE;font-weight:600">RUNG 3 &nbsp; next</div>
+        <div style="font-size:21px;font-weight:600;margin:8px 0 6px">Train it</div>
+        <p style="margin:0;font-size:17px;color:#525252;line-height:1.4">With a catch: train on coverage alone and
+        you get the last-line drug for everybody.</p>
+      </div>
+    </div>
+  </div>
+  <p class="lede" style="margin-top:22px;max-width:1060px">Also next: a live opposing agent instead of a scripted one,
+  and asking an actual stewardship pharmacist whether any of this is what they would want.</p>
+  <div class="foot">The order was set by my supervisor at the first meeting</div>
+</div></x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
