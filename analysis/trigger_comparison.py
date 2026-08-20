@@ -154,6 +154,32 @@ def main():
             "panel revealed after the debate has already moved the position",
             "SEQUENTIAL. Not a comparator for the two above; it starts where the debate ended"),
     }
+    # This file recomputes quantities that analysis/tingting_endpoints.py also computes, from the
+    # same runs by different code. Two implementations of the same endpoint that quietly disagree
+    # is the worst case, so they are compared here and a disagreement is a hard error rather than
+    # two numbers in two files.
+    te_path = RES / "tingting_endpoints.json"
+    if te_path.exists():
+        TE = json.loads(te_path.read_text())
+        mismatches = []
+        for sub, mine in out["trigger_one_content_free_challenge"].items():
+            theirs = TE.get("sycophancy_under_pressure", {}).get(sub, {}).get("HRR")
+            if theirs and (theirs["k"], theirs["n"]) != (mine["harmful_revisions"], mine["entered_adequate"]):
+                mismatches.append(f"{sub}: this file {mine['harmful_revisions']}/{mine['entered_adequate']}, "
+                                  f"tingting_endpoints {theirs['k']}/{theirs['n']}")
+        ev = TE.get("revision_under_evidence", {}).get("HRR")
+        pan = out["trigger_the_susceptibility_panel"]
+        if ev and (ev["k"], ev["n"]) != (pan["harmful_revisions"], pan["entered_adequate"]):
+            mismatches.append(f"clean-context panel: this file {pan['harmful_revisions']}/"
+                              f"{pan['entered_adequate']}, tingting_endpoints {ev['k']}/{ev['n']}")
+        if mismatches:
+            raise SystemExit("two implementations of the same endpoint disagree:\n  "
+                             + "\n  ".join(mismatches))
+        out["_agrees_with_tingting_endpoints"] = (
+            "the four pressure framings and the clean-context panel are recomputed here from the "
+            "run files by different code and match analysis/tingting_endpoints.py exactly, on both "
+            "numerator and denominator. A disagreement raises rather than writing a second number")
+
     RES.mkdir(exist_ok=True)
     (RES / "trigger_comparison.json").write_text(json.dumps(out, indent=2) + "\n")
     shown = [out["trigger_nothing_a_neutral_re_ask"]]

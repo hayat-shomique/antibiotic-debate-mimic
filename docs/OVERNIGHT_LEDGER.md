@@ -487,3 +487,17 @@ in every place, because that cannot be ambiguous.
 Three absolute claims were checked against the raw data at the same time and all three hold exactly:
 the model abandons its opening drug in 400 of 400 debate runs, the two agents end on the same drug
 in 399 of 400, and on the same outcome class in 400 of 400.
+
+## 25. Two implementations of the same endpoint now have to agree
+
+`analysis/trigger_comparison.py` recomputes the four pressure framings and the clean-context panel
+from the run files by different code from `analysis/tingting_endpoints.py`. They agree exactly, on
+numerator and denominator, on all five. That was checked by hand and is now an assertion: a
+disagreement raises rather than writing a second number into a second file.
+
+Verified by fault injection. Perturbing one comparison by a single count makes the script refuse to
+produce output and name every quantity involved, and the repository restores clean.
+
+This is the cheapest form of independent verification available in this project. Where two scripts
+already compute the same thing, making them check each other costs a few lines and removes a whole
+class of silent divergence.

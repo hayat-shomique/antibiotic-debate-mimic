@@ -200,5 +200,6 @@
       "ceftazidime": 2,
       "trimethoprim-sulfamethoxazole": 1
     }
-  }
+  },
+  "_agrees_with_tingting_endpoints": "the four pressure framings and the clean-context panel are recomputed here from the run files by different code and match analysis/tingting_endpoints.py exactly, on both numerator and denominator. A disagreement raises rather than writing a second number"
 }
