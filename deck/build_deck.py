@@ -733,11 +733,17 @@ table(s, ["what the agent hears", "harmful revision rate", "coverage of the orga
       [["a scripted sentence with no content",
         f"{NEUT['HRR']['pct']:.1f}%",
         f"unchanged, {DCOV['before_debate']['pct']}%"],
-       [("a second agent arguing a case", {"bold": True}),
+       [("a second agent arguing a case, five turns", {"bold": True}),
         (f"{DBT['HRR']['pct']}%", {"bold": True, "color": ACCENT}),
         (f"{DCOV['before_debate']['pct']}% to {DCOV['after_debate']['pct']}%, {DCOV['debate_change_pts']:+.1f} points", {"bold": True, "color": ACCENT})],
-       [("the susceptibility panel", {"bold": True}),
-        (f"{EVID['HRR']['pct']:.1f}%", {"bold": True, "color": PRIMARY}),
+       # Both cells in this row must come from the same arm. They did not: the rate was the
+       # clean-context arm, measured from the round-0 position over 200 runs, and the coverage
+       # was the reveal arm, measured after the debate over 400 runs. Read together they
+       # described an experiment nobody ran. The row is now the reveal arm throughout, which is
+       # also the better story: the panel arrives after the damage and undoes it.
+       [("the susceptibility panel, after the debate", {"bold": True}),
+        (f"{TRIG['after_the_debate_does_the_panel_repair_it']['harmful_revision_rate_pct']:.1f}%",
+         {"bold": True, "color": PRIMARY}),
         (f"{DCOV['after_debate']['pct']}% to {DCOV['after_panel']['pct']}%, {DCOV['evidence_change_pts']:+.1f} points", {"bold": True, "color": PRIMARY})]],
       x=M, y=5.42, w=CW, col_w=[0.40, 0.26, 0.34], row_h=0.40, size=13, head_size=10.5)
 notes(s, f"""
@@ -745,8 +751,10 @@ This is the slide that answers the question I was given.
 When a second agent argues a real case against it, the model abandons a correct recommendation in
 {DBT['HRR']['pct']} per cent of the cases where it had one, {DBT['HRR']['k']} of {DBT['HRR']['n']}, and coverage of the organism falls
 {abs(DCOV['debate_change_pts'])} points, from {DCOV['before_debate']['pct']} to {DCOV['after_debate']['pct']} per cent.
-Then give the same system the laboratory panel. Harmful revision is {EVID['HRR']['pct']:.1f} per cent, and coverage rises
-{DCOV['evidence_change_pts']} points to {DCOV['after_panel']['pct']} per cent.
+Then give the same system the laboratory panel, after the debate has already moved it. It pushes
+nobody off an adequate drug, and coverage rises {DCOV['evidence_change_pts']} points to {DCOV['after_panel']['pct']} per cent.
+If someone asks about the panel replacing the debate rather than following it, that is a different
+arm and its harmful revision rate is {EVID['HRR']['pct']:.1f} per cent, on the closing slide.
 So: multi-agent communication does not improve clinical decision quality here. It degrades it.
 Evidence improves it. The difference between those two rows is the whole finding, and the scripted
 neutral turn in the top row is what proves the middle row is about being argued with rather than about
@@ -877,7 +885,10 @@ text(s, M, 3.98, CW - 3.9, 2.1,
      size=13.5, color=SOFT, line=1.32, space_after=9)
 stat_strip(s, [(f"{DBT['HRR']['pct']}%", "correct answers abandoned\nto a second agent"),
                (f"{SPEC['under_pressure']['carbapenem_pct']}%", "carbapenem use under\nan empty sentence"),
-               (f"{EVID['HRR']['pct']:.1f}%", "harmful revision when\nthe evidence is real")],
+               # This is the clean-context arm, where the panel replaces the debate rather than
+               # following it. Slide 13's panel row is the reveal arm, where it follows. Both are
+               # near zero and they are different measurements, so this one names its arm.
+               (f"{EVID['HRR']['pct']:.1f}%", "harmful revision when the\npanel replaces the debate")],
            y=5.72, w=CW * 0.62, dark=True, value_size=27)
 text(s, M + CW * 0.68, 5.72, CW * 0.32, 1.2,
      [[("Thank you", {"bold": True, "color": WHITE, "size": 17})],
