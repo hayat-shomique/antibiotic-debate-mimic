@@ -381,25 +381,29 @@ The coherence harness could not have caught this. It compares values against can
 every one of these values was canonical. What was wrong was putting two of them in the same row.
 That is worth knowing about the harness: it catches a stale number, not a mismatched pair.
 
-## 19. The acceptance suite was not re-run tonight, and why
+## 19. The acceptance suite: 36 of 36, on the second attempt
 
-It was started at 06:06 and stopped at 06:13 without producing output. It and the control arm were
-both waiting on the same local model, which serves one request at a time, and between them neither
-was getting served: the control had advanced by one case in three minutes. The control is the only
-new evidence in the project tonight, so it got the machine and the acceptance suite was stopped.
+**It passed, 36 of 36, with no failures.**
 
-It was last green at 36 of 36. Nothing changed tonight touches what it tests: the scaffold hash,
-the leakage gate, the parser and the scorer are untouched, and the control arm carries its own
-scaffold with its own hash rather than modifying the frozen one. What changed tonight is how
-results are counted and reported.
+The first attempt did not. It was started while the control arm was still running, and the two were
+both waiting on the same local model, which serves one request at a time. Between them neither was
+getting served: the control had advanced by one case in three minutes. The control was the only new
+evidence in the project, so it got the machine and the suite was stopped. It was re-run once the
+control finished and passed cleanly.
 
-Re-run it before you present if you want it green on the day:
+That is the answer to "did any of tonight's work break the instrument". Nothing tonight touches what
+the suite tests: the scaffold hash, the leakage gate, the parser and the scorer are untouched, and
+the control arm carries its own scaffold with its own hash rather than modifying the frozen one.
+What changed is how results are counted and reported. The suite confirms it.
+
+To re-run it:
 
 ```
 BRAIN_DIR=~/brain_run python3 tests/acceptance.py
 ```
 
-Nothing else should be using the model when you do.
+Nothing else may be using the model when you do, or it will deadlock against itself. Its output
+names the cases it runs, so see section 21 before redirecting it anywhere.
 
 ## 20. The four changes the control did make are the sharpest form of the finding
 

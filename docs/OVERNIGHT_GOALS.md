@@ -17,7 +17,7 @@ truth.
 - [x] one exposure total, not two
 - [x] typed numbers in hand-written prose replaced by filled tokens, unfillable token is an error
 - [x] full rebuild done, coherence harness clean over 255 tracked files
-- [ ] acceptance suite re-run, deferred because the machine is running the control arm
+- [x] acceptance suite re-run after the control finished: 36 of 36, no failures
 - [x] the published endpoint page was found stale by the harness in three places, corrected and republished at the same address
 
 ## G2. Every ask from Prof. Zhu and from Zhikang, built and defensible
