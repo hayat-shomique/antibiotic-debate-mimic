@@ -1,0 +1,113 @@
+{
+  "medgemma:4b-it-q4_K_M": {
+    "n": 200,
+    "adequate": 102,
+    "adequate_pct": 51.0,
+    "outcomes": {
+      "ADEQUATE": 102,
+      "INADEQUATE": 54,
+      "UNDETERMINED": 44
+    },
+    "distinct_drugs": 2,
+    "top_drug": "cefazolin",
+    "top_drug_share_pct": 99.0,
+    "row_source": {
+      "called": 200
+    }
+  },
+  "qwen3:4b-instruct-2507-q4_K_M": {
+    "n": 200,
+    "adequate": 175,
+    "adequate_pct": 87.5,
+    "outcomes": {
+      "ADEQUATE": 175,
+      "INTERMEDIATE_ONLY": 5,
+      "INADEQUATE": 12,
+      "UNDETERMINED": 8
+    },
+    "distinct_drugs": 1,
+    "top_drug": "piperacillin-tazobactam",
+    "top_drug_share_pct": 100.0,
+    "row_source": {
+      "debate_log_A_first_round0": 171,
+      "called": 29
+    }
+  },
+  "_row_source_check": {
+    "why": "docs/MODELS.md once claimed both generative columns were freshly called. They are not. This records what is on disk and whether the mixture can bias the comparison.",
+    "qwen_drugs_by_source": {
+      "debate_log_A_first_round0": {
+        "piperacillin-tazobactam": 171
+      },
+      "called": {
+        "piperacillin-tazobactam": 29
+      }
+    },
+    "sources_agree_on_a_single_drug": true
+  },
+  "_encoder_baseline": {
+    "produced_by": "_t4c_step_a_cases.py -> _t4c_step_b_mlm.py (within-span) and _t4c_step_b2_allmask.py (all-masked) -> _t4c_step_c_score.py -> _t4c_step_d_report.py",
+    "cohort_hash": "4a4f4f782eb17345e0e9eab1cc596aab9ebf6442890bd1c3b82761ae3c65d414",
+    "seed": 20260818,
+    "frame": "C_sampled_200",
+    "primary_variant": "all_masked",
+    "models": {
+      "emilyalsentzer/Bio_ClinicalBERT": {
+        "n": 200,
+        "adequate": 0,
+        "adequate_pct_of_all": 0.0,
+        "distinct_predictions": 1,
+        "top_prediction": "vancomycin",
+        "top_prediction_n": 200,
+        "outcomes": {
+          "ADEQUATE": 0,
+          "INADEQUATE": 0,
+          "INTERMEDIATE_ONLY": 0,
+          "UNDETERMINED": 200
+        }
+      },
+      "dmis-lab/biobert-base-cased-v1.2": {
+        "n": 200,
+        "adequate": 22,
+        "adequate_pct_of_all": 11.0,
+        "distinct_predictions": 2,
+        "top_prediction": "linezolid",
+        "top_prediction_n": 177,
+        "outcomes": {
+          "ADEQUATE": 22,
+          "INADEQUATE": 0,
+          "INTERMEDIATE_ONLY": 0,
+          "UNDETERMINED": 178
+        }
+      },
+      "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext": {
+        "n": 200,
+        "adequate": 169,
+        "adequate_pct_of_all": 84.5,
+        "distinct_predictions": 2,
+        "top_prediction": "ceftazidime",
+        "top_prediction_n": 159,
+        "outcomes": {
+          "ADEQUATE": 169,
+          "INADEQUATE": 18,
+          "INTERMEDIATE_ONLY": 8,
+          "UNDETERMINED": 5
+        }
+      },
+      "google-bert/bert-base-uncased": {
+        "n": 200,
+        "adequate": 50,
+        "adequate_pct_of_all": 25.0,
+        "distinct_predictions": 2,
+        "top_prediction": "ampicillin",
+        "top_prediction_n": 198,
+        "outcomes": {
+          "ADEQUATE": 50,
+          "INADEQUATE": 73,
+          "INTERMEDIATE_ONLY": 2,
+          "UNDETERMINED": 75
+        }
+      }
+    }
+  }
+}

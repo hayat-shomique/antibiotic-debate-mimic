@@ -6,7 +6,20 @@
   "by_framing": {
     "C1a_authority": {
       "n_primary": 70,
-      "attrition": "                                                step    n\n0                cases with a row in every condition  200\n1   cases evaluable in every condition (primary set)   70\n2  dropped: \u22651 condition UNDETERMINED/INTERMEDIAT...  130",
+      "attrition": {
+        "cases_appearing_in_any_condition": 200,
+        "cases_with_a_row_in_every_condition": 78,
+        "dropped_arm_never_ran_the_case": 122,
+        "dropped_indeterminate_outcome": 8,
+        "primary_set": 70,
+        "missing_rows_by_condition": {
+          "C0": 0,
+          "Cn": 0,
+          "C1": 122,
+          "C2": 0
+        },
+        "note": "a case is dropped either because an arm never ran it, which is absent data, or because a condition returned UNDETERMINED or INTERMEDIATE_ONLY, which is an indeterminate outcome. Reporting them as one number misdescribes the design."
+      },
       "baseline_adequacy": {
         "k": 68,
         "n": 70,
@@ -122,11 +135,32 @@
         },
         "edi": 0.014705882352941124,
         "note": "appendix only: a difference of two proportions is wider than either term"
+      },
+      "coverage_check": {
+        "cases_in_the_frozen_selection": 200,
+        "cases_the_pressure_arm_covered": 78,
+        "covered_set_is_a_contiguous_prefix": true,
+        "baseline_adequacy_whole_selection_pct": 87.5,
+        "baseline_adequacy_covered_subset_pct": 88.5,
+        "note": "the arm runs the first n of a seeded random selection, so absence is a property of how far the arm got and not of the case. The two adequacy figures are the check on that, not a claim about it."
       }
     },
     "C1b_peer_consensus": {
       "n_primary": 70,
-      "attrition": "                                                step    n\n0                cases with a row in every condition  200\n1   cases evaluable in every condition (primary set)   70\n2  dropped: \u22651 condition UNDETERMINED/INTERMEDIAT...  130",
+      "attrition": {
+        "cases_appearing_in_any_condition": 200,
+        "cases_with_a_row_in_every_condition": 78,
+        "dropped_arm_never_ran_the_case": 122,
+        "dropped_indeterminate_outcome": 8,
+        "primary_set": 70,
+        "missing_rows_by_condition": {
+          "C0": 0,
+          "Cn": 0,
+          "C1": 122,
+          "C2": 0
+        },
+        "note": "a case is dropped either because an arm never ran it, which is absent data, or because a condition returned UNDETERMINED or INTERMEDIATE_ONLY, which is an indeterminate outcome. Reporting them as one number misdescribes the design."
+      },
       "baseline_adequacy": {
         "k": 68,
         "n": 70,
@@ -242,11 +276,32 @@
         },
         "edi": 0.014705882352941124,
         "note": "appendix only: a difference of two proportions is wider than either term"
+      },
+      "coverage_check": {
+        "cases_in_the_frozen_selection": 200,
+        "cases_the_pressure_arm_covered": 78,
+        "covered_set_is_a_contiguous_prefix": true,
+        "baseline_adequacy_whole_selection_pct": 87.5,
+        "baseline_adequacy_covered_subset_pct": 88.5,
+        "note": "the arm runs the first n of a seeded random selection, so absence is a property of how far the arm got and not of the case. The two adequacy figures are the check on that, not a claim about it."
       }
     },
     "C1c_safety_framing": {
       "n_primary": 70,
-      "attrition": "                                                step    n\n0                cases with a row in every condition  200\n1   cases evaluable in every condition (primary set)   70\n2  dropped: \u22651 condition UNDETERMINED/INTERMEDIAT...  130",
+      "attrition": {
+        "cases_appearing_in_any_condition": 200,
+        "cases_with_a_row_in_every_condition": 78,
+        "dropped_arm_never_ran_the_case": 122,
+        "dropped_indeterminate_outcome": 8,
+        "primary_set": 70,
+        "missing_rows_by_condition": {
+          "C0": 0,
+          "Cn": 0,
+          "C1": 122,
+          "C2": 0
+        },
+        "note": "a case is dropped either because an arm never ran it, which is absent data, or because a condition returned UNDETERMINED or INTERMEDIATE_ONLY, which is an indeterminate outcome. Reporting them as one number misdescribes the design."
+      },
       "baseline_adequacy": {
         "k": 68,
         "n": 70,
@@ -362,11 +417,32 @@
         },
         "edi": 0.0,
         "note": "appendix only: a difference of two proportions is wider than either term"
+      },
+      "coverage_check": {
+        "cases_in_the_frozen_selection": 200,
+        "cases_the_pressure_arm_covered": 78,
+        "covered_set_is_a_contiguous_prefix": true,
+        "baseline_adequacy_whole_selection_pct": 87.5,
+        "baseline_adequacy_covered_subset_pct": 88.5,
+        "note": "the arm runs the first n of a seeded random selection, so absence is a property of how far the arm got and not of the case. The two adequacy figures are the check on that, not a claim about it."
       }
     },
     "C1d_bare_doubt": {
       "n_primary": 70,
-      "attrition": "                                                step    n\n0                cases with a row in every condition  200\n1   cases evaluable in every condition (primary set)   70\n2  dropped: \u22651 condition UNDETERMINED/INTERMEDIAT...  130",
+      "attrition": {
+        "cases_appearing_in_any_condition": 200,
+        "cases_with_a_row_in_every_condition": 78,
+        "dropped_arm_never_ran_the_case": 122,
+        "dropped_indeterminate_outcome": 8,
+        "primary_set": 70,
+        "missing_rows_by_condition": {
+          "C0": 0,
+          "Cn": 0,
+          "C1": 122,
+          "C2": 0
+        },
+        "note": "a case is dropped either because an arm never ran it, which is absent data, or because a condition returned UNDETERMINED or INTERMEDIATE_ONLY, which is an indeterminate outcome. Reporting them as one number misdescribes the design."
+      },
       "baseline_adequacy": {
         "k": 68,
         "n": 70,
@@ -482,6 +558,14 @@
         },
         "edi": 0.1029411764705882,
         "note": "appendix only: a difference of two proportions is wider than either term"
+      },
+      "coverage_check": {
+        "cases_in_the_frozen_selection": 200,
+        "cases_the_pressure_arm_covered": 78,
+        "covered_set_is_a_contiguous_prefix": true,
+        "baseline_adequacy_whole_selection_pct": 87.5,
+        "baseline_adequacy_covered_subset_pct": 88.5,
+        "note": "the arm runs the first n of a seeded random selection, so absence is a property of how far the arm got and not of the case. The two adequacy figures are the check on that, not a claim about it."
       }
     }
   }

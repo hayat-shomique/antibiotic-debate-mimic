@@ -58,13 +58,37 @@ whole reason the scorer has four outcome classes.
 - **`gemma3:4b`, `gemma3:12b`, `deepseek-llm:7b`, `qwen3:4b` (base)**, installed during
   exploration, in no analysis. Left on disk; removed from every code path.
 
-## The one defect that was fixed today
+## The mixed-source column, stated as it actually is
 
-The two generative columns were not comparable. Qwen's 171 cases had been **harvested** from the
-debate log to save 200 calls; MedGemma's 54 were **freshly called**. One column reused and one
-called is not a controlled contrast, whatever the numbers say. Both columns are now being called
-fresh, on the same 200 cases, same prompt, same seed, same quantisation. The harvested rows stay
-on disk as an audit trail and are distinguishable by their `source` field.
+An earlier version of this file said both generative columns were being called fresh. **They are
+not, and the claim is withdrawn.** What is on disk, counted by `analysis/model_tiers.py` and
+recorded in `results/model_tiers.json`:
+
+| column | n | source |
+|---|---|---|
+| `medgemma:4b-it-q4_K_M` | 200 | 200 freshly called |
+| `qwen3:4b-instruct-2507-q4_K_M` | 200 | **171 harvested** from round 0 of the debate log, 29 freshly called |
+
+Harvesting was done to save 200 model calls. One column reused and one called is not, in general, a
+controlled contrast, so the question is whether the mixture can bias this particular comparison. It
+cannot, and that is measured rather than argued:
+
+- **The two sources agree on a single drug.** All 171 harvested rows and all 29 freshly called rows
+  return piperacillin-tazobactam. The column has no variance for the source to bias.
+- The harvested rows come from round 0 of the debate arm, which uses the same system prompt, the
+  same temperature 0, the same seed and the same quantisation as a fresh call.
+- The column's outcome distribution, 175 adequate of 200, matches the canonical baseline in
+  `results/tingting_endpoints.json` exactly.
+
+The honest reading: the comparison stands, and the correct claim is that the Qwen column is
+reproducible rather than that it was freshly called. If a reviewer wants the stronger version, the
+fix is 171 model calls, which is roughly three hours of local inference and changes no number
+unless determinism fails.
+
+**What the comparison shows.** MedGemma-4B is also near-constant, on a *different* drug: cefazolin
+in 198 of 200 cases, reaching 102/200 = 51.0% adequate against Qwen's 175/200 = 87.5%. Holding the
+prompt fixed and getting two different constants localises the choice of drug to the weights rather
+than to the prompt.
 
 ## Fixed across every model
 

@@ -28,6 +28,8 @@ DBT, EVID, NEUT = T["debate_with_live_agent"], T["revision_under_evidence"], T["
 MATCH = R["D_MATCH_1_drug_identity_vs_patient"]
 PTEST = json.loads((RES / "primary_test.json").read_text())
 PT = PTEST["by_framing"]
+ATTR = PT["C1a_authority"]["attrition"]
+COVER = PT["C1a_authority"]["coverage_check"]
 FRAMINGS = ["C1a_authority", "C1b_peer_consensus", "C1c_safety_framing", "C1d_bare_doubt"]
 
 TE, PTJ, PD, FSJ, RJ, LKJ = ("tingting_endpoints.json", "primary_test.json",
@@ -91,9 +93,15 @@ ROWS = [
     ("8", "the panel moves it less than a person does",
      f"{one(('flip_rates', 'C2', 'k'))}/{one(('flip_rates', 'C2', 'n'))} = "
      f"{100.0 * one(('flip_rates', 'C2', 'k')) / one(('flip_rates', 'C2', 'n')):.1f}%", PTJ, S_PT),
-    ("8", "attrition, stated before the result",
-     f"{one(('n_primary',))} of {PRIM['baseline_pre_culture']['n']} cases evaluable in all four conditions",
+    ("8", "attrition, split by cause rather than pooled",
+     f"{ATTR['dropped_arm_never_ran_the_case']} cases have no pressure row because the arm ran "
+     f"{COVER['cases_the_pressure_arm_covered']} of {COVER['cases_in_the_frozen_selection']}; "
+     f"{ATTR['dropped_indeterminate_outcome']} more are indeterminate; primary set {ATTR['primary_set']}",
      PTJ, S_PT),
+    ("8", "and the covered subset is not biased",
+     f"contiguous prefix of the seeded selection: {COVER['covered_set_is_a_contiguous_prefix']}; "
+     f"baseline adequacy {COVER['baseline_adequacy_covered_subset_pct']}% covered against "
+     f"{COVER['baseline_adequacy_whole_selection_pct']}% overall", PTJ, S_PT),
     ("8", "the baseline is reproducible across independently run arms",
      f"{PTEST['baseline_agreement']['agree']}/{PTEST['baseline_agreement']['n']} agreement", PTJ, S_PT),
     ("9", "harmful revision under scripted pressure is near zero",

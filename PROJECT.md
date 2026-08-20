@@ -250,9 +250,26 @@ panel, the only thing in the study carrying real information about the patient, 
 
 **The model is moved more by a person disagreeing than by the laboratory result.**
 
-Attrition, stated before the result: **70 of 200** cases are
-evaluable in all four conditions. The rest drop because some condition returns UNDETERMINED, which is
-a property of what the laboratory chose to test rather than of the model, and it is still attrition.
+**Attrition, split by cause rather than pooled.** Two different things reduce 
+200 cases to 70, and reporting them as one number would
+misdescribe the design.
+
+| step | n |
+|---|---|
+| cases appearing in any condition | 200 |
+| cases the pressure arm actually ran, so a row exists in every condition | 78 |
+| dropped because the pressure arm never ran the case | 122 |
+| dropped because a condition returned UNDETERMINED or INTERMEDIATE_ONLY | 8 |
+| **primary set** | **70** |
+
+The larger term is absent data, not indeterminate outcomes: the pressure arm ran
+78 of the 200 cases in the
+frozen selection. That absence is benign and it is measured rather than asserted. The covered cases
+are a **contiguous prefix of the seeded random selection**, so which cases are missing is a property
+of how far the arm got and not of the case, and baseline adequacy inside the covered subset is
+**88.5%** against
+**87.5%** across the whole selection. Nothing that was
+never run can change b or c, which are counted on complete cases only.
 
 ### 7.3 On accuracy alone, that pressure looks harmless
 

@@ -58,12 +58,20 @@ R = json.loads((RES / "RESULTS.json").read_text())
 P = json.loads((RES / "policy_degeneracy.json").read_text())
 FS = json.loads((RES / "fewshot.json").read_text())
 LEAK = json.loads((RES / "leakage.json").read_text())
+MT = json.loads((RES / "model_tiers.json").read_text())
+ENC = MT["_encoder_baseline"]["models"]
+BEST_ENC = max(ENC.items(), key=lambda kv: kv[1]["adequate"])
+MG = MT["medgemma:4b-it-q4_K_M"]
+QW = MT[R["model"]]
 METHODS = (ROOT / "docs" / "METHODS.md").read_text()
 SCORE = (ROOT / "SCORECARD.txt").read_text()
 MODELS_DOC = (ROOT / "docs" / "MODELS.md").read_text()
 README = (ROOT / "README.md").read_text()
 
-PT = R["pre_specified_primary_test"]["by_framing"]
+PTEST = json.loads((RES / "primary_test.json").read_text())
+PT = PTEST["by_framing"]
+ATTR = PT["C1a_authority"]["attrition"]
+COVER = PT["C1a_authority"]["coverage_check"]
 FRAMINGS = ["C1a_authority", "C1b_peer_consensus", "C1c_safety_framing", "C1d_bare_doubt"]
 NICE = {"C1a_authority": "authority", "C1b_peer_consensus": "peer consensus",
         "C1c_safety_framing": "safety framing", "C1d_bare_doubt": "bare doubt"}
@@ -583,20 +591,30 @@ C_SUFFIX = "in every framing" if len(C_VALUES) == 1 else "range across the four 
 stat_strip(s, [(f"b = {B_RANGE[0]} to {B_RANGE[1]}", "changed under pressure only"),
                (C_LABEL, f"changed under the neutral control only, {C_SUFFIX}"),
                (f"p ≤ {WORST_P:.1e}", "exact binomial, worst of the four framings"),
-               (f"{N_PRIMARY} of {PRIM['baseline_pre_culture']['n']}", "cases evaluable in all four conditions")],
+               (f"{N_PRIMARY} of {COVER['cases_the_pressure_arm_covered']}", "cases the pressure arm ran that are evaluable in all four conditions")],
            y=5.55, value_size=21, label_size=11)
-text(s, M, 6.55, CW, 0.4,
-     f"Stated before the result: {PRIM['baseline_pre_culture']['n'] - N_PRIMARY} cases are dropped because at least one condition returns UNDETERMINED, "
-     "which is a property of what the laboratory chose to test. The primary result rests on the surviving third.",
-     size=11.5, color=MUTED, line=1.3)
+text(s, M, 6.50, CW, 0.5,
+     [[("Stated before the result. ", {"bold": True}),
+       (f"The pressure arm ran {COVER['cases_the_pressure_arm_covered']} of the "
+        f"{COVER['cases_in_the_frozen_selection']} cases in the frozen selection, so "
+        f"{ATTR['dropped_arm_never_ran_the_case']} cases have no pressure row at all and "
+        f"{ATTR['dropped_indeterminate_outcome']} more are dropped for an indeterminate outcome. Those "
+        f"{COVER['cases_the_pressure_arm_covered']} are a contiguous prefix of a seeded random selection, and baseline adequacy inside "
+        f"them is {COVER['baseline_adequacy_covered_subset_pct']}% against "
+        f"{COVER['baseline_adequacy_whole_selection_pct']}% across all "
+        f"{COVER['cases_in_the_frozen_selection']}, which is what an unbiased subsample looks like.",
+        {"color": MUTED})]], size=11.5, line=1.3)
 notes(s, f"""
 This is the test the protocol pre-specified before any model ran: an exact binomial on the cases
 that change under exactly one of the neutral control and the pressure condition.
 c is zero. Not once in {N_PRIMARY} cases did the model change its recommendation because a neutral
 interlocutor spoke to it. Under unsupported pressure it changed in {B_RANGE[0]} to {B_RANGE[1]} of the same cases.
 p is on the order of ten to the minus twenty-one.
-The honest part: this runs on {N_PRIMARY} of {PRIM['baseline_pre_culture']['n']} cases. The rest drop out because some condition returns
-undetermined, and I would rather show you the attrition than a denominator I like better.
+The honest part: this runs on {N_PRIMARY} cases. Two different things reduce it, and I keep them
+separate. The pressure arm ran {COVER['cases_the_pressure_arm_covered']} of the {COVER['cases_in_the_frozen_selection']} cases in my selection, so {ATTR['dropped_arm_never_ran_the_case']} cases have no
+pressure row at all, and {ATTR['dropped_indeterminate_outcome']} more drop because a condition came back indeterminate. Those {COVER['cases_the_pressure_arm_covered']} are the
+first {COVER['cases_the_pressure_arm_covered']} of a seeded random selection rather than a chosen subset, and baseline adequacy inside them
+is {COVER['baseline_adequacy_covered_subset_pct']} per cent against {COVER['baseline_adequacy_whole_selection_pct']} across all {COVER['cases_in_the_frozen_selection']}, which is what an unbiased subsample looks like.
 And look at the last bar. The susceptibility panel, the only thing in the study carrying real
 information about the patient, moves the model less than a person disagreeing with it.
 """)
@@ -982,15 +1000,20 @@ head(s, "backup  ·  the models", "Three tiers, three different questions, size 
 table(s, ["tier", "model", "the question it answers"],
       [[("1  study model", {"bold": True}), f"{R['model']}", "the subject of every debate arm, not a comparison"],
        [("2  domain comparison", {"bold": True}), "medgemma:4b-it-q4_K_M", "does medical domain tuning change the behaviour"],
-       [("3  encoder baseline", {"bold": True}), "four BERT encoders, 110M, no fine-tuning", "how well does a small domain encoder do with no dialogue at all"]],
+       [("3  encoder baseline", {"bold": True}), f"{len(ENC)} BERT encoders, 110M, no fine-tuning", "how well does a small domain encoder do with no dialogue at all"]],
       x=M, y=2.28, w=CW * 0.63, col_w=[0.30, 0.36, 0.34], row_h=0.56, size=12.5, head_size=10.5)
 block(s, M + CW * 0.66, 2.28, CW * 0.34, 2.35, BG)
 text(s, M + CW * 0.66 + 0.30, 2.50, CW * 0.34 - 0.6, 2.0,
-     [[("Tier 3 is the sharpest number in the project", {"bold": True, "size": 13.5})],
-      [("BiomedBERT, 110M parameters, no fine-tuning and no dialogue, reaches 84.5 per cent coverage against the 4B model's 87.5 per cent.",
-        {"color": MUTED, "size": 12})],
-      [("All four encoders are near-constant too, one or two distinct predictions across 200 different patients. The fixed-policy behaviour is not a quirk of the generative model.",
-        {"color": MUTED, "size": 12})]], size=12, line=1.32, space_after=8)
+     [[("Two results worth the room's attention", {"bold": True, "size": 13.5})],
+      [(f"{BEST_ENC[0].split('/')[-1].split('-')[0]}, 110M parameters, no fine-tuning and no dialogue, reaches "
+        f"{BEST_ENC[1]['adequate_pct_of_all']} per cent against the 4B model's {QW['adequate_pct']} per cent. "
+        f"And every encoder is near-constant too, {min(v['distinct_predictions'] for v in ENC.values())} to "
+        f"{max(v['distinct_predictions'] for v in ENC.values())} distinct predictions across {BEST_ENC[1]['n']} patients.",
+        {"color": MUTED, "size": 11.5})],
+      [(f"MedGemma is near-constant on a different drug: {MG['top_drug']} in "
+        f"{int(MG['top_drug_share_pct'] * MG['n'] / 100)} of {MG['n']} cases, {MG['adequate_pct']} per cent adequate. "
+        "Same prompt, two checkpoints, two different constants, which puts the choice of drug in the weights.",
+        {"color": MUTED, "size": 11.5})]], size=12, line=1.30, space_after=7)
 text(s, M, 5.00, CW * 0.63, 1.3,
      [[("Why both generative tiers are 4B and both 4-bit. ", {"bold": True}),
        ("That matching is the point. If one were 12B, any difference would confound domain tuning with scale and the comparison would answer neither question. A 12B run is the right experiment for a scale question, which is a different experiment.",
@@ -1017,7 +1040,7 @@ So the degenerate policy is not a quirk of my model, it is a property of this ta
 And everything is local because the data is credentialed. The harness can move to hosted models, the
 patient data cannot.
 """)
-footer(s, "docs/MODELS.md  ·  the encoder baselines answer the supervisor's ask for a medical BERT without fine-tuning", page())
+footer(s, "results/model_tiers.json  ·  analysis/model_tiers.py  ·  the encoder baselines answer the supervisor's ask for a medical BERT without fine-tuning", page())
 
 # ============================================================== 15. discipline
 s = new_slide()

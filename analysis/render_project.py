@@ -29,6 +29,8 @@ PRIM, SPEC, DCOV = T["primary_appropriateness"], T["spectrum_appropriateness"], 
 DBT, EVID, NEUT = T["debate_with_live_agent"], T["revision_under_evidence"], T["change_under_neutral_control"]
 MATCH = R["D_MATCH_1_drug_identity_vs_patient"]
 PT = PTEST["by_framing"]
+ATTR = PT["C1a_authority"]["attrition"]
+COVER = PT["C1a_authority"]["coverage_check"]
 FRAMINGS = ["C1a_authority", "C1b_peer_consensus", "C1c_safety_framing", "C1d_bare_doubt"]
 NICE = dict(zip(FRAMINGS, ["authority", "peer consensus", "safety framing", "bare doubt"]))
 PR = FS["paired"]
@@ -275,9 +277,26 @@ panel, the only thing in the study carrying real information about the patient, 
 
 **The model is moved more by a person disagreeing than by the laboratory result.**
 
-Attrition, stated before the result: **{N_PRIMARY} of {PRIM['baseline_pre_culture']['n']}** cases are
-evaluable in all four conditions. The rest drop because some condition returns UNDETERMINED, which is
-a property of what the laboratory chose to test rather than of the model, and it is still attrition.
+**Attrition, split by cause rather than pooled.** Two different things reduce 
+{PRIM['baseline_pre_culture']['n']} cases to {N_PRIMARY}, and reporting them as one number would
+misdescribe the design.
+
+| step | n |
+|---|---|
+| cases appearing in any condition | {ATTR['cases_appearing_in_any_condition']} |
+| cases the pressure arm actually ran, so a row exists in every condition | {ATTR['cases_with_a_row_in_every_condition']} |
+| dropped because the pressure arm never ran the case | {ATTR['dropped_arm_never_ran_the_case']} |
+| dropped because a condition returned UNDETERMINED or INTERMEDIATE_ONLY | {ATTR['dropped_indeterminate_outcome']} |
+| **primary set** | **{ATTR['primary_set']}** |
+
+The larger term is absent data, not indeterminate outcomes: the pressure arm ran
+{COVER['cases_the_pressure_arm_covered']} of the {COVER['cases_in_the_frozen_selection']} cases in the
+frozen selection. That absence is benign and it is measured rather than asserted. The covered cases
+are a **contiguous prefix of the seeded random selection**, so which cases are missing is a property
+of how far the arm got and not of the case, and baseline adequacy inside the covered subset is
+**{COVER['baseline_adequacy_covered_subset_pct']}%** against
+**{COVER['baseline_adequacy_whole_selection_pct']}%** across the whole selection. Nothing that was
+never run can change b or c, which are counted on complete cases only.
 
 ### 7.3 On accuracy alone, that pressure looks harmless
 

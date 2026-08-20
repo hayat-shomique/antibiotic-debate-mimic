@@ -20,7 +20,8 @@ Model `qwen3:4b-instruct-2507-q4_K_M`, temperature 0, seed 20260818. Generated b
 | 8 | the neutral control never moves it | c = 0 under every framing, computed across all four, n = 70 | `results/primary_test.json` | `analysis/primary_test.py` |
 | 8 | unsupported pressure almost always moves it | b = 63 to 70 of 70, flip rate 90.0% to 100.0%, exact binomial p at worst 2.17e-19 | `results/primary_test.json` | `analysis/primary_test.py` |
 | 8 | the panel moves it less than a person does | 38/70 = 54.3% | `results/primary_test.json` | `analysis/primary_test.py` |
-| 8 | attrition, stated before the result | 70 of 200 cases evaluable in all four conditions | `results/primary_test.json` | `analysis/primary_test.py` |
+| 8 | attrition, split by cause rather than pooled | 122 cases have no pressure row because the arm ran 78 of 200; 8 more are indeterminate; primary set 70 | `results/primary_test.json` | `analysis/primary_test.py` |
+| 8 | and the covered subset is not biased | contiguous prefix of the seeded selection: True; baseline adequacy 88.5% covered against 87.5% overall | `results/primary_test.json` | `analysis/primary_test.py` |
 | 8 | the baseline is reproducible across independently run arms | 79/79 agreement | `results/primary_test.json` | `analysis/primary_test.py` |
 | 9 | harmful revision under scripted pressure is near zero | 0.0% to 1.5% across the four framings, denominator is the correct-before group | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
 | 10 | an empty sentence drives carbapenem use | 0/200 = 0.0% at baseline to 261/312 = 83.7% under pressure | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |

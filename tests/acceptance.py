@@ -11,15 +11,25 @@ import json
 import re
 import sys
 import time
+import os
+import sys
 from pathlib import Path
 
 import pandas as pd
+
+# The harness modules and the run data live outside the repository, because MIMIC-IV is
+# credentialed and none of it may be committed. Resolve that directory rather than assuming
+# this file sits beside them, so the suite runs from a clean checkout.
+ROOT = Path(os.environ.get("BRAIN_DIR", Path.home() / "brain_run")).expanduser().resolve()
+if not (ROOT / "case_assembly.py").exists():
+    sys.exit(f"harness not found at {ROOT}. Set BRAIN_DIR to the run directory that holds "
+             "case_assembly.py, provenance.py and debate_run.py.")
+sys.path.insert(0, str(ROOT))
 
 import case_assembly as CA
 import provenance as PV
 import debate_run as DR
 
-ROOT = Path(__file__).resolve().parent
 RESULTS: list[tuple[str, bool, str]] = []
 
 

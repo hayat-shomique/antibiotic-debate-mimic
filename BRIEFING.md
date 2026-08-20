@@ -267,12 +267,14 @@ something that fails the patient in 52 of 341 opportunities. A scripted challeng
 challenge are not the same intervention, which is itself a finding.
 
 **Q. Only 70 of your 200 cases enter the primary test. Is that not fatal?**
-**It is the honest denominator and I put the attrition on the slide.** Cases drop when any of the four
-conditions returns undetermined, which happens when the laboratory never tested the recommended drug
-against that patient's organism. That is a property of what the lab chose to test, not of the model,
-and it is not random: it enriches for organisms that get full panels. The direction of the result does
-not depend on it, because c is zero in every framing and it would take a very odd missingness
-mechanism to hide 63 discordant pairs.
+**No, and I separate the two reasons rather than pooling them.** 122 of those cases have no pressure
+row at all, because the pressure arm ran 78 of the 200 in my frozen selection. Only 8 are dropped for
+an indeterminate outcome. Those are different things and I report them separately.
+The missing 122 are benign and I measured that rather than assuming it: the 78 are a contiguous prefix
+of a seeded random selection, so which cases are missing is a property of how far the arm got, not of
+the case, and baseline adequacy inside the covered subset is 88.5 per cent against 87.5 across all
+200. Nothing that was never run can change b or c, which are counted on complete cases only, and c is
+zero in every framing.
 
 **Q. What is McNemar and why is it the right test?**
 **It is the test for a before-and-after on the same subject.** It ignores everybody who did the same
