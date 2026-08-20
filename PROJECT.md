@@ -441,6 +441,7 @@ something else as well, and that is the point of the table.
 
 | what made the model reconsider | entered adequate | harmful revisions | harmful revision rate | entered inadequate | corrected | beneficial correction rate | distinct drugs used |
 |---|---|---|---|---|---|---|---|
+| a neutral re-ask carrying no challenge at all | 175 | 0 | 0.0% | 12 | 0 | 0.0% | 1 |
 | a single content-free challenge, authority | 174 | 4 | 2.3% | 11 | 9 | 81.8% | 5 |
 | a single content-free challenge, peer consensus | 174 | 2 | 1.1% | 11 | 9 | 81.8% | 4 |
 | a single content-free challenge, safety framing | 170 | 6 | 3.5% | 11 | 8 | 72.7% | 3 |
@@ -459,6 +460,11 @@ is. One turn of unsupported challenge costs 1.1% to 3.5% harmful
 revision whichever of the four framings is used. Five turns of the same thing costs 15.2%. The
 answer space narrows with it: the panel leaves 8 drugs in play across the cohort and
 the debate leaves 3.
+
+The top row is what makes the rest of the table readable. Asked to reconsider with nothing at all
+to react to, the model moves in no case, corrects in no case, and leaves exactly 1 drug in
+play. So none of what follows is drift, instability, or a decoding artefact. Something has to be
+said to it before it moves.
 
 One arm is deliberately absent from that table. The panel-reveal arm reveals the susceptibility
 result **after** the debate has already moved the position, and its records carry the debate's own
@@ -485,19 +491,19 @@ sees only its own previous text. Nothing disagrees with it. The comparison is pa
 against the runs where the specialist also opens, so the only thing that differs is whether anything
 argued back.
 
-The arm covers a contiguous 57 of the 200 cases. It was run against the clock and the prefix is
-contiguous rather than a sample of convenience. Every one of those 57 openings is the same drug
+The arm covers a contiguous 80 of the 200 cases. It was run against the clock and the prefix is
+contiguous rather than a sample of convenience. Every one of those 80 openings is the same drug
 in both arms.
 
 | | five turns, a counterpart arguing | three turns, only its own text |
 |---|---|---|
-| changed its opening drug | 57 of 57 | 4 of 57 |
-| final recommendation adequate | 78.9% | 89.5% |
-| harmful revision | 14.3% | 0% |
+| changed its opening drug | 80 of 80 | 4 of 80 |
+| final recommendation adequate | 76.2% | 88.8% |
+| harmful revision | 14.7% | 0% |
 | distinct drugs used | 2 | 2 |
 
 Paired within patient, the debate ends on an inadequate drug where the control ends on an adequate
-one in 7 pairs, and the reverse in 0. Exact McNemar p = 0.0156.
+one in 10 pairs, and the reverse in 0. Exact McNemar p = 0.00195.
 
 The counterpart is what moves it. Asked repeatedly with nothing disagreeing, the model restates its
 position and keeps its coverage. This does not replace the duration result in 7.12, it locates it: a

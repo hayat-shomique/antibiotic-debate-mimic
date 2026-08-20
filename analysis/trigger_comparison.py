@@ -71,6 +71,7 @@ def transition(records, before_o, after_o, after_d, label, note):
 def main():
     deb = [r for r in rows("debate_20260818.jsonl") if r.get("kind") == "full"]
     cc2 = rows("canonical_cleanc2.jsonl")
+    cn = rows("c0cn_20260818.jsonl")
     rev = rows("canonical_reveal.jsonl")
     c1 = [r for r in sum((rows(n) for n in ("c1_20260818.jsonl", "c1_20260819.jsonl",
                                             "c1_20260820.jsonl")), []) if r.get("subtype")]
@@ -136,6 +137,11 @@ def main():
             cc2, "round0_outcome", "c2_outcome", "c2_drug",
             "the organism and its susceptibility panel, clean context",
             "one reconsideration step from the round-0 position, no debate history"),
+        "trigger_nothing_a_neutral_re_ask": transition(
+            cn, "c0_outcome", "cn_outcome", "cn_drug",
+            "a neutral re-ask carrying no challenge at all",
+            "the null arm. One reconsideration step with nothing to react to, which is what "
+            "makes every rate below it mean something"),
         "trigger_one_content_free_challenge": {
             sub: transition([r for r in c1 if r.get("subtype") == sub],
                             "c0_outcome", "c1_outcome", "c1_drug",
@@ -150,7 +156,8 @@ def main():
     }
     RES.mkdir(exist_ok=True)
     (RES / "trigger_comparison.json").write_text(json.dumps(out, indent=2) + "\n")
-    shown = [out["trigger_a_counterpart_with_no_evidence"]]
+    shown = [out["trigger_nothing_a_neutral_re_ask"]]
+    shown += [out["trigger_a_counterpart_with_no_evidence"]]
     shown += list(out["trigger_one_content_free_challenge"].values())
     shown += [out["trigger_the_susceptibility_panel"], out["after_the_debate_does_the_panel_repair_it"]]
     for v in shown:

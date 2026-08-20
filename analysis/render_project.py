@@ -58,8 +58,9 @@ def _trigger_table():
     onestep = list(TRIG["trigger_one_content_free_challenge"].values())
     panel = TRIG["trigger_the_susceptibility_panel"]
     debate = TRIG["trigger_a_counterpart_with_no_evidence"]
+    null = TRIG["trigger_nothing_a_neutral_re_ask"]
     rows = []
-    for v in onestep + [panel, debate]:
+    for v in [null] + onestep + [panel, debate]:
         rows.append("| {} | {} | {} | {}% | {} | {} | {}% | {} |".format(
             v["label"], v["entered_adequate"], v["harmful_revisions"],
             v["harmful_revision_rate_pct"], v["entered_inadequate"],
@@ -73,6 +74,7 @@ def _trigger_table():
         "ONESTEP_HRR_LO": f"{min(hrr):g}", "ONESTEP_HRR_HI": f"{max(hrr):g}",
         "ONESTEP_BCR_LO": f"{min(bcr):g}", "ONESTEP_BCR_HI": f"{max(bcr):g}",
         "PANEL_BCR": f'{panel["beneficial_correction_rate_pct"]:g}',
+        "NULL_DRUGS": str(null["distinct_drugs_used_across_all_determinate_runs"]),
         "PANEL_DRUGS": str(panel["distinct_drugs_used_across_all_determinate_runs"]),
         "DEBATE_HRR": f'{debate["harmful_revision_rate_pct"]:g}',
         "DEBATE_DRUGS": str(debate["distinct_drugs_used_across_all_determinate_runs"]),
@@ -100,6 +102,7 @@ TRIGGER_ROWS = TRIGGER["TRIGGER_ROWS"]
 ONESTEP_HRR_LO, ONESTEP_HRR_HI = TRIGGER["ONESTEP_HRR_LO"], TRIGGER["ONESTEP_HRR_HI"]
 ONESTEP_BCR_LO, ONESTEP_BCR_HI = TRIGGER["ONESTEP_BCR_LO"], TRIGGER["ONESTEP_BCR_HI"]
 PANEL_BCR, PANEL_DRUGS = TRIGGER["PANEL_BCR"], TRIGGER["PANEL_DRUGS"]
+NULL_DRUGS = TRIGGER["NULL_DRUGS"]
 DEBATE_HRR, DEBATE_DRUGS = TRIGGER["DEBATE_HRR"], TRIGGER["DEBATE_DRUGS"]
 DEBATE_TURNS_LABEL = TRIGGER["DEBATE_TURNS_LABEL"]
 REVEAL_MATCHED, REVEAL_IN, REVEAL_FIX = (TRIGGER["REVEAL_MATCHED"], TRIGGER["REVEAL_IN"],
@@ -575,6 +578,11 @@ is. One turn of unsupported challenge costs {ONESTEP_HRR_LO}% to {ONESTEP_HRR_HI
 revision whichever of the four framings is used. {DEBATE_TURNS_LABEL} costs {DEBATE_HRR}%. The
 answer space narrows with it: the panel leaves {PANEL_DRUGS} drugs in play across the cohort and
 the debate leaves {DEBATE_DRUGS}.
+
+The top row is what makes the rest of the table readable. Asked to reconsider with nothing at all
+to react to, the model moves in no case, corrects in no case, and leaves exactly {NULL_DRUGS} drug in
+play. So none of what follows is drift, instability, or a decoding artefact. Something has to be
+said to it before it moves.
 
 One arm is deliberately absent from that table. The panel-reveal arm reveals the susceptibility
 result **after** the debate has already moved the position, and its records carry the debate's own

@@ -1381,7 +1381,12 @@ _bcr = [v["beneficial_correction_rate_pct"] for v in _one.values()]
 s = new_slide()
 head(s, "backup  ·  what actually does the damage",
      "The framing of the challenge is not what costs coverage. Duration is.")
-_rows = []
+_null = TRIG["trigger_nothing_a_neutral_re_ask"]
+_rows = [["nothing, a neutral re-ask",
+          "one",
+          f"{_null['harmful_revision_rate_pct']:g}%",
+          f"{_null['beneficial_correction_rate_pct']:g}%",
+          str(_null["distinct_drugs_used_across_all_determinate_runs"])]]
 for _k, _v in _one.items():
     _rows.append([_k.split("_", 1)[1].replace("_", " "),
                   "one",
@@ -1399,8 +1404,8 @@ _rows.append([("a second agent arguing", {"bold": True}),
               (f"{_deb['beneficial_correction_rate_pct']}%", {"bold": True, "color": ACCENT}),
               (str(_deb["distinct_drugs_used_across_all_determinate_runs"]), {"bold": True, "color": ACCENT})])
 table(s, ["what made it reconsider", "turns", "harmful revision", "corrected an error", "drugs still in play"],
-      _rows, x=M, y=2.35, w=CW, col_w=[0.34, 0.10, 0.19, 0.21, 0.16],
-      row_h=0.42, size=12.5, head_size=10)
+      _rows, x=M, y=2.28, w=CW, col_w=[0.34, 0.10, 0.19, 0.21, 0.16],
+      row_h=0.40, size=12, head_size=10)
 text(s, M, 5.62, CW, 1.05,
      "Every row starts from the same round-0 position on the same frozen cohort and applies one "
      "reconsideration step. The panel-reveal arm is not in this table: it reveals the result after "
