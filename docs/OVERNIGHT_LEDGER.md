@@ -506,3 +506,20 @@ they ever stop agreeing. Fault-injected the same way, and restored clean.
 This is the cheapest form of independent verification available in this project. Where two scripts
 already compute the same thing, making them check each other costs a few lines and removes a whole
 class of silent divergence. Three endpoint pairs are now guarded this way.
+
+## 26. A negative confidence bound in a result file, deliberately not fixed. HELD
+
+`results/primary_test.json` carries a Wilson lower bound of about minus 1.7e-18 on the neutral
+control's flip rate, which is floating point arriving a hair below zero when the numerator is zero.
+The same artefact appeared in the control arm's own interval and was clamped there.
+
+It is not clamped here, on purpose. This interval comes from `wilson_ci` in the scorer, which is
+hash-pinned and whose fingerprint the acceptance suite checks. Editing it to make a number that
+nothing renders look tidier would break the pin that proves the scoring rule has not moved since
+the protocol was frozen. That is a bad trade.
+
+Checked before deciding: nothing renders it. Every document and slide uses the numerator and
+denominator of the flip rates, never the interval, so no negative percentage reaches a reader. If a
+future document does render it, clamp at the point of rendering rather than in the scorer.
+
+Recorded here so the next person finds the reasoning rather than the artefact.
