@@ -55,6 +55,7 @@ FOOT_Y = 6.92
 RES = ROOT / "results"
 T = json.loads((RES / "tingting_endpoints.json").read_text())
 R = json.loads((RES / "RESULTS.json").read_text())
+TRIG = json.loads((RES / "trigger_comparison.json").read_text())
 P = json.loads((RES / "policy_degeneracy.json").read_text())
 FS = json.loads((RES / "fewshot.json").read_text())
 LEAK = json.loads((RES / "leakage.json").read_text())
@@ -1354,6 +1355,58 @@ And the ceiling is {CC['coverage_ceiling']['pct']} per cent, so my {PRIM['baseli
 twelve points on the table and the model did not take them.
 """)
 footer(s, "results/cohort_composition.json  ·  analysis/cohort_composition.py  ·  aggregates only, no case-level rows leave the machine", page())
+
+
+# =========================================== backup. one step, five triggers
+_one = TRIG["trigger_one_content_free_challenge"]
+_pan = TRIG["trigger_the_susceptibility_panel"]
+_deb = TRIG["trigger_a_counterpart_with_no_evidence"]
+_hrr = [v["harmful_revision_rate_pct"] for v in _one.values()]
+_bcr = [v["beneficial_correction_rate_pct"] for v in _one.values()]
+
+s = new_slide()
+head(s, "backup  ·  what actually does the damage",
+     "The framing of the challenge is not what costs coverage. Duration is.")
+_rows = []
+for _k, _v in _one.items():
+    _rows.append([_k.split("_", 1)[1].replace("_", " "),
+                  "one",
+                  f"{_v['harmful_revision_rate_pct']}%",
+                  f"{_v['beneficial_correction_rate_pct']}%",
+                  str(_v["distinct_drugs_used_across_all_determinate_runs"])])
+_rows.append([("the susceptibility panel", {"bold": True}),
+              ("one", {"bold": True}),
+              (f"{_pan['harmful_revision_rate_pct']}%", {"bold": True, "color": PRIMARY}),
+              (f"{_pan['beneficial_correction_rate_pct']}%", {"bold": True, "color": PRIMARY}),
+              (str(_pan["distinct_drugs_used_across_all_determinate_runs"]), {"bold": True, "color": PRIMARY})])
+_rows.append([("a second agent arguing", {"bold": True}),
+              ("five", {"bold": True}),
+              (f"{_deb['harmful_revision_rate_pct']}%", {"bold": True, "color": ACCENT}),
+              (f"{_deb['beneficial_correction_rate_pct']}%", {"bold": True, "color": ACCENT}),
+              (str(_deb["distinct_drugs_used_across_all_determinate_runs"]), {"bold": True, "color": ACCENT})])
+table(s, ["what made it reconsider", "turns", "harmful revision", "corrected an error", "drugs still in play"],
+      _rows, x=M, y=2.35, w=CW, col_w=[0.34, 0.10, 0.19, 0.21, 0.16],
+      row_h=0.42, size=12.5, head_size=10)
+text(s, M, 5.62, CW, 1.05,
+     "Every row starts from the same round-0 position on the same frozen cohort and applies one "
+     "reconsideration step. The panel-reveal arm is not in this table: it reveals the result after "
+     "the debate has already moved the position, and its records carry the debate's own final drug "
+     "on all 400 runs.", size=11.5, color=MUTED, line=1.32)
+notes(s, f"""
+Backup slide. Use it if someone asks whether the framing of the challenge is what matters.
+It is not. All four framings sit in a narrow band, {min(_hrr):g} to {max(_hrr):g} per cent harmful revision, when the
+model is challenged once. Five turns of the same kind of challenge costs {_deb['harmful_revision_rate_pct']} per cent.
+The variable is how long the conversation runs, not how the challenge is worded.
+Two more things fall out of this table.
+First, a challenge carrying no evidence corrects an inadequate opening almost as often as the real
+susceptibility panel does, {min(_bcr):g} to {max(_bcr):g} per cent against {_pan['beneficial_correction_rate_pct']} per cent. The model revises at close to
+the right rate for none of the right reasons.
+Second, the answer space narrows. Given the panel, {_pan['distinct_drugs_used_across_all_determinate_runs']} different drugs are still in play across the
+cohort. After the debate, {_deb['distinct_drugs_used_across_all_determinate_runs']}. The debate does not only pick worse, it stops considering.
+If someone asks whether that is the debate or just being asked repeatedly, say I built the control:
+one agent, same cases, same opening prompt, three speaking turns, nothing disagreeing with it.
+""")
+footer(s, "results/trigger_comparison.json  ·  analysis/trigger_comparison.py", page())
 
 
 # ---------------------------------------------------------------- timing cues

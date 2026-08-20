@@ -148,8 +148,14 @@ thinking in, which is worth knowing before you present to her.
 
 ## Read only if someone brings it up
 
-### [ ] Zahavy, Position: LLMs can't jump
-PMLR 306 (2026) · PDF on your Desktop · sent by Tingting
+### [ ] DO NOT CITE: Zahavy, Position: LLMs can't jump
+
+**DO NOT CITE this one.** It is in `docs/do_not_cite.md`: the only identifier for it is an
+OpenReview forum id with no indexed record, and the PMLR 306 attribution on the PDF has not been
+resolved against a published volume. Attempted again on 20 August 2026 and still not resolved. Read
+it, do not put it in a bibliography until the venue resolves. A 2026 paper arguing against its
+central claim does resolve, arXiv:2608.14397, "LLMs Don't Pay for the Jump", if the argument itself
+is what you want to reference. PDF on your Desktop, sent by Tingting.
 
 Induction, deduction, abduction; Einstein's route to General Relativity as the case study.
 **Carries almost no evidential weight for you.** It is a position paper with no data, no models

@@ -147,10 +147,22 @@ BANNED_CLAIMS = [
      "so this framing argues against the study's own stewardship point"),
     (r"caused (?:a |an |better |worse )?(?:patient )?outcome|reduced mortality|shortened length of stay",
      "MIMIC-IV is observational; claims are alignment or counterfactual appropriateness only"),
+    # docs/do_not_cite.md carries three unresolved identifiers and this sweep enforced one of
+    # them. All three are enforced now, in the files where citing actually happens.
     (r"Clinical-RLVR",
      "docs/do_not_cite.md: identifier never resolved, DO NOT CITE",
      ("docs/references.bib", "docs/LITERATURE.md", "PROJECT.md", "BRIEFING.md", "README.md",
-      "deck/", "CLAUDE.md")),
+      "deck/", "CLAUDE.md", "AUDIT.md", "docs/HEADLINE.md", "docs/SUPERVISOR_ASKS.md")),
+    (r"fundamental flaw leaves LLMs strikingly vulnerable|MIT Technology Review",
+     "docs/do_not_cite.md: trade press, no DOI and no retrievable author, DO NOT CITE. "
+     "Cite the primary paper the article reports on instead",
+     ("docs/references.bib", "docs/LITERATURE.md", "PROJECT.md", "BRIEFING.md", "README.md",
+      "deck/", "CLAUDE.md", "AUDIT.md", "docs/HEADLINE.md", "docs/SUPERVISOR_ASKS.md")),
+    (r"LLMs? can'?t jump|klU4737opt",
+     "docs/do_not_cite.md: OpenReview forum id with no indexed record, venue unverified. "
+     "Do not cite it as a paper until the venue resolves",
+     ("docs/references.bib", "docs/LITERATURE.md", "PROJECT.md", "BRIEFING.md", "README.md",
+      "deck/", "CLAUDE.md", "AUDIT.md", "docs/HEADLINE.md", "docs/SUPERVISOR_ASKS.md")),
 ]
 # entries are (pattern, why) for an everywhere-ban, or (pattern, why, scope_prefixes)
 
@@ -165,6 +177,39 @@ NEGATED = re.compile(
     r"never say|do not say|verdict v-r|>R<|fastest way to lose|default: cite nothing|"
     r"claiming them|argues against",
     re.I)
+
+
+def _plain(t):
+    """Markdown and HTML emphasis splits a negation in two: "Do **not** say" does not match a
+    pattern looking for "do not". Emphasis is removed before the negation test."""
+    return re.sub(r"</?[a-zA-Z][^>]*>", " ", t).replace("**", "").replace("__", "") \
+             .replace("*", "").replace("_", "").replace("`", "")
+
+
+_SENT_END = re.compile(r"[.!?]\s|\n\s*\n|\n\s*[-*|#]")
+
+
+def _sentence_is_negated(text, m):
+    """True when the match sits in a sentence that forbids it rather than states it.
+
+    The window is the sentence containing the match, with the match itself removed. Sentence
+    boundaries are full stops, blank lines, and the start of a markdown list row, table row or
+    heading, because a register of forbidden items is written as a list and each row is its own
+    statement."""
+    starts = [x.end() for x in _SENT_END.finditer(text, 0, m.start())]
+    lo = starts[-1] if starts else max(0, m.start() - 400)
+    nxt = _SENT_END.search(text, m.end())
+    hi = nxt.start() if nxt else min(len(text), m.end() + 400)
+    before, after = text[lo:m.start()], text[m.end():hi]
+    # A forbidden item is usually written inside a list whose header carries the prohibition:
+    # a "never say" block, a do-not register. The item's own row does not repeat the negation,
+    # so the row alone reads as a breach. Look back to the line that opened the list.
+    line_start = text.rfind("\n", 0, m.start()) + 1
+    if re.match(r"\s*(?:[-*+]|\d+[.)]|<li|\|)", text[line_start:m.start()] or " "):
+        head_lo = max(0, line_start - 300)
+        header = text[head_lo:line_start]
+        before = header + before
+    return bool(NEGATED.search(_plain(before)) or NEGATED.search(_plain(after)))
 
 
 def sweep_banned_claims(files):
@@ -184,8 +229,22 @@ def sweep_banned_claims(files):
             if scope is not None and not any(rel.startswith(x) for x in scope):
                 continue                  # this ban only bites where citing happens
             for m in re.finditer(pattern, text, re.I):
-                window = text[max(0, m.start() - 200):m.end() + 90]
-                if NEGATED.search(window):
+                # Two faults were found here by fault injection, and both made the sweep
+                # report clean on real breaches.
+                #
+                # First, the window used to include the matched text, so a banned phrase
+                # containing a negation word negated its own ban. The entry for the position
+                # paper whose title contains "can't" never fired once.
+                #
+                # Second, and worse, the window was 200 characters of surrounding text, so a
+                # negation anywhere nearby silenced the ban. One "does not" earlier in a
+                # paragraph switched off every ban after it. Planting three banned citations
+                # in README.md caught one of the three.
+                #
+                # The guard is now the sentence the match sits in, which is what "the rule
+                # rather than a breach" actually means: a file that states the rule states it
+                # in the same sentence as the thing it forbids.
+                if _sentence_is_negated(text, m):
                     continue              # the rule, or an exclusion register, not a breach
                 hits.append((rel, text[:m.start()].count("\n") + 1, m.group(0).strip(), why))
     return hits
