@@ -441,7 +441,7 @@ exemplar seed.
 member counts as correct. The split is patient-level on `subject_id`, outside the frozen evaluation
 cohort. The objective must be coverage penalised by spectrum, weighted by WHO AWaRe class, because
 training on coverage alone would produce carbapenem for everybody: on this cohort a constant
-meropenem policy scores 96.0% coverage. Success is pre-specified as beating the best constant policy
+meropenem policy scores 192/200 = 96.0% coverage. Success is pre-specified as beating the best constant policy
 on coverage **and** on spectrum simultaneously, on held-out patients, and holding it under the C1
 pressure conditions.
 
@@ -503,29 +503,31 @@ sees only its own previous text. Nothing disagrees with it. The comparison is pa
 against the runs where the specialist also opens, so the only thing that differs is whether anything
 argued back.
 
-The arm covers a contiguous 125 of the 200 cases, because it was run against the clock. The
-prefix is contiguous rather than a sample of convenience, and every one of those 125 openings is
+The arm covers a contiguous 200 of the 200 cases, because it was run against the clock. The
+prefix is contiguous rather than a sample of convenience, and every one of those 200 openings is
 the same drug in both arms. The obvious worry about a prefix is that it might not be like the rest
 of the cohort, so here is the check: the debate arm's harmful revision rate computed on this prefix
-alone is 14.8%, against 15.2% on the whole cohort.
+alone is 17%, against 15.2% on the whole cohort.
 
 | | five turns, a counterpart arguing | three turns, only its own text |
 |---|---|---|
-| changed its opening drug | 125 of 125 | 4 of 125 |
-| final recommendation adequate | 77.6% | 88.8% |
-| harmful revision | 14.8% | 0% |
+| changed its opening drug | 200 of 200 | 6 of 200 |
+| final recommendation adequate | 77% | 87% |
+| harmful revision | 17% | 0.6% |
 | distinct drugs used | 2 | 2 |
 
 Paired within patient, the debate ends on an inadequate drug where the control ends on an adequate
-one in 16 pairs, and the reverse in 0. Exact McNemar p = 3.05e-05.
+one in 28 pairs, and the reverse in 0. Exact McNemar p = 7.45e-09.
 
 The counterpart is what moves it. Asked repeatedly with nothing disagreeing, the model restates its
 position and keeps its coverage.
 
-The 4 runs where it did change say the same thing more sharply. All 4 are the same
-move, piperacillin-tazobactam to ceftriaxone, and all 4 stay adequate. The debate leaves
-piperacillin-tazobactam for a cephalosporin in every run, ceftriaxone or cefepime, and that move
-costs coverage in 16 of the paired cases. Same destination drug, opposite safety profile, and what differs is
+The 6 runs where it did change say the same thing more sharply. All 6 are the same
+move, piperacillin-tazobactam to ceftriaxone, and 5 of the 6 keep their coverage
+while 1 does not. The debate leaves piperacillin-tazobactam for a cephalosporin in every
+run, ceftriaxone or cefepime, and that move costs coverage in 28 of the paired cases. So the
+move itself is not the problem, and the control is not a claim that the model never errs unprompted.
+It is a claim about rate: 0.6% against 17% for the same move on the same patients. Same destination drug, opposite safety profile, and what differs is
 what triggered it. De-escalating a broad-spectrum beta-lactam to a narrower agent is trial-supported
 when susceptibility guides it: the SIMPLIFY trial found it non-inferior in Enterobacterales
 bacteraemia, clinical cure 148 of 164 against 148 of 167, risk difference 1.6 percentage points, 95%
@@ -585,7 +587,7 @@ three is good, two is moderate, one is weak.
 | A five-turn debate costs coverage of the organism | 87.5% to 78.0%, -9.5 points; harmful revision 52/341 = 15.2% | yes | yes | yes | yes | **high** |
 | Duration, not the framing of the challenge, is what costs coverage | one turn costs 1.1% to 3.5% across four framings; five turns cost 15.2% | yes | yes | yes | yes | **high** |
 | An unsupported sentence drives carbapenem prescribing from nothing to most of the cohort | 0.0% to 87.2% carbapenem use | yes | yes | yes | yes | **high** |
-| Being contradicted moves the model, being asked again does not | changed its drug 125 of 125 with a counterpart against 4 without one; harmful revision 14.8% against 0.0%; exact McNemar p = 3.05e-05 | yes | yes | no | yes | **good** |
+| Being contradicted moves the model, being asked again does not | changed its drug 200 of 200 with a counterpart against 6 without one; harmful revision 17.0% against 0.6%; exact McNemar p = 7.45e-09 | yes | yes | no | yes | **good** |
 | The answer space collapses under debate and stays open under evidence | 3 distinct drugs after the debate against 8 after the panel, and 1 with no challenge at all | yes | yes | no | yes | **good** |
 | Few-shot examples do not improve the decision | 18 correct answers lost against 2 gained on 175 paired cases, exact McNemar p = 0.000402 | yes | no | yes | yes | **good** |
 | Adequacy labels are bounded by unhandled AmpC induction, and the harm finding is not | 36 of 200 specimens carry an AmpC-capable organism; 27 runs are affected, against 1 of the 52 harmful revisions | no | no | yes | yes | **moderate** |
@@ -799,9 +801,9 @@ repeated write, not a repeated measurement, and the second is dropped before any
 | track4 | 172 | 0 | `case_id + seed_drug + receiver + condition` |
 | fewshot | 200 | 0 | `case_id` |
 | confidence | 200 | 0 | `case_id` |
-| self_revision | 125 | 0 | `case_id` |
+| self_revision | 200 | 0 | `case_id` |
 
-**251 duplicate writes found and dropped in total**, across 4,034 exposures.
+**251 duplicate writes found and dropped in total**, across 4,109 exposures.
 Every arm now runs under a PID lock. Model `qwen3:4b-instruct-2507-q4_K_M`, temperature 0, seed
 20260818, run locally: MIMIC-IV is credentialed under a PhysioNet data use agreement and no
 record-level data is committed to this repository.
@@ -855,7 +857,7 @@ deviation log. **deferred** means it is not done and the reason is on the closin
 | 23 Jul | *"inject different prior information into the prompts, for instance, assign Agent A the identity of an 'infectious disease specialist' and Agent B the role of 'antimicrobial stewardship lead', so that each has a clear, potentially conflicting incentive."* | Those two personas, in those words, are the system prompts. The tension is real: one wants coverage, the other restraint. | **built** slide 6, verbatim |
 | 23 Jul | *"you can feed real de-identified case summaries (including microbiology cultures and susceptibility results) as the discussion input."* | Case summaries yes. The susceptibility results are deliberately **not** in the empiric input, because that would destroy the pre-culture decision point Tingting specified. They enter as their own condition, C2, which is what makes the evidence comparison possible at all. | **built, with a stated deviation** slide 5, conditions C0 to C2 |
 | 23 Jul | *"evaluate which agent's final recommendation aligns better with actual clinical outcomes (e.g. subsequent resistance)"* | The per-agent half is done: Agent A and Agent B both reach 312/400 = 78.0 per cent. Subsequent resistance is not done. | **partly built, rest deferred** |
-| 23 Jul | *"Because your time is limited, you need to complete the first step to satisfy your pre, and then, if you have time left, we could push the whole project forward."* | The first step is complete and the project went past it: 14 arms, 4,034 deduplicated exposures. | **built** `AUDIT.md` section 2 |
+| 23 Jul | *"Because your time is limited, you need to complete the first step to satisfy your pre, and then, if you have time left, we could push the whole project forward."* | The first step is complete and the project went past it: 14 arms, 4,109 deduplicated exposures. | **built** `AUDIT.md` section 2 |
 
 ---
 

@@ -71,6 +71,9 @@ iso_per_case = sel.groupby("micro_specimen_id")["isolate_num"].nunique()
 tested = sel.dropna(subset=["drug"])
 undetermined = determinate = 0
 ceiling_hits = 0
+# Coverage of every constant single-agent policy. The best of these is the comparator the study is
+# measured against, and it was a typed number in two documents until it was computed here.
+constant_cover = {}
 for msid, grp in tested.groupby("micro_specimen_id"):
     n_iso = iso_per_case[msid]
     any_full_cover = False
@@ -82,6 +85,9 @@ for msid, grp in tested.groupby("micro_specimen_id"):
         determinate += 1
         if set(sub["interp"]) <= {"S"}:
             any_full_cover = True
+            constant_cover[d] = constant_cover.get(d, 0) + 1
+        else:
+            constant_cover.setdefault(d, 0)
     ceiling_hits += int(any_full_cover)
 
 pairs = undetermined + determinate
@@ -116,6 +122,30 @@ out = {
         "pct": round(100.0 * ceiling_hits / n_cases, 1),
         "meaning": ("the best any single-agent policy could achieve on this cohort with perfect "
                     "per-patient choice. The baseline is measured against this, not against 100."),
+    },
+    "provenance_counts": {
+        # These were typed into JOURNEY.md as cohort provenance. They are read from the frozen
+        # inputs instead, so a change to any of them shows up rather than sitting in prose.
+        "index_events": int(len(pd.read_parquet(BRAIN / "index_classified.parquet")))
+                        if (BRAIN / "index_classified.parquet").exists() else None,
+        "frozen_cohort_rows": int(len(pd.read_parquet(BRAIN / "inputs" / "cohort_skeleton.parquet"))),
+        "panel_rows": int(len(panel)),
+        "evaluated_selection": n_cases,
+        "meaning": ("the chain from raw index events to the evaluated selection. The frozen cohort "
+                    "is content-hashed and the hash is asserted on every run."),
+    },
+    "constant_single_agent_policies": {
+        "coverage_by_agent": dict(sorted(((d, {"k": k, "n": n_cases,
+                                               "pct": round(100.0 * k / n_cases, 1)})
+                                          for d, k in constant_cover.items()),
+                                         key=lambda kv: -kv[1]["k"])),
+        "best": (lambda b: {"agent": b[0], "k": b[1], "n": n_cases,
+                            "pct": round(100.0 * b[1] / n_cases, 1)})(
+            max(constant_cover.items(), key=lambda kv: kv[1])),
+        "meaning": ("give every patient the same drug and score it against their own panel. The best "
+                    "of these is the comparator this study is measured against, because a model that "
+                    "cannot beat one constant is not reasoning about the patient. It is computed "
+                    "here rather than typed."),
     },
     "gram_positive_agents_in_the_formulary": {
         "agents": sorted(GRAM_POSITIVE_AGENTS),

@@ -825,10 +825,12 @@ If you are evaluating a multi-agent clinical system and you only score correctne
 this failure mode entirely.
 There is a second half to the contribution if you have time or if you are asked what causes it.
 I did not stop at measuring the harm, I isolated what produces it. Same cases, same opening prompt,
-one agent asked three times with nothing disagreeing: it keeps its answer and its coverage. The four
-times it does change, it makes the same de-escalation the debate makes, and none of those four costs
-coverage. So it is being contradicted that moves it, not being asked again, and the same destination
-drug is safe or harmful depending on what triggered the move. That is the control slide at the back.
+one agent asked three times with nothing disagreeing: it keeps its answer in almost every case and it
+keeps its coverage. The few times it does change, it makes the same de-escalation the debate makes,
+and almost all of those keep their coverage. So it is being contradicted that moves it, not being
+asked again, and the same destination drug carries a very different risk depending on what triggered
+the move. It is a claim about rate, not a claim that the model never errs alone. That is the control
+slide at the back.
 """)
 footer(s, "PROJECT.md  ·  the endpoint hierarchy is the instrument, not decoration", dark=True)
 
@@ -1467,9 +1469,13 @@ if SRC:
          f"adequate one in {_t['debate_inadequate_and_control_adequate']} pairs and the reverse in "
          f"{_t['control_inadequate_and_debate_adequate']}. Exact McNemar p = {_t['exact_mcnemar_p']:.3g}.",
          size=12.5, color=INK, line=1.34)
+    _w = SRC["what_the_control_did_when_it_did_change"]
+    _kept = sum(v for k, v in _w["outcome_of_those_changes"].items() if k.endswith("to ADEQUATE"))
+    _lost = sum(v for k, v in _w["outcome_of_those_changes"].items() if not k.endswith("to ADEQUATE"))
     text(s, M, 5.72, CW, 1.0,
-         "What it does not hold constant is context length: the debate transcript is about twice as "
-         "long by the final turn. A length-matched control is the next thing this needs.",
+         f"The {_w['runs_that_changed']} runs it did change are the same de-escalation the debate drives, and {_kept} keep "
+         f"their coverage while {_lost} does not. This is a claim about rate, not about the model never "
+         "erring alone. It does not hold context length or the revision instruction constant.",
          size=11.5, color=MUTED, line=1.3)
     notes(s, f"""
 Backup slide, and it is the answer to the obvious objection.

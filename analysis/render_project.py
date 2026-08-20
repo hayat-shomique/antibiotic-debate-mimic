@@ -98,6 +98,9 @@ if SRC:
     SRC_C = str(_t["control_inadequate_and_debate_adequate"])
     SRC_P = f'{_t["exact_mcnemar_p"]:.3g}'
     SRC_PREFIX_HRR = f'{SRC["_is_the_prefix_representative"]["debate_harmful_revision_rate_on_this_prefix"]:g}'
+    _w = SRC["what_the_control_did_when_it_did_change"]["outcome_of_those_changes"]
+    SRC_S_KEPT = str(sum(v for k, v in _w.items() if k.endswith("to ADEQUATE")))
+    SRC_S_LOST = str(sum(v for k, v in _w.items() if not k.endswith("to ADEQUATE")))
 
 
 if CONF:
@@ -581,7 +584,7 @@ exemplar seed.
 member counts as correct. The split is patient-level on `subject_id`, outside the frozen evaluation
 cohort. The objective must be coverage penalised by spectrum, weighted by WHO AWaRe class, because
 training on coverage alone would produce carbapenem for everybody: on this cohort a constant
-meropenem policy scores 96.0% coverage. Success is pre-specified as beating the best constant policy
+meropenem policy scores {CC["constant_single_agent_policies"]["best"]["k"]}/{CC["constant_single_agent_policies"]["best"]["n"]} = {CC["constant_single_agent_policies"]["best"]["pct"]}% coverage. Success is pre-specified as beating the best constant policy
 on coverage **and** on spectrum simultaneously, on held-out patients, and holding it under the C1
 pressure conditions.
 
@@ -657,9 +660,11 @@ The counterpart is what moves it. Asked repeatedly with nothing disagreeing, the
 position and keeps its coverage.
 
 The {SRC_S_CH} runs where it did change say the same thing more sharply. All {SRC_S_CH} are the same
-move, piperacillin-tazobactam to ceftriaxone, and all {SRC_S_CH} stay adequate. The debate leaves
-piperacillin-tazobactam for a cephalosporin in every run, ceftriaxone or cefepime, and that move
-costs coverage in {SRC_B} of the paired cases. Same destination drug, opposite safety profile, and what differs is
+move, piperacillin-tazobactam to ceftriaxone, and {SRC_S_KEPT} of the {SRC_S_CH} keep their coverage
+while {SRC_S_LOST} does not. The debate leaves piperacillin-tazobactam for a cephalosporin in every
+run, ceftriaxone or cefepime, and that move costs coverage in {SRC_B} of the paired cases. So the
+move itself is not the problem, and the control is not a claim that the model never errs unprompted.
+It is a claim about rate: {SRC_S_HRR}% against {SRC_D_HRR}% for the same move on the same patients. Same destination drug, opposite safety profile, and what differs is
 what triggered it. De-escalating a broad-spectrum beta-lactam to a narrower agent is trial-supported
 when susceptibility guides it: the SIMPLIFY trial found it non-inferior in Enterobacterales
 bacteraemia, clinical cure 148 of 164 against 148 of 167, risk difference 1.6 percentage points, 95%

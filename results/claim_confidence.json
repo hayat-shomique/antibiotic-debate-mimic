@@ -15,7 +15,7 @@
   },
   "_arms": {
     "registered": 14,
-    "deduplicated_exposures": 4082
+    "deduplicated_exposures": 4109
   },
   "claims": [
     {
@@ -64,8 +64,8 @@
     },
     {
       "claim": "Being contradicted moves the model, being asked again does not",
-      "number": "changed its drug 125 of 125 with a counterpart against 4 without one; harmful revision 14.8% against 0.0%; exact McNemar p = 3.05e-05",
-      "n": "125 of 200, a contiguous prefix",
+      "number": "changed its drug 200 of 200 with a counterpart against 6 without one; harmful revision 17.0% against 0.6%; exact McNemar p = 7.45e-09",
+      "n": "200 of 200, a contiguous prefix",
       "paired_within_patient": true,
       "has_a_control_arm": true,
       "reproduced_independently": false,

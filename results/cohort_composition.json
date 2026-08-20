@@ -69,6 +69,84 @@
     "pct": 99.5,
     "meaning": "the best any single-agent policy could achieve on this cohort with perfect per-patient choice. The baseline is measured against this, not against 100."
   },
+  "provenance_counts": {
+    "index_events": 9236,
+    "frozen_cohort_rows": 7796,
+    "panel_rows": 138513,
+    "evaluated_selection": 200,
+    "meaning": "the chain from raw index events to the evaluated selection. The frozen cohort is content-hashed and the hash is asserted on every run."
+  },
+  "constant_single_agent_policies": {
+    "coverage_by_agent": {
+      "meropenem": {
+        "k": 192,
+        "n": 200,
+        "pct": 96.0
+      },
+      "piperacillin-tazobactam": {
+        "k": 176,
+        "n": 200,
+        "pct": 88.0
+      },
+      "gentamicin": {
+        "k": 171,
+        "n": 200,
+        "pct": 85.5
+      },
+      "cefepime": {
+        "k": 159,
+        "n": 200,
+        "pct": 79.5
+      },
+      "ceftazidime": {
+        "k": 159,
+        "n": 200,
+        "pct": 79.5
+      },
+      "ceftriaxone": {
+        "k": 152,
+        "n": 200,
+        "pct": 76.0
+      },
+      "trimethoprim-sulfamethoxazole": {
+        "k": 148,
+        "n": 200,
+        "pct": 74.0
+      },
+      "ciprofloxacin": {
+        "k": 130,
+        "n": 200,
+        "pct": 65.0
+      },
+      "cefazolin": {
+        "k": 102,
+        "n": 200,
+        "pct": 51.0
+      },
+      "ampicillin-sulbactam": {
+        "k": 81,
+        "n": 200,
+        "pct": 40.5
+      },
+      "ampicillin": {
+        "k": 52,
+        "n": 200,
+        "pct": 26.0
+      },
+      "levofloxacin": {
+        "k": 4,
+        "n": 200,
+        "pct": 2.0
+      }
+    },
+    "best": {
+      "agent": "meropenem",
+      "k": 192,
+      "n": 200,
+      "pct": 96.0
+    },
+    "meaning": "give every patient the same drug and score it against their own panel. The best of these is the comparator this study is measured against, because a model that cannot beat one constant is not reasoning about the patient. It is computed here rather than typed."
+  },
   "gram_positive_agents_in_the_formulary": {
     "agents": [
       "daptomycin",

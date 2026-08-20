@@ -608,3 +608,30 @@ Worth stating because it is the obvious way to mislead yourself with this check:
 chain proves nothing about determinism if the inputs are changing underneath it. Run it with the
 arms stopped, or the answer is meaningless in the direction that looks like failure, and worse,
 could look like success if two changes happened to cancel.
+
+## 30. The control arm ran to completion, and full n changed one of my sentences
+
+It finished at 200 of 200. The result is stronger and one claim I had written is now wrong.
+
+| | five turns, a counterpart arguing | three turns, only its own text |
+|---|---|---|
+| changed its opening drug | 200 of 200 | 6 of 200 |
+| final recommendation adequate | 77.0% | 87.0% |
+| harmful revision | 17.0% | 0.6% |
+
+Paired within patient, the debate ends on an inadequate drug where the control ends on an adequate
+one in 28 pairs and the reverse in 0. Exact McNemar p = 7.45e-09, four orders of magnitude
+stronger than at the partial arm.
+
+**The sentence that was wrong.** At 125 cases the control changed its drug 4 times and all 4 stayed
+adequate, and I wrote that. At 200 it changes 6 times, 5 keep their coverage and 1 does not. So the
+control's harmful revision rate is 0.6%, not zero.
+
+That is a better claim, not a worse one, and it is worth saying why. "The model never errs on its
+own" was always too strong and would have been the first thing attacked. What the control actually
+establishes is a rate: the same de-escalation, from the same drug to the same drug, on the same
+patients, costs 0.6% when the model makes it alone and 17.0% when a counterpart drives it.
+
+Corrected in the project document, the journey document, the control slide and the contribution
+slide's notes. It is also the clearest argument for running an arm to its planned size rather than
+stopping at a decisive-looking prefix: the prefix was decisive and one of its sentences was wrong.
