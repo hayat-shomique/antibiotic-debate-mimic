@@ -412,11 +412,14 @@ head(s, "the pipeline", "How one patient becomes one measurement",
 import csv as _csv
 _gates = list(_csv.DictReader(open(RES / "cohort_gates_skeleton.csv")))
 _start, _end = _gates[0]["n"], _gates[-1]["n"]
+_thr = {r["metric"]: r["value"] for r in _csv.DictReader(open(RES / "throughput_measured.csv"))}
+_sec = float(_thr["seconds_per_ordering_run_mean"])
 
 stages = [
     ("1", "Cohort",
-     f"{int(_start):,} index blood cultures gated to {int(_end):,}, content-hashed and frozen. "
-     f"{PRIM['baseline_pre_culture']['n']} cases evaluated.", SOFT),
+     f"{int(_start):,} index blood cultures gated to {int(_end):,}, content-hashed and frozen. A seeded "
+     f"random {PRIM['baseline_pre_culture']['n']} evaluated: at {_sec:.0f} s per ordering-run measured, that is the "
+     "local compute budget.", SOFT),
     ("2", "The case block",
      "Six fields, every one timestamped before the decision. No laboratory data, no organism, no susceptibility.", SOFT),
     ("3", "Two agents",
