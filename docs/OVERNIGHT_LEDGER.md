@@ -338,3 +338,29 @@ the point of keeping the run files.
 Every generator in the analysis chain was re-run and `results/` came back byte identical, the
 control arm excepted because it is still growing. Running the chain twice cannot change a number,
 which is the property that makes "rebuild it and see" a real answer rather than a hope.
+
+## 18. One error class, found in six places. DONE
+
+The panel arrives in this study in two different ways and they are two different arms. In the
+clean-context arm it replaces the debate, measured from the round-0 position over 200 runs. In the
+reveal arm it follows the debate, measured from the post-debate position over 400 runs.
+
+Six places paired a harmful revision rate from the first with a coverage change from the second, in
+one row, and presented them as one condition. It reads as a single experiment and no such
+experiment was run.
+
+- the answer slide, which is the slide the whole talk builds to
+- the closing slide's third statistic
+- `README.md`, the front page
+- `deck/brief.html`, published
+- `canvas/Answer.dc.html`
+- `deck/EVIDENCE.md`, which exists to map every claim to its source
+
+All six corrected. Where the row is about the panel undoing the debate's damage it is now the
+reveal arm throughout, which is also the better claim: after the debate, the panel pushes none of
+the 311 runs that reach it on an adequate drug off one. Where the other arm is the point, it says
+so and sits on its own row. `deck/brief.html` has been republished.
+
+The coherence harness could not have caught this. It compares values against canonical values, and
+every one of these values was canonical. What was wrong was putting two of them in the same row.
+That is worth knowing about the harness: it catches a stale number, not a mismatched pair.

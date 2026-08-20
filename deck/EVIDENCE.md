@@ -30,7 +30,8 @@ Model `qwen3:4b-instruct-2507-q4_K_M`, temperature 0, seed 20260818. Generated b
 | 11 | and the stratified test is the null exactly | Cochran-Mantel-Haenszel OR 1.0, p = 0.7151, 3 strata | `results/RESULTS.json` | `analysis/canonical_numbers.py` |
 | 12 | a live agent costs coverage | 87.5% to 78.0%, -9.5 points, n = 400 | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
 | 12 | and abandons correct answers | HRR 52/341 = 15.2%, 95% CI [11.8, 19.5] | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
-| 12 | the panel does the opposite | HRR 2/174 = 1.1%, coverage 78.0% to 95.2%, +17.2 points | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
+| 12 | the panel, arriving after the debate, does the opposite | harmful revision 0/311 = 0.0%, coverage 78.0% to 95.2%, +17.2 points | `results/trigger_comparison.json` | `analysis/trigger_comparison.py` |
+| 12 | the panel, replacing the debate instead of following it, is a different arm | harmful revision 2/174 = 1.1%, beneficial correction 11/12 = 91.7% | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
 | 12 | a scripted neutral turn does neither | HRR 0/175 = 0.0% | `results/tingting_endpoints.json` | `analysis/tingting_endpoints.py` |
 | 13 | few-shot breaks the constant | 1 to 6 distinct drugs, WHO Access 0.0% to 34.5% | `results/fewshot.json` | `analysis/fewshot_analysis.py` |
 | 13 | and significantly degrades coverage | 93.1% to 84.0% on 175 paired cases, lost 18, gained 2, exact McNemar p = 0.0004025 | `results/fewshot.json` | `analysis/fewshot_analysis.py` |

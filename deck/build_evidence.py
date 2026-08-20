@@ -17,6 +17,7 @@ OUT = Path(__file__).resolve().parent / "EVIDENCE.md"
 
 T = json.loads((RES / "tingting_endpoints.json").read_text())
 R = json.loads((RES / "RESULTS.json").read_text())
+TRIGREV = json.loads((RES / "trigger_comparison.json").read_text())["after_the_debate_does_the_panel_repair_it"]
 P = json.loads((RES / "policy_degeneracy.json").read_text())
 FS = json.loads((RES / "fewshot.json").read_text())
 LK = json.loads((RES / "leakage.json").read_text())
@@ -135,9 +136,17 @@ ROWS = [
      f"n = {DCOV['before_debate']['n']}", TE, S_TE),
     ("12", "and abandons correct answers",
      f"HRR {DBT['HRR']['k']}/{DBT['HRR']['n']} = {DBT['HRR']['pct']}%, 95% CI {DBT['HRR']['ci95']}", TE, S_TE),
-    ("12", "the panel does the opposite",
-     f"HRR {EVID['HRR']['k']}/{EVID['HRR']['n']} = {EVID['HRR']['pct']}%, coverage "
+    # One arm per row. This used to pair the clean-context harmful revision rate, 200 runs
+    # measured from the round-0 position, with the reveal arm's coverage change, 400 runs
+    # measured after the debate, and present them as one condition.
+    ("12", "the panel, arriving after the debate, does the opposite",
+     f"harmful revision {TRIGREV['harmful_revisions']}/{TRIGREV['entered_adequate']} = "
+     f"{TRIGREV['harmful_revision_rate_pct']}%, coverage "
      f"{DCOV['after_debate']['pct']}% to {DCOV['after_panel']['pct']}%, {DCOV['evidence_change_pts']:+.1f} points",
+     "trigger_comparison.json", "analysis/trigger_comparison.py"),
+    ("12", "the panel, replacing the debate instead of following it, is a different arm",
+     f"harmful revision {EVID['HRR']['k']}/{EVID['HRR']['n']} = {EVID['HRR']['pct']}%, "
+     f"beneficial correction {EVID['BCR']['k']}/{EVID['BCR']['n']} = {EVID['BCR']['pct']}%",
      TE, S_TE),
     ("12", "a scripted neutral turn does neither",
      f"HRR {NEUT['HRR']['k']}/{NEUT['HRR']['n']} = {NEUT['HRR']['pct']}%", TE, S_TE),
