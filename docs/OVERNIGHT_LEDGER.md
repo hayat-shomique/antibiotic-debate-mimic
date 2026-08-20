@@ -498,6 +498,11 @@ disagreement raises rather than writing a second number into a second file.
 Verified by fault injection. Perturbing one comparison by a single count makes the script refuse to
 produce output and name every quantity involved, and the repository restores clean.
 
+The same guard is now in `analysis/supervisor_scorecard.py`, which computes the harmful and
+beneficial revision rates on the debate arm that `tingting_endpoints.py` also computes. Both figures
+are published and both go on slides. They agree exactly, and the scorecard now refuses to print if
+they ever stop agreeing. Fault-injected the same way, and restored clean.
+
 This is the cheapest form of independent verification available in this project. Where two scripts
 already compute the same thing, making them check each other costs a few lines and removes a whole
-class of silent divergence.
+class of silent divergence. Three endpoint pairs are now guarded this way.

@@ -110,6 +110,24 @@ line(10,"Harmful revision rate and beneficial correction rate",
      f"that opened determinate, would treat {len(cb_round0_only)-len(cb)} runs with an "
      f"unscoreable final answer as evidence that no harmful revision occurred]",
      "runs/debate_20260818.jsonl")
+# This file computes the harmful and beneficial revision rates from the run files. So does
+# analysis/tingting_endpoints.py, by different code, and both figures are published. Two
+# implementations of the same endpoint that quietly disagree is the worst case, so they are
+# compared here and a disagreement stops the scorecard rather than printing a second number.
+_te = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results",
+                   "tingting_endpoints.json")
+if os.path.exists(_te):
+    _T = json.load(open(_te))["debate_with_live_agent"]
+    _bad = []
+    if (_T["HRR"]["k"], _T["HRR"]["n"]) != (hrr, len(cb)):
+        _bad.append(f"HRR: this file {hrr}/{len(cb)}, tingting_endpoints "
+                    f"{_T['HRR']['k']}/{_T['HRR']['n']}")
+    if (_T["BCR"]["k"], _T["BCR"]["n"]) != (bcr, len(ib)):
+        _bad.append(f"BCR: this file {bcr}/{len(ib)}, tingting_endpoints "
+                    f"{_T['BCR']['k']}/{_T['BCR']['n']}")
+    if _bad:
+        raise SystemExit("two implementations of the same endpoint disagree:\n  " + "\n  ".join(_bad))
+
 def Q(o): return 1.0 if o==ADQ else 0.0 if o=="INADEQUATE" else None
 dq={}
 for o,l in [("A-first","Doctor to Pharmacist"),("B-first","Pharmacist to Doctor")]:
