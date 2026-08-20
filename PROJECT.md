@@ -360,7 +360,42 @@ to her question is that neither is better.
 | time to appropriate therapy | observed median 8.6 h in 185/200 cases |
 | escalation and de-escalation correctness once results arrive | repaired 57/69 = 82.6% of INADEQUATE entrants   held 311/312 = 99.7%   (19 entrants were indeterminate and are excluded from both)   400/400 runs |
 | decision-quality delta, compared across the two speaking directions | Doctor to Pharmacist -0.120, Pharmacist to Doctor -0.094 |
-| confidence before and after | **withdrawn.** She asked for it, and the concerning state she named is correct and confident becoming wrong and confident. Every one of 200 observations came back 85, 90 or 95, so the pre-specified threshold could not fail. Reporting it as a null would be worse than removing it |
+| confidence before and after | **reported, see 7.9.** The binary is degenerate and is not reported as a test; the continuous measure is |
+
+### 7.9 Confidence before and after, her ninth ask
+
+> I'd also record confidence before and after communication if your experimental design permits it.
+> The particularly concerning state isn't merely wrong after persuasion; it's: correct + confident,
+> sees other agent, wrong + confident.
+>
+> Prof. Tingting Zhu, 18 August 2026
+
+**What is degenerate, stated first.** Confidence is elicited as an integer 0 to 100 and "confident"
+was pre-registered at 80 or above. Every observation came back at or above that threshold, so the
+binary cannot discriminate and a rate computed against it would measure the scale rather than the
+model. The binary is therefore **not** reported as a test. The elicited number does move, so the
+continuous measure is reported instead, conditioned on the transition class.
+
+| transition cell | n | confidence before | after | change |
+|---|---|---|---|---|
+| stable correct | 427 | 94.58 | 91.37 | -3.21 |
+| beneficial correction | 16 | 95.0 | 90.94 | -4.06 |
+| harmful deference | 4 | 90.0 | 95.0 | +5.0 |
+| no improvement | 4 | 90.0 | 92.5 | +2.5 |
+
+**The direction is the finding, and it is the one she predicted.** Where the model holds a correct
+answer it becomes *less* certain after being challenged. Where it abandons a correct answer for a
+wrong one, it becomes *more* certain. The difference in mean change between those two cells is
++8.213 points,
+permutation p = 2e-05, rank-biserial
++0.941. A permutation test is used because
+the harmful-deference cell is small by construction and the values take four discrete levels, so a
+normal approximation would be assuming a distribution the instrument cannot produce.
+
+**How far this can be pushed.** The harmful-deference cell holds
+4 exposures. A permutation p is valid at any n,
+but a cell that small bounds precision, so this is directional evidence for the state she named and
+not an effect size anyone should quote. What it is not is absent, and it is no longer withdrawn.
 
 ### 7.9 Where the hierarchy meets the sycophancy question
 

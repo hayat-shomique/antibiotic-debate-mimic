@@ -60,6 +60,7 @@ FS = json.loads((RES / "fewshot.json").read_text())
 LEAK = json.loads((RES / "leakage.json").read_text())
 MT = json.loads((RES / "model_tiers.json").read_text())
 CLIN = json.loads((RES / "clinician_comparison.json").read_text())
+CONF = json.loads((RES / "confidence_axis.json").read_text())
 ENC = MT["_encoder_baseline"]["models"]
 BEST_ENC = max(ENC.items(), key=lambda kv: kv[1]["adequate"])
 MG = MT["medgemma:4b-it-q4_K_M"]
@@ -812,8 +813,8 @@ left = [
      "With one recommendation for every patient there is no variation to explain, so this cannot separate a model that reasons about patients from a model with one good default."),
     ("The primary test runs on 70 cases",
      f"The pressure arm ran {COVER['cases_the_pressure_arm_covered']} of {COVER['cases_in_the_frozen_selection']}, so {ATTR['dropped_arm_never_ran_the_case']} cases have no pressure row and {ATTR['dropped_indeterminate_outcome']} more are indeterminate. A contiguous prefix of a seeded selection, adequacy {COVER['baseline_adequacy_covered_subset_pct']}% against {COVER['baseline_adequacy_whole_selection_pct']}%."),
-    ("The confidence endpoint is withdrawn",
-     "She asked for confidence before and after, because correct and confident becoming wrong and confident is the concerning state. Every one of 200 observations came back 85, 90 or 95, so the pre-registered threshold could not fail."),
+    ("The confidence binary cannot fail",
+     "Every observation sits above the pre-registered threshold of 80, so the binary is degenerate and is not reported as a test. The continuous measure is reported instead, and the harmful-deference cell it rests on is small."),
     ("Clustering, not independence",
      "400 ordering-runs are 200 patients seen twice. Measured ICC 0.913, design effect 1.91, effective n 209. Any interval computed as though they were independent is too narrow."),
 ]
@@ -1239,6 +1240,57 @@ to her question is that neither is better, and the interesting part is that a co
 achieves that.
 """)
 footer(s, "results/clinician_comparison.json  ·  analysis/clinician_comparison.py  ·  identical scoring rule, protocol_v1 line 65", page())
+
+
+# ============================================================== backup, confidence
+s = new_slide(paper=True)
+head(s, "backup slide", "Confidence before and after, and the state she predicted",
+     "“The particularly concerning state isn't merely wrong after persuasion; it's: correct + confident, sees other agent, wrong + confident.”   Prof. Tingting Zhu, 18 August 2026")
+_cells = [("stable correct", "stable_correct"), ("beneficial correction", "beneficial_correction"),
+          ("harmful deference", "harmful_deference"), ("no improvement", "no_improvement")]
+table(s, ["transition cell", "n", "confidence before", "after", "change"],
+      [[nm, str(CONF["by_transition_cell"][k]["n"]),
+        f"{CONF['by_transition_cell'][k]['mean_confidence_before']:.1f}",
+        f"{CONF['by_transition_cell'][k]['mean_confidence_after']:.1f}",
+        (f"{CONF['by_transition_cell'][k]['mean_delta']:+.1f}",
+         {"bold": k == "harmful_deference",
+          "color": ACCENT if CONF["by_transition_cell"][k]["mean_delta"] > 0 else PRIMARY})]
+       for nm, k in _cells if CONF["by_transition_cell"].get(k, {}).get("n")],
+      x=M, y=2.90, w=CW * 0.72, col_w=[0.36, 0.12, 0.22, 0.14, 0.16], row_h=0.44, size=12.5, head_size=10)
+
+block(s, M + CW * 0.75, 2.90, CW * 0.25, 2.0, BG)
+text(s, M + CW * 0.75 + 0.24, 3.08, CW * 0.25 - 0.5, 1.7,
+     [[("Where it holds a correct answer it becomes less certain. Where it abandons one, it becomes more certain.",
+        {"bold": True, "size": 12.5})],
+      [(f"Difference in mean change {CONF['harmful_deference_vs_stable_correct']['observed_difference_in_mean_delta']:+.1f} points, "
+        f"permutation p = {CONF['harmful_deference_vs_stable_correct']['p_two_sided']}, "
+        f"rank-biserial {CONF['harmful_deference_vs_stable_correct']['rank_biserial']:+.2f}.",
+        {"color": MUTED, "size": 11.5})]], size=12, line=1.3, space_after=7)
+
+text(s, M, 5.20, CW, 1.2,
+     [[("What is degenerate, said first. ", {"bold": True}),
+       (f"Confidence is elicited 0 to 100 and confident was pre-registered at {80}. Every observation came "
+        f"back at or above it, {sorted(CONF['_degeneracy']['distinct_values_after'])}, so the binary cannot "
+        "discriminate and is not reported as a test. The continuous measure is, conditioned on the transition.",
+        {"color": MUTED})],
+      [(f"And the honest bound: the harmful-deference cell holds {CONF['by_transition_cell']['harmful_deference']['n']} exposures. "
+        "A permutation test is valid at any n, but a cell that small is directional evidence for the state she "
+        "named, not an effect size to quote.", {"color": MUTED})]], size=12.5, line=1.34, space_after=8)
+notes(s, f"""
+Backup slide, and it answers her ninth ask.
+She asked for confidence before and after, and she named the state that worries her: correct and
+confident, sees the other agent, wrong and confident.
+I nearly withdrew this endpoint, and half of that was right. The binary cannot fail: every single
+observation is above my pre-registered threshold of 80, so a rate against that threshold measures my
+scale, not the model. I say that before I show anything else.
+But the number itself moves, and it moves in opposite directions depending on what happened. When the
+model holds a correct answer under challenge it gets less certain, about three points. When it
+abandons a correct answer for a wrong one it gets MORE certain, five points. That is the state she
+predicted, in the direction she predicted.
+The honest bound is the cell size: {CONF['by_transition_cell']['harmful_deference']['n']} exposures. I use a permutation test because it is valid
+at any n, and I do not quote it as an effect size.
+""")
+footer(s, "results/confidence_axis.json  ·  analysis/confidence_axis.py  ·  specification written before the pressure arm was extended, and re-run unchanged", page())
 
 
 # ---------------------------------------------------------------- timing cues

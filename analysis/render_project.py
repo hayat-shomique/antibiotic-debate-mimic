@@ -41,6 +41,7 @@ PROMPTS = (DOCS / "prompts_used.md").read_text()
 ASKS = (DOCS / "SUPERVISOR_ASKS.md").read_text()
 SCORE = (ROOT / "SCORECARD.txt").read_text()
 CLIN = json.loads((RES / "clinician_comparison.json").read_text())
+CONF = json.loads((RES / "confidence_axis.json").read_text())
 
 
 def prose(pattern, source=METHODS):
@@ -385,7 +386,42 @@ to her question is that neither is better.
 | time to appropriate therapy | {TTA} |
 | escalation and de-escalation correctness once results arrive | {ESC} |
 | decision-quality delta, compared across the two speaking directions | Doctor to Pharmacist {DQ_AB}, Pharmacist to Doctor {DQ_BA} |
-| confidence before and after | **withdrawn.** She asked for it, and the concerning state she named is correct and confident becoming wrong and confident. Every one of 200 observations came back 85, 90 or 95, so the pre-specified threshold could not fail. Reporting it as a null would be worse than removing it |
+| confidence before and after | **reported, see 7.9.** The binary is degenerate and is not reported as a test; the continuous measure is |
+
+### 7.9 Confidence before and after, her ninth ask
+
+> I'd also record confidence before and after communication if your experimental design permits it.
+> The particularly concerning state isn't merely wrong after persuasion; it's: correct + confident,
+> sees other agent, wrong + confident.
+>
+> Prof. Tingting Zhu, 18 August 2026
+
+**What is degenerate, stated first.** Confidence is elicited as an integer 0 to 100 and "confident"
+was pre-registered at 80 or above. Every observation came back at or above that threshold, so the
+binary cannot discriminate and a rate computed against it would measure the scale rather than the
+model. The binary is therefore **not** reported as a test. The elicited number does move, so the
+continuous measure is reported instead, conditioned on the transition class.
+
+| transition cell | n | confidence before | after | change |
+|---|---|---|---|---|
+| stable correct | {CONF['by_transition_cell']['stable_correct']['n']} | {CONF['by_transition_cell']['stable_correct']['mean_confidence_before']} | {CONF['by_transition_cell']['stable_correct']['mean_confidence_after']} | {CONF['by_transition_cell']['stable_correct']['mean_delta']:+} |
+| beneficial correction | {CONF['by_transition_cell']['beneficial_correction']['n']} | {CONF['by_transition_cell']['beneficial_correction']['mean_confidence_before']} | {CONF['by_transition_cell']['beneficial_correction']['mean_confidence_after']} | {CONF['by_transition_cell']['beneficial_correction']['mean_delta']:+} |
+| harmful deference | {CONF['by_transition_cell']['harmful_deference']['n']} | {CONF['by_transition_cell']['harmful_deference']['mean_confidence_before']} | {CONF['by_transition_cell']['harmful_deference']['mean_confidence_after']} | {CONF['by_transition_cell']['harmful_deference']['mean_delta']:+} |
+| no improvement | {CONF['by_transition_cell']['no_improvement']['n']} | {CONF['by_transition_cell']['no_improvement']['mean_confidence_before']} | {CONF['by_transition_cell']['no_improvement']['mean_confidence_after']} | {CONF['by_transition_cell']['no_improvement']['mean_delta']:+} |
+
+**The direction is the finding, and it is the one she predicted.** Where the model holds a correct
+answer it becomes *less* certain after being challenged. Where it abandons a correct answer for a
+wrong one, it becomes *more* certain. The difference in mean change between those two cells is
+{CONF['harmful_deference_vs_stable_correct']['observed_difference_in_mean_delta']:+} points,
+permutation p = {CONF['harmful_deference_vs_stable_correct']['p_two_sided']}, rank-biserial
+{CONF['harmful_deference_vs_stable_correct']['rank_biserial']:+}. A permutation test is used because
+the harmful-deference cell is small by construction and the values take four discrete levels, so a
+normal approximation would be assuming a distribution the instrument cannot produce.
+
+**How far this can be pushed.** The harmful-deference cell holds
+{CONF['by_transition_cell']['harmful_deference']['n']} exposures. A permutation p is valid at any n,
+but a cell that small bounds precision, so this is directional evidence for the state she named and
+not an effect size anyone should quote. What it is not is absent, and it is no longer withdrawn.
 
 ### 7.9 Where the hierarchy meets the sycophancy question
 

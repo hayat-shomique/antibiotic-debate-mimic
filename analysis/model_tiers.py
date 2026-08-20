@@ -55,6 +55,27 @@ tiers["_row_source_check"] = {
     "sources_agree_on_a_single_drug": len({d for v in by_src.values() for d in v}) == 1,
 }
 
+tiers["_medbert"] = {
+    "her_ask": ("Prof. Tingting Zhu, 29 July 2026, twice in one minute: 'compare with some medical "
+                "bert models which previously trained on EHR data already. See how well they perform "
+                "without fine-tuning' and 'Smith like Med Bert or ClinicalBert etc.'"),
+    "clinicalbert": "run, see the encoder table",
+    "med_bert_original": {
+        "identifier_probed": "Rasmy/Med-BERT",
+        "probed_on": "20 August 2026",
+        "result": "not a valid model identifier on the HuggingFace Hub",
+        "why_it_would_not_apply_anyway": (
+            "the original Med-BERT of Rasmy et al. is pretrained on sequences of structured "
+            "diagnosis codes, not free clinical text. Its vocabulary is codes, so a masked-token "
+            "cloze over antibiotic names has nothing to predict into. Substituting it would require "
+            "building a code-sequence representation of every case, which is a different study."),
+        "what_was_run_instead": ["Charangan/MedBERT", "medicalai/ClinicalBERT"],
+        "declared_before_the_numbers": (
+            "both substitutes were chosen and launched before their results were seen, to answer her "
+            "ask rather than to improve a column, and are reported whatever they show"),
+    },
+}
+
 enc_path = BRAIN / "encoder_baseline_summary.json"
 if enc_path.exists():
     enc = json.loads(enc_path.read_text())
