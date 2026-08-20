@@ -144,6 +144,19 @@ thinking in, which is worth knowing before you present to her.
 | Small language models in medicine, *Nat. Biomed. Eng.* | the case for small models clinically | you used a 4B model, this is your justification |
 | AI in drug discovery, *Nat. Rev. Drug Discov.* | Tingting quoted it: *"evidence of their clinically relevant impact is, so far, disappointingly limited"* | her stated view on AI hype |
 
+### [ ] Not read. Found 20 August, relevant to "where this goes"
+
+**Group Perspective Matters: Regulating Debate Relationships Can Mitigate Blind Conformity in
+Multi-Agent Debate**, arXiv:2608.03648, 4 August 2026.
+
+Proposes regulating the relationships between debating agents as a mitigation for blind conformity.
+That is the intervention side of exactly what this project measures, so it belongs on the future
+work slide rather than in the results. **Not read, and not in `references.bib`,** because this
+reading list's own rule is that nothing gets cited until it has been read and the author list has
+not been resolved. Identified only, so it can be found again.
+
+---
+
 ---
 
 ## Read only if someone brings it up
