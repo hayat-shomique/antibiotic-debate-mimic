@@ -530,3 +530,20 @@ denominator of the flip rates, never the interval, so no negative percentage rea
 future document does render it, clamp at the point of rendering rather than in the scorer.
 
 Recorded here so the next person finds the reasoning rather than the artefact.
+
+## 27. The cohort chain, verified end to end from the source files
+
+Every step from the raw index events to the frozen 200 was recomputed from the parquet files, not
+read out of a document.
+
+| step | claimed | recomputed |
+|---|---|---|
+| index events, panel-bearing first positive blood cultures | 9,236 | 9,236 rows, 9,236 distinct specimens |
+| gated to the frozen cohort | 7,796 | 7,796 |
+| content hash pinned before any model call | `4a4f4f78...3c65d414` | reproduces exactly, by the method the code uses |
+| susceptibility panel rows behind the reference standard | 138,513 | 138,513 |
+| the evaluated selection | a seeded 200 | the seeded selection reproduces the frozen 200 and overlaps the debate arm 200 of 200 |
+
+That last row is the one that matters most, because it is the check that caught the control arm
+running on the wrong cases before it produced a number. It is now asserted inside
+`selfrevise_run.py` rather than checked by hand.
