@@ -52,12 +52,12 @@ repeated write, not a repeated measurement, and the second is dropped before any
 | debate | 401 | 0 | `case_id + drug + ordering + turn` | `debate_20260818.jsonl`, `debate_20260819.jsonl`, `debate_20260820.jsonl` |
 | self_consistency | 200 | 0 | `case_id` | `selfcon_20260819.jsonl` |
 | cross_model | 400 | 0 | `case_id + drug + model` | `model_compare_20260818.jsonl`, `model_compare_20260819.jsonl` |
-| plausible | 166 | 119 | `case_id + seed_drug + receiver` | `plausible_20260819.jsonl`, `plausible_20260820.jsonl` |
+| plausible | 312 | 166 | `case_id + seed_drug + receiver` | `plausible_20260819.jsonl`, `plausible_20260820.jsonl` |
 | track4 | 172 | 0 | `case_id + seed_drug + receiver + condition` | `track4_20260819.jsonl` |
 | fewshot | 200 | 0 | `case_id` | `fewshot_20260819.jsonl` |
 | confidence | 200 | 0 | `case_id` | `confidence_20260819.jsonl` |
 
-**204 duplicate writes found and dropped in total.** Cause and fix in `archive/DATA_INTEGRITY.md`.
+**251 duplicate writes found and dropped in total.** Cause and fix in `archive/DATA_INTEGRITY.md`.
 
 ## What is deliberately not claimed
 

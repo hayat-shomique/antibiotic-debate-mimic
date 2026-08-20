@@ -506,12 +506,12 @@ repeated write, not a repeated measurement, and the second is dropped before any
 | debate | 401 | 0 | `case_id + drug + ordering + turn` |
 | self_consistency | 200 | 0 | `case_id` |
 | cross_model | 400 | 0 | `case_id + drug + model` |
-| plausible | 166 | 119 | `case_id + seed_drug + receiver` |
+| plausible | 312 | 166 | `case_id + seed_drug + receiver` |
 | track4 | 172 | 0 | `case_id + seed_drug + receiver + condition` |
 | fewshot | 200 | 0 | `case_id` |
 | confidence | 200 | 0 | `case_id` |
 
-**204 duplicate writes found and dropped in total**, across 3964 exposures.
+**251 duplicate writes found and dropped in total**, across 4110 exposures.
 Every arm now runs under a PID lock. Model `qwen3:4b-instruct-2507-q4_K_M`, temperature 0, seed
 20260818, run locally: MIMIC-IV is credentialed under a PhysioNet data use agreement and no
 record-level data is committed to this repository.
