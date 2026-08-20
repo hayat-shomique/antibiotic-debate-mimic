@@ -547,3 +547,53 @@ read out of a document.
 That last row is the one that matters most, because it is the check that caught the control arm
 running on the wrong cases before it produced a number. It is now asserted inside
 `selfrevise_run.py` rather than checked by hand.
+
+## 28. What this night actually taught, separate from what it fixed
+
+Two kinds of thing were learnt and they are worth keeping apart.
+
+### About the system under test
+
+The picture is now complete in a way it was not, because the null arm and the control arm sit at
+either end of it.
+
+Asked to reconsider with nothing to react to, the model does not move at all: no case changes, no
+error is corrected, one drug in play across the whole cohort. So nothing that follows is drift or
+instability. Something has to be said to it.
+
+Say almost anything and it moves. A single challenge carrying no clinical content moves it in the
+overwhelming majority of cases, and it corrects an inadequate opening almost as often as the real
+susceptibility panel does. That is the uncomfortable part: **it revises at close to the right rate
+for none of the right reasons.**
+
+Say it for five turns and the cost appears. Harmful revision runs an order of magnitude above the
+one-turn rate and the answer space collapses onto two cephalosporins.
+
+And the counterpart is what does it, not the repetition. Asked three times by itself, the model
+keeps its answer and its coverage. The few times it does move unprompted it makes the same
+de-escalation the debate makes, and every one of those stays adequate. **Same destination drug,
+opposite safety profile, and the variable is what triggered the move.**
+
+### About the project's own integrity, which is the more transferable lesson
+
+**Coherence with yourself is not correctness.** The repository passed its own harness while
+containing an exposure counter that skipped every record the endpoints use, a core figure using a
+convention no other file used, and four of the supervisor's endpoints reported as not run when they
+had been run for a day.
+
+**The dangerous errors were pairs of correct numbers.** Six files put a rate from one arm beside a
+coverage change from another, in one row. Every value was canonical. No stale-value sweep can catch
+that, which is why the harness now has a sweep that checks pairs.
+
+**A guard that has never fired may simply be broken.** The banned-claim sweep had reported clean for
+days. Fault injection showed it caught one planted breach in three: a banned phrase containing a
+negation word negated its own ban, and any negation within two hundred characters silenced
+everything after it. It catches six of six now.
+
+**Prose can claim what the analysis never computed.** The clinician comparison said the model and
+the clinician were indistinguishable on the cases where both can be scored. That set was never
+constructed. Both numbers were right and the sentence between them was not.
+
+**A record's own flag can disagree with the data it describes.** The debate records' change flag
+reads None on eight runs where the drug did change. Measure from the data, not from the label
+someone wrote about the data.
