@@ -417,3 +417,15 @@ The fix list asked for that framing and proposed supporting it by comparing a fi
 against a single-step panel rate, which varies two things at once. It is now earned from this
 project's own data, within one design, with the destination drug held fixed by observation rather
 than by assertion.
+
+## 21. The acceptance suite prints case identifiers, and now says so
+
+Running it revealed something worth writing down. Its output names each case it runs, so the
+transcript contains `case_id` values, which are `subject_id` plus `micro_specimen_id` and are
+credentialed under the data use agreement. Nothing has leaked: the log lives outside the repository
+and no acceptance output is tracked. But the rule was not written anywhere, and the obvious thing
+to do with a test run is to redirect it into a file next to the code.
+
+`CLAUDE.md` now says it beside the command: never redirect that output into the repository, never
+paste it into a document or a commit message, never quote a line of it. Report the pass count, not
+the transcript.

@@ -60,7 +60,7 @@ python3 deck/build_evidence.py            # deck/EVIDENCE.md
 
 Scripts that need pandas run under `$HOME/.claude-science/conda/envs/brain/bin/python`. The shell
 function `rebuild` does the document half. The acceptance suite is `tests/acceptance.py` and needs
-the harness directory: `BRAIN_DIR=~/brain_run python3 tests/acceptance.py`, currently 36 of 36.
+the harness directory: `BRAIN_DIR=~/brain_run python3 tests/acceptance.py`, currently 36 of 36. **Its output prints case identifiers**, because it names the cases it runs. Never redirect it into a file inside the repository, never paste it into a document or a commit message, and never quote a line of it. Report the pass count, not the transcript.
 
 ## Verifying before you commit
 
