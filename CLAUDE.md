@@ -99,7 +99,7 @@ without a semantic reason.
 Sycophancy and peer conformity are published phenomena, not findings of this project. Coverage on
 this cohort is maximised by a degenerate carbapenem-for-all policy, so never argue the model
 underperforms a constant. The speaking-order effect is entailed, not discovered. The confidence
-endpoint is withdrawn. See the last section of `deck/EVIDENCE.md`.
+confidence **binary** is withdrawn, because every observation sat above the pre-registered threshold; the continuous measure is reported instead. See the last section of `deck/EVIDENCE.md`.
 
 ---
 
@@ -151,7 +151,7 @@ source control, comorbidity, timing and other treatments. Never lead with it.
 
 Anything she asked for that is not done goes on a limitations or further-work slide **by name**. An
 acknowledged gap is a limitation; an unacknowledged one is a hole. This currently applies to the
-withdrawn confidence endpoint, the two arms short of their planned n, the transfer to hosted models,
+withdrawn confidence binary, the transfer to hosted models,
 subsequent resistance, and clinician review.
 
 ---

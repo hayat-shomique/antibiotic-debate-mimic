@@ -46,7 +46,7 @@ and Cohen's kappa is 0.178. Only three of seventeen formulary drugs are ever use
 answer, and two of them account for 399 of 400. The order effect is real as a description and it
 is not surprising as a statistic.
 
-**Beneficial correction rate is on the wrong unit.** 13/24 runs is 6/12 patients. The
+**Beneficial correction rate is on the wrong unit.** 13/22 runs is 7/12 patients. The
 patient-level interval is [25.4, 74.6], a span of 49 points. Directional only.
 
 **No multiplicity correction.** Fourteen declared endpoints across twenty run files, all drawn

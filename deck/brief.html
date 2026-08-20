@@ -334,7 +334,7 @@ footer{
         <h2>The 45 second version</h2>
         <div class="script">
           <p>Language models are trained to be agreeable. People are now building clinical systems where several models confer and reach a decision together, on the assumption that they check each other's work. I tested that assumption on 200 real bloodstream infection cases, and the thing that makes the test work is the referee: the patient's own laboratory susceptibility panel, which neither agent can see and neither agent can argue with.</p>
-          <p>When a second agent argues a case, the first abandons a correct recommendation 15.2 per cent of the time and coverage of the organism falls 9.5 points. Give the same system the laboratory panel instead and harmful revision is 1.1 per cent and coverage rises 17.2 points. So in this setup, agent-to-agent argument reduced coverage and the laboratory panel increased it.</p>
+          <p>When a second agent argues a case, the first abandons a correct recommendation 15.2 per cent of the time and coverage of the organism falls 9.5 points. Give that same system the laboratory panel after the debate and it pushes nobody off a working drug, and coverage rises 17.2 points. So in this setup, agent-to-agent argument reduced coverage and the laboratory panel increased it.</p>
           <p>The part I did not expect is that on a standard accuracy endpoint this failure is invisible. Score whether the answer was right and the debate looks harmless. Score what kind of answer it was and a sentence containing no clinical evidence at all pushes carbapenem use from 0 to 87.2 per cent. The contribution is not that models are agreeable, that is known. It is that the usual way of measuring the harm cannot see this one.</p>
         </div>
         <p class="lede">Slow down on the middle paragraph. Those are the two rows of the panel at the top of this page, and they are the two rows of slide 14.</p>
@@ -351,7 +351,7 @@ footer{
           <li><b>The answer arrives later.</b> The lab grows the bacterium from the blood and tests it against each antibiotic in turn. On my cohort that takes a median of 134 hours. So there is a real answer, and it lands days after the decision was made.</li>
           <li><b>Why that is a gift.</b> Normally, to grade a medical AI, you compare it against what a doctor did, which assumes the doctor was right. My supervisor put it best: "the doctor makes the right decision, that's a huge assumption you make." Here I do not need the doctor. The bacteria tell you who was right.</li>
           <li><b>The experiment.</b> Two AI agents with opposite jobs. One is an infectious disease specialist who wants to cover the infection. One is a stewardship pharmacist whose job is to stop over-prescribing. They argue for five turns and settle on one drug, and I check that drug against the patient's lab result. Then I run the same case three more ways: nobody disagrees, somebody disagrees but says nothing of substance, and the model is simply handed the lab result.</li>
-          <li><b>What happened.</b> An empty sentence of disagreement moved it in 93.5 to 100 per cent of cases. The actual laboratory result moved it in 54 per cent. It responds more to a person pushing back than to the evidence.</li>
+          <li><b>What happened.</b> An empty sentence of disagreement moved it in 93.5 to 100 per cent of cases. The actual laboratory result moved it in 57.2 to 57.8 per cent. It responds more to a person pushing back than to the evidence.</li>
         </ol>
         <h3>The analogy that lands</h3>
         <p>It is a junior doctor who changes the prescription because a senior frowned, not because a test came back. The test is the thing that should move a prescription.</p>
@@ -499,7 +499,7 @@ footer{
             <p>No: the escalation here is not paid for by anything. It happens in response to a sentence containing no clinical information, coverage was already 87.5 and harmful revision near zero. Under the actual panel the model escalates far less, 21 per cent, and there the broadening is earned.</p>
           </div></details>
 
-          <details><summary>You say harmful revision is 15.2 per cent with a live agent but 0 to 1.5 per cent under pressure. Which is it?</summary><div class="answer">
+          <details><summary>You say harmful revision is 15.2 per cent with a live agent but 1.1 to 3.5 per cent under pressure. Which is it?</summary><div class="answer">
             <p><span class="lead-in">Both, and the difference is the point.</span> They are different stimuli. The pressure conditions are four fixed sentences with no content, and the model usually swaps to another drug that also covers. The debate arm is a second model constructing a case for a specific drug, and there it lands on something that fails the patient in 52 of 341 opportunities. A scripted challenge and a reasoned challenge are not the same intervention, which is itself a finding.</p>
           </div></details>
 

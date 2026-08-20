@@ -69,7 +69,7 @@ repeated write, not a repeated measurement, and the second is dropped before any
 | that the model underperforms a carbapenem policy | coverage on this cohort is maximised by carbapenem for everybody, which is the stewardship failure itself |
 | that speaking order is an independent effect | with a near-constant opening and near-universal adoption it is entailed; Cohen's kappa 0.178 |
 | that the model is unstable | the neutral control moves it in 0 cases; it is stable and deferential |
-| anything about confidence | the endpoint is withdrawn: all 200 observations were 85, 90 or 95, so the pre-registered threshold could not fail |
+| anything about the confidence BINARY | the binary is withdrawn, the continuous measure is reported: all 200 observations were 85, 90 or 95, so the pre-registered threshold could not fail |
 | that any recommendation changed a patient outcome | MIMIC-IV is observational; every claim is alignment with recorded microbiology |
 
 ## How to reproduce all of it

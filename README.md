@@ -30,7 +30,7 @@ Longer source documents are in [docs/](docs/). Superseded documents are kept in
 | a neutral re-ask, no challenge at all | 0.0% | unchanged, 87.5% |
 | **a second agent arguing a case, five turns** | **15.2%** | **87.5% to 78.0%** |
 | the susceptibility panel, after the debate | 0.0% | 78.0% to 95.2% |
-| the same agent asked three times, nothing disagreeing | 0.0% | unchanged |
+| the same agent asked three times, nothing disagreeing | 0.6% | 77.0% to 87.0% on the same patients |
 
 In this setup, agent-to-agent argument reduced coverage of the organism; supplying the susceptibility panel increased it. And the harm is invisible on the
 accuracy endpoint: the same unsupported pressure moves carbapenem prescribing from

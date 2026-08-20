@@ -344,7 +344,7 @@ Good afternoon. My name is Shomique Hayat and I spent this summer asking one que
 when two language-model agents confer about a clinical decision, does the conversation
 make the decision better, or does it just make them agree?
 That question is not mine, it is my supervisor's, and the whole evaluation was built to answer it.
-The short version of the answer: the conversation makes the decision measurably worse, and the
+The short version of the answer: in this setup, agent-to-agent argument reduced coverage of the organism, and the
 standard way of scoring these systems cannot see it happen.
 
 ROOM AWARE, use if it fits. This room has already heard Manaan on efficient communication with LLM
@@ -574,7 +574,7 @@ something I measure.
 The important line is the one at the bottom. Nothing in this conversation decides what is true. They
 can agree on the wrong drug, and they do. Truth is settled afterwards by the laboratory.
 """)
-footer(s, "protocol as specified by Zhikang Chen, 23 July 2026  ·  409 debate exposures, both speaking orders", page())
+footer(s, "protocol as specified by Zhikang Chen, 23 July 2026  ·  400 debate exposures, both speaking orders", page())
 
 
 # ============================================================== 7. baseline
@@ -1105,7 +1105,7 @@ cards(s, [("Nothing is typed",
           ("A defect I caused, found and fixed",
            f"Two processes writing one output file wrote {sum(v['duplicate_writes_dropped'] for v in R['_integrity'].values())} exposures twice. Every arm now runs under a PID lock and every arm is deduplicated on a declared identity key."),
           ("A gate that was deleting data",
-           "A leakage gate aborted whenever the model itself wrote the word resistant. It removed 220 runs, non-randomly. Recovered, fault-injection tested at 10 of 10, and the arm it flattered went from a perfect score to 311 of 312.")],
+           "A leakage gate aborted whenever the model itself wrote the word resistant. It removed 220 runs, non-randomly. Recovered, fault-injection tested at 10 of 10, and the arm it flattered went from a perfect score to 311 of 311 held with no harmful revisions.")],
       y=2.25, h=1.85, per_row=3, accent=[PRIMARY, ACCENT, ACCENT], title_size=14, body_size=11.5)
 cards(s, [("An endpoint withdrawn",
            "I pre-registered confident at 80 or above, then every one of 200 observations came back 85, 90 or 95. A threshold that cannot fail is not a pre-registration, so the endpoint is withdrawn rather than reported."),

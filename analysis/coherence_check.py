@@ -223,15 +223,15 @@ def _sentence_is_negated(text, m):
 # many characters of each other is the defect, because that is the width of a table row or a
 # sentence.
 PAIR_BANS = [
-    (r"\b2/174\b|\b1\.1\s*%", r"\b95\.2\s*%|\+?17\.2 points", 220,
+    (r"\b2/174\b|\b1\.1\s*(?:%|per cent)", r"\b95\.2\s*(?:%|per cent)|\+?17\.2 points", 220,
      "the clean-context arm's harmful revision rate beside the reveal arm's coverage change. "
      "They are different arms on different denominators from different starting positions. Use "
      "the reveal arm's own rate, 0 of 311, when the row is about the panel following the debate"),
-    (r"\b11/12\b|\b91\.7\s*%", r"\b57/65\b|\b87\.7\s*%", 220,
+    (r"\b11/12\b|\b91\.7\s*(?:%|per cent)", r"\b57/65\b|\b87\.7\s*(?:%|per cent)", 220,
      "the clean-context arm's beneficial correction rate beside the reveal arm's. Same trap as "
      "the harm rates: one is measured from the round-0 position over 200 runs and the other from "
      "the post-debate position over 400. Name the arm on each or use one of them"),
-    (r"\b15\.2\s*%|\b52/341\b", r"\b1\.1 to 3\.5\s*%", 200,
+    (r"\b15\.2\s*(?:%|per cent)|\b52/341\b", r"\b1\.1 to 3\.5\s*(?:%|per cent)", 200,
      "the five-turn debate rate beside the one-turn pressure band, with nothing saying the "
      "number of turns differs. Name the turns on both sides or the comparison reads as a "
      "framing effect"),
@@ -264,7 +264,8 @@ def sweep_pair_bans(files):
                 # row that names an arm is at least a row someone thought about. Verified by
                 # fault injection both ways, with and without an escape phrase present.
                 if re.search(r"after the debate|replac|different arm|following it|reveal arm|"
-                             r"clean.context|five turns|one turn|per framing", window, re.I):
+                             r"clean.context|five turns|one turn|per framing|different stimul|"
+                             r"which is it|live agent|both, and the difference", window, re.I):
                     continue
                 hits.append((rel, text[:ma.start()].count("\n") + 1,
                              f"{ma.group(0).strip()} near {mb.group(0).strip()}", why))

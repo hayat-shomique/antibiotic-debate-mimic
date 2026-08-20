@@ -166,8 +166,9 @@ def main():
                 f"{r['round0_outcome']} to {r['final_A_outcome']}"
                 for r in ctrl if r["round0_drug"] != r["final_A"]).items(), key=lambda kv: -kv[1])),
             "reading": "this is the sharpest form of the finding. The few changes the model makes "
-                       "unprompted are the same de-escalation the debate drives it to, and none of "
-                       "them costs coverage. Same destination drug, opposite safety profile, and "
+                       "unprompted are the same de-escalation the debate drives it to, and almost "
+                       "all of them keep their coverage. Same destination drug, and a very "
+                       "different rate of harm, and "
                        "the thing that differs is what triggered the move. De-escalating a "
                        "broad-spectrum beta-lactam to a narrower agent is trial-supported when "
                        "susceptibility guides it: Lopez-Cortes et al., Lancet Infect Dis "

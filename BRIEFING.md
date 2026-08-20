@@ -43,10 +43,10 @@ backup slide 21 is the strongest answer to what you learned.
 > neither agent can see and neither agent can argue with.
 >
 > When a second agent argues a case, the first abandons a correct recommendation 15.2 per cent of
-> the time and coverage of the organism falls 9.5 points. Give the same system the laboratory panel
-> instead and harmful revision is 1.1 per cent and coverage rises 17.2 points. So communication
-> agent-to-agent argument reduced coverage of the organism, and supplying the susceptibility panel
-> increased it.
+> the time and coverage of the organism falls 9.5 points. Give that same system the laboratory
+> panel after the debate and it pushes nobody off a working drug, and coverage rises 17.2 points.
+> In this setup, agent-to-agent argument reduced coverage of the organism, and supplying the
+> susceptibility panel increased it.
 >
 > The part I did not expect is that on a standard accuracy endpoint this failure is invisible.
 > Score whether the answer was right and the debate looks harmless. Score what kind of answer it
@@ -79,7 +79,7 @@ Use these five beats, in this order. No jargon until you have earned it.
    case: one where nobody disagrees, one where somebody disagrees but says nothing of substance, and
    one where the model is simply handed the lab result.
 5. **What happened.** Being disagreed with by an empty sentence moved the model in 93.5 to 100 per cent
-   of cases. Being handed the actual laboratory result moved it in 54 per cent. It responds more to a
+   of cases. Being handed the actual laboratory result moved it in 57.2 to 57.8 per cent. It responds more to a
    person pushing back than to the evidence. And when a real second agent argues, the final answer is
    worse than the one it started with.
 
@@ -233,11 +233,12 @@ Read the question, answer out loud, then check. The bold sentence is the one to 
 the same specialist, the same frozen cases, the same round-0 prompt byte for byte, the same formulary,
 gate and scorer, speaking three times, which is exactly how many times the specialist speaks in the
 debate. Between turns it sees only its own previous text and nothing disagrees with it. With a
-counterpart it abandons its opening drug in every single run. Without one it almost never does, and its
-coverage is higher, and its harmful revision rate is zero. Paired within patient the debate ends on an
-inadequate drug where the control ends on an adequate one, never the other way round. **The numbers are
-on the control backup slide, and say the coverage out loud: it is a contiguous prefix of the cohort, not
-all 200, because I ran it against the clock.** What it does not control is the revision instruction: the debate tells the specialist it is in a
+counterpart it abandons its opening drug in all 200 runs. Without one it does so 6 times, its coverage is
+87.0 per cent against 77.0, and its harmful revision rate is 0.6 per cent against 17.0. Paired within
+patient the debate ends on an inadequate drug where the control ends on an adequate one in 28 cases and
+the reverse in 0, exact McNemar p = 7e-09. **Say the honest version of the claim: this is not that the
+model never errs alone. The 6 times it moved on its own it made the same move the debate makes, and
+5 of 6 kept their coverage. It is a claim about rate.** The arm ran to all 200 cases. What it does not control is the revision instruction: the debate tells the specialist it is in a
 discussion with a stewardship lead and to consider their comments, and the control tells it to review
 its own answer. It had to, because naming a stewardship lead would put a counterpart back into the
 control. So the strict claim is that the instruction and the content together move it where reviewing
@@ -292,7 +293,7 @@ happens in response to a sentence containing no clinical information, and covera
 with harmful revision near zero. Under the actual panel the model escalates far less, 21 per cent,
 and there the broadening is earned.
 
-**Q. You say harmful revision is 15.2 per cent with a live agent but 0 to 1.5 per cent under pressure. Which is it?**
+**Q. You say harmful revision is 15.2 per cent with a live agent but 1.1 to 3.5 per cent under pressure. Which is it?**
 **Both, and the difference is the point.** They are different stimuli. The pressure conditions are
 four fixed sentences with no content, and the model usually swaps to another drug that also covers.
 The debate arm is a second model constructing a case for a specific drug, and there it lands on
@@ -349,7 +350,7 @@ the closing slide.
 
 **Q. How do you know the model was not just told the answer somewhere in the prompt?**
 **Three ways.** The case block passes a provenance gate that aborts on any organism name or
-susceptibility phrasing. The pressure sentences are a closed set of four and I censused all 312 turns
+susceptibility phrasing. The pressure sentences are a closed set of four and I censused all 800 turns
 rather than sampling: zero contain any microbiology. And the model's own turns are hashed and measured
 rather than aborted, because a model writing "await culture results" is reasoning aloud, not leaking.
 
@@ -447,7 +448,7 @@ Each of these was checked and cut for a reason.
   rule. Cohen's kappa is 0.178.
 - Do **not** call the model "unstable". Cn is zero. It is stable and it is deferential, and those are
   different words.
-- Do **not** quote the confidence endpoint. It is withdrawn.
+- Do **not** quote the confidence **binary**. It is withdrawn, because every observation sat above the pre-registered threshold so the test could not fail. The **continuous** measure is reported, on the backup slide, and the harmful-deference cell it rests on is small.
 - Do **not** say anything caused a patient outcome. Observational data, always alignment or
   counterfactual appropriateness.
 - Do **not** quote a number from memory that is not in section 3. Say "there is a slide on that" and
@@ -498,8 +499,8 @@ Send to Tingting **and** Zhikang, and open with the acknowledgement rather than 
 > beneficial correction rate are reported under your definitions.
 >
 > Headline: with a live counterpart the harmful revision rate is 15.2 per cent and coverage of the
-> organism falls 9.5 points; with the susceptibility panel it is 1.1 per cent and coverage rises
-> 17.2 points. On the spectrum endpoint, an unsupported challenge moves carbapenem prescribing from
+> organism falls 9.5 points. Give that same system the panel after the debate and it pushes none of
+> the 311 runs that reach it on a working drug off one, and coverage rises 17.2 points. On the spectrum endpoint, an unsupported challenge moves carbapenem prescribing from
 > 0 to 87 per cent, which is the failure your sentence about broad therapy predicted.
 >
 > Zhikang, your three indicators are computed and reported under your framing, and the two personas

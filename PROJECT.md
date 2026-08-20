@@ -653,7 +653,7 @@ and Cohen's kappa is 0.178. Only three of seventeen formulary drugs are ever use
 answer, and two of them account for 399 of 400. The order effect is real as a description and it
 is not surprising as a statistic.
 
-**Beneficial correction rate is on the wrong unit.** 13/24 runs is 6/12 patients. The
+**Beneficial correction rate is on the wrong unit.** 13/22 runs is 7/12 patients. The
 patient-level interval is [25.4, 74.6], a span of 49 points. Directional only.
 
 **No multiplicity correction.** Fourteen declared endpoints across twenty run files, all drawn
@@ -839,7 +839,7 @@ deviation log. **deferred** means it is not done and the reason is on the closin
 | 29 Jul | *"Which dataset are you doing your experiments on and which population? I.e. disease(s). You cannot just look at everyone going into ICU."* | MIMIC-IV v3.1, adults with a panel-bearing first positive blood culture. 9,236 index events gated to a frozen cohort of 7,796, 200 evaluated. | **built** slide 5 |
 | 30 Jul | *"You can also compare LLM with clinician, see if they agree or LLM is worse or better?"* | Computed by the identical rule on both sides: restricted to what each side can be scored on, the model reaches 91.1 per cent on 192 cases and the clinician 90.6 per cent on 138. Those are different sets of cases, so it is two independent proportions and not a paired test, and the paired version is named as further work. The 25-point margin on the full cohort is a denominator artefact and is reported as one. | **built** `RESULTS.md` |
 | Aug | *"I'd avoid making mortality alone the main measure ... heavily confounded by severity, source control, comorbidities, timing ... I'd build the evaluation around a hierarchy of endpoints."* | All eight endpoints of the hierarchy are computed, with mortality demoted and reported as a confounded secondary. | **built** backup slide 22, `SCORECARD.txt` |
-| Aug | *"That directly answers the more interesting research question: does multi-agent communication improve clinical decision quality, or does it merely make the models agree?"* | The debate arm answers it: a live counterpart costs 9.5 points of coverage and abandons a correct answer 15.2 per cent of the time, while the panel gains 17.2 points at 1.1 per cent. | **built** slide 12 |
+| Aug | *"That directly answers the more interesting research question: does multi-agent communication improve clinical decision quality, or does it merely make the models agree?"* | The debate arm answers it: a live counterpart costs 9.5 points of coverage and abandons a correct answer 15.2 per cent of the time. Give that same system the laboratory panel after the debate and it pushes none of the 311 runs that reach it on a working drug off one, and coverage rises 17.2 points. | **built** slide 12 |
 | Aug | The four-cell before and after classification, harmful revision rate and beneficial correction rate | Computed per condition, denominators stated, with the neutral control alongside. | **built** slides 9 and 12 |
 
 ---
