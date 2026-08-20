@@ -332,3 +332,9 @@ shares no code with the analysis chain.
 Not a proof that the pipeline is right everywhere. It is evidence that the three numbers most
 likely to be challenged are what the raw data says, and it took one short script to check, which is
 the point of keeping the run files.
+
+## 17. The whole chain is idempotent
+
+Every generator in the analysis chain was re-run and `results/` came back byte identical, the
+control arm excepted because it is still growing. Running the chain twice cannot change a number,
+which is the property that makes "rebuild it and see" a real answer rather than a hope.
