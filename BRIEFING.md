@@ -327,6 +327,18 @@ microbiology or counterfactual appropriateness of a recommendation. The stewards
 difference in prescribing behaviour. Carbapenem overuse drives carbapenem-resistant Enterobacterales
 at population level, but I cannot and do not show a resistance outcome in these patients.
 
+**Q. How does it compare with what the doctors actually prescribed?**
+**Neither is better on this evidence, and the comparison needs a caveat I will give you first.** Both
+sides are scored by the identical rule, fixed in the protocol before I computed it. On all 200 cases
+the model looks 25 points better, and that is a denominator artefact, not a margin: the clinician
+scores undetermined in 62 cases, mostly because a real prescription falls outside my closed
+seventeen-drug formulary or was never tested against that isolate, so it penalises the clinician for
+prescribing outside my answer space. Restricted to what each side can be scored on, the model is
+91.1 per cent on 192 cases and the clinician 90.6 per cent on 138. **Those are
+different sets of cases, so it is two independent proportions and not a paired test.** The paired
+version needs per-case clinician outcomes and the comparator artefact holds aggregates only, so it is
+further work and I say so. There is a backup slide.
+
 **Q. Did a clinician check any of this?**
 **No, and it is on the limitations slide.** The personas, the 17-drug formulary and the adequacy rule
 come from my supervisor and from published guidance, not from a treating physician or a clinical
