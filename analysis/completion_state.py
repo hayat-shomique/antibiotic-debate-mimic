@@ -58,8 +58,12 @@ C("tingting","3. Time to appropriate therapy", ex("secondary_endpoints.json"),
   "observed median 8.6 h to an active drug (185/200); counterfactual reported with its artefact")
 C("tingting","4. Spectrum appropriateness", ex("spectrum_results.csv"),
   "77.6% over-treated; + WHO AWaRe 0/400 Access")
+_rri=[r for r in rev if r["final_A_outcome"]=="INADEQUATE"
+      and r["reveal_outcome"] in ("ADEQUATE","INADEQUATE")]
+_rfx=sum(1 for r in _rri if r["reveal_outcome"]=="ADEQUATE")
 C("tingting","5. Escalation / de-escalation correctness", len(rev)>=400 and len(cc2)>=200,
-  f"reveal {len(rev)}/400: 57/69 = 82.6% repaired; clean-context {len(cc2)}/200")
+  f"reveal {len(rev)}/400: {_rfx}/{len(_rri)} = {100*_rfx/len(_rri):.1f}% repaired, both ends "
+  f"determinate; clean-context {len(cc2)}/200")
 C("tingting","6. Treatment failure / deterioration", ex("secondary_endpoints.json"),
   "persistent bacteraemia 13/200 = 6.5%; definable, but not attributable to a therapy")
 C("tingting","7. Mortality 7/14/30d (cautious secondary)", ex("secondary_endpoints.json"),

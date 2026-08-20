@@ -355,7 +355,7 @@ to her question is that neither is better.
 | her endpoint | value |
 |---|---|
 | time to appropriate therapy | observed median 8.6 h in 185/200 cases |
-| escalation and de-escalation correctness once results arrive | repaired 57/69 = 82.6% of INADEQUATE entrants   held 311/312 = 99.7%   (19 entrants were indeterminate and are excluded from both)   400/400 runs |
+| escalation and de-escalation correctness once results arrive | repaired 57/65 = 87.7% of INADEQUATE entrants   held 311/311 = 100.0%   (24 entrants were indeterminate and are excluded from both)   400/400 runs |
 | decision-quality delta, compared across the two speaking directions | Doctor to Pharmacist -0.120, Pharmacist to Doctor -0.094 |
 | confidence before and after | **reported, see 7.9.** The binary is degenerate and is not reported as a test; the continuous measure is |
 

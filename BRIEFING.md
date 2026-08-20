@@ -100,12 +100,15 @@ carbapenem, sycophancy, McNemar, ICC.
 | **1 distinct drug** | the model recommends piperacillin-tazobactam for 200 of 200 patients before any conversation | not a bug in the prompt. Nothing in the case block predicts the organism |
 | **0 of 180 to 185** | cases changed under the neutral re-ask, every framing | this is the control, not a result about pressure. It is what makes the pressure number mean something |
 | **93.5 to 100%** | cases changed under an empty challenge sentence, across four framings | not "the model is unstable". Cn is zero, so the movement is specific to being contradicted |
-| **57.2 to 57.8%** | cases changed when handed the actual susceptibility panel | not a failure to read the panel. Slide 19 row 5: given the panel it repairs 82.6% of the runs that entered inadequate |
+| **57.2 to 57.8%** | cases changed when handed the actual susceptibility panel | not a failure to read the panel. Slide 19 row 5: given the panel it repairs 57 of the 65 runs that entered inadequate, 87.7%, and pushes none off an adequate drug |
 | **1.1 to 3.5%** | harmful revision under scripted pressure | this is why accuracy alone hides the problem. Do not present it as reassurance |
 | **0 to 87.2%** | carbapenem use, baseline to under pressure | prescribing behaviour, not demonstrated patient harm. Carbapenem overuse drives resistance at population level |
 | **15.2%** | harmful revision when a live second agent argues, 52 of 341 | the debate arm, not the scripted-pressure arm. Different stimulus, different number, both real |
 | **OR 1.0, p = 0.7151** | same drug proposed, patient varied: adoption identical | it is a null and the null is the finding. Within a drug, coverage makes no difference |
 | **p = 0.0004** | few-shot loses 18 correct answers and gains 2, exact McNemar on 175 paired cases | few-shot did change behaviour, it moved off the constant. It just changed it for the worse |
+| **1.1 to 3.5% against 15.2%** | harmful revision after one turn of unsupported challenge, against five turns of it | not a framing effect. All four framings sit in the one-turn band. The variable that moves it is how long the conversation runs |
+| **8 drugs against 3** | distinct drugs still in play across the cohort after the panel, against after the debate | the debate does not just pick worse, it stops considering. The panel keeps meropenem, gentamicin and piperacillin-tazobactam alive; the debate keeps two cephalosporins |
+| **66.7 to 81.8% against 91.7%** | inadequate openings corrected by a content-free challenge, against by the susceptibility panel | the model revises at close to the right rate for none of the right reasons. Do not present this as the model being nearly as good as evidence |
 
 Two more worth having: **180 to 185 of 200** cases enter the pre-specified primary test, and **ICC 0.913**,
 which makes 400 ordering-runs behave like an effective 209.
@@ -224,6 +227,28 @@ you have on future work:
 ## 8. Question and answer drill
 
 Read the question, answer out loud, then check. The bold sentence is the one to lead with.
+
+**Q. Five turns of debate cost you 15 per cent. Is that the debate, or is it just being asked three times?**
+**That is the right question and I built the control for it.** One agent, the same specialist, the same
+frozen cases, the same round-0 prompt byte for byte, the same formulary, gate and scorer, speaking three
+times, which is exactly how many times the specialist speaks in the debate. Between turns it sees only
+its own previous text. Nothing disagrees with it. If coverage collapses there too, my finding is about
+repetition and "debate" is the wrong word for it. The arm is in `runs/selfrevise_20260820.jsonl` and the
+comparison is paired within patient in `results/selfrevision_control.json`. What it does not control is
+context length: the debate transcript is about twice as long by the final turn.
+
+**Q. Why does your core figure say 17.0 per cent for Agent A when your headline says 15.2?**
+**Different units, and both are on the figure.** 15.2 per cent is pooled over all 400 ordering-runs,
+52 of 341. 17.0 is Agent A in the runs where it opens, 29 of 171, and 13.5 is Agent B in the runs where
+it opens, 23 of 170. The two per-agent counts sum to the 52. Speaking first costs you more, which is
+the speaking-order effect on slide 7.
+
+**Q. Your figure shows 100 per cent adequate when the counterpart is right and 0 per cent when it is
+wrong. That looks too clean.**
+**It is too clean, it is entailed, and the figure says so.** The two agents end on the same outcome
+class in all 400 runs, so conditioning on the counterpart being right is conditioning on the agent
+being right. Those bars are not an effect size. What they honestly show is how completely the position
+is shared, which is the point of the figure, and I would not present them as a finding on their own.
 
 **Q. Is 200 cases not very small?**
 **It is small, and it is paired.** Every case is its own control: the same patient is put to the same
@@ -375,9 +400,15 @@ Worked examples.
   interpretable panel, which enriches Gram-negatives, and the formulary is built around them. Testing
   the Gram-positive half means a different intrinsic-resistance table, and that is genuine work rather
   than a rerun.
-- *"What about inducible AmpC?"* Unhandled, and I say so on the limitations slide. Roughly 18 per cent
-  of this cohort can de-repress AmpC, so a recommendation scored adequate against the reported panel
-  could still fail clinically. Correcting it needs organism-specific rules.
+- *"What about inducible AmpC?"* Unhandled, and I say so on the limitations slide. 36 of the 200
+  specimens carry an AmpC-capable organism. The induction risk is not uniform across them: it is best
+  established for *Enterobacter cloacae*, which is 9 of the 200, and the primer says the likelihood
+  in other Enterobacteriaceae is less clear, so I do not pool them. What it bounds is the adequacy
+  labels, 27 of the 400 runs end on a third-generation cephalosporin against an AmpC-capable organism
+  and are scored adequate. What it does not bound is the harm finding: 1 of the 52 harmful revisions
+  is onto a third-generation cephalosporin against an AmpC-capable organism, and 23 are onto cefepime,
+  which guidance recommends for AmpC producers. The direction of the residual bias is the safe one:
+  if AmpC de-represses on therapy, the harm I report is an underestimate.
 
 If someone asserts something you believe is wrong, do not fold. That is literally the failure mode you
 are presenting. Say: "that may be right, and here is what my data shows, so let me check it and come

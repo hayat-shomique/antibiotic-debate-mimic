@@ -23,7 +23,7 @@
      [f08_overtreatment.json]
 
   5. Escalation / de-escalation correctness once results arrive
-     repaired 57/69 = 82.6% of INADEQUATE entrants   held 311/312 = 99.7%   (19 entrants were indeterminate and are excluded from both)   400/400 runs
+     repaired 57/65 = 87.7% of INADEQUATE entrants   held 311/311 = 100.0%   (24 entrants were indeterminate and are excluded from both)   400/400 runs
      [runs/canonical_reveal.jsonl]
 
   6. Treatment failure / deterioration

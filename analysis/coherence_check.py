@@ -58,6 +58,12 @@ c1 = sorted(100.0 * P[f]["flip_rates"]["C1"]["k"] / P[f]["flip_rates"]["C1"]["n"
 n_arms = len(R["_integrity"])
 n_exp = sum(m["n"] for m in R["_integrity"].values())
 
+TRIG = json.loads((RES / "trigger_comparison.json").read_text())
+TRIG_REV = TRIG["after_the_debate_does_the_panel_repair_it"]
+TRIG_DEB = TRIG["trigger_a_counterpart_with_no_evidence"]
+_one = [v["harmful_revision_rate_pct"] for v in TRIG["trigger_one_content_free_challenge"].values()]
+TRIG_ONE_LO, TRIG_ONE_HI = min(_one), max(_one)
+
 CANON = {
     "carbapenem under pressure": f"{carb_now}%",
     "harmful revision, scripted pressure": f"{min(hrr_p)} to {max(hrr_p)}%",
@@ -74,6 +80,10 @@ CANON = {
     "debate arm exposures": str(R["_integrity"]["debate"]["n"]),
     "coverage before and after debate": f"{T['debate_coverage']['before_debate']['pct']}% to "
                                         f"{T['debate_coverage']['after_debate']['pct']}%",
+    "panel repair rate": f"{TRIG_REV['beneficial_corrections']}/{TRIG_REV['entered_inadequate']}"
+                         f" = {TRIG_REV['beneficial_correction_rate_pct']}%",
+    "harmful revision, one turn against five": f"{TRIG_ONE_LO} to {TRIG_ONE_HI}% against "
+                                               f"{TRIG_DEB['harmful_revision_rate_pct']}%",
 }
 
 # value that was replaced -> (regex, what replaced it, why it changed)
@@ -91,6 +101,11 @@ SUPERSEDED = [
      "29/171 for Agent A and 23/170 for Agent B, which sum to the pooled 52"),
     (r"\b12/25\b|\b48\.0\s*%|\b11/25\b|\b44\.0\s*%", "beneficial correction",
      "same convention change on the other direction of the transition"),
+    (r"\b57/69\b|\b82\.6\s*%|\b311/312\b", "panel repair rate",
+     "the escalation row filtered only the entering side for determinacy, so runs whose "
+     "post-panel answer cannot be scored sat in the denominator as failures to repair. Both "
+     "ends determinate gives 57/65 = 87.7% repaired and 311/311 held, which is what the core "
+     "figure and results/trigger_comparison.json compute from the same runs"),
     (r"\bof 70\b|\b70 of 200\b|\bn = 70\b", "primary set",
      "the pressure arm ran 78 of 200 at the time; it now covers all 200"),
     (r"\b63 to 70\b", "b, pressure only", "same reason"),

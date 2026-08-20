@@ -180,7 +180,7 @@ endpoints.<cite>Prof. Tingting Zhu, 17 August</cite></blockquote>
 <tr><td class="n">2</td><td>Active therapy / susceptibility concordance</td><td><span class="tag t-d">done</span></td><td class="n">87.5% → 78.0%<br>−9.5 points</td></tr>
 <tr><td class="n">3</td><td>Time to appropriate therapy, where timestamps permit</td><td><span class="tag t-d">done</span></td><td class="n">observed median<br>8.6 h (185/200)</td></tr>
 <tr><td class="n">4</td><td>Spectrum appropriateness, effective vs appropriately narrow</td><td><span class="tag t-d">done</span></td><td class="n">77.6% over-treated<br>0/400 WHO Access</td></tr>
-<tr class="ok"><td class="n">5</td><td>Escalation / de-escalation correctness once results arrive</td><td><span class="tag t-d">done</span></td><td class="n">57/69 = 82.6% repaired<br>311/312 held</td></tr>
+<tr class="ok"><td class="n">5</td><td>Escalation / de-escalation correctness once results arrive</td><td><span class="tag t-d">done</span></td><td class="n">57/65 = 87.7% repaired<br>311/311 held<br><span style="opacity:.7">both ends determinate</span></td></tr>
 <tr><td class="n">6</td><td>Treatment failure / clinical deterioration, if reliably definable</td><td><span class="tag t-d">done</span></td><td class="n">persistent bacteraemia<br>13/200 = 6.5%</td></tr>
 <tr><td class="n">7</td><td>Mortality 7/14/30-day, as a cautious secondary</td><td><span class="tag t-d">done</span></td><td class="n">9.5 / 15.0 / 18.5%</td></tr>
 <tr><td class="n">8</td><td>Length of stay / ICU-free days, confounded secondaries</td><td><span class="tag t-d">done</span></td><td class="n">median LOS 11.9 d<br>99/185 with ICU</td></tr>
@@ -233,7 +233,7 @@ identities were assigned precisely to create conflicting incentives, and they be
 <div class="c a"><span class="v">41.0%</span><span class="l">of cases end on a different drug depending only on who spoke first</span></div>
 <div class="c"><span class="v">15.2%</span><span class="l">harmful revision rate, 52 of 341 runs that started correct</span></div>
 <div class="c g"><span class="v">59.1%</span><span class="l">beneficial correction rate, 13 of 22, directional only at that n</span></div>
-<div class="c g"><span class="v">82.6%</span><span class="l">of inadequate positions repaired when shown the real panel</span></div>
+<div class="c g"><span class="v">87.7%</span><span class="l">of inadequate positions repaired when shown the real panel, 57 of 65</span></div>
 <div class="c a"><span class="v">p = 0.0004</span><span class="l">few-shot loses 18 correct recommendations and gains 2 on 175 paired cases</span></div>
 </div>
 
@@ -324,7 +324,7 @@ Content-hashed the cohort and pinned the scorer before running a single model ca
 could be tuned after seeing a result.</div></div>
 <div class="arc"><span class="wk f">WEEK 5</span><div class="bd"><b>Learned that a clean number is a warning.</b>
 Found a perfect 160/160 in my own results, traced it to a safety check that was deleting 220 runs
-non-randomly, fixed it, and watched the real figure appear: 311/312.</div></div>
+non-randomly, fixed it, and watched the real figure appear: every one of the 311 runs that reached the panel on an adequate drug stayed on one.</div></div>
 <div class="arc"><span class="wk">WEEK 5</span><div class="bd"><b>Learned why controls come first.</b>
 Built the neutral re-ask arm and got 0/200. Without that zero, “it folds every time” could have
 meant “it is unstable”.</div></div>

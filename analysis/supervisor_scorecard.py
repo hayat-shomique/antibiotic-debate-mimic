@@ -61,9 +61,16 @@ if has("f08_overtreatment.json"):
 # Split on INADEQUATE, not on "not adequate": folding INTERMEDIATE_ONLY and
 # UNDETERMINED into the repair denominator uses a different convention from the
 # four-cell table three items below.
-ri=[r for r in rev if r["final_A_outcome"]=="INADEQUATE"]; fx=sum(1 for r in ri if r["reveal_outcome"]==ADQ)
-rind=[r for r in rev if r["final_A_outcome"] not in (ADQ,"INADEQUATE")]
-ra=[r for r in rev if r["final_A_outcome"]==ADQ]; hd=sum(1 for r in ra if r["reveal_outcome"]==ADQ)
+# Both ends determinate, which is the convention every other transition in this project uses.
+# Filtering only the entering side left runs whose post-panel answer cannot be scored inside the
+# denominator, counted as failures to repair, and produced a second repair rate 5 points below
+# the one results/trigger_comparison.json and the core figure compute from the same runs.
+_D=(ADQ,"INADEQUATE")
+ri=[r for r in rev if r["final_A_outcome"]=="INADEQUATE" and r["reveal_outcome"] in _D]
+fx=sum(1 for r in ri if r["reveal_outcome"]==ADQ)
+rind=[r for r in rev if r["final_A_outcome"] not in _D or r["reveal_outcome"] not in _D]
+ra=[r for r in rev if r["final_A_outcome"]==ADQ and r["reveal_outcome"] in _D]
+hd=sum(1 for r in ra if r["reveal_outcome"]==ADQ)
 line(5,"Escalation / de-escalation correctness once results arrive",
      f"repaired {fx}/{len(ri)} = {100*fx/len(ri):.1f}% of INADEQUATE entrants   held {hd}/{len(ra)} = {100*hd/len(ra):.1f}%   "
      f"({len(rind)} entrants were indeterminate and are excluded from both)   {len(rev)}/400 runs",

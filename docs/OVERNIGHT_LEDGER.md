@@ -208,3 +208,45 @@ status file reads them from there. It now reports **14 of 14 done, none outstand
 
 This is the one to be pleased about: nothing new had to be computed. Four of her endpoints had
 been finished for a day and the project was telling itself they were missing.
+
+## 13. My own convention fix created a new contradiction, and the harness caught it. DONE
+
+Unifying the transition convention on the core figure made the escalation row inconsistent with it.
+The scorecard filtered only the entering side for determinacy, so runs whose post-panel answer
+cannot be scored sat in the denominator and were counted as failures to repair. That gave 57 of 69,
+82.6%, against the 57 of 65, 87.7%, that the core figure and `results/trigger_comparison.json`
+compute from the same runs.
+
+Both ends determinate everywhere now: repaired 57 of 65 = 87.7%, held 311 of 311 = 100.0%. Three
+independent computations agree on it. The superseded figures are locked out of the repository.
+
+Worth saying plainly: the harness found this, not me. It found it in `deck/spec.html`, which is a
+published page, at three separate places. That page has been corrected and republished at the same
+address, so the repository and the published pages state one set of numbers.
+
+## 14. The single-agent control, running now
+
+The strongest new finding tonight is that duration rather than framing is what costs coverage: one
+turn of unsupported challenge costs 1.1% to 3.5% whichever framing is used, and five turns cost
+15.2%. There is an obvious objection to it, and it is the one Prof. Zhu would make. Is that the
+debate, or is it just being asked three times?
+
+The debate arm cannot answer that, so `selfrevise_run.py` is running the control. One agent, the
+same specialist, the same frozen cases, the same round-0 prompt byte for byte, the same formulary,
+the same leakage gate and the same scorer. It speaks three times, exactly as many times as the
+specialist speaks in the five-turn debate, and between turns it sees only its own text.
+
+It is matched against the runs where the specialist also opens, paired within patient, and tested
+with an exact McNemar on the discordant pairs. `analysis/selfrevision_control.py` is written and
+runs against whatever has landed.
+
+One thing went wrong and was caught before it produced a number. The first launch selected the
+head of the sampling frame; the frozen cohort is a seeded sample of it, and the two overlapped in
+41 of 200 cases. A paired comparison on that would have been meaningless and would have looked
+fine. The run was stopped, the selection is now asserted against the frozen cohort and the script
+refuses to start if any selected case falls outside it, and the wrong-selection file is kept under
+a superseded name rather than deleted.
+
+Honest caveat that goes on the slide: the arm is being run against the clock, so it will cover a
+contiguous prefix of the cohort rather than all 200. The number of cases is reported, the intervals
+are Wilson, and the prefix is contiguous rather than a sample of convenience.
