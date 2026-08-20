@@ -1241,7 +1241,7 @@ footer(s, "results/fewshot.json  ·  analysis/fewshot_analysis.py  ·  paired on
 s = new_slide(paper=True)
 head(s, "backup slide", "The model against the clinician, her second comparison",
      "“You can also compare LLM with clinician see if they agree or LLM is worse or better?”   Prof. Tingting Zhu, 30 July 2026")
-table(s, ["scored against the same panels, by the same rule", "all cases", "cases where both can be scored"],
+table(s, ["scored against the same panels, by the same rule", "all cases", "cases that side can be scored on"],
       [["the clinician's actual empiric prescription",
         f"{CLIN['clinician']['counts']['ADEQUATE']}/{CLIN['clinician']['n']} = {CLIN['clinician']['adequate_all_cases_pct']}%",
         (f"{CLIN['clinician']['adequate_determined_only']['k']}/{CLIN['clinician']['adequate_determined_only']['n']} = "
@@ -1257,9 +1257,11 @@ text(s, M, 4.42, CW, 1.2,
        (f"The clinician scores UNDETERMINED in {CLIN['clinician']['counts']['UNDETERMINED']} of "
         f"{CLIN['clinician']['n']} cases, largely because real prescriptions fall outside the closed "
         "17-drug formulary or were never tested against the isolate, so that comparison penalises the "
-        "clinician for prescribing outside the model's answer space. On the cases where both can be "
-        f"scored the two are indistinguishable, {CLIN['model_zero_shot']['adequate_determined_only']['pct']}% against "
-        f"{CLIN['clinician']['adequate_determined_only']['pct']}%. The answer to her question is that neither is better.",
+        "clinician for prescribing outside the model's answer space. Restricted to what each side can "
+        f"be scored on, the two rates are within a point of each other, {CLIN['model_zero_shot']['adequate_determined_only']['pct']}% on "
+        f"{CLIN['model_zero_shot']['adequate_determined_only']['n']} cases against {CLIN['clinician']['adequate_determined_only']['pct']}% on "
+        f"{CLIN['clinician']['adequate_determined_only']['n']}. Those are different sets of cases, so this is two "
+        "independent proportions and not a paired test. The answer to her question is that on this evidence neither is better.",
         {"color": MUTED})]], size=13, line=1.36)
 block(s, M, 5.72, CW, 0.86, BG)
 text(s, M + 0.28, 5.90, CW - 0.6, 0.6,
@@ -1275,9 +1277,12 @@ On all 200 cases the model looks 25 points better. That is not a real margin and
 as one. The clinician scores undetermined in 62 cases, mostly because real prescriptions fall outside
 my closed formulary or were never tested against the isolate, so that comparison penalises the
 clinician for prescribing outside my answer space.
-On the cases where both can be scored, it is 91.1 against 90.6. Indistinguishable. The honest answer
-to her question is that neither is better, and the interesting part is that a constant policy
-achieves that.
+Restricted to what each side can be scored on, it is 91.1 on 192 cases against 90.6 on 138. Within a
+point. Say the next sentence before anyone else does: those are different sets of cases, so that is
+two independent proportions and not a paired test. The paired version needs per-case outcomes on the
+clinician side and the comparator artefact holds aggregates only, so it is further work and I say so.
+The honest answer to her question is that on this evidence neither is better, and the interesting
+part is that a constant policy achieves that.
 """)
 footer(s, "results/clinician_comparison.json  ·  analysis/clinician_comparison.py  ·  identical scoring rule, protocol_v1 line 65", page())
 

@@ -63,9 +63,18 @@ out = {
     "gap_determined_only_pts": round(100.0 * k_m / n_m - 100.0 * k_c / n_c, 1),
     "_reading": ("The margin on the full cohort is a denominator artefact: the clinician scores "
                  "UNDETERMINED far more often, largely because real prescriptions fall outside the "
-                 "closed 17-drug formulary or were never tested against the isolate. On the cases "
-                 "where both can be scored the two are indistinguishable. The answer to her question "
-                 "is that neither is better."),
+                 "closed 17-drug formulary or were never tested against the isolate. Restricted to "
+                 "what each side can be scored on, the two rates are within a point of each other. "
+                 "The answer to her question is that on this evidence neither is better."),
+    "_this_is_not_a_paired_comparison": (
+        "The two determinate-only rates sit on different sets of cases, 138 for the clinician and "
+        "192 for the model, so this is two independent proportions and not a paired test. An "
+        "earlier version of this reading said the two were indistinguishable on the cases where "
+        "both can be scored, which is a claim about a set that was never constructed. The paired "
+        "version needs per-case outcomes for the clinician side, and the comparator artefact "
+        "carries aggregates only, because it is derived from credentialed prescribing records. "
+        "Building it is the next step on this endpoint and it is named as further work rather "
+        "than implied here."),
 }
 (RES / "clinician_comparison.json").write_text(json.dumps(out, indent=2))
 print(f"wrote results/clinician_comparison.json")

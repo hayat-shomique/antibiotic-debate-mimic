@@ -473,8 +473,19 @@ pathogenic isolate is covered.
 The margin on the full cohort is a **denominator artefact** and is reported as one: the clinician
 scores UNDETERMINED in {CLIN['clinician']['counts']['UNDETERMINED']} of {CLIN['clinician']['n']}
 cases, largely because real prescriptions fall outside the closed formulary or were never tested
-against the isolate. On the cases where both can be scored the two are indistinguishable. The answer
-to her question is that neither is better.
+against the isolate. Restricted to what each side can be scored on, the two rates are within a point
+of each other: {CLIN['model_zero_shot']['adequate_determined_only']['pct']}% on
+{CLIN['model_zero_shot']['adequate_determined_only']['n']} cases for the model against
+{CLIN['clinician']['adequate_determined_only']['pct']}% on
+{CLIN['clinician']['adequate_determined_only']['n']} for the clinician. The answer to her question is
+that on this evidence neither is better.
+
+**This is not a paired comparison and it is not presented as one.** Those two rates sit on different
+sets of cases, so they are two independent proportions. Saying the two are indistinguishable on the
+cases where both can be scored would be a claim about a set that has not been constructed. Building
+it needs per-case outcomes on the clinician side and the comparator artefact carries aggregates only,
+because it derives from credentialed prescribing records. It is named here as further work rather
+than implied.
 
 ### 7.8 The remaining endpoints in her hierarchy
 

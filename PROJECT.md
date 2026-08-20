@@ -348,8 +348,19 @@ pathogenic isolate is covered.
 The margin on the full cohort is a **denominator artefact** and is reported as one: the clinician
 scores UNDETERMINED in 62 of 200
 cases, largely because real prescriptions fall outside the closed formulary or were never tested
-against the isolate. On the cases where both can be scored the two are indistinguishable. The answer
-to her question is that neither is better.
+against the isolate. Restricted to what each side can be scored on, the two rates are within a point
+of each other: 91.1% on
+192 cases for the model against
+90.6% on
+138 for the clinician. The answer to her question is
+that on this evidence neither is better.
+
+**This is not a paired comparison and it is not presented as one.** Those two rates sit on different
+sets of cases, so they are two independent proportions. Saying the two are indistinguishable on the
+cases where both can be scored would be a claim about a set that has not been constructed. Building
+it needs per-case outcomes on the clinician side and the comparator artefact carries aggregates only,
+because it derives from credentialed prescribing records. It is named here as further work rather
+than implied.
 
 ### 7.8 The remaining endpoints in her hierarchy
 
@@ -737,7 +748,7 @@ deviation log. **deferred** means it is not done and the reason is on the closin
 | 29 Jul | *"There is 12B as well for MedGemma, 27B is not necessary."* | MedGemma has no 12B checkpoint. The Ollama tag list queried on 18 August returns nine tags, 4b and 27b only, no 12b at any quantisation. The instruction cannot be followed as written, so the arm is size-matched at 4B and the decision was recorded rather than made silently. | **built, with a stated deviation** `docs/deviation_log_proposed.csv` row D-MODEL-1 |
 | 29 Jul | *"maybe it would be interesting to compare with some medical bert models which previously trained on EHR data already. See how well they perform without fine-tuning."* and *"like Med Bert or ClinicalBert etc."* | Four encoders, no fine-tuning, masked-token prediction over the same 17-drug formulary, same 200 cases, same panels. BiomedBERT reaches 84.5 per cent against the 4B model's 87.5, and every encoder is near-constant too. | **built** backup slide 20 |
 | 29 Jul | *"Which dataset are you doing your experiments on and which population? I.e. disease(s). You cannot just look at everyone going into ICU."* | MIMIC-IV v3.1, adults with a panel-bearing first positive blood culture. 9,236 index events gated to a frozen cohort of 7,796, 200 evaluated. | **built** slide 5 |
-| 30 Jul | *"You can also compare LLM with clinician, see if they agree or LLM is worse or better?"* | Computed on comparable ground: on the cases where both can be scored the model reaches 91.1 per cent and the clinician 90.6 per cent. The 25-point margin on the full cohort is a denominator artefact and is reported as one. | **built** `RESULTS.md` |
+| 30 Jul | *"You can also compare LLM with clinician, see if they agree or LLM is worse or better?"* | Computed by the identical rule on both sides: restricted to what each side can be scored on, the model reaches 91.1 per cent on 192 cases and the clinician 90.6 per cent on 138. Those are different sets of cases, so it is two independent proportions and not a paired test, and the paired version is named as further work. The 25-point margin on the full cohort is a denominator artefact and is reported as one. | **built** `RESULTS.md` |
 | Aug | *"I'd avoid making mortality alone the main measure ... heavily confounded by severity, source control, comorbidities, timing ... I'd build the evaluation around a hierarchy of endpoints."* | All eight endpoints of the hierarchy are computed, with mortality demoted and reported as a confounded secondary. | **built** backup slide 22, `SCORECARD.txt` |
 | Aug | *"That directly answers the more interesting research question: does multi-agent communication improve clinical decision quality, or does it merely make the models agree?"* | The debate arm answers it: a live counterpart costs 9.5 points of coverage and abandons a correct answer 15.2 per cent of the time, while the panel gains 17.2 points at 1.1 per cent. | **built** slide 12 |
 | Aug | The four-cell before and after classification, harmful revision rate and beneficial correction rate | Computed per condition, denominators stated, with the neutral control alongside. | **built** slides 9 and 12 |

@@ -444,3 +444,24 @@ Registering it also surfaced two stale entries in the scorecard: the debate arm'
 still the turn-level 401 from before section 3's fix, and the footnote still called its count
 turn-level rows. Both now say what they are, and the arm size and the endpoint denominator are one
 number.
+
+## 23. One of her two required comparisons claimed something it had not computed. DONE
+
+The clinician comparison reported the model at 91.1% on 192 cases and the clinician at 90.6% on
+138, and then said "on the cases where both can be scored the two are indistinguishable". Those are
+two different sets of cases. The set where both can be scored was never constructed, so the sentence
+described an analysis that does not exist, and the deck's own column header said the same thing.
+
+The two rates are real and the comparison is fair on its own terms: the identical rule scores both
+sides and each is restricted to what it can be scored on. What is not true is that they are paired.
+
+Corrected in five places: the result file, the project document, the deck's table header, the deck's
+speaker notes and the supervisor asks table. Each now says the rates sit on different sets of cases
+and that this is two independent proportions rather than a paired test.
+
+The paired version needs per-case outcomes on the clinician side. The comparator artefact carries
+aggregates only, because it derives from credentialed prescribing records, so building it is real
+work rather than a rerun. It is named as further work rather than implied.
+
+This is the one to be least comfortable about. It is not a stale number and no sweep would have
+caught it: every figure was right and the sentence next to them was not.
