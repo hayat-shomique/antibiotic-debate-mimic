@@ -1028,6 +1028,11 @@ text(s, M + CW * 0.66, 4.90, CW * 0.34, 1.5,
      [[("Held fixed across every model", {"bold": True, "size": 12.5})],
       [(f"Temperature {R['temperature']}, seed {R['seed']}, context 8192, 512 predicted tokens, thinking disabled, digest recorded and asserted before use.",
         {"color": MUTED, "size": 11.5})]], size=11.5, line=1.32, space_after=6)
+text(s, M, 6.86, CW, 0.4,
+     [[("Her ask was “Med Bert or ClinicalBert etc”, and ClinicalBERT is here. ", {"bold": True, "size": 10.5}),
+       ("Med-BERT itself is not: it is trained on structured diagnosis codes rather than free text, so it needs a "
+        "different input representation, and that is a separate build rather than a fourth column.",
+        {"color": MUTED, "size": 10.5})]], size=10.5, line=1.25)
 text(s, M + CW * 0.66, 6.28, CW * 0.34, 0.6,
      "Everything runs locally on this machine. MIMIC-IV is credentialed under a PhysioNet agreement, "
      "so no record-level data may reach a hosted service, which is also why the study model is a 4B "
