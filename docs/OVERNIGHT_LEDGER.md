@@ -429,3 +429,18 @@ to do with a test run is to redirect it into a file next to the code.
 `CLAUDE.md` now says it beside the command: never redirect that output into the repository, never
 paste it into a document or a commit message, never quote a line of it. Report the pass count, not
 the transcript.
+
+## 22. The control arm was itself an unregistered arm, which is the defect from section 3 again
+
+Building the control created a run file that no counter knew about. That is exactly the failure
+`assert_no_orphan_files` exists to prevent, and it did not fire, because the guard only watches
+file-name prefixes it has been told about and `selfrevise_` was not one of them.
+
+Registered now, with its prefix added to the guard. The project holds 14 arms and 4,034 deduplicated
+exposures, and the control is marked PARTIAL by design in both the registry and the scorecard, so
+the one arm short of its planned size says so on its own row rather than being averaged away.
+
+Registering it also surfaced two stale entries in the scorecard: the debate arm's design size was
+still the turn-level 401 from before section 3's fix, and the footnote still called its count
+turn-level rows. Both now say what they are, and the arm size and the endpoint denominator are one
+number.

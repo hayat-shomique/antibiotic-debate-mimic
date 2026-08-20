@@ -87,18 +87,19 @@
     D_CALIB_1             201/ 201  COMPLETE  dupes dropped  13
     clean_context         200/ 200  COMPLETE  dupes dropped   0
     reveal                400/ 400  COMPLETE  dupes dropped   0
-    debate                400/ 401  SHORT     dupes dropped   0
+    debate                400/ 400  COMPLETE  dupes dropped   0
     self_consistency      200/ 200  COMPLETE  dupes dropped   0
     cross_model           400/ 400  COMPLETE  dupes dropped   0
     plausible             312/ 312  COMPLETE  dupes dropped 166
     track4                172/ 172  COMPLETE  dupes dropped   0
     fewshot               200/ 200  COMPLETE  dupes dropped   0
     confidence            200/ 200  COMPLETE  dupes dropped   0
+    self_revision         125/ 200  SHORT     dupes dropped   0
 
-    ARMS SHORT OF DESIGN: debate
+    ARMS SHORT OF DESIGN: self_revision
     Counts are deduplicated exposures on the identity key recorded in results/RESULTS.json.
     D_MATCH_1 and track4 are bounded by cohort eligibility, not by the plan; see the
     reasons registered in analysis/supervisor_scorecard.py DESIGN.
-    The debate endpoints above are computed on the 400 complete ordering-runs
-    (200 cases x 2 speaking orders); the 400 figure here is turn-level rows.
+    The debate endpoints above are computed on these same 400 ordering-runs,
+    200 cases in both speaking orders, so the arm size and the denominator are one number.
     [results/RESULTS.json _integrity, written by analysis/canonical_numbers.py]

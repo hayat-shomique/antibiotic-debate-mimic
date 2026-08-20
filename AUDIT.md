@@ -42,6 +42,7 @@ An exposure is one model decision in one experimental cell. Two records sharing 
 | track4 | 172 | 0 | 0 | case_id + seed_drug + receiver + condition |
 | fewshot | 200 | 0 | 0 | case_id |
 | confidence | 200 | 0 | 0 | case_id |
+| self_revision | 125 | 0 | 0 | case_id |
 
 **251 duplicate writes found and dropped in total.** Cause and fix in `archive/DATA_INTEGRITY.md`.
 
@@ -91,9 +92,9 @@ Documents written by hand, not generated: `docs/METHODS.md`, `docs/LIMITATIONS.m
 | | |
 |---|---|
 | tracked files | 256 |
-| commits | 85 |
-| head | `6db94dd Point the rehearsal plan at the ledger first, since the deck carries material not yet rehearsed` |
-| remote in sync | check |
+| commits | 89 |
+| head | `a37ea15 The acceptance suite prints case identifiers; write the rule down beside the command` |
+| remote in sync | yes |
 
 ## 5. Run state
 

@@ -85,6 +85,13 @@ ARMS = {
                       "rung two of the escalation ladder, four worked exemplars per case"),
     "confidence":    (["confidence_*.jsonl"], ("case_id",),
                       "confidence elicited before and after; the binary is degenerate, see confidence_axis.json"),
+    "self_revision":  (["selfrevise_*.jsonl"], ("case_id",),
+                      "the single-agent control: same specialist, same frozen cases, same round-0 "
+                      "prompt, three speaking turns, nothing disagreeing with it. PARTIAL by "
+                      "design, stopped at a scheduled deadline, and the cases it covers are a "
+                      "contiguous prefix of the frozen selection rather than a sample. See "
+                      "results/selfrevision_control.json",
+                      lambda r: r.get("kind") == "full"),
 }
 
 
@@ -122,7 +129,7 @@ def assert_no_orphan_files():
         for pat in spec[0]:
             claimed.update(glob.glob(os.path.join(RUNS, pat)))
     prefixes = {"c1_", "matched_", "calib_", "debate_", "selfcon_", "model_compare_",
-                "plausible_", "track4_", "canonical_", "fewshot_", "confidence_"}
+                "plausible_", "track4_", "canonical_", "fewshot_", "confidence_", "selfrevise_"}
     orphans = [p for p in glob.glob(os.path.join(RUNS, "*.jsonl"))
                if p not in claimed
                and any(os.path.basename(p).startswith(x) for x in prefixes)]

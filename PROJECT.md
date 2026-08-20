@@ -701,8 +701,9 @@ repeated write, not a repeated measurement, and the second is dropped before any
 | track4 | 172 | 0 | `case_id + seed_drug + receiver + condition` |
 | fewshot | 200 | 0 | `case_id` |
 | confidence | 200 | 0 | `case_id` |
+| self_revision | 125 | 0 | `case_id` |
 
-**251 duplicate writes found and dropped in total**, across 3,909 exposures.
+**251 duplicate writes found and dropped in total**, across 4,034 exposures.
 Every arm now runs under a PID lock. Model `qwen3:4b-instruct-2507-q4_K_M`, temperature 0, seed
 20260818, run locally: MIMIC-IV is credentialed under a PhysioNet data use agreement and no
 record-level data is committed to this repository.
@@ -756,7 +757,7 @@ deviation log. **deferred** means it is not done and the reason is on the closin
 | 23 Jul | *"inject different prior information into the prompts, for instance, assign Agent A the identity of an 'infectious disease specialist' and Agent B the role of 'antimicrobial stewardship lead', so that each has a clear, potentially conflicting incentive."* | Those two personas, in those words, are the system prompts. The tension is real: one wants coverage, the other restraint. | **built** slide 6, verbatim |
 | 23 Jul | *"you can feed real de-identified case summaries (including microbiology cultures and susceptibility results) as the discussion input."* | Case summaries yes. The susceptibility results are deliberately **not** in the empiric input, because that would destroy the pre-culture decision point Tingting specified. They enter as their own condition, C2, which is what makes the evidence comparison possible at all. | **built, with a stated deviation** slide 5, conditions C0 to C2 |
 | 23 Jul | *"evaluate which agent's final recommendation aligns better with actual clinical outcomes (e.g. subsequent resistance)"* | The per-agent half is done: Agent A and Agent B both reach 312/400 = 78.0 per cent. Subsequent resistance is not done. | **partly built, rest deferred** |
-| 23 Jul | *"Because your time is limited, you need to complete the first step to satisfy your pre, and then, if you have time left, we could push the whole project forward."* | The first step is complete and the project went past it: 13 arms, 3,909 deduplicated exposures. | **built** `AUDIT.md` section 2 |
+| 23 Jul | *"Because your time is limited, you need to complete the first step to satisfy your pre, and then, if you have time left, we could push the whole project forward."* | The first step is complete and the project went past it: 14 arms, 4,034 deduplicated exposures. | **built** `AUDIT.md` section 2 |
 
 ---
 

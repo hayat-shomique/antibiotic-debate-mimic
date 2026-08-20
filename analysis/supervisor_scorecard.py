@@ -169,13 +169,16 @@ DESIGN = {
     "D_CALIB_1":        (201, "one elicitation per case-drug pair present in the calibration arm"),
     "clean_context":    (200, "one clean-context reveal per case"),
     "reveal":           (400, "200 cases x 2 speaking orders"),
-    "debate":           (401, "turn-level rows inside the frozen 200-case selection"),
+    "debate":           (400, "200 cases x 2 speaking orders, one completed ordering-run per row"),
     "self_consistency": (200, "five samples per case, collapsed upstream to one row"),
     "cross_model":      (400, "the shared case set across the model comparison"),
     "plausible":        (312, "plausible-but-wrong seeding, at its planned size"),
     "track4":           (172, "supporter and opponent cells that exist in the cohort"),
     "fewshot":          (200, "rung two of the ladder, one row per case"),
     "confidence":       (200, "confidence elicited before and after, one row per case"),
+    "self_revision":    (200, "the single-agent control, one row per case. PARTIAL by design: it "
+                              "was stopped at a scheduled deadline and covers a contiguous prefix "
+                              "of the frozen selection, which is reported rather than hidden"),
 }
 short = []
 for nm, m in INTEG.items():
@@ -191,6 +194,6 @@ print(f"\n    {'ALL ARMS COMPLETE' if not short else 'ARMS SHORT OF DESIGN: ' + 
 print("    Counts are deduplicated exposures on the identity key recorded in results/RESULTS.json.")
 print("    D_MATCH_1 and track4 are bounded by cohort eligibility, not by the plan; see the")
 print("    reasons registered in analysis/supervisor_scorecard.py DESIGN.")
-print("    The debate endpoints above are computed on the 400 complete ordering-runs")
-print(f"    (200 cases x 2 speaking orders); the {INTEG['debate']['n']} figure here is turn-level rows.")
+print(f"    The debate endpoints above are computed on these same {INTEG['debate']['n']} ordering-runs,")
+print("    200 cases in both speaking orders, so the arm size and the denominator are one number.")
 print("    [results/RESULTS.json _integrity, written by analysis/canonical_numbers.py]")

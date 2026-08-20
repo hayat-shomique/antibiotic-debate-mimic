@@ -57,6 +57,7 @@ repeated write, not a repeated measurement, and the second is dropped before any
 | track4 | 172 | 0 | `case_id + seed_drug + receiver + condition` | `track4_20260819.jsonl` |
 | fewshot | 200 | 0 | `case_id` | `fewshot_20260819.jsonl` |
 | confidence | 200 | 0 | `case_id` | `confidence_20260819.jsonl` |
+| self_revision | 125 | 0 | `case_id` | `selfrevise_20260820.jsonl` |
 
 **251 duplicate writes found and dropped in total.** Cause and fix in `archive/DATA_INTEGRITY.md`.
 
